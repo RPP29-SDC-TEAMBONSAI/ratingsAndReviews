@@ -1,0 +1,38 @@
+{
+  "name": "front-end-capstone",
+  "version": "1.0.0",
+  "description": "\"rpp29 cotija fec\"",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode development --watch",
+    "start": "nodemon node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEC-RPP29-cotija/Front-End-Capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEC-RPP29-cotija/Front-End-Capstone/issues"
+  },
+  "homepage": "https://github.com/FEC-RPP29-cotija/Front-End-Capstone#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "jquery": "^3.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
