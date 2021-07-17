@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import sum from './jest-example/example';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>Hello World</div>
+      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
     )
   }
 }
