@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import sum from './jest-example/example';
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
@@ -8,6 +9,18 @@ class App extends React.Component {
     this.state = {
 
     }
+  }
+
+  componentDidMount() {
+    axios.get('/qa/questions')
+      .then(q_a_data => {
+        console.log(data)
+        console.log('req fired')
+
+        axios.get()
+      })
+
+
   }
 
   render() {
