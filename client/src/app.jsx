@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import sum from './jest-example/example';
-import axios from 'axios'
+import axios from 'axios';
+
+import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,14 +12,7 @@ class App extends React.Component {
 
     }
   }
-
   componentDidMount() {
-
-    // below looks really bad and honestly there is probably a way better way to implement our get requests.
-    // because we are going for MVP it has been left as is for now, because its working.
-    // this is a tech debt - refactor componentDidMount requests to look nice
-
-    //for Atelier Products component get requests
     axios.get('/products')
       .then((product_data) => {
         console.log('products', product_data)
@@ -68,27 +63,15 @@ class App extends React.Component {
       .catch(err => {
         console.log('this is the err 🥲 ', err)
       })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   render() {
     return (
+      <div className='app'>
+
       <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
+      <RelatedProducts />
+      </div>
     )
   }
 }
