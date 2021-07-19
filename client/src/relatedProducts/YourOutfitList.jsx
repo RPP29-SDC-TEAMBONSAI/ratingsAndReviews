@@ -1,7 +1,7 @@
 import React from 'react';
-import YourOutfitCard from './YourOutfitCard';
+import YourOutfitCard from './YourOutfitCard.jsx';
 
-class YourOutfitList extends React.Component {
+export default class YourOutfitList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,11 +11,15 @@ class YourOutfitList extends React.Component {
 
   render () {
     return (
+      <div className='yourOutfitListContainer'>
+        <h2>Your Outfit: </h2>
       <div className='yourOutfitList'>
         <YourOutfitCard />
+        <YourOutfitCard />
+        <YourOutfitCard />
+      </div>
       </div>
     )
   }
 }
 
-module.exports = YourOutfitList;

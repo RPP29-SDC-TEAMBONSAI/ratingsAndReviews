@@ -1,9 +1,9 @@
 import React from 'react';
-//import RelatedProductsList from './RelatedProductsList';
-//import YourOutfitList from './YourOutfitList';
+import RelatedProductsList from './RelatedProductsList.jsx';
+import YourOutfitList from './YourOutfitList.jsx';
 
 
-class RelatedProducts extends React.Component {
+export default class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,11 +14,10 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div className='relatedProducts'>
-
-        <span>realted procuts</span>
+        <RelatedProductsList  />
+        <YourOutfitList />
       </div>
       )
   }
 }
 
-module.exports = RelatedProducts;

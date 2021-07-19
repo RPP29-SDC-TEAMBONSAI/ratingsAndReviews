@@ -1,8 +1,8 @@
 import React from 'react';
-import RelatedProductsCard from './RelatedProductsCard';
+import RelatedProductsCard from './RelatedProductsCard.jsx';
 
 
-class RelatedProductsList extends React.Component {
+export default class RelatedProductsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,11 +11,15 @@ class RelatedProductsList extends React.Component {
   }
   render () {
     return (
+      <div className='relatedProductsListContainer'>
+        <h2>Related Products:</h2>
       <div className='relatedProductsList'>
         <RelatedProductsCard />
+        <RelatedProductsCard />
+        <RelatedProductsCard />
+      </div>
       </div>
     )
   }
 }
 
-module.exports = RelatedProductsList;
