@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import sum from './jest-example/example';
 import axios from 'axios'
+import Overview from './Overview/index.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -88,7 +89,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
+      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}
+      <Overview/>
+      </div>
     )
   }
 }

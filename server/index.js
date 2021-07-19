@@ -15,6 +15,7 @@ app.get('/products', (req, res) => {
   //implement API request for list of products
   //send info to client
 
+
 })
   .get('/products/:product_id', (req, res) => {
     console.log('product id req', req)
