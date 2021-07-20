@@ -1,0 +1,45 @@
+
+
+.relatedProductsList {
+  border: solid;
+  display: flex;
+}
+.relatedProductsCardList {
+
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.relatedProductsCard {
+  flex-grow: 1;
+  flex-shrink: 1;
+  border: solid;
+  margin: 1rem .25em;
+}
+
+.yourOutfitList {
+  border: solid;
+  display: flex;
+}
+.yourOutfitCardList {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.yourOutfitCard {
+  flex-grow: 1;
+  flex-shrink: 1;
+  border: solid;
+  margin: 1rem .25em;
+  align-items: center;
+  justify-content: center;
+}
+
+.addToOutfitButton {
+  align-self: center;
+}
+
+
+
