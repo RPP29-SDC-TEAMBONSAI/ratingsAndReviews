@@ -1,0 +1,154 @@
+/* TOP LEVEL COMPONENT */
+.ratings-and-reviews {
+  display: flex;
+  flex-direction: row;
+}
+
+/* LEFT PANE OF COMPONENT */
+
+.ratings-breakdown {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+/* SUMMARY AT THE TOP OF THE LEFT PANE */
+
+.rating-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-title {
+  height: 50px;
+}
+
+.average-rating-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.average-rating-num {
+  font-size: 80px;
+  font-weight: bolder;
+  padding-right: 10px;
+}
+
+.stars-count-wrapper {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  font-size: smaller;
+}
+
+.average-rating-stars {
+  justify-content: flex-start; /* this is wrong */
+}
+
+.count-of-reviews {
+  justify-content: flex-start; /* this is wrong */
+}
+
+.recommends {
+  font-size: smaller;
+  padding: 10px 0 10px 0;
+}
+
+/* CLICKABLE RATING BARS */
+
+.rating-breakdown {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.breakdown-clickable {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.bar-label {
+  text-decoration: underline;
+}
+
+.bar-wrapper {
+  display: flex;
+  width: 350px;
+  height: 10px;
+  padding: 10px;
+  justify-content: stretch;
+}
+
+.bar-green {
+  background-color: green;
+  height: 10px;
+}
+
+.bar-grey {
+  background-color: lightgray;
+  height: 10px;
+}
+
+/* PRODUCT FACTORS */
+
+.product-breakdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.factor {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+.factor-title {
+  text-align: left;
+}
+
+.factor-levels {
+  display: flex;
+  flex-direction: row;
+  height: 10px;
+  margin: 5px 0 5px 0;
+  justify-content: space-evenly;
+  position: relative
+}
+
+.icon {
+  align-self: center;
+  position: absolute;
+  left: calc(50% - 8px);
+}
+
+.factor-level-section {
+  margin: 0 3px 0 3px;
+  width: 100%;
+  background-color: lightgray;
+}
+
+.factor-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: smaller;
+}
+
+.factor-label {
+  width: 100%;
+  text-align: center;
+}
+
+.factor-label-first {
+  width: 100%;
+  text-align: left;
+}
+
+.factor-label-last {
+  width: 100%;
+  text-align: right;
+}
+
+/* RIGHT PANE OF COMPONENT */
