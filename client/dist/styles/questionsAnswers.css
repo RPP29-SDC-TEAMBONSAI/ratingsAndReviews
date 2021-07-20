@@ -1,0 +1,64 @@
+.qna {
+  display: block;
+}
+
+.search {
+  width: 100%;
+  box-sizing: border-box;
+}
+.searchBtn {
+  float: right;
+
+}
+
+.qna.container {
+  display: flex;
+
+  flex-direction: row;
+}
+.questionAndAnswer {
+  flex-grow: 2;
+  flex-shrink: 2;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: auto;
+
+}
+.qna.table {
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-content: flex-end;
+  flex-direction: column;
+
+}
+.questionText, .answerText {
+  margin-top: 0px;
+  margin-top: 0px;
+}
+
+.inputBox {
+  padding: 0 5px 0 0;
+  overflow: hidden;
+
+}
+
+
+.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
+  text-decoration: underline;
+
+}
+
+.answerTable {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.aHelpful, .helpfulCount, .userIdText, .userHelpIndicator {
+  border-right: 1px solid black;
+}
+
+
+.moreAnsweredBtn, .addAQuestion {
+  height: 50px;
+  width: 225px;
+}
