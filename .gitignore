@@ -102,3 +102,6 @@ client/dist/bundle.js
 
 # TernJS port file
 .tern-port
+
+# API token
+config.js

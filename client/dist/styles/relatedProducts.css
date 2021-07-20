@@ -16,6 +16,7 @@
   flex-shrink: 1;
   border: solid;
   margin: 1rem .25em;
+
 }
 
 .yourOutfitList {
@@ -39,4 +40,9 @@
 
 .addToOutfitButton {
   align-self: center;
+}
+
+.actionStar {
+  justify-self: flex-end;
+  order: 5;
 }

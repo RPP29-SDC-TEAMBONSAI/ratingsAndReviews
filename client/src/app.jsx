@@ -12,64 +12,63 @@ class App extends React.Component {
 
     }
   }
-  componentDidMount() {
-    axios.get('/products')
-      .then((product_data) => {
-        console.log('products', product_data)
+  // componentDidMount() {
+  //   axios.get('/products')
+  //     .then((product_data) => {
+  //       console.log('products', product_data)
 
-        axios.get('/products/:product_id')
-          .then((products) => {
-            console.log('products data', products)
+  //       axios.get('/products/:product_id')
+  //         .then((products) => {
+  //           console.log('products data', products)
 
-            axios.get('/products/:product_id/styles')
-              .then((product_styles) => {
-                console.log('product styles', product_styles)
+  //           axios.get('/products/:product_id/styles')
+  //             .then((product_styles) => {
+  //               console.log('product styles', product_styles)
 
-                axios.get('/products/:product_id/related')
-                  .then((related_products) => {
+  //               axios.get('/products/:product_id/related')
+  //                 .then((related_products) => {
 
-                    console.log('related products', related_products)
-                    //for reviews component get requests
-                    axios.get('/reviews')
-                      .then((reviews) => {
-                        console.log('reviews', reviews)
+  //                   console.log('related products', related_products)
+  //                   //for reviews component get requests
+  //                   axios.get('/reviews')
+  //                     .then((reviews) => {
+  //                       console.log('reviews', reviews)
 
-                        axios.get('/reviews/meta')
-                          .then((reviews_meta) => {
+  //                       axios.get('/reviews/meta')
+  //                         .then((reviews_meta) => {
 
-                            console.log('reviews meta', reviews_meta)
-                            //for q/a component get requests
-                            axios.get('/qa/questions')
-                              .then((questions) => {
-                                console.log('questions', questions)
+  //                           console.log('reviews meta', reviews_meta)
+  //                           //for q/a component get requests
+  //                           axios.get('/qa/questions')
+  //                             .then((questions) => {
+  //                               console.log('questions', questions)
 
-                                axios.get('/qa/questions/:question_id/answers')
-                                  .then((answers) => {
-                                    console.log('answers', answers)
-                                    //for cart component get requests
-                                    axios.get('/cart')
-                                      .then((cart) =>{
-                                        console.log('cart', cart)
+  //                               axios.get('/qa/questions/:question_id/answers')
+  //                                 .then((answers) => {
+  //                                   console.log('answers', answers)
+  //                                   //for cart component get requests
+  //                                   axios.get('/cart')
+  //                                     .then((cart) =>{
+  //                                       console.log('cart', cart)
 
-                                      })
-                                  })
-                              })
-                          })
-                      })
-                  })
-              })
-          })
-      })
-      .catch(err => {
-        console.log('this is the err 🥲 ', err)
-      })
-  }
+  //                                     })
+  //                                 })
+  //                             })
+  //                         })
+  //                     })
+  //                 })
+  //             })
+  //         })
+  //     })
+  //     .catch(err => {
+  //       console.log('this is the err 🥲 ', err)
+  //     })
+  // }
 
   render() {
     return (
       <div className='app'>
 
-      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
       <RelatedProducts />
       </div>
     )
