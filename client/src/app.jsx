@@ -4,27 +4,25 @@ import sum from './jest-example/example';
 import axios from 'axios'
 import Overview from './Overview/index.jsx'
 
+
+import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product_id: 1,
 
     }
   }
-
   componentDidMount() {
-
-    // below looks really bad and honestly there is probably a way better way to implement our get requests.
-    // because we are going for MVP it has been left as is for now, because its working.
-    // this is a tech debt - refactor componentDidMount requests to look nice
-
-    //for Atelier Products component get requests
     axios.get('/products')
       .then((product_data) => {
         console.log('products', product_data)
 
         axios.get('/products/:product_id')
           .then((products) => {
+
             console.log('products data', products)
 
             axios.get('/products/:product_id/styles')
@@ -69,28 +67,15 @@ class App extends React.Component {
       .catch(err => {
         console.log('this is the err 🥲 ', err)
       })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   render() {
     return (
-      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}
-      <Overview/>
+      <div className='app'>
+
+      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
+      <Overview />
+      <RelatedProducts />
       </div>
     )
   }
