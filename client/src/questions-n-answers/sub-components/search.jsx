@@ -6,14 +6,16 @@ class Search extends React.Component {
 
     this.state = {
 
+      value: 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
+
     }
   }
 
   render() {
     return (
-      <form>
-        <input className='search' type='text' value='temp' name='question'></input>
-        <input type="submit" value='Search'></input>
+      <form className='searchAnswerForm'>
+        <input className='searchBtn' type="submit" value='Search'></input>
+        <div className='inputBox'><input className='search' type='text' value={this.state.value} name='question'></input></div>
 
       </form>
     )
