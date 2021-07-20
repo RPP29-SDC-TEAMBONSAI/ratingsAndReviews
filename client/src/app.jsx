@@ -4,6 +4,7 @@ import sum from './jest-example/example';
 import axios from 'axios';
 
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class App extends React.Component {
 
       <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
       <RelatedProducts />
+      <QuestionsNAnswers />
       </div>
     )
   }
