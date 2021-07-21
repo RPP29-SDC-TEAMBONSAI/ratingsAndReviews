@@ -15,7 +15,7 @@ export default class RelatedProductsCard extends React.Component {
           <h3 className='productCategory'>{this.props.category}</h3>
           <h3 className='productPrice'>{this.props.defaultPrice}</h3>
           {/* <img className='cardImage' href='tinyurl.com/5h4ad7ks'></img> */}
-          <p className='starRating'>XXXXX</p>
+          <p className='starRating'><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span></p>
       </div>
     )
   }

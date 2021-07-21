@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import sum from './jest-example/example';
 import axios from 'axios';
 
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -72,6 +73,7 @@ class App extends React.Component {
 
       <RelatedProducts />
       <QuestionsNAnswers />
+      <RatingsAndReviews />
       </div>
     )
   }
