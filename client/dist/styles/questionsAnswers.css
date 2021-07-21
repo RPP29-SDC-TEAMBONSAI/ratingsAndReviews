@@ -82,3 +82,12 @@ h4.questionText {
 .questionListButton.container {
   margin-bottom: 5%;
 }
+
+.answerListTable.hide{
+  /* visibility: hidden; */
+  display: none;
+}
+
+.list.container {
+  /* display: none; */
+}
