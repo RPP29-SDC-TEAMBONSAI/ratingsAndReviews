@@ -22,6 +22,7 @@
   justify-content: flex-start;
   flex-direction: column;
   margin-top: auto;
+  margin-bottom: 25px;
 
 }
 .qna.table {
@@ -30,10 +31,15 @@
   justify-content: flex-end;
   flex-direction: column;
 
+
 }
-.questionText, .answerText {
+h4.answerText {
   margin-top: 0px;
   margin-top: 0px;
+  margin-bottom: 0px;
+}
+h4.questionText {
+  margin-top: 0px
 }
 
 .inputBox {
@@ -61,4 +67,9 @@
 .moreAnsweredBtn, .addAQuestion {
   height: 50px;
   width: 225px;
+}
+
+.userIdText.container{
+  margin-bottom: 15px;
+  display: flex;
 }

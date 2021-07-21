@@ -1,3 +1,4 @@
+
 module.exports = {
     "env": {
         "browser": true,
@@ -15,5 +16,5 @@ module.exports = {
         "react"
     ],
     "rules": {
-    }
+    },
 };

@@ -1,6 +1,6 @@
 import React from 'react'
 import AddAnswer from './mini-components/addAnswerTable.jsx';
-import ReportAnswer from './mini-components/reportAnswer.jsx';
+// import ReportAnswer from './mini-components/reportAnswer.jsx';
 import AnswerNQuestion from './mini-components/answerNQuestionDisplay.jsx';
 
 class QuestionsAndAnswers extends React.Component {
@@ -18,19 +18,11 @@ class QuestionsAndAnswers extends React.Component {
       <div>
         <div className='qna container'>
           <div className='questionAndAnswer'>
-            <AnswerNQuestion/>
+            <AnswerNQuestion data={this.props.data}/>
           </div>
           <div className='qna table'>
-            <AddAnswer/>
+            <AddAnswer data={this.props.data.question_helpfulness}/>
           </div>
-        </div>
-        <div className='reportAnswer'>
-          <ReportAnswer/>
-        </div>
-        <div className='button container'>
-          <button className='moreAnsweredBtn'>MORE ANSWERED QUESTIONS</button>
-          <button className='addAQuestion'>ADD A QUESTION +</button>
-
         </div>
       </div>
 
