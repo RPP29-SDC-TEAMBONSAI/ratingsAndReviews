@@ -23,10 +23,15 @@ class QuestionsAndAnswers extends React.Component {
           <div className='qna table'>
             <AddAnswer data={this.props.data.question_helpfulness}/>
           </div>
+          <div>
+
+          </div>
+
         </div>
+
       </div>
 
-    );
+    )
   }
 }
 
