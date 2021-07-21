@@ -77,7 +77,7 @@ class App extends React.Component {
     return (
       <div className='app'>
 
-      <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
+
       <RelatedProducts />
       <QuestionsNAnswers data={this.state.qNa}/>
       <RatingsAndReviews />
