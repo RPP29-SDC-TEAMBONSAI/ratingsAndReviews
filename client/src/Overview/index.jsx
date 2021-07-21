@@ -9,6 +9,9 @@ class Overview extends React.Component {
   constructor (props) {
     super (props)
     this.props = props;
+    this.state = {
+      style: 0
+    }
   }
 
 
@@ -16,7 +19,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
-        <ProductInfo state = {this.props.state}/>
+        <ProductInfo state = {this.props.state} OverviewState = {this.state}/>
         <StyleSelector state = {this.props.state}/>
         <AddToCart state = {this.props.state}/>
         <ImageGallery state = {this.props.state}/>
