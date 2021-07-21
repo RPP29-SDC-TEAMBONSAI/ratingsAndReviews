@@ -5,6 +5,12 @@ import axios from 'axios'
 import Overview from './Overview/index.jsx'
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+
+//questions/answers test data
+import qNa_testData from '../../tests/QnA-testData';
+
+let qNa = qNa_testData.results
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +19,7 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: []
+      qNa: props.qNaTestData
 
     }
   }
@@ -39,19 +46,19 @@ class App extends React.Component {
                         axios.get('/reviews/meta')
                           .then((reviews_meta) => {
 
-
+                            // console.log('reviews meta', reviews_meta)
                             //for q/a component get requests
                             axios.get('/qa/questions')
                               .then((questions) => {
-
+                                // console.log('questions', questions)
 
                                 axios.get('/qa/questions/:question_id/answers')
                                   .then((answers) => {
-
+                                    // console.log('answers', answers)
                                     //for cart component get requests
                                     axios.get('/cart')
                                       .then((cart) =>{
-
+                                        // console.log('cart', cart)
 
                                       })
                                   })
@@ -72,10 +79,13 @@ class App extends React.Component {
       <div className='app'>
       <Overview state = {this.state}/>
       <RelatedProducts />
-      <QuestionsNAnswers />
+      <QuestionsNAnswers data={this.state.qNa}/>
+      <RatingsAndReviews />
       </div>
     )
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+
+ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
+

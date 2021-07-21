@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class AddAnswer extends React.Component {
   constructor(props) {
     super(props)
@@ -12,17 +13,22 @@ class AddAnswer extends React.Component {
   render() {
     return (
       <table className='answerTable'>
-        <tr>
-          <td className='aHelpful'>Helpful?</td>
-          <td className='qhelpfulIndicator'>Yes</td>
-          <td className='helpfulCount'>({this.state.questionHelpfulCount})</td>
-          <td className='addAnswerText'>Add Answer</td>
-
-        </tr>
+        <tbody>
+          <tr>
+            <td className='aHelpful'>Helpful?</td>
+            <td className='qhelpfulIndicator'>Yes</td>
+            <td className='helpfulCount'>({this.props.data ? this.props.data : 0})</td>
+            <td className='addAnswerText'>Add Answer</td>
+          </tr>
+        </tbody>
       </table>
     )
   }
 }
 
+
+
 export default AddAnswer
+
+
 
