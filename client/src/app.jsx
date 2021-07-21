@@ -28,14 +28,10 @@ class App extends React.Component {
       .then((product_data) => {
         axios.get('/products/:product_id')
           .then((products) => {
-            this.setState({
-              productInformation: products.data
-            })
+
             axios.get('/products/:product_id/styles')
               .then((product_styles) => {
-                this.setState({
-                  styles: product_styles.data
-                })
+
                 axios.get('/products/:product_id/related')
                   .then((related_products) => {
                     //for reviews component get requests
@@ -59,6 +55,12 @@ class App extends React.Component {
                                     axios.get('/cart')
                                       .then((cart) =>{
                                         // console.log('cart', cart)
+
+
+                                        this.setState({
+                                          productInformation: products.data,
+                                          styles: product_styles.data
+                                        })
 
                                       })
                                   })
