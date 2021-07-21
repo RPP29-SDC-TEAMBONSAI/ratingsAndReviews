@@ -17,7 +17,6 @@ class AddAnswer extends React.Component {
           <td className='qhelpfulIndicator'>Yes</td>
           <td className='helpfulCount'>({this.state.questionHelpfulCount})</td>
           <td className='addAnswerText'>Add Answer</td>
-
         </tr>
       </table>
     )

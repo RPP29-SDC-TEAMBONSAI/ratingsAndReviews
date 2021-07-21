@@ -1,7 +1,7 @@
 import React from 'react'
 import AddAnswer from './mini-components/addAnswerTable.jsx';
 // import ReportAnswer from './mini-components/reportAnswer.jsx';
-import AnswerNQuestion from './mini-components/answerNQuestionDisplay.jsx';
+import QuestionList from './mini-components/questionList.jsx';
 
 class QuestionsAndAnswers extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class QuestionsAndAnswers extends React.Component {
       <div>
         <div className='qna container'>
           <div className='questionAndAnswer'>
-            <AnswerNQuestion data={this.props.data}/>
+            <QuestionList data={this.props.data}/>
           </div>
           <div className='qna table'>
             <AddAnswer data={this.props.data.question_helpfulness}/>

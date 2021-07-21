@@ -1,6 +1,6 @@
 import React from 'React';
 
-class AnswerNQuestion extends React.Component {
+class QuestionList extends React.Component {
   constructor(props) {
     super(props)
 
@@ -12,42 +12,26 @@ class AnswerNQuestion extends React.Component {
 
   render() {
     let answers=[]
-    let singleAnswers = []
+    //is this best way for getting answers??? probably not
 
-
-    // console.log(this.props.data)
-
+    //* the question results came in as an array of objects - but the answers came in as a nested object
+    //so in order to associate the create answers with the correct questions, without having to make
+    //another request to db, i pulled all the answers with the below functionality and pushed them to an array.
     if (Object.keys(this.props.data.answers).length) {
       for (var key in this.props.data.answers) {
-        // answers.push(this.props.data.answers)
         answers.push(this.props.data.answers[key])
-        // console.log(this.props.data.answers[key])
-        // for (var key2 in this.props.data.answers[key]) {
-        //   console.log(this.props.)
-        // }
-
       }
-
-
-
-
     }
-    // if (answers[0] === undefined) {
-    //   answers = {body: 'none'}
-    // }
-    // console.log(answers, "🔥")
-
-
 
     return (
-      <div className=''>
+      <div>
         <h4 className='questionText'>Q: {this.props.data.question_body}</h4>
         {answers.map((answer, index) => {
           return (
           <div className='' key={index}>
           <h4 className='answerText'>A: {answer.body}</h4>
             <table className=''key={index}>
-            <tr className='userIdText container'>
+            <tr>
               <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
               <td>helpful?</td>
               <td className='userHelpfulBtn'>Yes</td>
@@ -64,4 +48,4 @@ class AnswerNQuestion extends React.Component {
 }
 
 
-export default AnswerNQuestion
+export default QuestionList
