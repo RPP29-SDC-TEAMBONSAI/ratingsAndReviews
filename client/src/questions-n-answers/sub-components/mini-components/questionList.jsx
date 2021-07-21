@@ -1,14 +1,18 @@
 import React from 'React';
 
+
 class QuestionList extends React.Component {
   constructor(props) {
     super(props)
+
 
 
     this.state = {
 
     }
   }
+
+
 
   render() {
     let answers=[]
@@ -31,13 +35,15 @@ class QuestionList extends React.Component {
           <div className='' key={index}>
           <h4 className='answerText'>A: {answer.body}</h4>
             <table className=''key={index}>
-            <tr>
-              <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-              <td>helpful?</td>
-              <td className='userHelpfulBtn'>Yes</td>
-              <td className='userHelpIndicator'>({answer.helpfulness})</td>
-              <td className='userReportBtn'>report</td>
-            </tr>
+              <tbody>
+                <tr>
+                  <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
+                  <td>helpful?</td>
+                  <td className='userHelpfulBtn'>Yes</td>
+                  <td className='userHelpIndicator'>({answer.helpfulness})</td>
+                  <td className='userReportBtn'>report</td>
+                </tr>
+            </tbody>
           </table>
         </div> )
         })}

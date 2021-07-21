@@ -1,17 +1,35 @@
 import React from 'react';
 import Search from './sub-components/search.jsx'
 import QuestionsAndAnswers from './sub-components/questionsAndAnswers.jsx';
+import QnAClientHelpers from '../helper-functions/qnAHelper.js';
 
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
     super(props)
 
+
     this.state ={
+      questions: []
 
     };
 
   }
+
+
+  componentDidMount() {
+    let helper = new QnAClientHelpers()
+
+    // console.log(this.props.data)
+    let copy = this.props.data.slice()
+    let newOrder = helper.sortQuestions(copy)
+    console.log(newOrder)
+    this.setState({
+      questions: newOrder
+    })
+
+  }
+
 
   render () {
     return (
@@ -22,7 +40,7 @@ class QuestionsNAnswers extends React.Component {
           <Search/>
         </div>
         <div className='list container'>
-          {this.props.data.map((question, index) => {
+          {this.state.questions.map((question, index) => {
             return <QuestionsAndAnswers key={index} data={question}/>
           })}
         </div>
