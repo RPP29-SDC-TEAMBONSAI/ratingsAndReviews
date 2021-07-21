@@ -1,3 +1,5 @@
+const { IgnorePlugin } = require("webpack");
+
 module.exports = {
     "env": {
         "browser": true,
@@ -15,5 +17,5 @@ module.exports = {
         "react"
     ],
     "rules": {
-    }
+    },
 };

@@ -6,10 +6,16 @@ import axios from 'axios';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 
+//questions/answers test data
+import qNa_testData from '../../tests/QnA-testData';
+
+let qNa = qNa_testData.results
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      qNa: props.qNaTestData
 
     }
   }
@@ -72,10 +78,12 @@ class App extends React.Component {
 
       <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
       <RelatedProducts />
-      <QuestionsNAnswers />
+      <QuestionsNAnswers data={this.state.qNa}/>
       </div>
     )
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+
+ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
+
