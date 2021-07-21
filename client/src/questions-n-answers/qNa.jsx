@@ -23,9 +23,10 @@ class QuestionsNAnswers extends React.Component {
     // console.log(this.props.data)
     let copy = this.props.data.slice()
     let newOrder = helper.sortQuestions(copy)
-    console.log(newOrder)
+
     this.setState({
-      questions: newOrder
+      questions: newOrder,
+      questionHide: 'questionText Hide'
     })
 
   }
@@ -34,14 +35,21 @@ class QuestionsNAnswers extends React.Component {
   render () {
     return (
 
-      <div className='questionList container'>
+      <div className={`questionList container`}>
         <div className="questionListTitle container">
           <h3 className='qnaTitle'>Questions & answers</h3>
           <Search/>
         </div>
         <div className='list container'>
           {this.state.questions.map((question, index) => {
-            return <QuestionsAndAnswers key={index} data={question}/>
+            let currentClass;
+            if (index <= 1) {
+              currentClass = 'questionText'
+
+            } else {
+              currentClass = this.state.questionHide
+            }
+            return <QuestionsAndAnswers key={index} classname={currentClass} data={question}/>
           })}
         </div>
         <div className='questionListButton container'>
