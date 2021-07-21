@@ -79,12 +79,8 @@ class App extends React.Component {
 
       <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
       <RelatedProducts />
-<<<<<<< HEAD
       <QuestionsNAnswers data={this.state.qNa}/>
-=======
-      <QuestionsNAnswers />
       <RatingsAndReviews />
->>>>>>> 1a54702a76b1a6bb531521c8f90376d8c2c404c9
       </div>
     )
   }
