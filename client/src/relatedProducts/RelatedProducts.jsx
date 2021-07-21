@@ -19,7 +19,7 @@ export default class RelatedProducts extends React.Component {
     //       .catch(err => {
     //         console.log(`err in product get: ${err}`);
     //       })
-    console.log(`example products: ${JSON.stringify(products)}`)
+    // console.log(`example products: ${JSON.stringify(products)}`)
   }
 
   render() {
