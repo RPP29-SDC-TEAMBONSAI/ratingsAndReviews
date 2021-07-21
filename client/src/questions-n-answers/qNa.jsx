@@ -23,7 +23,7 @@ class QuestionsNAnswers extends React.Component {
     // console.log(this.props.data)
     let copy = this.props.data.slice()
     let newOrder = helper.sortQuestions(copy)
-    console.log(newOrder)
+
     this.setState({
       questions: newOrder
     })
