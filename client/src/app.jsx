@@ -18,7 +18,7 @@ class App extends React.Component {
     this.state = {
       product_id: 28212,
       productInformation: {},
-      styles: []
+      styles: [],
       qNa: props.qNaTestData
 
     }

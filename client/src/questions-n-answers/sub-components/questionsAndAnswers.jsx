@@ -26,9 +26,6 @@ class QuestionsAndAnswers extends React.Component {
           <div className='qna table'>
             <AddAnswer data={this.props.data.question_helpfulness} classname={this.props.classname}/>
           </div>
-          <div>
-
-          </div>
 
         </div>
 
