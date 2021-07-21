@@ -5,9 +5,7 @@ class Search extends React.Component {
     super(props)
 
     this.state = {
-
       value: 'HAVE A QUESTION? SEARCH FOR ANSWERS...'
-
     }
   }
 
@@ -21,4 +19,5 @@ class Search extends React.Component {
     )
   }
 }
+
 export default Search;
