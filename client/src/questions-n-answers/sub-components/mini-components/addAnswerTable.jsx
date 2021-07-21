@@ -12,7 +12,7 @@ class AddAnswer extends React.Component {
   }
   render() {
     return (
-      <table className='answerTable'>
+      <table className={`answerTable ${this.props.classname}`}>
         <tbody>
           <tr>
             <td className='aHelpful'>Helpful?</td>

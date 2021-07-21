@@ -11,7 +11,8 @@ class QuestionList extends React.Component {
     this.state = {
       answers: [],
       questions: '',
-      hide: 'answerListTable Hide'
+      answerHide: 'answerListTable Hide',
+
 
 
     }
@@ -56,16 +57,23 @@ class QuestionList extends React.Component {
   render() {
 
 
+
     return (
       <div className='list container'>
-        <h4 className='questionText'>Q: {this.state.questions}</h4>
+        <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
         {this.state.answers.map((answer, index) => {
           let _class;
           if (index <= 1) {
             _class = 'answerListTable'
 
-          } else {
-            _class = this.state.hide
+          }
+          if (this.props.classname === 'questionText Hide') {
+            console.log(this.props.classname === 'questionText Hide')
+            _class = this.state.answerHide
+          }
+
+          if (index >= 2) {
+            _class = this.state.answerHide
           }
           return (
           <div className={_class} key={index}>

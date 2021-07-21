@@ -19,12 +19,12 @@ class QuestionsAndAnswers extends React.Component {
 
     return (
       <div>
-        <div className='qna container'>
+        <div className={`qna container ${this.props.classname}`}>
           <div className='questionAndAnswer'>
-            <QuestionList data={this.props.data}/>
+            <QuestionList data={this.props.data} classname={this.props.classname} />
           </div>
           <div className='qna table'>
-            <AddAnswer data={this.props.data.question_helpfulness}/>
+            <AddAnswer data={this.props.data.question_helpfulness} classname={this.props.classname}/>
           </div>
           <div>
 
