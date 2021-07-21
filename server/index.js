@@ -13,7 +13,6 @@ app.use(express.static('client/dist'));
 
 //get requests for page load (chain)
 app.get('/products', (req, res) => {
-  console.log('products req')
   //res.send(200)
   //implement API request for list of products
   //send info to client
@@ -48,10 +47,16 @@ res.send(200)
     //send info to client
   })
   .get('/products/:product_id/styles', (req, res) => {
-    //console.log('product styles req', req)
-    res.send(200)
-    //implement API request for product styles
-    //send info to client
+    axios.get(api + 'products/28212/styles', {
+      headers: {
+        'Authorization': TOKEN
+      }
+    }).then((data)=> {
+      console.log("STYLES", data.data)
+      res.send(data.data.results)
+    })
+    .catch(err => console.log('erroryuh', err))
+
 
   })
   .get('/products/:product_id/related', (req, res) => {

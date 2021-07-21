@@ -8,22 +8,18 @@ import ImageGallery from './components/ImageGallery.jsx';
 class Overview extends React.Component {
   constructor (props) {
     super (props)
-
-    this.state = {
-
-    }
-
+    this.props = props;
   }
 
 
 
   render() {
     return (
-      <div> Overview
-        <ProductInfo />
-        <StyleSelector />
-        <AddToCart />
-        <ImageGallery />
+      <div>
+        <ProductInfo state = {this.props.state}/>
+        <StyleSelector state = {this.props.state}/>
+        <AddToCart state = {this.props.state}/>
+        <ImageGallery state = {this.props.state}/>
 
 
 
