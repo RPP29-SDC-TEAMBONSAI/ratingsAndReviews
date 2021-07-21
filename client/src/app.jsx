@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 
 //questions/answers test data
 import qNa_testData from '../../tests/QnA-testData';
@@ -78,7 +79,12 @@ class App extends React.Component {
 
       <div>{`Hello Sum 1 + 1 = ${sum(1, 1)}`}</div>
       <RelatedProducts />
+<<<<<<< HEAD
       <QuestionsNAnswers data={this.state.qNa}/>
+=======
+      <QuestionsNAnswers />
+      <RatingsAndReviews />
+>>>>>>> 1a54702a76b1a6bb531521c8f90376d8c2c404c9
       </div>
     )
   }
