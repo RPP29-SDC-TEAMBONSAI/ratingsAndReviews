@@ -28,11 +28,12 @@ module.exports = {
       console.log("data", data.data)
       res.send(data.data)
     })
-    .catch(err => console.log('erroryuh', err))
-
+    .catch((err) => {
+      console.log('erroryuh', err)
+      res.status(500).end()
+    })
     //implement API request for product details
     //send info to client
-    res.status(200).end();
   },
   productsStyle: (req, res) => {
     axios.get(api + 'products/28212/styles', {
@@ -41,11 +42,12 @@ module.exports = {
       }
     }).then((data)=> {
       console.log("STYLES", data.data)
-      res.send(data.data.results)
+      res.send(data.data.results);
     })
-    .catch(err => console.log('erroryuh', err))
-
-    res.status(200).end();
+    .catch((err) => {
+      console.log('erroryuh', err)
+      res.status(500).end()
+    })
   },
   productsRelated: (req, res) => {
     //console.log('related products req', req)
