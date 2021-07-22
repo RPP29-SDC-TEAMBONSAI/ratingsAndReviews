@@ -117,3 +117,7 @@ h3.loadMoreAnswersButton:hover {
 .qna.questionText.container {
   margin-bottom: 5vh;
 }
+
+.moreAnsweredBtn.Hide {
+  display: none;
+}

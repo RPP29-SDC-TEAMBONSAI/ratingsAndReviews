@@ -16,6 +16,7 @@ class QuestionsAndAnswers extends React.Component {
   }
   showQuestion(currentCount) {
     let newClass;
+    // console.log(this.props)
 
     if (currentCount % 2 !== 0) {
 
@@ -34,8 +35,10 @@ class QuestionsAndAnswers extends React.Component {
   render() {
 
     let showQuestionClass = this.showQuestion(this.props.questionCount)
+    // this.props.showButton(this.props.currentI)
 
-    console.log(showQuestionClass)
+
+    // console.log(showQuestionClass)
 
 
 
