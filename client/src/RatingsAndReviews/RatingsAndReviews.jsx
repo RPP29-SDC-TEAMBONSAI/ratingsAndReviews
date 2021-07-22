@@ -10,7 +10,7 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div className="ratings-and-reviews">
+      <div className="ratings-and-reviews" id="link_to_reviews">
         <RatingsBreakdown props={this.props.productId}/>
         <Reviews props={this.props.productId}/>
       </div>
