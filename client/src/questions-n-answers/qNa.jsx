@@ -12,7 +12,8 @@ class QuestionsNAnswers extends React.Component {
       questions: [],
       answerClickCount:0,
       questionHide: 'Hide',
-      answerScroll: 'list scroll container'
+      answerScroll: 'list scroll container',
+      loadButtonText: 'Load More Answers'
 
     };
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
@@ -36,9 +37,18 @@ class QuestionsNAnswers extends React.Component {
 
   loadAnswerClick(e) {
     let count = this.state.answerClickCount + 1;
+    let text;
+
+    if (count % 2 !== 0) {
+      text = 'Collapse Answers'
+
+    } else {
+      text = 'Load More Answers'
+    }
 
     this.setState({
-      answerClickCount: count
+      answerClickCount: count,
+      loadButtonText: text
     })
 
 
@@ -66,7 +76,7 @@ class QuestionsNAnswers extends React.Component {
           })}
         </div>
         <div className='questionListButton container'>
-          <h3 className='loadMoreAnswersButton' onClick={this.loadAnswerClick}>Load more answers</h3>
+          <h3 className='loadMoreAnswersButton' onClick={this.loadAnswerClick}>{this.state.loadButtonText}</h3>
           <button className='moreAnsweredBtn'>MORE ANSWERED QUESTIONS</button>
           <button className='addAQuestion'>ADD A QUESTION +</button>
         </div>
