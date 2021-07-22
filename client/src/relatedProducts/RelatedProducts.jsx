@@ -2,7 +2,7 @@ import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 import axios from 'axios';
-import {currentProduct, relatedProducts, relatedProductsInfo} from './exampleData.jsx';
+import {currentProduct, relatedProducts, relatedProductsInfo, relatedProductsStyles} from './exampleData.jsx';
 
 export default class RelatedProducts extends React.Component {
   constructor(props) {
@@ -10,7 +10,8 @@ export default class RelatedProducts extends React.Component {
     this.state = {
       currentProuctId: currentProduct.id,
       relatedProductIds: relatedProducts,
-      relatedProducts: relatedProductsInfo
+      relatedProducts: relatedProductsInfo,
+      relatedProductsStyles: relatedProductsStyles
     }
   }
   componentDidMount() {
@@ -27,7 +28,7 @@ export default class RelatedProducts extends React.Component {
   render() {
     return (
       <div className='relatedProducts'>
-        <RelatedProductsList currentProductId={this.state.currentProuctId} relatedProductIds={this.state.relatedProductIds} relatedProducts={this.state.relatedProducts} />
+        <RelatedProductsList currentProductId={this.state.currentProuctId} relatedProductIds={this.state.relatedProductIds} relatedProducts={this.state.relatedProducts} relatedProductsStyles={this.state.relatedProductsStyles} />
         <YourOutfitList />
       </div>
       )
