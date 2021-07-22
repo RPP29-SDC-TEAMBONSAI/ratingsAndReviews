@@ -11,7 +11,8 @@ class QuestionsNAnswers extends React.Component {
     this.state ={
       questions: [],
       answerClickCount:0,
-      questionHide: 'Hide'
+      questionHide: 'Hide',
+      answerScroll: 'list scroll container'
 
     };
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
@@ -61,7 +62,7 @@ class QuestionsNAnswers extends React.Component {
             } else {
               currentClass = this.state.questionHide
             }
-            return <QuestionsAndAnswers key={index} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
+            return <QuestionsAndAnswers key={index} answerScroll={this.state.answerScroll} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
           })}
         </div>
         <div className='questionListButton container'>

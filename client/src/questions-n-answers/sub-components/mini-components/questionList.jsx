@@ -12,6 +12,7 @@ class QuestionList extends React.Component {
       answers: [],
       questions: '',
       answerHide: 'answerListTable Hide',
+      scrollStateClass: 'list container'
 
 
 
@@ -19,6 +20,8 @@ class QuestionList extends React.Component {
     }
     this.hide = this.hide.bind(this)
     this.showOrHide = this.showOrHide.bind(this)
+    this.addScroll = this.addScroll.bind(this)
+
   }
 
   componentDidMount() {
@@ -77,7 +80,7 @@ class QuestionList extends React.Component {
   }
 
   showOrHide(currentCount, i) {
-    console.log(i)
+    // console.log(i)
     let _class;
 
     if (currentCount % 2 !== 0)  {
@@ -97,47 +100,69 @@ class QuestionList extends React.Component {
 
   }
 
+  addScroll(currentCount) {
+    let  newClass;
+    if (currentCount % 2 !== 0) {
+      newClass = 'list scroll container'
+
+    }
+    return newClass
+
+  }
+
 
 
   render() {
 
+    let scrollClass = this.addScroll(this.props.answerCount)
+    // console.log(scrollStateClass)
+
+
+
 
     return (
-      <div className='list container'>
+      <div>
         <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
+
+        <div className={scrollClass ? scrollClass : 'list container'}>
+
         {this.state.answers.map((answer, index) => {
 
 
 
           let _class= this.hide(this.props.classname, index)
-          console.log(this.props)
+          // console.log(this.props)
 
           let showOrHideClass = this.showOrHide(this.props.answerCount, index)
           let showClass;
           if (showOrHideClass === 'answerListTable') {
-            showClass = showOrHideClass
+            showClass = 'answerListTable'
 
           }
-          console.log(showClass)
+
+
+          // console.log(showClass)
 
           return (
             <div className={showClass ? showClass : _class} key={index}>
-            <h4 className='answerText'>A: {answer.body}</h4>
+              <h4 className='answerText'>A: {answer.body}</h4>
               <table className=''key={index}>
                 <tbody>
-                  <tr>
-                    <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-                    <td>helpful?</td>
-                    <td className='userHelpfulBtn'>Yes</td>
-                    <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn'>report</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
+                    <tr>
+                      <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
+                      <td>helpful?</td>
+                      <td className='userHelpfulBtn'>Yes</td>
+                      <td className='userHelpIndicator'>({answer.helpfulness})</td>
+                      <td className='userReportBtn'>report</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
           )
         })}
+        </div>
       </div>
+
     )
   }
 }

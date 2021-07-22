@@ -1,4 +1,4 @@
-.qna {
+.questionList.container {
   display: block;
 }
 
@@ -107,4 +107,13 @@ h3.loadMoreAnswersButton:hover {
   color:navy;
   background: beige;
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+.list.scroll.container {
+  height: 25vh;
+  overflow-y:scroll;
+
+}
+
+.qna.questionText.container {
+  margin-bottom: 5vh;
 }
