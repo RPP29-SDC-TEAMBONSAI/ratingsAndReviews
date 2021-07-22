@@ -1,8 +1,7 @@
 import React from 'react';
 import Search from './sub-components/search.jsx'
 import QuestionsAndAnswers from './sub-components/questionsAndAnswers.jsx';
-import QnAClientHelpers from '../helper-functions/qnAHelper.js';
-
+import QnAClientHelpers from '../helpers/qnAHelper.js';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class QuestionsNAnswers extends React.Component {
 
     this.setState({
       questions: newOrder,
-      questionHide: 'questionText Hide'
+      questionHide: 'Hide'
     })
 
   }

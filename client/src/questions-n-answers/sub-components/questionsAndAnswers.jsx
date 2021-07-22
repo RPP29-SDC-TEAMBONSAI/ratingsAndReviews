@@ -19,7 +19,7 @@ class QuestionsAndAnswers extends React.Component {
 
     return (
       <div>
-        <div className={`qna container ${this.props.classname}`}>
+        <div className={`qna ${this.props.classname} Container`}>
           <div className='questionAndAnswer'>
             <QuestionList data={this.props.data} classname={this.props.classname} />
           </div>

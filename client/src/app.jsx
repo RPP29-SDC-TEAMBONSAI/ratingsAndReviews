@@ -39,6 +39,11 @@ class App extends React.Component {
       cart()
     ])
       .then((results) => {
+        this.setState({
+          productId: results[3].data.id,
+          productInformation: results[3].data,
+          styles: results[4].data
+        });
         console.log(results);
       })
       .catch((err) => {

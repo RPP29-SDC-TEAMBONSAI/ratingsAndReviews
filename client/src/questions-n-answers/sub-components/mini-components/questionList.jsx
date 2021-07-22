@@ -1,5 +1,5 @@
 import React from 'React';
-import QnAClientHelpers from '../../../helper-functions/qnAHelper';
+import QnAClientHelpers from '../../../helpers/qnAHelper';
 
 
 class QuestionList extends React.Component {
@@ -15,7 +15,9 @@ class QuestionList extends React.Component {
 
 
 
+
     }
+    this.hide = this.hide.bind(this)
   }
 
   componentDidMount() {
@@ -38,17 +40,37 @@ class QuestionList extends React.Component {
       sortedAnswers = helper.sortAnswers(answers)
       this.setState({
         answers: sortedAnswers,
-        questions: questions
+        questions: questions,
+
 
       })
 
     } else {
 
       this.setState({
-        questions: questions
+        questions: questions,
+
+
       })
 
     }
+
+  }
+
+  hide(currentClassname, index) {
+    console.log(currentClassname)
+    let newClass;
+
+    if (index <= 1) {
+      newClass = 'answerListTable'
+    }
+    if (currentClassname === 'Hide') {
+      newClass = this.state.answerHide
+    }
+    if (index >= 2) {
+      newClass = this.state.answerHide
+    }
+    return newClass
 
   }
 
@@ -57,41 +79,33 @@ class QuestionList extends React.Component {
   render() {
 
 
-
     return (
       <div className='list container'>
         <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
         {this.state.answers.map((answer, index) => {
-          let _class;
-          if (index <= 1) {
-            _class = 'answerListTable'
 
-          }
-          if (this.props.classname === 'questionText Hide') {
-            console.log(this.props.classname === 'questionText Hide')
-            _class = this.state.answerHide
-          }
 
-          if (index >= 2) {
-            _class = this.state.answerHide
-          }
+
+          let _class= this.hide(this.props.classname, index)
+          console.log(_class)
+
           return (
-          <div className={_class} key={index}>
-          <h4 className='answerText'>A: {answer.body}</h4>
-            <table className=''key={index}>
-              <tbody>
-                <tr>
-                  <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-                  <td>helpful?</td>
-                  <td className='userHelpfulBtn'>Yes</td>
-                  <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                  <td className='userReportBtn'>report</td>
-                </tr>
-            </tbody>
-          </table>
-        </div> )
+            <div className={_class} key={index}>
+            <h4 className='answerText'>A: {answer.body}</h4>
+              <table className=''key={index}>
+                <tbody>
+                  <tr>
+                    <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
+                    <td>helpful?</td>
+                    <td className='userHelpfulBtn'>Yes</td>
+                    <td className='userHelpIndicator'>({answer.helpfulness})</td>
+                    <td className='userReportBtn'>report</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          )
         })}
-
       </div>
     )
   }
