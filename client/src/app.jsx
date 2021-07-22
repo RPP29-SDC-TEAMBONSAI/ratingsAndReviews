@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import sum from './jest-example/example';
-import axios from 'axios';
-
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import Overview from './Overview/index.jsx'
+import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+
+// CLIENT ROUTES
+import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
+import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
+import { questions, answers } from "./clientRoutes/qa.js";
+import { cart } from "./clientRoutes/cart.js";
 
 //questions/answers test data
 import qNa_testData from '../../tests/QnA-testData';
@@ -16,69 +20,44 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product_id: 28212,
+      productInformation: {},
+      styles: [],
       qNa: props.qNaTestData
 
     }
   }
-  // componentDidMount() {
-  //   axios.get('/products')
-  //     .then((product_data) => {
-  //       console.log('products', product_data)
-
-  //       axios.get('/products/:product_id')
-  //         .then((products) => {
-  //           console.log('products data', products)
-
-  //           axios.get('/products/:product_id/styles')
-  //             .then((product_styles) => {
-  //               console.log('product styles', product_styles)
-
-  //               axios.get('/products/:product_id/related')
-  //                 .then((related_products) => {
-
-  //                   console.log('related products', related_products)
-  //                   //for reviews component get requests
-  //                   axios.get('/reviews')
-  //                     .then((reviews) => {
-  //                       console.log('reviews', reviews)
-
-  //                       axios.get('/reviews/meta')
-  //                         .then((reviews_meta) => {
-
-  //                           console.log('reviews meta', reviews_meta)
-  //                           //for q/a component get requests
-  //                           axios.get('/qa/questions')
-  //                             .then((questions) => {
-  //                               console.log('questions', questions)
-
-  //                               axios.get('/qa/questions/:question_id/answers')
-  //                                 .then((answers) => {
-  //                                   console.log('answers', answers)
-  //                                   //for cart component get requests
-  //                                   axios.get('/cart')
-  //                                     .then((cart) =>{
-  //                                       console.log('cart', cart)
-
-  //                                     })
-  //                                 })
-  //                             })
-  //                         })
-  //                     })
-  //                 })
-  //             })
-  //         })
-  //     })
-  //     .catch(err => {
-  //       console.log('this is the err 🥲 ', err)
-  //     })
-  // }
+  componentDidMount() {
+    Promise.all([
+      // REVIEW REQUESTS
+      reviews(), reviewsMeta(),
+      // PRODUCT REQUESTS
+      products(), productsWithId(), productsStyle(), productsRelated(),
+      // QNA REQUESTS
+      questions(), answers(),
+      // CART REQUESTS
+      cart()
+    ])
+      .then((results) => {
+        console.log(results);
+        this.setState({
+          productId: results[3].data.id,
+          productInformation: results[3].data,
+          styles: results[4].data
+        });
+      })
+      .catch((err) => {
+        console.log('this is the err 🥲 ', err)
+      });
+  }
 
   render() {
     return (
       <div className='app'>
-      <RelatedProducts />
-      <QuestionsNAnswers data={this.state.qNa}/>
-      <RatingsAndReviews />
+        <Overview state = {this.state}/>
+        <RelatedProducts state={this.state} />
+        <QuestionsNAnswers data={this.state.qNa}/>
+        <RatingsAndReviews />
       </div>
     )
   }

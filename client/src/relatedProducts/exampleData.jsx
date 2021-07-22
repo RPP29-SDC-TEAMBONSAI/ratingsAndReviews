@@ -167,7 +167,7 @@ const relatedProductsInfo = [
 
 
 
-const relatedProductStyles = [
+const relatedProductsStyles = [
   {
     "product_id": "28217",
     "results": [
@@ -2004,6 +2004,6 @@ const relatedProductStyles = [
 
 ]
 
-module.exports = {currentProduct, relatedProducts, relatedProductsInfo, relatedProductStyles};
+module.exports = {currentProduct, relatedProducts, relatedProductsInfo, relatedProductsStyles};
 
 
