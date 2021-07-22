@@ -18,6 +18,7 @@ class QuestionList extends React.Component {
 
     }
     this.hide = this.hide.bind(this)
+    this.showOrHide = this.showOrHide.bind(this)
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ class QuestionList extends React.Component {
   }
 
   hide(currentClassname, index) {
-    console.log(currentClassname)
+
     let newClass;
 
     if (index <= 1) {
@@ -67,10 +68,32 @@ class QuestionList extends React.Component {
     if (currentClassname === 'Hide') {
       newClass = this.state.answerHide
     }
+
     if (index >= 2) {
       newClass = this.state.answerHide
     }
     return newClass
+
+  }
+
+  showOrHide(currentCount, i) {
+    console.log(i)
+    let _class;
+
+    if (currentCount % 2 !== 0)  {
+      if (i >= 2) {
+        _class = 'answerListTable'
+
+      }
+
+    } else {
+      if (i >= 2) {
+        _class = 'answerListTable Hide'
+
+      }
+    }
+    return _class
+
 
   }
 
@@ -87,10 +110,18 @@ class QuestionList extends React.Component {
 
 
           let _class= this.hide(this.props.classname, index)
-          console.log(_class)
+          console.log(this.props)
+
+          let showOrHideClass = this.showOrHide(this.props.answerCount, index)
+          let showClass;
+          if (showOrHideClass === 'answerListTable') {
+            showClass = showOrHideClass
+
+          }
+          console.log(showClass)
 
           return (
-            <div className={_class} key={index}>
+            <div className={showClass ? showClass : _class} key={index}>
             <h4 className='answerText'>A: {answer.body}</h4>
               <table className=''key={index}>
                 <tbody>

@@ -9,9 +9,12 @@ class QuestionsNAnswers extends React.Component {
 
 
     this.state ={
-      questions: []
+      questions: [],
+      answerClickCount:0,
+      questionHide: 'Hide'
 
     };
+    this.loadAnswerClick = this.loadAnswerClick.bind(this)
 
   }
 
@@ -25,8 +28,18 @@ class QuestionsNAnswers extends React.Component {
 
     this.setState({
       questions: newOrder,
-      questionHide: 'Hide'
+
     })
+
+  }
+
+  loadAnswerClick(e) {
+    let count = this.state.answerClickCount + 1;
+
+    this.setState({
+      answerClickCount: count
+    })
+
 
   }
 
@@ -48,11 +61,11 @@ class QuestionsNAnswers extends React.Component {
             } else {
               currentClass = this.state.questionHide
             }
-            return <QuestionsAndAnswers key={index} classname={currentClass} data={question}/>
+            return <QuestionsAndAnswers key={index} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
           })}
         </div>
         <div className='questionListButton container'>
-          <h3 className='loadMoreAnswersButton'>Load more answers</h3>
+          <h3 className='loadMoreAnswersButton' onClick={this.loadAnswerClick}>Load more answers</h3>
           <button className='moreAnsweredBtn'>MORE ANSWERED QUESTIONS</button>
           <button className='addAQuestion'>ADD A QUESTION +</button>
         </div>
