@@ -38,7 +38,7 @@ h4.answerText {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-h4.questionText {
+h4.questionText{
   margin-top: 0px
 }
 
@@ -109,7 +109,7 @@ h3.loadMoreAnswersButton:hover {
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }
 .list.scroll.container {
-  height: 25vh;
+  height: 10vh;
   overflow-y:scroll;
 
 }

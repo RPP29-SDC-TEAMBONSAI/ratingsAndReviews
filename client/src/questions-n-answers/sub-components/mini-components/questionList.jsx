@@ -21,6 +21,7 @@ class QuestionList extends React.Component {
     this.hide = this.hide.bind(this)
     this.showOrHide = this.showOrHide.bind(this)
     this.addScroll = this.addScroll.bind(this)
+    this.showQuestion = this.showQuestion.bind(this)
 
   }
 
@@ -96,8 +97,6 @@ class QuestionList extends React.Component {
       }
     }
     return _class
-
-
   }
 
   addScroll(currentCount) {
@@ -109,39 +108,40 @@ class QuestionList extends React.Component {
     return newClass
 
   }
+  showQuestion(currentCount) {
+    let prevCount = currentCount
 
+    let newClass;
 
+    if (currentCount % 2 !== 0) {
+
+    }
+    // console.log(this.props.classname)
+
+  }
 
   render() {
 
     let scrollClass = this.addScroll(this.props.answerCount)
-    // console.log(scrollStateClass)
 
-
-
+    let showQuestion = this.showQuestion(this.props.questionCount)
 
     return (
       <div>
-        <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
+        <h4 className={''}>Q: {this.state.questions}</h4>
 
         <div className={scrollClass ? scrollClass : 'list container'}>
 
         {this.state.answers.map((answer, index) => {
 
-
-
           let _class= this.hide(this.props.classname, index)
-          // console.log(this.props)
-
           let showOrHideClass = this.showOrHide(this.props.answerCount, index)
           let showClass;
+
           if (showOrHideClass === 'answerListTable') {
+
             showClass = 'answerListTable'
-
           }
-
-
-          // console.log(showClass)
 
           return (
             <div className={showClass ? showClass : _class} key={index}>

@@ -10,13 +10,15 @@ class QuestionsNAnswers extends React.Component {
 
     this.state ={
       questions: [],
-      answerClickCount:0,
+      answerClickCount: 0,
+      questionClickCount: 1,
       questionHide: 'Hide',
       answerScroll: 'list scroll container',
       loadButtonText: 'Load More Answers'
 
     };
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
+    this.loadQuestionClick = this.loadQuestionClick.bind(this)
 
   }
 
@@ -50,6 +52,13 @@ class QuestionsNAnswers extends React.Component {
       answerClickCount: count,
       loadButtonText: text
     })
+  }
+
+  loadQuestionClick(e) {
+    let count = this.state.questionClickCount + 2
+    this.setState({
+      questionClickCount: count
+    })
 
 
   }
@@ -57,7 +66,7 @@ class QuestionsNAnswers extends React.Component {
 
   render () {
     return (
-
+<div>
       <div className={`questionList container`}>
         <div className="questionListTitle container">
           <h3 className='qnaTitle'>Questions & answers</h3>
@@ -72,14 +81,15 @@ class QuestionsNAnswers extends React.Component {
             } else {
               currentClass = this.state.questionHide
             }
-            return <QuestionsAndAnswers key={index} answerScroll={this.state.answerScroll} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
+            return <QuestionsAndAnswers key={index} currentI={index} answerScroll={this.state.answerScroll} questionCount={this.state.questionClickCount} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
           })}
         </div>
         <div className='questionListButton container'>
           <h3 className='loadMoreAnswersButton' onClick={this.loadAnswerClick}>{this.state.loadButtonText}</h3>
-          <button className='moreAnsweredBtn'>MORE ANSWERED QUESTIONS</button>
+          <button className='moreAnsweredBtn' onClick={this.loadQuestionClick}>MORE ANSWERED QUESTIONS</button>
           <button className='addAQuestion'>ADD A QUESTION +</button>
         </div>
+      </div>
       </div>
     )
   }
