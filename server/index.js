@@ -13,17 +13,16 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static('client/dist'));
 
 //get requests for page load (chain)
-app.get('/products', (req, res) => { products(req, res) })
-  .get('/products/:product_id', (req, res) => { productsWithId(req, res) })
-  .get('/products/:product_id/styles', (req, res) => { productsStyle(req, res) })
-  .get('/products/:product_id/related', (req, res) => { productsRelated(req, res) })
-  .get('/reviews', (req, res) => { reviews(req, res) })
-  .get('/reviews/meta', (req, res) => { reviewsMeta(req, res) })
-  .get('/qa/questions', (req, res) => { questions(req, res) })
-  .get('/qa/questions/:question_id/answers', (req, res) => { answers(req, res) })
-  .get('/cart', (req, res) => { cart(req, res) })
+app.get('/products', products)
+  .get('/products/:product_id', productsWithId)
+  .get('/products/:product_id/styles', productsStyle)
+  .get('/products/:product_id/related', productsRelated)
+  .get('/reviews', reviews)
+  .get('/reviews/meta', reviewsMeta)
+  .get('/qa/questions', questions)
+  .get('/qa/questions/:question_id/answers', answers)
+  .get('/cart', cart)
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-

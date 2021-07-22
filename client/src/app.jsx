@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import sum from './jest-example/example';
-import axios from 'axios'
 import Overview from './Overview/index.jsx'
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+
+// CLIENT ROUTES
+import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
+import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
+import { questions, answers } from "./clientRoutes/qa.js";
+import { cart } from "./clientRoutes/cart.js";
 
 //questions/answers test data
 import qNa_testData from '../../tests/QnA-testData';
@@ -24,63 +28,31 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    axios.get('/products')
-      .then((product_data) => {
-        axios.get('/products/:product_id')
-          .then((products) => {
-            this.setState({
-              productInformation: products.data
-            })
-            axios.get('/products/:product_id/styles')
-              .then((product_styles) => {
-                this.setState({
-                  styles: product_styles.data
-                })
-                axios.get('/products/:product_id/related')
-                  .then((related_products) => {
-                    //for reviews component get requests
-                    axios.get('/reviews')
-                      .then((reviews) => {
-
-
-                        axios.get('/reviews/meta')
-                          .then((reviews_meta) => {
-
-                            // console.log('reviews meta', reviews_meta)
-                            //for q/a component get requests
-                            axios.get('/qa/questions')
-                              .then((questions) => {
-                                // console.log('questions', questions)
-
-                                axios.get('/qa/questions/:question_id/answers')
-                                  .then((answers) => {
-                                    // console.log('answers', answers)
-                                    //for cart component get requests
-                                    axios.get('/cart')
-                                      .then((cart) =>{
-                                        // console.log('cart', cart)
-
-                                      })
-                                  })
-                              })
-                          })
-                      })
-                  })
-              })
-          })
+    Promise.all([
+      // REVIEW REQUESTS
+      reviews(), reviewsMeta(),
+      // PRODUCT REQUESTS
+      products(), productsWithId(), productsStyle(), productsRelated(),
+      // QNA REQUESTS
+      questions(), answers(),
+      // CART REQUESTS
+      cart()
+    ])
+      .then((results) => {
+        console.log(results);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('this is the err 🥲 ', err)
-      })
+      });
   }
 
   render() {
     return (
       <div className='app'>
-      <Overview state = {this.state}/>
-      <RelatedProducts />
-      <QuestionsNAnswers data={this.state.qNa}/>
-      <RatingsAndReviews />
+        <Overview state = {this.state}/>
+        <RelatedProducts />
+        <QuestionsNAnswers data={this.state.qNa}/>
+        <RatingsAndReviews />
       </div>
     )
   }
