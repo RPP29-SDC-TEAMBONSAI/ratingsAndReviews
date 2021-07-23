@@ -44,12 +44,7 @@ class App extends React.Component {
           productInformation: results[3].data,
           styles: results[4].data
         });
-        console.log(results);
-        this.setState({
-          productId: results[3].data.id,
-          productInformation: results[3].data,
-          styles: results[4].data
-        });
+        // console.log(results);
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
