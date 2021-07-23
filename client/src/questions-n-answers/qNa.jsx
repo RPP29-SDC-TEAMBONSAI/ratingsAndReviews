@@ -122,7 +122,7 @@ class QuestionsNAnswers extends React.Component {
           })}
         </div>
         <div className='questionListButton container'>
-          <h3 className={showButtonClass ? showButtonClass : 'moreAnsweredBtn Hide'}  onClick={this.loadAnswerClick}>{this.state.loadButtonText}</h3>
+          <h3 className={showButtonClass ? `loadMoreAnswersButton ${showButtonClass}` : 'moreAnsweredBtn Hide'}  onClick={this.loadAnswerClick}>{this.state.loadButtonText}</h3>
           <button className={showButtonClass ? showButtonClass : 'moreAnsweredBtn Hide'} onClick={this.loadQuestionClick}>MORE ANSWERED QUESTIONS</button>
           <button className='moreAnsweredBtn'>ADD A QUESTION +</button>
         </div>
