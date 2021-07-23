@@ -1,5 +1,49 @@
 import React from 'react';
 
+const factorDetail = {
+  Size: ['A size too small',
+    '½ a size too small',
+    'Perfect',
+    '½ a size too big',
+    'A size too wide',
+  ],
+  Width: [
+    'Too narrow',
+    'Slightly narrow',
+    'Perfect',
+    'Slightly wide',
+    'Too wide'
+  ],
+  Comfort: [
+    'Uncomfortable',
+    'Slightly uncomfortable',
+    'Ok',
+    'Comfortable',
+    'Perfect'
+  ],
+  Quality: [
+    'Poor',
+    'Below average',
+    'What I expected',
+    'Pretty great',
+    'Perfect'
+  ],
+  Length: [
+    'Runs Short',
+    'Runs slightly short',
+    'Perfect',
+    'Runs slightly long',
+    'Runs long'
+  ],
+  Fit: [
+    'Runs tight',
+    'Runs slightly tight',
+    'Perfect',
+    'Runs slightly long',
+    'Runs long'
+  ]
+};
+
 const helper = {
   round: (value, precision) => {
     const multiplier = Math.pow(10, precision || 0);
@@ -46,7 +90,24 @@ const helper = {
         </div>
       )
     }
+  },
+  getFactorDetailArray: (factor) => {
+    return factorDetail[factor];
+  },
+  mapCharacteristicsToProps: (characteristics) => {
+    let props = [];
+    for (let char in characteristics) {
+      props.push({
+        key: characteristics[char].id,
+        title: char,
+        levels: helper.getFactorDetailArray(char),
+        percent: Math.round(characteristics[char].value / 5 * 100)
+      });
+    }
+    return props;
   }
 }
+
+
 
 export default helper;

@@ -1,13 +1,20 @@
 import React from 'react';
 import Factor from './Factor.jsx';
+import PropTypes from 'prop-types';
 
 const ProductBreakdown = (props) => {
+  console.log(props);
   return (
     <div className="product-breakdown">
-      <Factor title="Size" levels={['Too small', 'Perfect', 'Too large']} percent={60}/>
-      <Factor title="Comfort" levels={['Poor', 'Perfect']} percent={20}/>
+      {props.characteristics.map((char) => {
+        return <Factor {...char}/>
+      })}
     </div>
   );
 };
+
+ProductBreakdown.propTypes = {
+  characteristics: PropTypes.array
+}
 
 export default ProductBreakdown;

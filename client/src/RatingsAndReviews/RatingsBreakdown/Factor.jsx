@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Factor = (props) => {
+  console.log(props);
   return (
     <div className="factor">
       <div className="factor-title">{props.title}</div>

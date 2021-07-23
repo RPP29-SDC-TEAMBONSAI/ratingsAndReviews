@@ -4,7 +4,7 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
-const { ratingsToTotalAndAverage, recommendedToPercentage } = helper;
+const { ratingsToTotalAndAverage, recommendedToPercentage, mapCharacteristicsToProps } = helper;
 
 class RatingsBreakdown extends React.Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class RatingsBreakdown extends React.Component {
       totalRatings: 0,
       averageRating: 0,
       recommendPercentage: 0,
+      characteristics: []
     };
   };
 
@@ -21,13 +22,13 @@ class RatingsBreakdown extends React.Component {
     .then(({ data }) => {
       const { count, average } = ratingsToTotalAndAverage(data.ratings);
       const recommendPercentage = recommendedToPercentage(data.recommended);
-      console.log('COUNT:', count);
-      console.log('AVERAGE:', average);
-      console.log('RPERCENT:', recommendPercentage);
+      const characteristics = mapCharacteristicsToProps(data.characteristics);
+
       this.setState({
         totalRatings: count,
         averageRating: average,
-        recommendPercentage: recommendPercentage
+        recommendPercentage: recommendPercentage,
+        characteristics: characteristics
       });
     })
     .catch(err => console.log("REVIEWS MOUNT ERR", err));
@@ -41,7 +42,8 @@ class RatingsBreakdown extends React.Component {
           average={this.state.averageRating}
           percent={this.state.recommendPercentage}/>
         <RatingBreakdown/>
-        <ProductBreakdown/>
+        <ProductBreakdown
+          characteristics={this.state.characteristics}/>
       </div>
     )
   };
