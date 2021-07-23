@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
-import CardImage from './CardImage.jsx';
+
 
 const RelatedProductsList = (props) => {
 
@@ -28,12 +28,6 @@ const RelatedProductsList = (props) => {
 }
 
 RelatedProductsList.propTypes = {
-  key: propTypes.any,
-  name: propTypes.any,
-  category: propTypes.any,
-  originalPrice: propTypes.any,
-  salePrice: propTypes.any,
-  photo: propTypes.any,
   allProps: propTypes.any
   };
 

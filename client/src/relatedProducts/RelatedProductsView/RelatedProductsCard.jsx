@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import CardImage from './CardImage.jsx';
+
 
 const RelatedProductsCard = (props) => {
 
@@ -19,12 +19,11 @@ const RelatedProductsCard = (props) => {
 }
 
 RelatedProductsCard.propTypes = {
-  name: propTypes.any,
-  id: propTypes.any,
-  category: propTypes.any,
-  originalPrice: propTypes.any,
+  photo: propTypes.any,
   salePrice: propTypes.any,
-  photo: propTypes.any
+  originalPrice: propTypes.any,
+  category: propTypes.any,
+  name: propTypes.any
   };
 
   export default RelatedProductsCard;
