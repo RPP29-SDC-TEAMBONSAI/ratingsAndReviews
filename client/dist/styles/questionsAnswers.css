@@ -41,6 +41,9 @@ h4.answerText {
 h4.questionText{
   margin-top: 0px
 }
+h4 {
+  margin-top: 0px;
+}
 
 .inputBox {
   padding: 0 5px 0 0;
@@ -91,8 +94,8 @@ h4.questionText{
 }
 
 .loadMoreAnswersButton {
-  width: 25%;
-  height: 4.5%;
+  width: 15%;
+  height: 3.5%;
 
   cursor: pointer;
   display:block;

@@ -1,5 +1,6 @@
 import React from 'React';
 import QnAClientHelpers from '../../../helpers/qnAHelper';
+import propTypes from 'prop-types';
 
 
 class QuestionList extends React.Component {
@@ -166,6 +167,11 @@ class QuestionList extends React.Component {
     )
   }
 }
-
+QuestionList.propTypes = {
+  data: propTypes.array.isRequired,
+  answerCount: propTypes.number.isRequired,
+  questionCount: propTypes.number.isRequired,
+  classname: propTypes.string.isRequired
+}
 
 export default QuestionList

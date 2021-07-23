@@ -1,7 +1,8 @@
 import React from 'react';
 import Search from './sub-components/search.jsx'
-import QuestionsAndAnswers from './sub-components/questionsAndAnswers.jsx';
+import QuestionsContainer from './sub-components/questionContainer.jsx';
 import QnAClientHelpers from '../helpers/qnAHelper.js';
+import propTypes from 'prop-types';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class QuestionsNAnswers extends React.Component {
 
 
   componentDidMount() {
+
     // console.log(this.props)
     let helper = new QnAClientHelpers()
 
@@ -88,9 +90,9 @@ class QuestionsNAnswers extends React.Component {
       newClass = 'moreAnsweredBtn'
 
     }
-    console.log(this.state.questionClickCount)
+    console.log(this.state.lastIndex)
 
-    if (this.state.questionClickCount - 1  === this.state.lastIndex) {
+    if (this.state.questionClickCount - 1  === this.state.lastIndex || this.state.questionClickCount -2 === this.state.lastIndex) {
       console.log('hi')
       newClass = 'moreAnswerBtn Hide'
     }
@@ -117,7 +119,7 @@ class QuestionsNAnswers extends React.Component {
             } else {
               currentClass = this.state.questionHide
             }
-            return <QuestionsAndAnswers key={index} currentI={index} showButton={this.showButton} lastI={this.state.lastIndex} answerScroll={this.state.answerScroll} questionCount={this.state.questionClickCount} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
+            return <QuestionsContainer key={index} currentI={index} showButton={this.showButton} lastI={this.state.lastIndex} answerScroll={this.state.answerScroll} questionCount={this.state.questionClickCount} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
           })}
         </div>
         <div className='questionListButton container'>
@@ -129,6 +131,10 @@ class QuestionsNAnswers extends React.Component {
 
     )
   }
+}
+
+QuestionsNAnswers.propTypes = {
+  data: propTypes.array.isRequired
 }
 
 export default QuestionsNAnswers;

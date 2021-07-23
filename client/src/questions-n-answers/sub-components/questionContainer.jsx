@@ -1,9 +1,9 @@
 import React from 'react'
 import AddAnswer from './mini-components/addAnswerTable.jsx';
-// import ReportAnswer from './mini-components/reportAnswer.jsx';
+import propTypes from 'prop-types';
 import QuestionList from './mini-components/questionList.jsx';
 
-class QuestionsAndAnswers extends React.Component {
+class QuestionsContainer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -61,4 +61,13 @@ class QuestionsAndAnswers extends React.Component {
   }
 }
 
-export default QuestionsAndAnswers;
+QuestionsContainer.propTypes = {
+  data: propTypes.array.isRequired,
+  questionCount: propTypes.number.isRequired,
+  answerCount: propTypes.number.isRequired,
+  classname: propTypes.string.isRequired,
+  currentI: propTypes.number.isRequired,
+}
+
+
+export default QuestionsContainer;

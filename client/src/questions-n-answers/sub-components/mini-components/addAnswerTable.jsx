@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 
 class AddAnswer extends React.Component {
@@ -24,6 +25,11 @@ class AddAnswer extends React.Component {
       </table>
     )
   }
+}
+
+AddAnswer.propTypes ={
+  classname: propTypes.string.isRequired,
+  data: propTypes.array.isRequired
 }
 
 
