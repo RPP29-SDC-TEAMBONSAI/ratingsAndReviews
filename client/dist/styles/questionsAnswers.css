@@ -126,3 +126,9 @@ h3.loadMoreAnswersButton:hover {
 .moreAnsweredBtn.Hide {
   display: none;
 }
+
+.questionList.scroll {
+  height: 50vh;
+  overflow-y: scroll;
+
+}

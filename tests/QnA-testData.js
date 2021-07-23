@@ -154,7 +154,7 @@ const qNa_testData =
 
 
   //   ]
-  // },
+  // }
  { product_id:"28213",
    results:
      [
@@ -241,10 +241,10 @@ const qNa_testData =
                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png"
                     ]}}},
-        { question_id:213341,
-          question_body:"I'm allergic to dye #17, does this product contain any?",
+        { question_id:213340,
+          question_body:"yooo",
           question_date:"2019-01-24T00:00:00.000Z",
-          asker_name:"l33tgamer",
+          asker_name:"rob",
           question_helpfulness:14,
           reported:false,
           answers:
@@ -252,8 +252,8 @@ const qNa_testData =
                { id:1992400,
                  body:"Yes",
                  date:"2019-11-24T00:00:00.000Z",
-                 answerer_name:"n00bgamer",
-                 helpfulness:7,
+                 answerer_name:"rob",
+                 helpfulness:15,
                  photos:[]
             }}}
           ]

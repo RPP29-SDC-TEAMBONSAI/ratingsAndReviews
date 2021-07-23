@@ -10,17 +10,23 @@ class QnAClientHelpers {
       sortedCount.push(question.question_helpfulness)
 
     })
+
     sortedCount = sortedCount.sort((a, b) => b - a);
+
 
     sortedCount.forEach((number) => {
       questions.forEach((question) => {
         if (question.question_helpfulness === number) {
-          newArr.push(question)
-
+          if (!newArr.includes(question)) {
+            newArr.push(question)
+          }
         }
+
       })
 
     })
+
+
     return newArr;
 
   }

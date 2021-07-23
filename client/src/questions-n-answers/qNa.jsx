@@ -25,6 +25,7 @@ class QuestionsNAnswers extends React.Component {
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
     this.loadQuestionClick = this.loadQuestionClick.bind(this)
     this.showButton = this.showButton.bind(this)
+    this.showScrollContainer = this.showScrollContainer.bind(this)
 
   }
 
@@ -43,6 +44,7 @@ class QuestionsNAnswers extends React.Component {
     }
 
     // console.log(this.props.data)
+
     let copy = this.props.data.slice()
     let newOrder = helper.sortQuestions(copy)
 
@@ -51,8 +53,10 @@ class QuestionsNAnswers extends React.Component {
       showQuestionButton: showButton
 
     })
+    console.log(this.props.data)
 
   }
+
 
   loadAnswerClick(e) {
     let count = this.state.answerClickCount + 1;
@@ -90,18 +94,29 @@ class QuestionsNAnswers extends React.Component {
       newClass = 'moreAnsweredBtn'
 
     }
-    console.log(this.state.lastIndex)
 
-    if (this.state.questionClickCount - 1  === this.state.lastIndex || this.state.questionClickCount -2 === this.state.lastIndex) {
+
+    if (this.state.questionClickCount === this.state.lastIndex || this.state.questionClickCount - 1 === this.state.lastIndex) {
       console.log('hi')
       newClass = 'moreAnswerBtn Hide'
     }
     return newClass
   }
 
+  showScrollContainer() {
+    let newClass;
+    if (this.state.questionClickCount > 1) {
+      newClass = 'questionList scroll container'
+    }
+    return newClass
+
+  }
+
 
   render () {
     let showButtonClass = this.showButton()
+    let scrollContainerClass = this.showScrollContainer()
+    console.log(this.props.data)
     return (
 
       <div className={`questionList container`}>
@@ -109,18 +124,21 @@ class QuestionsNAnswers extends React.Component {
           <h3 className='qnaTitle'>Questions & answers</h3>
           <Search/>
         </div>
-        <div className='list container'>
-          {this.state.questions.map((question, index) => {
+        <div className={scrollContainerClass? scrollContainerClass : ''}>
+          <div className={`List container`}>
+            {this.state.questions.map((question, index) => {
 
-            let currentClass;
-            if (index <= 1) {
-              currentClass = 'questionText'
 
-            } else {
-              currentClass = this.state.questionHide
-            }
-            return <QuestionsContainer key={index} currentI={index} showButton={this.showButton} lastI={this.state.lastIndex} answerScroll={this.state.answerScroll} questionCount={this.state.questionClickCount} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
-          })}
+              let currentClass;
+              if (index <= 1) {
+                currentClass = 'questionText'
+
+              } else {
+                currentClass = this.state.questionHide
+              }
+              return <QuestionsContainer key={index} currentI={index} showButton={this.showButton} lastI={this.state.lastIndex} answerScroll={this.state.answerScroll} questionCount={this.state.questionClickCount} answerCount={this.state.answerClickCount} classname={currentClass} data={question}/>
+            })}
+          </div>
         </div>
         <div className='questionListButton container'>
           <h3 className={showButtonClass ? `loadMoreAnswersButton ${showButtonClass}` : 'moreAnsweredBtn Hide'}  onClick={this.loadAnswerClick}>{this.state.loadButtonText}</h3>
