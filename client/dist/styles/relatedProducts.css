@@ -1,7 +1,6 @@
 
 
 .relatedProductsList {
-  border: solid;
   display: flex;
 }
 .relatedProductsCardList {
@@ -16,6 +15,7 @@
   flex-shrink: 1;
   border: solid;
   margin: 1rem .25em;
+
 }
 
 .yourOutfitList {
@@ -41,5 +41,12 @@
   align-self: center;
 }
 
+.actionStar {
+  justify-self: flex-end;
+  order: 5;
+}
 
-
+img {
+  width: 250px;
+  height: 300px;
+}
