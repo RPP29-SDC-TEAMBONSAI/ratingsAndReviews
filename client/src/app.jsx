@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './Overview/index.jsx'
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 
@@ -45,6 +45,11 @@ class App extends React.Component {
           styles: results[4].data
         });
         console.log(results);
+        this.setState({
+          productId: results[3].data.id,
+          productInformation: results[3].data,
+          styles: results[4].data
+        });
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
@@ -55,7 +60,7 @@ class App extends React.Component {
     return (
       <div className='app'>
         <Overview state = {this.state}/>
-        <RelatedProducts />
+        <RelatedProducts state={this.state} />
         <QuestionsNAnswers data={this.state.qNa}/>
         <RatingsAndReviews />
       </div>
