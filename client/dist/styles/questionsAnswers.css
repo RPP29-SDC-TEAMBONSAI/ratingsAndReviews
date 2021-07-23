@@ -1,4 +1,4 @@
-.qna {
+.questionList.container {
   display: block;
 }
 
@@ -83,15 +83,37 @@ h4.questionText {
   margin-bottom: 5%;
 }
 
-.answerListTable.hide{
-  /* visibility: hidden; */
+.qna.hide {
+ display: none;
+}
+.hide {
   display: none;
 }
 
-.questionText.hide {
-  display: none;
+.loadMoreAnswersButton {
+  width: 25%;
+
+  cursor: pointer;
+  display:block;
+  color:#444;
+  border:1px solid #CCC;
+  background:#DDD;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  padding: 5px;
+  text-align: center;
 }
 
-.list.container {
-  /* display: none; */
+h3.loadMoreAnswersButton:hover {
+  color:navy;
+  background: beige;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+.list.scroll.container {
+  height: 25vh;
+  overflow-y:scroll;
+
+}
+
+.qna.questionText.container {
+  margin-bottom: 5vh;
 }
