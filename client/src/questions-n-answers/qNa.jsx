@@ -102,7 +102,6 @@ class QuestionsNAnswers extends React.Component {
     let showButtonClass = this.showButton()
     return (
 
-
       <div className={`questionList container`}>
         <div className="questionListTitle container">
           <h3 className='qnaTitle'>Questions & answers</h3>
