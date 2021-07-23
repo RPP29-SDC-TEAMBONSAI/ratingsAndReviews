@@ -1,5 +1,5 @@
 import React from 'React';
-import QnAClientHelpers from '../../../helper-functions/qnAHelper';
+import QnAClientHelpers from '../../../helpers/qnAHelper';
 
 
 class QuestionList extends React.Component {
@@ -12,10 +12,16 @@ class QuestionList extends React.Component {
       answers: [],
       questions: '',
       answerHide: 'answerListTable Hide',
+      scrollStateClass: 'list container'
+
 
 
 
     }
+    this.hide = this.hide.bind(this)
+    this.showOrHide = this.showOrHide.bind(this)
+    this.addScroll = this.addScroll.bind(this)
+
   }
 
   componentDidMount() {
@@ -38,17 +44,69 @@ class QuestionList extends React.Component {
       sortedAnswers = helper.sortAnswers(answers)
       this.setState({
         answers: sortedAnswers,
-        questions: questions
+        questions: questions,
+
 
       })
 
     } else {
 
       this.setState({
-        questions: questions
+        questions: questions,
+
+
       })
 
     }
+
+  }
+
+  hide(currentClassname, index) {
+
+    let newClass;
+
+    if (index <= 1) {
+      newClass = 'answerListTable'
+    }
+    if (currentClassname === 'Hide') {
+      newClass = this.state.answerHide
+    }
+
+    if (index >= 2) {
+      newClass = this.state.answerHide
+    }
+    return newClass
+
+  }
+
+  showOrHide(currentCount, i) {
+    // console.log(i)
+    let _class;
+
+    if (currentCount % 2 !== 0)  {
+      if (i >= 2) {
+        _class = 'answerListTable'
+
+      }
+
+    } else {
+      if (i >= 2) {
+        _class = 'answerListTable Hide'
+
+      }
+    }
+    return _class
+
+
+  }
+
+  addScroll(currentCount) {
+    let  newClass;
+    if (currentCount % 2 !== 0) {
+      newClass = 'list scroll container'
+
+    }
+    return newClass
 
   }
 
@@ -56,43 +114,55 @@ class QuestionList extends React.Component {
 
   render() {
 
+    let scrollClass = this.addScroll(this.props.answerCount)
+    // console.log(scrollStateClass)
+
+
 
 
     return (
-      <div className='list container'>
+      <div>
         <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
+
+        <div className={scrollClass ? scrollClass : 'list container'}>
+
         {this.state.answers.map((answer, index) => {
-          let _class;
-          if (index <= 1) {
-            _class = 'answerListTable'
+
+
+
+          let _class= this.hide(this.props.classname, index)
+          // console.log(this.props)
+
+          let showOrHideClass = this.showOrHide(this.props.answerCount, index)
+          let showClass;
+          if (showOrHideClass === 'answerListTable') {
+            showClass = 'answerListTable'
 
           }
-          if (this.props.classname === 'questionText Hide') {
-            console.log(this.props.classname === 'questionText Hide')
-            _class = this.state.answerHide
-          }
 
-          if (index >= 2) {
-            _class = this.state.answerHide
-          }
+
+          // console.log(showClass)
+
           return (
-          <div className={_class} key={index}>
-          <h4 className='answerText'>A: {answer.body}</h4>
-            <table className=''key={index}>
-              <tbody>
-                <tr>
-                  <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-                  <td>helpful?</td>
-                  <td className='userHelpfulBtn'>Yes</td>
-                  <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                  <td className='userReportBtn'>report</td>
-                </tr>
-            </tbody>
-          </table>
-        </div> )
+            <div className={showClass ? showClass : _class} key={index}>
+              <h4 className='answerText'>A: {answer.body}</h4>
+              <table className=''key={index}>
+                <tbody>
+                    <tr>
+                      <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
+                      <td>helpful?</td>
+                      <td className='userHelpfulBtn'>Yes</td>
+                      <td className='userHelpIndicator'>({answer.helpfulness})</td>
+                      <td className='userReportBtn'>report</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          )
         })}
-
+        </div>
       </div>
+
     )
   }
 }
