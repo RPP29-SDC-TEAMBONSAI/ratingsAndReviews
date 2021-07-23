@@ -49,18 +49,27 @@ const helper = {
     const multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
   },
-  ratingsToTotalAndAverage: (ratings) => {
+  ratingsToTotalAverageAndPercentages: (ratings) => {
     let count = 0;
     let multipleTotals = 0;
+    let countsForEach = new Array(5).fill(0);
     for (let key in ratings) {
       let countOfRating = parseInt(ratings[key]);
       count += countOfRating;
       let multiple = countOfRating * key;
       multipleTotals += multiple;
+      countsForEach[parseInt(key) - 1] = countOfRating;
     }
+
+    let percentages = countsForEach.map((percentage) => {
+      return helper.round((percentage / count * 100), 1)
+    });
+
     return {
       count: count,
-      average: helper.round(multipleTotals / count, 1)
+      average: helper.round(multipleTotals / count, 1),
+      countsForEach: countsForEach,
+      percentages: percentages
     }
   },
   recommendedToPercentage: (recommended) => {
@@ -107,7 +116,5 @@ const helper = {
     return props;
   }
 }
-
-
 
 export default helper;

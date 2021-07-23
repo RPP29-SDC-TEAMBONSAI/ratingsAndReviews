@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReviewsHeader from './ReviewsHeader.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
@@ -10,10 +11,22 @@ class Reviews extends React.Component {
       reviews: [],
       loaded: 0
     };
+
+    this.getStateData = this.getStateData.bind(this);
   };
 
   componentDidMount() {
-    reviews(1, 1000, 'newest', 28212)
+    this.getStateData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.product_id !== prevProps.product_id) {
+      getStateData();
+    }
+  }
+
+  getStateData() {
+    reviews(1, 1000, 'newest', this.props.product_id)
       .then(({ data }) => {
         this.setState({
           reviews: data,
@@ -34,5 +47,9 @@ class Reviews extends React.Component {
     );
   }
 };
+
+Reviews.propTypes = {
+  product_id: PropTypes.number
+}
 
 export default Reviews;
