@@ -31,6 +31,7 @@ class App extends React.Component {
 
             axios.get('/products/:product_id/styles')
               .then((product_styles) => {
+                console.log(product_styles.data)
 
                 axios.get('/products/:product_id/related')
                   .then((related_products) => {
