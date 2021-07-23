@@ -215,13 +215,7 @@
   font-size: larger;
 }
 
-.irt-user-date-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.irt-username
-, .irt-date-of-review {
+.irt-username-and-date {
   font-size: smaller;
   padding-right: 3px;
 }
