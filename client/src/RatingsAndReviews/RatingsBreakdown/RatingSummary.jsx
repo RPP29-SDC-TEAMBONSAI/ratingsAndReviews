@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Stars from '../../stars/stars.jsx'
 
 const RatingSummary = (props) => {
   return (
@@ -8,7 +9,7 @@ const RatingSummary = (props) => {
       <div className="average-rating-wrapper">
         <div className="average-rating-num">{props.average}</div>
         <div className="stars-count-wrapper">
-          <div className="average-rating-stars">* * * * *</div>
+          <div className="average-rating-stars">{Stars(props.average)}</div>
           <div className="count-of-reviews">from {props.total} reviews</div>
         </div>
       </div>
