@@ -20,12 +20,12 @@ module.exports = {
   },
   productsWithId: (req, res) => {
     // console.log('product id req', req)28212
-    axios.get(api + 'products/28212', {
+    let request = req.originalUrl.split('?');
+    axios.get(api + `products/${request[1]}`, {
       headers: {
         'Authorization': TOKEN
       }
     }).then((data)=> {
-      console.log("data", data.data)
       res.send(data.data)
     })
     .catch((err) => {
@@ -36,12 +36,12 @@ module.exports = {
     //send info to client
   },
   productsStyle: (req, res) => {
-    axios.get(api + 'products/28212/styles', {
+    let request = req.originalUrl.split('?');
+    axios.get(api + `products/${request[1]}/styles`, {
       headers: {
         'Authorization': TOKEN
       }
     }).then((data)=> {
-      console.log("STYLES", data.data)
       res.send(data.data.results);
     })
     .catch((err) => {

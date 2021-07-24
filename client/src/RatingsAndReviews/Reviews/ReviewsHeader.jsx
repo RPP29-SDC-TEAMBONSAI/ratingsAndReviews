@@ -1,19 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ReviewsHeader = (props) => {
   return (
     <div className="reviews-header">
       <div className="sort-title-wrapper">
-        <div className="sort-title">301 reviews, sorted by </div>
+        <div className="sort-title">{props.numReviews} reviews, sorted by </div>
         <select className="sort-options">
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>
           <option value="relevent">relevance</option>
         </select>
       </div>
-      <div className="sort-options-selected">Additional Sort Options Selected: </div>
+      <div className="sort-options-selected">
+        <div className="sort-option-title">Also sorted on: </div>
+        {props.starFilters.map((sfilter, index) => {
+          return (
+            <div
+              className="sort-option"
+              key={index}>
+                <div className="remove-star-filter" star={sfilter} onClick={props.starFilterClick}>✕</div>
+                <div className="sort-option-text">{sfilter} </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
+
+ReviewsHeader.propTypes = {
+  starFilters: PropTypes.array,
+  starFilterClick: PropTypes.func,
+  numReviews: PropTypes.number
+}
 
 export default ReviewsHeader;
