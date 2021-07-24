@@ -4,11 +4,11 @@ module.exports = {
   products: () => {
     return axios.get('/products');
   },
-  productsWithId: () => {
-    return axios.get('/products/:product_id');
+  productsWithId: (id) => {
+    return axios.get(`/products/:product_id?${id}`);
   },
-  productsStyle: () => {
-    return axios.get('/products/:product_id/styles');
+  productsStyle: (id) => {
+    return axios.get(`/products/:product_id/styles?${id}`);
   },
   productsRelated: () => {
     return axios.get('/products/:product_id/related');

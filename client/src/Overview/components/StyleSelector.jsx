@@ -2,18 +2,19 @@ import React from 'react';
 
 const StyleSelector = (props) => {
   if (props.state.styles.length > 0) {
-    let i = 0;
+    let key = -1;
 
   return (
     <div className = "styleSelector">
-      <p>STYLE > selected style</p>
+      <p>STYLE > {props.state.styles[props.OverviewState.styleIndex].name}</p>
       <table>
         <tbody>
         <tr>
-           {props.state.styles[2].photos.map((photo)=> {
+           {props.state.styles.map((style)=> {
+             key += 1;
           return (
-            <td>
-            <img src={photo.thumbnail_url} width="50" height="50"></img>
+            <td key = {key} onClick = {props.changeStyle}>
+            <img value = {key} src={style.photos[0].thumbnail_url} width="50" height="50"></img>
             </td>
             )
         })
