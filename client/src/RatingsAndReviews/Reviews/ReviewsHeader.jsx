@@ -6,7 +6,7 @@ const ReviewsHeader = (props) => {
     <div className="reviews-header">
       <div className="sort-title-wrapper">
         <div className="sort-title">{props.numReviews} reviews, sorted by </div>
-        <select className="sort-options">
+        <select className="sort-options" value={props.sortBy} onChange={props.handleSortChange}>
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>
           <option value="relevent">relevance</option>
@@ -32,7 +32,9 @@ const ReviewsHeader = (props) => {
 ReviewsHeader.propTypes = {
   starFilters: PropTypes.array,
   starFilterClick: PropTypes.func,
-  numReviews: PropTypes.number
+  numReviews: PropTypes.number,
+  sortBy: PropTypes.string,
+  handleSortChange: PropTypes.func
 }
 
 export default ReviewsHeader;

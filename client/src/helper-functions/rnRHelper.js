@@ -114,6 +114,9 @@ const helper = {
       });
     }
     return props;
+  },
+  sortByRelevance: (reviews) => {
+    return reviews;
   }
 }
 
