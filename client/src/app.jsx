@@ -35,7 +35,7 @@ class App extends React.Component {
       // REVIEW REQUESTS
       reviews(), reviewsMeta(),
       // PRODUCT REQUESTS
-      products(), productsWithId(), productsStyle(), productsRelated(),
+      products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
       // QNA REQUESTS
       questions(), answers(),
       // CART REQUESTS

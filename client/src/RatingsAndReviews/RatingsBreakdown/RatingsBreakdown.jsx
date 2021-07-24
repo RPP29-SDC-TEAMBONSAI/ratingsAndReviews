@@ -27,7 +27,7 @@ class RatingsBreakdown extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      getStateData();
+      this.getStateData();
     }
   }
 
@@ -59,7 +59,8 @@ class RatingsBreakdown extends React.Component {
           percent={this.state.recommendPercentage}/>
         <RatingBreakdown
           percentages={this.state.percentages}
-          counts={this.state.countsForEach}/>
+          counts={this.state.countsForEach}
+          starFilterClick={this.props.starFilterClick}/>
         <ProductBreakdown
           characteristics={this.state.characteristics}/>
       </div>
@@ -68,7 +69,8 @@ class RatingsBreakdown extends React.Component {
 };
 
 RatingsBreakdown.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  starFilterClick: PropTypes.func
 }
 
 export default RatingsBreakdown;

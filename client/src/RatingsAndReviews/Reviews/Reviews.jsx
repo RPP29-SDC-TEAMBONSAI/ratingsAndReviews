@@ -39,7 +39,10 @@ class Reviews extends React.Component {
   render() {
     return (
       <div className="reviews">
-        <ReviewsHeader/>
+        <ReviewsHeader
+          starFilters={this.props.starFilters}
+          starFilterClick={this.props.starFilterClick}
+          numReviews={this.state.reviews.length}/>
         <ReviewsList
           reviews={this.state.reviews}
           loaded={this.state.loaded}/>
@@ -49,7 +52,9 @@ class Reviews extends React.Component {
 };
 
 Reviews.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  starFilters: PropTypes.array,
+  starFilterClick: PropTypes.func
 }
 
 export default Reviews;
