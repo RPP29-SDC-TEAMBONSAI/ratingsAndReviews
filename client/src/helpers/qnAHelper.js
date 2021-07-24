@@ -71,8 +71,9 @@ class QnAClientHelpers {
    }
    return sortedArr
 
-
   }
+
+
 }
 
 export default QnAClientHelpers;

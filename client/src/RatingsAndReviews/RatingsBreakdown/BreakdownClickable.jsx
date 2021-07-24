@@ -9,6 +9,7 @@ const BreakdownClickable = (props) => {
         <div className="bar-green" style={{width: `${props.percent}%`}}></div>
         <div className="bar-grey" style={{width: `${100 - props.percent}%`}}></div>
       </div>
+      <div className="bar-count">({props.count})</div>
     </div>
   );
 };
@@ -16,6 +17,7 @@ const BreakdownClickable = (props) => {
 BreakdownClickable.propTypes = {
   stars: PropTypes.number,
   percent: PropTypes.number,
+  count: PropTypes.number
 }
 
 export default BreakdownClickable;

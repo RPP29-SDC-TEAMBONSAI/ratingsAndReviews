@@ -23,7 +23,8 @@ const ProductInfo = (props) => {
         )} else {
           return (
             <>
-           <div className = "productOriginalPrice"> Original Price: ${props.state.styles[props.OverviewState.styleIndex].original_price}</div> <div className = "productSalePrice">Sale Price: ${props.state.styles[props.OverviewState.styleIndex].sale_price} </div>
+           <div className = "productOriginalPrice"> Original Price: ${props.state.styles[props.OverviewState.styleIndex].original_price}</div>
+           <div className = "productSalePrice">Sale Price: ${props.state.styles[props.OverviewState.styleIndex].sale_price} </div>
            </>
           )
         }

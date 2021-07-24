@@ -3,12 +3,36 @@ const qNa_testData =
     results:
     [
       { question_id:213335,
-        question_body: "Does this product run big or small?",
+        question_body: "test",
         question_date:"2019-01-17T00:00:00.000Z",
-        asker_name:"jbilas",
-        question_helpfulness:8,
+        asker_name:"rob",
+        question_helpfulness:2,
         reported:false,
-        "answers":{}
+        "answers":
+          { 1992397:
+              { id:1992397,
+                body:"I've thrown it in the wash and it seems fine",
+                date:"2018-02-08T00:00:00.000Z",
+                answerer_name:"marcanthony",
+                helpfulness:8,"photos":[]
+              },
+          }
+      },
+      { question_id:213335,
+        question_body: "test2",
+        question_date:"2019-01-17T00:00:00.000Z",
+        asker_name:"rob",
+        question_helpfulness:3,
+        reported:false,
+        "answers":
+          { 1992397:
+              { id:1992397,
+                body:"I've thrown it in the wash and it seems fine",
+                date:"2018-02-08T00:00:00.000Z",
+                answerer_name:"marcanthony",
+                helpfulness:8,"photos":[]
+              },
+          }
       },
       { question_id:213337,
         question_body:"Can I wash it?",
@@ -127,6 +151,8 @@ const qNa_testData =
                 helpfulness:3,
                 photos:[]}}
               },
+
+
     ]
   };
 

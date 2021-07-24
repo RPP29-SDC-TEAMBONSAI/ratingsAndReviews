@@ -2,7 +2,7 @@ import React from 'react';
 
 const StyleSelector = (props) => {
   if (props.state.styles.length > 0) {
-    let key = 0;
+    let key = -1;
 
   return (
     <div className = "styleSelector">
@@ -13,8 +13,8 @@ const StyleSelector = (props) => {
            {props.state.styles.map((style)=> {
              key += 1;
           return (
-            <td key = {key}>
-            <img src={style.photos[0].thumbnail_url} width="50" height="50"></img>
+            <td key = {key} onClick = {props.changeStyle}>
+            <img value = {key} src={style.photos[0].thumbnail_url} width="50" height="50"></img>
             </td>
             )
         })

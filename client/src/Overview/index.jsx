@@ -20,6 +20,16 @@ class Overview extends React.Component {
     this.changeAvailableQuantity = this.changeAvailableQuantity.bind(this);
     this.addToBag = this.addToBag.bind(this);
     this.changeSelectedQuantity = this.changeSelectedQuantity.bind(this);
+    this.changeStyle = this.changeStyle.bind(this);
+  }
+
+  changeStyle (e) {
+    this.setState({
+      styleIndex: e.target.attributes.value.value,
+      sizeSelected: '',
+      quantitySelected: 0
+    })
+
   }
 
   changeAvailableQuantity (e) {
@@ -64,8 +74,10 @@ class Overview extends React.Component {
     return (
       <div>
         <ProductInfo state = {this.props.state} OverviewState = {this.state}/>
-        <StyleSelector state = {this.props.state} OverviewState = {this.state}/>
-        <AddToCart state = {this.props.state} OverviewState = {this.state} changeAvailableQuantity = {this.changeAvailableQuantity} addToBag = {this.addToBag} changeSelectedQuantity = {this.changeSelectedQuantity}/>
+        <StyleSelector state = {this.props.state} OverviewState = {this.state} changeStyle = {this.changeStyle}/>
+        <AddToCart state = {this.props.state} OverviewState = {this.state}
+        changeAvailableQuantity = {this.changeAvailableQuantity} addToBag = {this.addToBag}
+        changeSelectedQuantity = {this.changeSelectedQuantity}/>
         <ImageGallery state = {this.props.state} OverviewState = {this.state}/>
       </div>
 

@@ -6,7 +6,7 @@ const AddToCart = (props) => {
     return (
       <div>
         <select className="selectSize" onChange={props.changeAvailableQuantity}>
-          <option>SELECT SIZE</option>
+          <option id = "selectSize">SELECT SIZE</option>
           {Object.entries(
             props.state.styles[props.OverviewState.styleIndex].skus
           ).map(([key, value]) => {
