@@ -24,7 +24,8 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
-      qNa: []
+      qNa: [],
+      savedQnA:[]
 
     }
     this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
@@ -46,7 +47,8 @@ class App extends React.Component {
           productId: results[3].data.id,
           productInformation: results[3].data,
           styles: results[4].data,
-          qNa: this.props.qNaTestData
+          qNa: this.props.qNaTestData,
+          savedQnA: this.props.qNaTestData
         });
       })
       .catch((err) => {
@@ -54,11 +56,20 @@ class App extends React.Component {
       });
   }
 
-  searchQuestionHandler(newState) {
+  searchQuestionHandler(newState, originalState) {
     console.log(newState)
-    this.setState({
-      qNa: newState
-    })
+    if (this.state.savedQnA.length) {
+
+      this.setState({
+        qNa: newState
+
+      })
+    } else {
+      this.setState({
+        qNa: newState
+      })
+    }
+
 
   }
 
@@ -67,7 +78,7 @@ class App extends React.Component {
       <div className='app'>
         <Overview state = {this.state}/>
         <RelatedProducts state={this.state} />
-        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
+        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler} savedData={this.state.savedQnA}/>
         <RatingsAndReviews />
       </div>
     )
@@ -76,6 +87,7 @@ class App extends React.Component {
 
 App.propTypes ={
   qNaTestData: propTypes.array.isRequired
+
 }
 
 

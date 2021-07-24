@@ -35,7 +35,6 @@ const QuestionsContainer = (props) => {
 
 QuestionsContainer.propTypes = {
   showQuestions: propTypes.func.isRequired,
-  data: propTypes.array.isRequired,
   questionCount: propTypes.number.isRequired,
   answerCount: propTypes.number.isRequired,
   classname: propTypes.string.isRequired,
@@ -44,6 +43,6 @@ QuestionsContainer.propTypes = {
   answerTableHide: propTypes.func.isRequired,
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
-  question: propTypes.string.isRequired
+  question: propTypes.object.isRequired
 }
 export default QuestionsContainer;

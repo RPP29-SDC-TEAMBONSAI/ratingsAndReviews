@@ -49,7 +49,7 @@ class QnAClientHelpers {
         return answer.helpfulness
       })
       countArr = countArr.sort((a, b) => (b - a));
-      console.log(countArr)
+
       let sortedArr=[]
 
       countArr.forEach((number) => {

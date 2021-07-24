@@ -21,7 +21,7 @@ const AddAnswer = (props) => {
 
 AddAnswer.propTypes ={
   classname: propTypes.string.isRequired,
-  data: propTypes.array.isRequired
+  data: propTypes.number.isRequired
 }
 
 export default AddAnswer

@@ -20,7 +20,9 @@ class QuestionsNAnswers extends React.Component {
       lastIndex : null,
       answerHiddenClass: '',
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
-      qSearchCharCount: 0
+      qSearchCharCount: 0,
+
+
     };
 
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
@@ -35,24 +37,28 @@ class QuestionsNAnswers extends React.Component {
     this.showQuestions = this.showQuestions.bind(this)
     this.helper = this.helper.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
+
+
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+    let copy = this.props.data.slice()
     if (prevProps.data.length !== this.props.data.length) {
-      let copy = this.props.data.slice()
+
       let sortedData = this.filterAnswersNQuestions(copy)
       let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
 
       this.setState({
         questions: sortedData[0],
         answers: sortedData[1],
-        showQuestionButton: showButton
+        showQuestionButton: showButton,
+
       })
     }
     if (prevState.qSearchCharCount !== this.state.qSearchCharCount) {
+
       if (this.state.qSearchCharCount >= 3) {
-         return this.searchFilter(this.state.questionSearchVal)
+        this.searchFilter(this.state.questionSearchVal)
       }
     }
   }
@@ -60,6 +66,8 @@ class QuestionsNAnswers extends React.Component {
   helper() {
     return new QnAClientHelpers()
   }
+
+
 
   filterAnswersNQuestions(currentQuestions) {
     let filtered = this.helper().filterAll(currentQuestions)
@@ -96,8 +104,16 @@ class QuestionsNAnswers extends React.Component {
 
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
-    let newQuestions = this.helper().filterSearchInput(copy, searchValue);
-    this.props.searchQuestionHandler(newQuestions)
+    let original = this.props.savedData
+
+    if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
+
+      this.props.searchQuestionHandler(original)
+    } else {
+      let newQuestions = this.helper().filterSearchInput(copy, searchValue);
+
+        this.props.searchQuestionHandler(newQuestions)
+      }
   }
 
   answerHide (classname, index) {
@@ -122,11 +138,13 @@ class QuestionsNAnswers extends React.Component {
 
   questionSearchChange(e) {
     let newCount = this.state.qSearchCharCount + 1
+
     this.setState({
       questionSearchVal: e.target.value,
       qSearchCharCount: newCount
     })
   }
+
 
 
   render () {
@@ -140,8 +158,9 @@ class QuestionsNAnswers extends React.Component {
           <h3 className='qnaTitle'>Questions & answers</h3>
           <Search
             currentInput={this.state.questionSearchVal}
-            searchFilter={this.searchFilter}
-            questionSearchChange={this.questionSearchChange}/>
+            questionSearchChange={this.questionSearchChange}
+
+          />
         </div>
         <div className={scrollContainerClass? scrollContainerClass : ''}>
           <div className={`List container`}>
@@ -189,7 +208,8 @@ class QuestionsNAnswers extends React.Component {
 
 QuestionsNAnswers.propTypes = {
   data: propTypes.array.isRequired,
-  searchQuestionHandler: propTypes.func.isRequired
+  searchQuestionHandler: propTypes.func.isRequired,
+  savedData: propTypes.array.isRequired
 }
 
 export default QuestionsNAnswers;

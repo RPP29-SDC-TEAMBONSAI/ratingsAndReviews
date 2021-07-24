@@ -51,7 +51,7 @@ QuestionList.propTypes = {
   answerTableHide: propTypes.func.isRequired,
   classname: propTypes.string.isRequired,
   answerCount: propTypes.number.isRequired,
-  question: propTypes.string.isRequired
+  question: propTypes.object.isRequired
 
 }
 
