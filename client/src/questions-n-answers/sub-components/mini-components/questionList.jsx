@@ -25,7 +25,7 @@ const QuestionList = (props) => {
           <div className={showClass ? showClass : _class} key={index}>
             <h4 className='answerText'>A: {answer.body}</h4>
             <table className=''key={index}>
-              <tbody>
+              <tbody >
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
@@ -44,6 +44,8 @@ const QuestionList = (props) => {
 }
 
 QuestionList.propTypes = {
+  currentI: propTypes.number.isRequired,
+  helpfulQuestionClick:propTypes.func.isRequired,
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,

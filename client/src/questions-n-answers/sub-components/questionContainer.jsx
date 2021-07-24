@@ -11,6 +11,7 @@ const QuestionsContainer = (props) => {
     <div className={showQuestionClass ? ` qna ${showQuestionClass} Container `: `qna ${props.classname} Container`}>
       <div className='questionAndAnswer'>
         <QuestionList
+
           answerHide={props.answerHide}
           addAnswerScroll={props.addAnswerScroll}
           answerTableHide={props.answerTableHide}
@@ -24,6 +25,8 @@ const QuestionsContainer = (props) => {
       </div>
       <div className='qna table'>
         <AddAnswer
+          currentI={props.currentI}
+          helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
           classname={showQuestionClass ? showQuestionClass : props.classname}
         />
@@ -34,6 +37,7 @@ const QuestionsContainer = (props) => {
 
 
 QuestionsContainer.propTypes = {
+  helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,
   questionCount: propTypes.number.isRequired,
   answerCount: propTypes.number.isRequired,

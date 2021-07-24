@@ -3,6 +3,8 @@ import Search from './sub-components/search.jsx'
 import QuestionsContainer from './sub-components/questionContainer.jsx';
 import QnAClientHelpers from '../helpers/qnAHelper.js';
 import propTypes from 'prop-types';
+import axios from 'axios';
+import {updateHelpfulness, questions} from '../clientRoutes/qa';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -21,6 +23,8 @@ class QuestionsNAnswers extends React.Component {
       answerHiddenClass: '',
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
+      helpfulQuestionCount: 0,
+      question_id: null
 
 
     };
@@ -37,6 +41,7 @@ class QuestionsNAnswers extends React.Component {
     this.showQuestions = this.showQuestions.bind(this)
     this.helper = this.helper.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
+    this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
 
 
   }
@@ -61,7 +66,28 @@ class QuestionsNAnswers extends React.Component {
         this.searchFilter(this.state.questionSearchVal)
       }
     }
+
+    if(prevState.helpfulQuestionCount !== this.state.helpfulQuestionCount) {
+
+      if (this.state.helpfulQuestionCount === 1) {
+        this.setState({
+          helpfulQuestionCount:0
+        })
+        updateHelpfulness(this.state.question_id)
+          .then(data=>
+            questions(this.props.product_id)
+              .then(newData => {
+                this.setState({
+                  questions: newData.data
+                })
+              })
+
+          )
+      }
+
+    }
   }
+
 
   helper() {
     return new QnAClientHelpers()
@@ -144,6 +170,19 @@ class QuestionsNAnswers extends React.Component {
       qSearchCharCount: newCount
     })
   }
+  helpfulQuestionClick(e) {
+    console.log(e.target.id)
+    let currentQuestion = Object.assign({}, this.state.questions[e.target.id])
+    let question_id = currentQuestion.question_id
+    if (this.state.question_id !== question_id) {
+    this.setState({
+      helpfulQuestionCount: 1,
+      question_id:question_id
+    })
+    }
+
+
+  }
 
 
 
@@ -175,6 +214,7 @@ class QuestionsNAnswers extends React.Component {
               }
               return <QuestionsContainer
                       key={index}
+                      helpfulQuestionClick={this.helpfulQuestionClick}
                       currentI={index}
                       showQuestions={this.showQuestions}
                       addAnswerScroll={this.addAnswerScroll}
@@ -207,6 +247,7 @@ class QuestionsNAnswers extends React.Component {
 }
 
 QuestionsNAnswers.propTypes = {
+  product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
   searchQuestionHandler: propTypes.func.isRequired,
   savedData: propTypes.array.isRequired

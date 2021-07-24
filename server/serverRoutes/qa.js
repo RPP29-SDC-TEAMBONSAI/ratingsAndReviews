@@ -8,13 +8,13 @@ module.exports = {
     console.log('questions req', req.url)
     let url = req.url.split('=')
     let request = api + `qa/questions?product_id=${Number(url[1])}`
-    console.log(url)
+
     axios.get(request, {
       headers: {
         'Authorization': TOKEN
       }
     }).then((data) => {
-      console.log(data.data.results, "🤙")
+
       res.send(data.data.results).end();
 
     })
@@ -24,5 +24,24 @@ module.exports = {
     res.status(200).end();
     //implement API request for product answers
     //send info to client
+  },
+  updateHelpfulness: (req, res) => {
+    console.log(req.url)
+    let id = Number(req.url.split('=')[1])
+    axios.put(api + `qa/questions/${id}/helpful`, id.toString(), {
+      headers: {
+        'Authorization': TOKEN
+      }
+    }).then(data=> {
+      res.send(200)
+
+      })
+      .catch(err=> {
+        console.log(err)
+      })
+
+    console.log(id)
+
   }
+
 }

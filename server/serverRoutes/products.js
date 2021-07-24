@@ -37,6 +37,7 @@ module.exports = {
   },
   productsStyle: (req, res) => {
     let request = req.originalUrl.split('?');
+
     axios.get(api + `products/${request[1]}/styles`, {
       headers: {
         'Authorization': TOKEN

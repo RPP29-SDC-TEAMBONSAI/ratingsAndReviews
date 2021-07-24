@@ -6,5 +6,13 @@ module.exports = {
   },
   answers: () => {
     return axios.get('/qa/questions/:question_id/answers');
+  },
+  updateHelpfulness: (id) => {
+
+    return axios.put(`/qa/questions/:question_id=${id}`)
+      .then(data =>{
+        return data
+      })
+
   }
 }

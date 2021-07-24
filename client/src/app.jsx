@@ -30,6 +30,7 @@ class App extends React.Component {
     }
     this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
     this.handleProductChange = this.handleProductChange.bind(this);
+
   }
   componentDidMount() {
     Promise.all([
@@ -91,12 +92,14 @@ class App extends React.Component {
 
   }
 
-  searchQuestionHandler(newState, originalState) {
+  searchQuestionHandler(newState) {
     console.log(newState)
     this.setState({
       qNa: newState
     })
   }
+
+
 
   handleProductChange(newProductId) {
     //console.log(`new product id set: ${newProductId}`)
@@ -111,7 +114,9 @@ class App extends React.Component {
       <div className='app'>
         <Overview state = {this.state}/>
         <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
-        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler} savedData ={this.state.savedQnA}/>
+        <QuestionsNAnswers product_id={this.state.product_id}
+                           data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}
+                           QuestionsavedData ={this.state.savedQnA}/>
         <RatingsAndReviews />
       </div>
     )
