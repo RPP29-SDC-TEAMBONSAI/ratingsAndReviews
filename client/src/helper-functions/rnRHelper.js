@@ -26,7 +26,7 @@ const factorDetail = {
     'Below average',
     'What I expected',
     'Pretty great',
-    'Perfect'
+    'Perfect',
   ],
   Length: [
     'Runs Short',

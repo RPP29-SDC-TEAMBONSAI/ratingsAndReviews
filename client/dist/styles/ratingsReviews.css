@@ -87,6 +87,10 @@
   justify-content: stretch;
 }
 
+.bar-wrapper:hover {
+  cursor: pointer;
+}
+
 .bar-green {
   background-color: green;
   height: 10px;
@@ -193,7 +197,40 @@
 }
 
 .sort-options-selected {
+  margin-top: 5px;
+  font-size: small;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.sort-option
+, .sort-option-title {
+  display: flex;
+  flex-direction: row;
+  height: 16px;
+  margin: 0 2px 0 2px;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
+  background-color: lightgray;
+}
+
+.sort-option-text {
+  margin-left: 4px;
+}
+
+.remove-star-filter {
+  background-color: rgb(237, 237, 237);
+  border-radius: 100px;
   font-size: smaller;
+  height: 13px;
+  width: 13px;
+  align-self: center;
+  text-align: center;
+}
+
+.remove-star-filter:hover {
+  cursor: pointer;
 }
 
 /* Reviews List */
@@ -308,4 +345,36 @@
 
 .irt-hr {
   width: 100%;
+}
+
+/* STARS */
+
+.stars {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: lightgray;
+  overflow: hidden;
+}
+
+.full-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+}
+
+.empty-stars:before, .full-stars:before {
+  content:"\2605\2605\2605\2605\2605";
+  font-size: 14pt;
+}
+
+.empty-stars:before {
+  -webkit-text-stroke: 1px black;
+}
+
+.full-stars:before {
+  -webkit-text-stroke: 1px black;
 }

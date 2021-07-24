@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Stars from '../../stars/stars.jsx'
 import helper from '../../helper-functions/rnRHelper.js';
 const { formatDate, truncateSummary, createRecommendDiv, createResponseDiv } = helper;
 
 const IndividualReviewTile = (props) => {
+  console.log(props.review)
   return (
     <div className="irt">
       <div className="irt-header">
-        <div className="irt-star-rating">* * * * *</div>
+        <div className="irt-star-rating">{Stars(props.review.rating)}</div>
         <div className="irt-username-and-date">✓ {props.review.reviewer_name}, {formatDate(props.review.date)}</div>
       </div>
       <div className="irt-review-summary">
