@@ -38,7 +38,7 @@ const qNa_testData =
         question_body:"Can I wash it?",
         question_date:"2018-02-08T00:00:00.000Z",
         asker_name:"cleopatra",
-        question_helpfulness:7,
+        question_helpfulness:36,
         reported:false,
         answers:
           { 1992397:
@@ -154,6 +154,113 @@ const qNa_testData =
 
 
     ]
-  };
+  }
+//  { product_id:"28213",
+//    results:
+//      [
+//        { question_id:213343,
+//          question_body:"Where does this product ship from?",
+//          question_date:"2018-01-06T00:00:00.000Z",
+//          asker_name:"jbilas",
+//          question_helpfulness:36,
+//          reported:false,
+//          answers:
+//            { 1992374:
+//               { id:1992374,
+//                body:"It ships from the facility in Tulsa",
+//                date:"2018-01-06T00:00:00.000Z",
+//                answerer_name:"dschulman",
+//                helpfulness:30,
+//                photos:[]},
+//              2171318:
+//               { id:2171318,
+//                 body:"This is my test answer",
+//                 date:"2021-07-23T00:00:00.000Z",
+//                 answerer_name:"testUsername123",
+//                 helpfulness:0,
+//                 photos:
+//                   [
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png"
+//                   ]}}},
+//         { question_id:213345,
+//           question_body:"What fabric is the bottom made of?",
+//           question_date:"2019-02-18T00:00:00.000Z",
+//           asker_name:"cleopatra",
+//           question_helpfulness:21,
+//           reported:false,
+//           answers:
+//             { 1992353:
+//                { id:1992353,
+//                  body:"Some kind of recycled rubber, works great!",
+//                  date:"2019-03-18T00:00:00.000Z",
+//                  answerer_name:"marcanthony",
+//                  helpfulness:14,
+//                  photos:[]},
+//               1992367:
+//                { id:1992367,
+//                 body:"Rubber",
+//                 date:"2019-03-18T00:00:00.000Z",
+//                 answerer_name:"Seller",
+//                 helpfulness:12,
+//                 photos:[]}}},
+//         { question_id:213346,
+//           question_body:"Where is this product made?",
+//           question_date:"2018-10-04T00:00:00.000Z",
+//           asker_name:"jbilas",
+//           question_helpfulness:14,
+//           reported:false,
+//           answers:
+//             { 1992368:
+//                { id:1992368,
+//                 body:"China",
+//                 date:"2018-08-04T00:00:00.000Z",
+//                 answerer_name:"Seller",
+//                 helpfulness:13,
+//                 photos:[]},
+//               2171319:
+//                { id:2171319,
+//                  body:"This is my test answer",
+//                  date:"2021-07-23T00:00:00.000Z",
+//                  answerer_name:"testUsername123",
+//                  helpfulness:0,
+//                  photos:
+//                    ["https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png"
+//                   ]},
+//               2171326:
+//                 { id:2171326,
+//                   body:"This is my test answer",
+//                   date:"2021-07-23T00:00:00.000Z",
+//                   answerer_name:"testUsername123",
+//                   helpfulness:0,
+//                   photos:
+//                     ["https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png",
+//                     "https://raw.githubusercontent.com/PKief/vscode-markdown-checkbox/master/logo.png"
+//                     ]}}},
+//         { question_id:213340,
+//           question_body:"yooo",
+//           question_date:"2019-01-24T00:00:00.000Z",
+//           asker_name:"rob",
+//           question_helpfulness:1,
+//           reported:false,
+//           answers:
+//             { 1992400:
+//                { id:1992400,
+//                  body:"Yes",
+//                  date:"2019-11-24T00:00:00.000Z",
+//                  answerer_name:"rob",
+//                  helpfulness:15,
+//                  photos:[]
+//             }}}
+//           ]
+
+//           }
+
 
   export default qNa_testData;
+
+
