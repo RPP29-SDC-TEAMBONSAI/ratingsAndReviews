@@ -1,11 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import CardImage from './CardImage.jsx';
+
 
 const RelatedProductsCard = (props) => {
 
   return (
-    <div className='relatedProductsCard'>
+    <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
         <h3 className='productCategory'>{props.category}</h3>
         <h3 className='originalProductPrice'>{props.originalPrice}</h3>
@@ -19,12 +19,13 @@ const RelatedProductsCard = (props) => {
 }
 
 RelatedProductsCard.propTypes = {
-  name: propTypes.any,
-  id: propTypes.any,
-  category: propTypes.any,
-  originalPrice: propTypes.any,
+  photo: propTypes.any,
   salePrice: propTypes.any,
-  photo: propTypes.any
+  originalPrice: propTypes.any,
+  category: propTypes.any,
+  name: propTypes.any,
+  handleProductChange: propTypes.any,
+  id: propTypes.any
   };
 
   export default RelatedProductsCard;

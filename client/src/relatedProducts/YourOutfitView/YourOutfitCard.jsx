@@ -1,24 +1,29 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
-export default class YourOutfitCard extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
 
-    }
-  }
+const YourOutfitCard = (props) => {
 
-  render () {
-    return (
-      <div className='yourOutfitCard'>
-          <button className='addToOutfitButton'>+</button>
-          <h2 className='productName'></h2>
-          <h3 className='productCategory'></h3>
-          <p className='productPrice'></p>
-          <img className='cardImage' href='tinyurl.com/5h4ad7ks'></img>
-          <p className='starRating'></p>
-      </div>
-    )
-  }
+  return (
+    <div className='yourOutfitCard'>
+        <button className='addToOutfitButton'>+</button>
+        <h2 className='productName'>{props.name}</h2>
+        <h3 className='productCategory'>{props.category}</h3>
+        <h3 className='originalProductPrice'>{props.originalPrice}</h3>
+        <h3 className='saleroductPrice'>{props.salePrice}</h3>
+        <img src={props.photo}></img>
+        <span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span>
+    </div>
+  )
+
 }
 
+YourOutfitCard.propTypes = {
+  photo: propTypes.any,
+  salePrice: propTypes.any,
+  originalPrice: propTypes.any,
+  category: propTypes.any,
+  name: propTypes.any
+  };
+
+  export default YourOutfitCard;
