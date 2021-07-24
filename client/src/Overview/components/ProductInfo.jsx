@@ -10,13 +10,25 @@ const ProductInfo = (props) => {
     return (
       <div>
       <div className = "productInfo">
-        <div className = "reviewStars">⭒⭒⭒⭒⭒</div>
-        <p>Read all # reviews</p>
+      <div className = "reviewStars">⭒⭒⭒⭒⭒</div>
+      <a href="#link_to_reviews">Read all # Reviews</a>
       </div>
       <h2 className = "expandedProductName">{props.state.productInformation.name}</h2>
-      <h3 className = "expandedProductStyleName">{props.state.styles[2].name}</h3>
+      <h3 className = "expandedProductStyleName">{props.state.styles[props.OverviewState.styleIndex].name}</h3>
       <p className = "productDescription">{props.state.productInformation.description}</p>
-      <p className = "productPrice"> Default price ${props.state.styles[2].original_price} sale price ${props.state.styles[2].sale_price} </p>
+      {function () {
+        if (props.state.styles[props.OverviewState.styleIndex].sale_price === null) {
+        return (
+          <p className = "productPrice">  ${props.state.styles[props.OverviewState.styleIndex].original_price} </p>
+        )} else {
+          return (
+            <>
+           <div className = "productOriginalPrice"> Original Price: ${props.state.styles[props.OverviewState.styleIndex].original_price}</div>
+           <div className = "productSalePrice">Sale Price: ${props.state.styles[props.OverviewState.styleIndex].sale_price} </div>
+           </>
+          )
+        }
+      }()}
     </div>
   )
 } else {

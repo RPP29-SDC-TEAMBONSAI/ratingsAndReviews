@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './Overview/index.jsx'
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+import propTypes from 'prop-types';
 
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
@@ -23,40 +24,67 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
-      qNa: props.qNaTestData
+      qNa: []
 
     }
+    this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
+    this.handleProductChange = this.handleProductChange.bind(this);
   }
   componentDidMount() {
     Promise.all([
       // REVIEW REQUESTS
       reviews(), reviewsMeta(),
       // PRODUCT REQUESTS
-      products(), productsWithId(), productsStyle(), productsRelated(),
+      products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
       // QNA REQUESTS
       questions(), answers(),
       // CART REQUESTS
       cart()
     ])
       .then((results) => {
-        console.log(results);
+        this.setState({
+          product_id: results[3].data.id,
+          productInformation: results[3].data,
+          styles: results[4].data,
+          qNa: this.props.qNaTestData
+        });
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
       });
   }
 
+  searchQuestionHandler(newState) {
+    console.log(newState)
+    this.setState({
+      qNa: newState
+    })
+  }
+
+  handleProductChange(newProductId) {
+    //console.log(`new product id set: ${newProductId}`)
+    this.setState({
+      product_id: newProductId
+    })
+  }
+
   render() {
     return (
       <div className='app'>
         <Overview state = {this.state}/>
-        <RelatedProducts />
-        <QuestionsNAnswers data={this.state.qNa}/>
+        <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
+        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
         <RatingsAndReviews />
       </div>
     )
   }
 }
+
+App.propTypes ={
+  qNaTestData: propTypes.array.isRequired
+}
+
+
 
 
 ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));

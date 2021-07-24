@@ -1,4 +1,4 @@
-.qna {
+.questionList.container {
   display: block;
 }
 
@@ -38,8 +38,11 @@ h4.answerText {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-h4.questionText {
+h4.questionText{
   margin-top: 0px
+}
+h4 {
+  margin-top: 0px;
 }
 
 .inputBox {
@@ -83,15 +86,49 @@ h4.questionText {
   margin-bottom: 5%;
 }
 
-.answerListTable.hide{
-  /* visibility: hidden; */
+.qna.hide {
+ display: none;
+}
+.hide {
   display: none;
 }
 
-.questionText.hide {
+.loadMoreAnswersButton {
+  width: 15%;
+  height: 3.5%;
+
+  cursor: pointer;
+  display:block;
+  color:#444;
+  border:1px solid #CCC;
+  background:#DDD;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  padding: 5px;
+  text-align: center;
+
+}
+
+h3.loadMoreAnswersButton:hover {
+  color:navy;
+  background: beige;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+.list.scroll.container {
+  height: 6.5vh;
+  overflow-y:scroll;
+
+}
+
+.qna.questionText.container {
+  margin-bottom: 5vh;
+}
+
+.moreAnsweredBtn.Hide {
   display: none;
 }
 
-.list.container {
-  /* display: none; */
+.questionList.scroll {
+  height: 50vh;
+  overflow-y: scroll;
+
 }

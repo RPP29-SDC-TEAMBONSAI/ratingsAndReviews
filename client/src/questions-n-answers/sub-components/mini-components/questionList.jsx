@@ -1,101 +1,58 @@
 import React from 'React';
-import QnAClientHelpers from '../../../helper-functions/qnAHelper';
+import propTypes from 'prop-types';
 
+const QuestionList = (props) => {
 
-class QuestionList extends React.Component {
-  constructor(props) {
-    super(props)
+  let scrollClass = props.addAnswerScroll(props.answerCount)
 
+  return (
+    <div>
+      <h4 className={''}>Q: {props.question.question_body}</h4>
+      <div className={scrollClass ? scrollClass : 'list container'}>
 
+      {props.answers[props.currentI].map((answer, index) => {
 
-    this.state = {
-      answers: [],
-      questions: '',
-      answerHide: 'answerListTable Hide',
+        let _class= props.answerHide(props.classname, index)
+        let showOrHideClass = props.answerTableHide(props.answerCount, index)
+        let showClass;
 
+        if (showOrHideClass === 'answerListTable') {
 
+          showClass = 'answerListTable'
+        }
 
-    }
-  }
-
-  componentDidMount() {
-    let helper = new QnAClientHelpers()
-    let answers=[]
-    let copy = {}
-    copy = Object.assign(copy, this.props.data.answers)
-    //is this best way for getting answers??? probably not
-
-    //* the question results came in as an array of objects - but the answers came in as a nested object
-    //so in order to associate the create answers with the correct questions, without having to make
-    //another request to db, i pulled all the answers with the below functionality and pushed them to an array.
-    let sortedAnswers;
-
-    let questions = this.props.data.question_body
-    if (Object.keys(copy).length) {
-      for (var key in copy) {
-        answers.push(copy[key])
-      }
-      sortedAnswers = helper.sortAnswers(answers)
-      this.setState({
-        answers: sortedAnswers,
-        questions: questions
-
-      })
-
-    } else {
-
-      this.setState({
-        questions: questions
-      })
-
-    }
-
-  }
-
-
-
-  render() {
-
-
-
-    return (
-      <div className='list container'>
-        <h4 className={this.props.classname}>Q: {this.state.questions}</h4>
-        {this.state.answers.map((answer, index) => {
-          let _class;
-          if (index <= 1) {
-            _class = 'answerListTable'
-
-          }
-          if (this.props.classname === 'questionText Hide') {
-            console.log(this.props.classname === 'questionText Hide')
-            _class = this.state.answerHide
-          }
-
-          if (index >= 2) {
-            _class = this.state.answerHide
-          }
-          return (
-          <div className={_class} key={index}>
-          <h4 className='answerText'>A: {answer.body}</h4>
+        return (
+          <div className={showClass ? showClass : _class} key={index}>
+            <h4 className='answerText'>A: {answer.body}</h4>
             <table className=''key={index}>
               <tbody>
-                <tr>
-                  <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-                  <td>helpful?</td>
-                  <td className='userHelpfulBtn'>Yes</td>
-                  <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                  <td className='userReportBtn'>report</td>
-                </tr>
-            </tbody>
-          </table>
-        </div> )
-        })}
-
+                  <tr>
+                    <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
+                    <td>helpful?</td>
+                    <td className='userHelpfulBtn'>Yes</td>
+                    <td className='userHelpIndicator'>({answer.helpfulness})</td>
+                    <td className='userReportBtn'>report</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      })}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
+QuestionList.propTypes = {
+  addAnswerScroll: propTypes.func.isRequired,
+  answers: propTypes.array.isRequired,
+  currentI: propTypes.number.isRequired,
+  answerHide: propTypes.func.isRequired,
+  answerTableHide: propTypes.func.isRequired,
+  classname: propTypes.string.isRequired,
+  answerCount: propTypes.number.isRequired,
+  question: propTypes.string.isRequired
+
+}
 
 export default QuestionList
