@@ -19,7 +19,7 @@ app.get('/products', products)
   .get('/products/:product_id/related', productsRelated)
   .get('/reviews', reviews)
   .get('/reviews/meta', reviewsMeta)
-  .get('/qa/questions', questions)
+  .get('/qa/questions/:product_id?', questions)
   .get('/qa/questions/:question_id/answers', answers)
   .get('/cart', cart)
 

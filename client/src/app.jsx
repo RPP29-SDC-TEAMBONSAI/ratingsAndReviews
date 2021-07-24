@@ -38,7 +38,8 @@ class App extends React.Component {
       // PRODUCT REQUESTS
       products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
       // QNA REQUESTS
-      questions(), answers(),
+      questions(this.state.product_id),
+      //answers(),
       // CART REQUESTS
       cart()
     ])
@@ -47,8 +48,8 @@ class App extends React.Component {
           productId: results[3].data.id,
           productInformation: results[3].data,
           styles: results[4].data,
-          qNa: this.props.qNaTestData,
-          savedQnA: this.props.qNaTestData
+          qNa: results[6].data,
+          savedQnA: results[6].data
         });
       })
       .catch((err) => {

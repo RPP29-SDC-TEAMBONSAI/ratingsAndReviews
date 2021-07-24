@@ -93,7 +93,7 @@ class QuestionsNAnswers extends React.Component {
   }
 
   showButton() {
-    let newClass = this.helper().showMoreAnsweredBtnClass( this.state.showQuestionButton, this.state.questionClickCount, this.state.lastIndex);
+    let newClass = this.helper().showMoreAnsweredBtnClass(this.state.showQuestionButton, this.state.questionClickCount, this.state.lastIndex);
     return newClass
   }
 
@@ -192,7 +192,7 @@ class QuestionsNAnswers extends React.Component {
           </div>
         </div>
         <div className='questionListButton container'>
-          <h3 className={showButtonClass ? `loadMoreAnswersButton ${showButtonClass}` : 'moreAnsweredBtn Hide'}
+          <h3 className={'loadMoreAnswersButton'}
               onClick={this.loadAnswerClick}>{this.state.loadButtonText}
           </h3>
           <button className={showButtonClass ? showButtonClass : 'moreAnsweredBtn Hide'}

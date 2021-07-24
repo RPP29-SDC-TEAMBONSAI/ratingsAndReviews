@@ -121,7 +121,7 @@ class QnAClientHelpers {
 
   showMoreAnsweredQuestions(arr) {
     let showButton;
-      if (arr[0].length) {
+      if (arr[0].length > 2) {
         showButton = true;
       } else {
         showButton = false

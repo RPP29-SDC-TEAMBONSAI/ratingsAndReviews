@@ -4,10 +4,20 @@ const api = require("../../config.js").API;
 
 module.exports = {
   questions: (req, res) => {
-    //console.log('questions req', req)
-    res.status(200).end();
-    //implement API request for product questions
-    //send info to client
+    // qa/questions\?product_id\=28213
+    console.log('questions req', req.url)
+    let url = req.url.split('=')
+    let request = api + `qa/questions?product_id=${Number(url[1])}`
+    console.log(url)
+    axios.get(request, {
+      headers: {
+        'Authorization': TOKEN
+      }
+    }).then((data) => {
+      console.log(data.data.results, "🤙")
+      res.send(data.data.results).end();
+
+    })
   },
   answers: (req, res) => {
     //console.log('answers', req)
