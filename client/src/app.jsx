@@ -4,6 +4,7 @@ import Overview from './Overview/index.jsx'
 import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProducts.jsx';
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+import propTypes from 'prop-types';
 
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
@@ -23,9 +24,11 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
-      qNa: props.qNaTestData
+      qNa: []
 
     }
+    this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
+
   }
   componentDidMount() {
     Promise.all([
@@ -42,13 +45,21 @@ class App extends React.Component {
         this.setState({
           productId: results[3].data.id,
           productInformation: results[3].data,
-          styles: results[4].data
+          styles: results[4].data,
+          qNa: this.props.qNaTestData
         });
-
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
       });
+  }
+
+  searchQuestionHandler(newState) {
+    console.log(newState)
+    this.setState({
+      qNa: newState
+    })
+
   }
 
   render() {
@@ -56,12 +67,18 @@ class App extends React.Component {
       <div className='app'>
         <Overview state = {this.state}/>
         <RelatedProducts state={this.state} />
-        <QuestionsNAnswers data={this.state.qNa}/>
+        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
         <RatingsAndReviews />
       </div>
     )
   }
 }
+
+App.propTypes ={
+  qNaTestData: propTypes.array.isRequired
+}
+
+
 
 
 ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
