@@ -33,6 +33,7 @@ const helper = {
     //console.log(`allPropsObj: ${JSON.stringify(Object.values(allPropsObj))}`)
     return Object.values(allPropsObj);
   }
+
 }
 
 module.exports = helper;

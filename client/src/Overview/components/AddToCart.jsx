@@ -7,7 +7,7 @@ const AddToCart = (props) =>  {
       <select className = "selectSize">
         <option>SELECT SIZE</option>
         {Object.entries(props.state.styles[2].skus).map(([key, value]) =>{
-          console.log('value', value)
+          //console.log('value', value)
           if (value.quantity > 0) {
 
             return (

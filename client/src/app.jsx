@@ -28,7 +28,7 @@ class App extends React.Component {
 
     }
     this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
-
+    this.handleProductChange = this.handleProductChange.bind(this);
   }
   componentDidMount() {
     Promise.all([
@@ -43,7 +43,7 @@ class App extends React.Component {
     ])
       .then((results) => {
         this.setState({
-          productId: results[3].data.id,
+          product_id: results[3].data.id,
           productInformation: results[3].data,
           styles: results[4].data,
           qNa: this.props.qNaTestData
@@ -59,14 +59,20 @@ class App extends React.Component {
     this.setState({
       qNa: newState
     })
+  }
 
+  handleProductChange(newProductId) {
+    //console.log(`new product id set: ${newProductId}`)
+    this.setState({
+      product_id: newProductId
+    })
   }
 
   render() {
     return (
       <div className='app'>
         <Overview state = {this.state}/>
-        <RelatedProducts state={this.state} />
+        <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
         <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
         <RatingsAndReviews />
       </div>

@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 const RelatedProductsCard = (props) => {
 
   return (
-    <div className='relatedProductsCard'>
+    <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
         <h3 className='productCategory'>{props.category}</h3>
         <h3 className='originalProductPrice'>{props.originalPrice}</h3>
@@ -23,7 +23,9 @@ RelatedProductsCard.propTypes = {
   salePrice: propTypes.any,
   originalPrice: propTypes.any,
   category: propTypes.any,
-  name: propTypes.any
+  name: propTypes.any,
+  handleProductChange: propTypes.any,
+  id: propTypes.any
   };
 
   export default RelatedProductsCard;
