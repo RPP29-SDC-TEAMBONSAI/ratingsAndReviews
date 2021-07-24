@@ -2,4 +2,9 @@
 function sum(a, b) {
   return a + b;
 }
-module.exports = sum;
+
+function concat(a, b, c) {
+  return `${a} ${b} ${c}`;
+}
+
+module.exports = {sum, concat};
