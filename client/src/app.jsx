@@ -57,6 +57,38 @@ class App extends React.Component {
       });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState.product_id)
+    console.log(this.state.product_id)
+    if (prevState.product_id !== this.state.product_id) {
+      Promise.all([
+        // REVIEW REQUESTS
+        reviews(), reviewsMeta(),
+        // PRODUCT REQUESTS
+        products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
+        // QNA REQUESTS
+        questions(this.state.product_id),
+        //answers(),
+        // CART REQUESTS
+        cart()
+      ])
+        .then((results) => {
+          this.setState({
+            product_id: results[3].data.id,
+            productInformation: results[3].data,
+            styles: results[4].data,
+            qNa: results[6].data,
+            savedQnA: results[6].data
+          });
+        })
+        .catch((err) => {
+          console.log('this is the err 🥲 ', err)
+        });
+
+    }
+
+  }
+
   searchQuestionHandler(newState, originalState) {
     console.log(newState)
     this.setState({
@@ -66,6 +98,7 @@ class App extends React.Component {
 
   handleProductChange(newProductId) {
     //console.log(`new product id set: ${newProductId}`)
+    console.log(newProductId)
     this.setState({
       product_id: newProductId
     })
