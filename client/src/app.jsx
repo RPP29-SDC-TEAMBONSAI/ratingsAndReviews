@@ -51,6 +51,7 @@ class App extends React.Component {
           qNa: results[6].data,
           savedQnA: results[6].data
         });
+
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
@@ -80,6 +81,7 @@ class App extends React.Component {
             qNa: results[6].data,
             savedQnA: results[6].data
           });
+
         })
         .catch((err) => {
           console.log('this is the err 🥲 ', err)
@@ -109,7 +111,7 @@ class App extends React.Component {
       <div className='app'>
         <Overview state = {this.state}/>
         <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
-        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler} savedData ={this.state.savedData}/>
+        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler} savedData ={this.state.savedQnA}/>
         <RatingsAndReviews />
       </div>
     )
