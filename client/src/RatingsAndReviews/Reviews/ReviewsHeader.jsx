@@ -5,12 +5,13 @@ const ReviewsHeader = (props) => {
   return (
     <div className="reviews-header">
       <div className="sort-title-wrapper">
-        <div className="sort-title">{props.numReviews} reviews, sorted by </div>
-        <select className="sort-options" value={props.sortBy} onChange={props.handleSortChange}>
-          <option value="helpful">helpfulness</option>
-          <option value="newest">newest</option>
-          <option value="relevent">relevance</option>
-        </select>
+        <div className="sort-title">{props.numReviews} reviews, sorted by
+          <select className="sort-options" value={props.sortBy} onChange={props.handleSortChange}>
+            <option value="helpful">helpfulness</option>
+            <option value="newest">newest</option>
+            <option value="relevent">relevance</option>
+          </select>
+        </div>
       </div>
       <div className="sort-options-selected">
         <div className="sort-option-title">Also sorted on: </div>
