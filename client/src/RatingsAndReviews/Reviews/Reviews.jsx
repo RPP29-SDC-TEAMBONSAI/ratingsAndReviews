@@ -29,7 +29,7 @@ class Reviews extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      getStateData();
+      this.getStateData();
     }
   }
 
