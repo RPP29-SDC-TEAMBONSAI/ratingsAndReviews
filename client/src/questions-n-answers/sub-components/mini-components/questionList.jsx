@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import propTypes from 'prop-types';
 
 const QuestionList = (props) => {
@@ -23,13 +23,13 @@ const QuestionList = (props) => {
 
         return (
           <div className={showClass ? showClass : _class} key={index}>
-            <h4 className='answerText'>A: {answer.body}</h4>
+            <h4  className={`answerText${props.currentI.toString()} answerText`}>A: {answer.body}</h4>
             <table className=''key={index}>
-              <tbody>
+              <tbody >
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
-                    <td className='userHelpfulBtn'>Yes</td>
+                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
                     <td className='userReportBtn'>report</td>
                   </tr>
@@ -44,6 +44,9 @@ const QuestionList = (props) => {
 }
 
 QuestionList.propTypes = {
+  helpfulAnswerClick:propTypes.func.isRequired,
+  currentI: propTypes.number.isRequired,
+
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,
@@ -51,7 +54,7 @@ QuestionList.propTypes = {
   answerTableHide: propTypes.func.isRequired,
   classname: propTypes.string.isRequired,
   answerCount: propTypes.number.isRequired,
-  question: propTypes.string.isRequired
+  question: propTypes.object.isRequired
 
 }
 

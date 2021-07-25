@@ -24,11 +24,13 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
-      qNa: []
+      qNa: [],
+      savedQnA:[]
 
     }
-    this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
+
     this.handleProductChange = this.handleProductChange.bind(this);
+
   }
   componentDidMount() {
     Promise.all([
@@ -37,7 +39,8 @@ class App extends React.Component {
       // PRODUCT REQUESTS
       products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
       // QNA REQUESTS
-      questions(), answers(),
+      questions(this.state.product_id),
+      //answers(),
       // CART REQUESTS
       cart()
     ])
@@ -46,23 +49,52 @@ class App extends React.Component {
           product_id: results[3].data.id,
           productInformation: results[3].data,
           styles: results[4].data,
-          qNa: this.props.qNaTestData
+          qNa: results[6].data,
+          savedQnA: results[6].data
         });
+
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
       });
   }
 
-  searchQuestionHandler(newState) {
-    console.log(newState)
-    this.setState({
-      qNa: newState
-    })
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState.product_id)
+    console.log(this.state.product_id)
+    if (prevState.product_id !== this.state.product_id) {
+      Promise.all([
+        // REVIEW REQUESTS
+        reviews(), reviewsMeta(),
+        // PRODUCT REQUESTS
+        products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
+        // QNA REQUESTS
+        questions(this.state.product_id),
+        //answers(),
+        // CART REQUESTS
+        cart()
+      ])
+        .then((results) => {
+          this.setState({
+            product_id: results[3].data.id,
+            productInformation: results[3].data,
+            styles: results[4].data,
+            qNa: results[6].data,
+            savedQnA: results[6].data
+          });
+
+        })
+        .catch((err) => {
+          console.log('this is the err 🥲 ', err)
+        });
+
+    }
+
   }
 
   handleProductChange(newProductId) {
     //console.log(`new product id set: ${newProductId}`)
+    console.log(newProductId)
     this.setState({
       product_id: newProductId
     })
@@ -73,7 +105,9 @@ class App extends React.Component {
       <div className='app'>
         <Overview state = {this.state}/>
         <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
-        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
+        <QuestionsNAnswers product_id={this.state.product_id}
+                           data={this.state.qNa}
+                           QuestionSavedData ={this.state.savedQnA}/>
         <RatingsAndReviews />
       </div>
     )
@@ -82,6 +116,7 @@ class App extends React.Component {
 
 App.propTypes ={
   qNaTestData: propTypes.array.isRequired
+
 }
 
 
