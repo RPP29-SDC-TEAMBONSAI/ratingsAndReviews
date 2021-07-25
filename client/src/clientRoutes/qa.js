@@ -14,5 +14,15 @@ module.exports = {
         return data
       })
 
+  },
+
+  updateAnswerHelpfulness(id) {
+    console.log(id)
+    return axios.put(`/qa/answers/:answer_id=${id}`)
+      .then(data => {
+
+        return data
+      })
+
   }
 }

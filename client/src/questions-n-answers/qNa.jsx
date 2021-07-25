@@ -4,7 +4,7 @@ import QuestionsContainer from './sub-components/questionContainer.jsx';
 import QnAClientHelpers from '../helpers/qnAHelper.js';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import {updateHelpfulness, questions} from '../clientRoutes/qa';
+import {updateHelpfulness, questions, updateAnswerHelpfulness} from '../clientRoutes/qa';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -24,7 +24,10 @@ class QuestionsNAnswers extends React.Component {
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
       helpfulQuestionCount: 0,
-      question_id: null
+      question_id: null,
+      helpfulAnswerCount: 0,
+      answer_id: 0,
+      answerHelpfulnessCount: 0
 
 
     };
@@ -42,6 +45,7 @@ class QuestionsNAnswers extends React.Component {
     this.helper = this.helper.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
+    this.helpfulAnswerClick = this.helpfulAnswerClick.bind(this)
 
 
   }
@@ -84,7 +88,26 @@ class QuestionsNAnswers extends React.Component {
 
           )
       }
+    }
 
+    if (prevState.answerHelpfulnessCount !== this.state.answerHelpfulnessCount) {
+
+      if (this.state.answerHelpfulnessCount === 1) {
+        this.setState({
+          answerHelpfulnessCount:0
+        })
+        updateAnswerHelpfulness(this.state.answer_id)
+          .then(data => {
+            questions(this.props.product_id)
+              .then(newData => {
+                let filtered =this.filterAnswersNQuestions(newData.data)
+                console.log(filtered)
+                this.setState({
+                  answers: filtered[1]
+                })
+              })
+          })
+      }
     }
   }
 
@@ -171,15 +194,30 @@ class QuestionsNAnswers extends React.Component {
     })
   }
   helpfulQuestionClick(e) {
-    console.log(e.target.id)
+
     let currentQuestion = Object.assign({}, this.state.questions[e.target.id])
     let question_id = currentQuestion.question_id
     if (this.state.question_id !== question_id) {
-    this.setState({
-      helpfulQuestionCount: 1,
-      question_id:question_id
-    })
+      this.setState({
+        helpfulQuestionCount: 1,
+        question_id:question_id
+      })
     }
+  }
+
+  helpfulAnswerClick(e, body, cAnswer) {
+    console.log(body)
+    if (this.state.answer_id !== body) {
+      this.setState({
+        answer_id: body,
+        answerHelpfulnessCount: 1
+      })
+    }
+    // let test = document.getElementsByClassName('answerText' + e.target.className.substring(e.target.className.length -1))
+
+    // let id = body
+
+
 
 
   }
@@ -214,6 +252,7 @@ class QuestionsNAnswers extends React.Component {
               }
               return <QuestionsContainer
                       key={index}
+                      helpfulAnswerClick={this.helpfulAnswerClick}
                       helpfulQuestionClick={this.helpfulQuestionClick}
                       currentI={index}
                       showQuestions={this.showQuestions}

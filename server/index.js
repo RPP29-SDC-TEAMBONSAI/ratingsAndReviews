@@ -5,7 +5,7 @@ const PORT = 3000;
 // SERVER ROUTES
 const { reviews, reviewsMeta } = require("./serverRoutes/reviews.js");
 const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
-const { questions, answers, updateHelpfulness } = require("./serverRoutes/qa.js");
+const { questions, answers, updateHelpfulness, updateAnswerHelpfulness} = require("./serverRoutes/qa.js");
 const { cart } = require("./serverRoutes/cart.js");
 
 app.use(express.json());
@@ -25,6 +25,7 @@ app.get('/products', products)
 
 //put request for helpfulness Question
 app.put('/qa/questions/:question_id?', updateHelpfulness)
+app.put('/qa/answers/:answer_id?', updateAnswerHelpfulness)
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

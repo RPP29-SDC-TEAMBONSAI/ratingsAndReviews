@@ -26,7 +26,7 @@ module.exports = {
     //send info to client
   },
   updateHelpfulness: (req, res) => {
-    console.log(req.url)
+
     let id = Number(req.url.split('=')[1])
     axios.put(api + `qa/questions/${id}/helpful`, id.toString(), {
       headers: {
@@ -39,8 +39,23 @@ module.exports = {
       .catch(err=> {
         console.log(err)
       })
+  },
 
-    console.log(id)
+  updateAnswerHelpfulness(req, res) {
+    console.log(req.url)
+    let id = Number(req.url.split('=')[1])
+    axios.put(api + `qa/answers/${id}/helpful`, id.toString(), {
+      headers: {
+        'Authorization': TOKEN
+      }
+    })
+      .then(data => {
+        res.send(200)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
 
   }
 

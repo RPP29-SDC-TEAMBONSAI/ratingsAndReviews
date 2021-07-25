@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import QuestionList from './mini-components/questionList.jsx';
 
 const QuestionsContainer = (props) => {
+  console.log(props.answers)
 
   let showQuestionClass = props.showQuestions(props.questionCount, props.currentI)
 
@@ -11,7 +12,7 @@ const QuestionsContainer = (props) => {
     <div className={showQuestionClass ? ` qna ${showQuestionClass} Container `: `qna ${props.classname} Container`}>
       <div className='questionAndAnswer'>
         <QuestionList
-
+          helpfulAnswerClick= {props.helpfulAnswerClick}
           answerHide={props.answerHide}
           addAnswerScroll={props.addAnswerScroll}
           answerTableHide={props.answerTableHide}
@@ -37,6 +38,7 @@ const QuestionsContainer = (props) => {
 
 
 QuestionsContainer.propTypes = {
+  helpfulAnswerClick: propTypes.func.isRequired,
   helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,
   questionCount: propTypes.number.isRequired,
