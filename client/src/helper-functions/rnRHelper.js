@@ -3,14 +3,12 @@ import React from 'react';
 const factorDetail = {
   Size: [
     'A size too small',
-    '',
-    '',
+    'Perfect',
     'A size too wide'
   ],
   Width: [
     'Too narrow',
-    '',
-    '',
+    'Perfect',
     'Too wide'
   ],
   Comfort: [
@@ -27,14 +25,12 @@ const factorDetail = {
   ],
   Length: [
     'Runs Short',
-    '',
-    '',
+    'Perfect',
     'Runs long'
   ],
   Fit: [
     'Runs tight',
-    '',
-    '',
+    'Perfect',
     'Runs long'
   ]
 };
