@@ -7,9 +7,9 @@ const AddAnswer = (props) => {
   return (
     <table className={`answerTable ${props.classname}`}>
       <tbody>
-        <tr>
+        <tr >
           <td className='aHelpful'>Helpful?</td>
-          <td className='qhelpfulIndicator'>Yes</td>
+          <td id={props.currentI.toString()} className='qhelpfulIndicator' onClick={props.helpfulQuestionClick}>Yes</td>
           <td className='helpfulCount'>({props.data ? props.data : 0})</td>
           <td className='addAnswerText'>Add Answer</td>
         </tr>
@@ -20,8 +20,10 @@ const AddAnswer = (props) => {
 }
 
 AddAnswer.propTypes ={
+  currentI: propTypes.number.isRequired,
+  helpfulQuestionClick: propTypes.func.isRequired,
   classname: propTypes.string.isRequired,
-  data: propTypes.array.isRequired
+  data: propTypes.number.isRequired
 }
 
 export default AddAnswer

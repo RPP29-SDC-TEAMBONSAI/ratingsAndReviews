@@ -49,7 +49,6 @@ class QnAClientHelpers {
         return answer.helpfulness
       })
       countArr = countArr.sort((a, b) => (b - a));
-     // console.log(countArr)
       let sortedArr=[]
 
       countArr.forEach((number) => {
@@ -121,7 +120,7 @@ class QnAClientHelpers {
 
   showMoreAnsweredQuestions(arr) {
     let showButton;
-      if (arr[0].length) {
+      if (arr[0].length > 2) {
         showButton = true;
       } else {
         showButton = false
