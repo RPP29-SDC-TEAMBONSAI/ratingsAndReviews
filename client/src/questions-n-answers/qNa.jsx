@@ -83,6 +83,7 @@ class QuestionsNAnswers extends React.Component {
               .then(newData => {
                 this.setState({
                   questions: newData.data
+
                 })
               })
 
@@ -153,15 +154,26 @@ class QuestionsNAnswers extends React.Component {
 
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
-    let original = this.props.savedData
+    let original = this.props.QuestionSavedData
+    console.log(this.props, "🤙")
+    console.log(this.state.qSearchCharCount)
+    console.log(searchValue.length)
+
 
     if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
 
-      this.props.searchQuestionHandler(original)
+
+      this.setState({
+        questions: original
+      })
+
     } else {
+
       let newQuestions = this.helper().filterSearchInput(copy, searchValue);
 
-        this.props.searchQuestionHandler(newQuestions)
+        this.setState({
+          questions: newQuestions
+        })
       }
   }
 
@@ -206,23 +218,14 @@ class QuestionsNAnswers extends React.Component {
   }
 
   helpfulAnswerClick(e, body, cAnswer) {
-    console.log(body)
+
     if (this.state.answer_id !== body) {
       this.setState({
         answer_id: body,
         answerHelpfulnessCount: 1
       })
     }
-    // let test = document.getElementsByClassName('answerText' + e.target.className.substring(e.target.className.length -1))
-
-    // let id = body
-
-
-
-
   }
-
-
 
   render () {
     let showButtonClass = this.showButton()
@@ -286,10 +289,9 @@ class QuestionsNAnswers extends React.Component {
 }
 
 QuestionsNAnswers.propTypes = {
+  QuestionSavedData: propTypes.array.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
-  searchQuestionHandler: propTypes.func.isRequired,
-  savedData: propTypes.array.isRequired
 }
 
 export default QuestionsNAnswers;

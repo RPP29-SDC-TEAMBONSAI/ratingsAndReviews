@@ -23,7 +23,7 @@ const QuestionList = (props) => {
 
         return (
           <div className={showClass ? showClass : _class} key={index}>
-            <h4  className={`answerText${props.currentI.toString()}`}>A: {answer.body}</h4>
+            <h4  className={`answerText${props.currentI.toString()} answerText`}>A: {answer.body}</h4>
             <table className=''key={index}>
               <tbody >
                   <tr>
@@ -44,9 +44,9 @@ const QuestionList = (props) => {
 }
 
 QuestionList.propTypes = {
-  helpfulAnswerClick: propTypes.func.isRequired,
+  helpfulAnswerClick:propTypes.func.isRequired,
   currentI: propTypes.number.isRequired,
-  helpfulQuestionClick:propTypes.func.isRequired,
+
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,

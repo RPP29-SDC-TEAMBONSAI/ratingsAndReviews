@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import QuestionList from './mini-components/questionList.jsx';
 
 const QuestionsContainer = (props) => {
-  console.log(props.answers)
+
 
   let showQuestionClass = props.showQuestions(props.questionCount, props.currentI)
 
