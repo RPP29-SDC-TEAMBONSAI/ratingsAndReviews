@@ -422,9 +422,6 @@
 
 .review-photo-open {
   position: fixed;
-  display: grid;
-  justify-items: center;
-  align-items: center;
   left: 0;
   top: 0;
   width: 100vw;
