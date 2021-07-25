@@ -25,92 +25,70 @@ class App extends React.Component {
       productInformation: {},
       styles: [],
       qNa: [],
-      savedQnA:[]
-
+      savedQnA: [],
+      loaded: false
     }
-
     this.handleProductChange = this.handleProductChange.bind(this);
-
+    this.getStateData = this.getStateData.bind(this);
   }
   componentDidMount() {
+    this.getStateData();
+    this.setState({
+      loaded: true
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.product_id !== this.state.product_id) {
+      this.getStateData();
+    }
+  }
+
+  handleProductChange(newProductId) {
+    this.setState({
+      product_id: newProductId
+    })
+  }
+
+  getStateData() {
     Promise.all([
-      // REVIEW REQUESTS
-      reviews(), reviewsMeta(),
-      // PRODUCT REQUESTS
       products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
-      // QNA REQUESTS
       questions(this.state.product_id),
-      //answers(),
-      // CART REQUESTS
       cart()
     ])
       .then((results) => {
         this.setState({
-          product_id: results[3].data.id,
-          productInformation: results[3].data,
-          styles: results[4].data,
-          qNa: results[6].data,
-          savedQnA: results[6].data
+          productInformation: results[1].data,
+          styles: results[2].data,
+          qNa: results[4].data,
+          savedQnA: results[4].data
         });
-
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevState.product_id)
-    console.log(this.state.product_id)
-    if (prevState.product_id !== this.state.product_id) {
-      Promise.all([
-        // REVIEW REQUESTS
-        reviews(), reviewsMeta(),
-        // PRODUCT REQUESTS
-        products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
-        // QNA REQUESTS
-        questions(this.state.product_id),
-        //answers(),
-        // CART REQUESTS
-        cart()
-      ])
-        .then((results) => {
-          this.setState({
-            product_id: results[3].data.id,
-            productInformation: results[3].data,
-            styles: results[4].data,
-            qNa: results[6].data,
-            savedQnA: results[6].data
-          });
-
-        })
-        .catch((err) => {
-          console.log('this is the err 🥲 ', err)
-        });
-
-    }
-
-  }
-
-  handleProductChange(newProductId) {
-    //console.log(`new product id set: ${newProductId}`)
-    console.log(newProductId)
-    this.setState({
-      product_id: newProductId
-    })
-  }
-
   render() {
-    return (
-      <div className='app'>
-        <Overview state = {this.state}/>
-        <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
-        <QuestionsNAnswers product_id={this.state.product_id}
-                           data={this.state.qNa}
-                           QuestionSavedData ={this.state.savedQnA}/>
-        <RatingsAndReviews />
-      </div>
-    )
+    if (this.state.loaded) {
+      return (
+        <div className='app'>
+          <Overview
+            state = {this.state}/>
+          <RelatedProducts
+            state={this.state}
+            handleProductChange={this.handleProductChange}/>
+          <QuestionsNAnswers
+            product_id={this.state.product_id}
+            data={this.state.qNa}
+            QuestionSavedData ={this.state.savedQnA}/>
+          <RatingsAndReviews
+            product_id={this.state.product_id}/>
+        </div>
+      )
+    } else {
+      return <div>Loading</div>
+    }
   }
 }
 
