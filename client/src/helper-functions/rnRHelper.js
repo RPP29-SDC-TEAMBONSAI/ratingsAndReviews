@@ -96,7 +96,6 @@ const helper = {
   },
   mapCharacteristicsToProps: (characteristics) => {
     let props = [];
-    console.log(characteristics);
     for (let char in characteristics) {
       props.push({
         key: characteristics[char].id,

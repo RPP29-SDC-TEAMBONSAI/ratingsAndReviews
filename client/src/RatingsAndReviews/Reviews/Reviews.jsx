@@ -37,7 +37,6 @@ class Reviews extends React.Component {
     reviews(1, 1000, 'newest', this.props.product_id)
       .then(({ data }) => {
         // sortByRelevance(data);
-        console.log(data);
         this.setState({
           reviews: data,
           loaded: 1
@@ -47,7 +46,6 @@ class Reviews extends React.Component {
   }
 
   handleSortChange(event) {
-    console.log(event.target.value)
     this.setState({
       sortBy: event.target.value
     });
@@ -65,8 +63,6 @@ class Reviews extends React.Component {
   }
 
   render() {
-
-
     return (
       <div>
         <div
