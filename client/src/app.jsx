@@ -31,6 +31,7 @@ class App extends React.Component {
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
   }
+
   componentDidMount() {
     this.getStateData();
     this.setState({
@@ -57,6 +58,7 @@ class App extends React.Component {
       cart()
     ])
       .then((results) => {
+        console.log(results)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,

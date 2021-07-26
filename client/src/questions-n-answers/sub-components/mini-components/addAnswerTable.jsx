@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 
 
 const AddAnswer = (props) => {
-
   return (
     <table className={`answerTable ${props.classname}`}>
       <tbody>
@@ -16,7 +15,6 @@ const AddAnswer = (props) => {
       </tbody>
     </table>
   )
-
 }
 
 AddAnswer.propTypes ={

@@ -7,7 +7,7 @@ module.exports = {
     // qa/questions\?product_id\=28213
     console.log('questions req', req.url)
     let url = req.url.split('=')
-    let request = api + `qa/questions?product_id=${Number(url[1])}`
+    let request = api + `qa/questions?product_id=${Number(url[1])}&page=1&count=25`
 
     axios.get(request, {
       headers: {
@@ -20,10 +20,9 @@ module.exports = {
     })
   },
   answers: (req, res) => {
-    //console.log('answers', req)
+
     res.status(200).end();
-    //implement API request for product answers
-    //send info to client
+
   },
   updateHelpfulness: (req, res) => {
 
@@ -50,13 +49,24 @@ module.exports = {
       }
     })
       .then(data => {
+
         res.send(200)
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => console.log(err))
+  },
 
-
+  postQuestion(req, res) {
+    // console.log(req.body)
+    let newQuestion = req.body
+    axios.post(api + `qa/questions`, newQuestion, {
+      headers: {
+        'Authorization': TOKEN
+      }
+    }).then(data => {
+      console.log(data, "✅")
+      res.send(200)
+    })
+    .catch(err => console.log(err, "🤙"))
   }
 
 }
