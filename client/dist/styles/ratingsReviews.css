@@ -420,7 +420,8 @@
 
 /* PHOTO MODAL */
 
-.review-photo-open {
+.review-photo-open
+, .add-review-open {
   position: fixed;
   left: 0;
   top: 0;
@@ -436,4 +437,16 @@
   height: 90vh;
   margin-top: 5vh;
   width: auto;
+}
+
+/* ADD REVIEW MODAL */
+
+.add-review-form {
+  display: flex;
+  margin: auto;
+  height: 90vh;
+  width: 40vw;
+  margin-top: 5vh;
+  background-color: white;
+  border-radius: 5px;
 }
