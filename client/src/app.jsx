@@ -119,6 +119,7 @@ class App extends React.Component {
                            QuestionSavedData ={this.state.savedQnA}
                            currentItemName={this.state.productNameQnA}/>
         <RatingsAndReviews />
+
       </div>
     )
   }

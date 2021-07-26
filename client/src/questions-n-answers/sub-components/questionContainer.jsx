@@ -5,10 +5,6 @@ import QuestionList from './mini-components/questionList.jsx';
 
 const QuestionsContainer = (props) => {
 
-
-
-
-
   let showQuestionClass = props.showQuestions(props.questionCount, props.currentI)
 
   return (
@@ -38,7 +34,6 @@ const QuestionsContainer = (props) => {
     </div>
   )
 }
-
 
 QuestionsContainer.propTypes = {
   helpfulAnswerClick: propTypes.func.isRequired,

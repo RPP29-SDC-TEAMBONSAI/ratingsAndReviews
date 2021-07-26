@@ -20,10 +20,9 @@ module.exports = {
     })
   },
   answers: (req, res) => {
-    //console.log('answers', req)
+
     res.status(200).end();
-    //implement API request for product answers
-    //send info to client
+
   },
   updateHelpfulness: (req, res) => {
 
@@ -53,11 +52,7 @@ module.exports = {
 
         res.send(200)
       })
-      .catch(err => {
-        console.log(err)
-      })
-
-
+      .catch(err => console.log(err))
   },
 
   postQuestion(req, res) {
@@ -72,7 +67,6 @@ module.exports = {
       res.send(200)
     })
     .catch(err => console.log(err, "🤙"))
-
   }
 
 }

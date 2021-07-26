@@ -25,7 +25,9 @@ app.get('/products', products)
 
 //put request for helpfulness Question
 app.put('/qa/questions/:question_id?', updateHelpfulness)
+//put request for helpfulness Answer
 app.put('/qa/answers/:answer_id?', updateAnswerHelpfulness)
+//post request for new question
 app.post('/qa/questions', postQuestion)
 
 app.listen(PORT, () => {

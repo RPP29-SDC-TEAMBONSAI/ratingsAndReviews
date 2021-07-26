@@ -5,7 +5,7 @@ import QnAClientHelpers from '../helpers/qnAHelper.js';
 import UserQuestion from './sub-components/mini-components/userQuestion.jsx';
 import propTypes from 'prop-types';
 import axios from 'axios';
-import {updateHelpfulness, questions, updateAnswerHelpfulness} from '../clientRoutes/qa';
+import {updateHelpfulness, questions, updateAnswerHelpfulness, answers} from '../clientRoutes/qa';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -160,10 +160,14 @@ class QuestionsNAnswers extends React.Component {
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
     let original = this.props.QuestionSavedData
+    let newQuestions = this.helper().filterAll(original)
+
 
     if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
+
       this.setState({
-        questions: original
+        questions: newQuestions[0],
+        answers: newQuestions[1]
       })
 
     } else {
@@ -207,6 +211,7 @@ class QuestionsNAnswers extends React.Component {
       qSearchCharCount: newCount
     })
   }
+
   helpfulQuestionClick(e) {
 
     let currentQuestion = Object.assign({}, this.state.questions[e.target.id])
@@ -228,6 +233,7 @@ class QuestionsNAnswers extends React.Component {
       })
     }
   }
+
   updateQuestions (questions) {
     let filtered = this.helper().filterAll(questions);
     console.log(filtered, "🤙")
@@ -235,21 +241,25 @@ class QuestionsNAnswers extends React.Component {
       questions: filtered[0],
       answers: filtered[1]
     })
-
   }
 
   addQuestion(e) {
 
-    this.setState({
-      qFormShowOrHide: 'qForm'
-    })
+    if (this.state.qFormShowOrHide === 'qForm') {
+      this.setState({
+        qFormShowOrHide: 'qFormHide'
+      })
+    } else {
 
+      this.setState({
+        qFormShowOrHide: 'qForm'
+      })
+    }
   }
 
   render () {
     let showButtonClass = this.showButton()
     let scrollContainerClass = this.showScrollContainer()
-
 
     return (
 
@@ -262,7 +272,9 @@ class QuestionsNAnswers extends React.Component {
 
           />
         </div>
+
         <div className={this.state.qFormShowOrHide}>
+          {/* <div className='qForm'>  </div> */}
           <UserQuestion
             currentItemName={this.props.currentItemName}
             product_id={this.props.product_id}
@@ -270,6 +282,7 @@ class QuestionsNAnswers extends React.Component {
             qFormShowOrHide={this.state.qFormShowOrHide}
             addQuestion={this.addQuestion}
           />
+
         </div>
         <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
           <div className={`List container`}>
@@ -315,7 +328,6 @@ class QuestionsNAnswers extends React.Component {
         </div>
 
       </div>
-
     )
   }
 }

@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 
 const QuestionList = (props) => {
 
-
   let scrollClass = props.addAnswerScroll(props.answerCount)
 
   return (
@@ -57,7 +56,6 @@ QuestionList.propTypes = {
   classname: propTypes.string.isRequired,
   answerCount: propTypes.number.isRequired,
   question: propTypes.object.isRequired
-
 }
 
 export default QuestionList

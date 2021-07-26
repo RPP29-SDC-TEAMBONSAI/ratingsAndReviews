@@ -136,40 +136,43 @@ h3.loadMoreAnswersButton:hover {
   display:  none;
 }
 .qForm {
-  flex-direction: column;
-
-  z-index: 10;
-
-  position:absolute;
-  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
-  background-color: wheat;
-  flex-direction: center;
-
-
-  justify-content:end;
-}
-.app {
+  width: 100%;
   z-index: 1;
-  display: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
 }
-/* .questionList.container {
-  z-index:0;
+.qFormData {
+  width: 50%;
+
+  height: 50%;
+
+  position: fixed;
+  top: 20%;
+  left: 22%;
+
+  /* top: 40vh;
+  right: 60vh; */
+  background-color: #B2D2A4;
+  border-radius: 25px;
+  text-align: center;
+  margin-bottom: 1vh;
+
+
+  z-index: 2;
 }
-.questionListTitle.container {
-  z-index: 0;
-  width: 50vh;
+.userQuestion {
+  width: 35vh;
+  height:15vh;
+  resize: none;
+  overflow-y: scroll;
 
 }
-
-.qFormData{
-
+.askQuestionForm {
+  margin-bottom: 1vh;
 }
-
-*/
-.body{
-  z-index: 0;
-}
-.userAddQuestionForm{
-
+.userNickName, .userEmail {
+   width: 35vh;
 }
