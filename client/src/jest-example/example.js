@@ -7,4 +7,4 @@ function concat(a, b, c) {
   return `${a} ${b} ${c}`;
 }
 
-module.exports = {sum, concat};
+module.exports = { sum, concat };
