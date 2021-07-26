@@ -34,18 +34,26 @@ class RatingsBreakdown extends React.Component {
   getStateData() {
     reviewsMeta(this.props.product_id)
     .then(({ data }) => {
-      const { count, average, countsForEach, percentages } = ratingsToTotalAverageAndPercentages(data.ratings);
-      const recommendPercentage = recommendedToPercentage(data.recommended);
-      const characteristics = mapCharacteristicsToProps(data.characteristics);
+      // if no review are present hide the entire component
+      if (Object.keys(data.ratings).length === 0) {
+        this.props.hideIfNoReviews(true);
+      } else {
+        const { count, average, countsForEach, percentages } = ratingsToTotalAverageAndPercentages(data.ratings);
+        const recommendPercentage = recommendedToPercentage(data.recommended);
+        const characteristics = mapCharacteristicsToProps(data.characteristics);
 
-      this.setState({
-        totalRatings: count,
-        averageRating: average,
-        countsForEach: countsForEach,
-        percentages: percentages,
-        recommendPercentage: recommendPercentage,
-        characteristics: characteristics
-      });
+        this.setState(
+          {
+            totalRatings: count,
+            averageRating: average,
+            countsForEach: countsForEach,
+            percentages: percentages,
+            recommendPercentage: recommendPercentage,
+            characteristics: characteristics
+          },
+          this.props.hideIfNoReviews(false)
+        );
+      }
     })
     .catch(err => console.log("REVIEWS MOUNT ERR", err));
   }
@@ -70,7 +78,8 @@ class RatingsBreakdown extends React.Component {
 
 RatingsBreakdown.propTypes = {
   product_id: PropTypes.number,
-  starFilterClick: PropTypes.func
+  starFilterClick: PropTypes.func,
+  hideIfNoReviews: PropTypes.func
 }
 
 export default RatingsBreakdown;

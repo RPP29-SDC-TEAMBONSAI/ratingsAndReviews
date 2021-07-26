@@ -7,9 +7,11 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      starFilters: []
+      starFilters: [],
+      hidden: false
     };
     this.setStarFilter = this.setStarFilter.bind(this);
+    this.hideIfNoReviews = this.hideIfNoReviews.bind(this);
   };
 
   setStarFilter(event) {
@@ -28,19 +30,26 @@ class RatingsAndReviews extends React.Component {
     });
   }
 
+  hideIfNoReviews(bool) {
+    this.setState({
+      hidden: bool
+    });
+  }
+
   render() {
     return (
-      <div className="ratings-and-reviews" id="link_to_reviews">
+      <div className="ratings-and-reviews" id="link_to_reviews" style={{display: this.state.hidden ? "none" : "flex"}}>
         <RatingsBreakdown
           product_id={this.props.product_id}
-          starFilterClick={this.setStarFilter}/>
+          starFilterClick={this.setStarFilter}
+          hideIfNoReviews={this.hideIfNoReviews}/>
         <Reviews
           product_id={this.props.product_id}
           starFilters={this.state.starFilters}
           starFilterClick={this.setStarFilter}/>
       </div>
     );
-  };
+  }
 };
 
 RatingsAndReviews.propTypes = {
