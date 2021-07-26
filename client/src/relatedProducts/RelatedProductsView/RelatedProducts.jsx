@@ -16,8 +16,12 @@ export default class RelatedProducts extends React.Component {
       relatedProducts: relatedProductsInfo,
       relatedProductsStyles: relatedProductsStyles
     }
+    this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
   }
 
+  handleAddToOutfit () {
+    console.log('item added to outfit! 🐮')
+  }
 
   render() {
     let allPropsObj = helper.compileDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
@@ -26,7 +30,7 @@ export default class RelatedProducts extends React.Component {
     return (
       <div className='relatedProducts'>
         <RelatedProductsList allProps={allPropsObj} handleProductChange={this.props.handleProductChange} />
-        <YourOutfitList allProps={allPropsObj} />
+        <YourOutfitList handleAddToOutfit={this.handleAddToOutfit} />
       </div>
       )
   }
