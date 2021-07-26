@@ -25,13 +25,15 @@ class App extends React.Component {
       productInformation: {},
       styles: [],
       qNa: [],
-      savedQnA:[]
+      savedQnA:[],
+      productNameQnA: ''
 
     }
 
     this.handleProductChange = this.handleProductChange.bind(this);
 
   }
+
   componentDidMount() {
     Promise.all([
       // REVIEW REQUESTS
@@ -45,12 +47,15 @@ class App extends React.Component {
       cart()
     ])
       .then((results) => {
+        console.log(results)
         this.setState({
           product_id: results[3].data.id,
           productInformation: results[3].data,
           styles: results[4].data,
           qNa: results[6].data,
-          savedQnA: results[6].data
+          savedQnA: results[6].data,
+
+          productNameQnA: results[3].data.name
         });
 
       })
@@ -60,8 +65,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState.product_id)
-    console.log(this.state.product_id)
+    // console.log(prevState.product_id)
+    // console.log(this.state.product_id)
     if (prevState.product_id !== this.state.product_id) {
       Promise.all([
         // REVIEW REQUESTS
@@ -75,12 +80,16 @@ class App extends React.Component {
         cart()
       ])
         .then((results) => {
+          console.log(results[3])
           this.setState({
             product_id: results[3].data.id,
             productInformation: results[3].data,
             styles: results[4].data,
             qNa: results[6].data,
-            savedQnA: results[6].data
+            savedQnA: results[6].data,
+            productNameQnA: results[3].data.name
+
+
           });
 
         })
@@ -94,7 +103,7 @@ class App extends React.Component {
 
   handleProductChange(newProductId) {
     //console.log(`new product id set: ${newProductId}`)
-    console.log(newProductId)
+    // console.log(newProductId)
     this.setState({
       product_id: newProductId
     })
@@ -107,7 +116,8 @@ class App extends React.Component {
         <RelatedProducts state={this.state} handleProductChange={this.handleProductChange} />
         <QuestionsNAnswers product_id={this.state.product_id}
                            data={this.state.qNa}
-                           QuestionSavedData ={this.state.savedQnA}/>
+                           QuestionSavedData ={this.state.savedQnA}
+                           currentItemName={this.state.productNameQnA}/>
         <RatingsAndReviews />
       </div>
     )

@@ -6,6 +6,42 @@ class QnAClientHelpers {
     let newArr = []
     let sortedCount = []
     //time complexity bad - could refactor for performance!!!
+    let filterAnswers = questions.map((q) => {
+      let newArr=[]
+      newArr.push(q.answers)
+      return newArr
+
+
+
+    })
+
+
+
+    let creatArr = (arr, count =filterAnswers.length -1, result =[]) => {
+
+
+      if(count > 0) {
+        let current = arr.splice(0, 1)
+        // console.log(current)
+        // console.log(arr)
+        for (let key in current[0]) {
+          // console.log(Object.values(current[0][key]))
+          Object.values(current[0][key]).forEach((obj) => {
+            // let temp = [];
+            // temp.push(obj)
+            result.push(obj)
+          })
+
+        }
+        // console.log(result)
+
+
+      }
+
+    }
+    let newans = creatArr(filterAnswers.slice())
+
+
     questions.forEach((question) => {
       sortedCount.push(question.question_helpfulness)
 
@@ -76,6 +112,10 @@ class QnAClientHelpers {
   }
 
   filterAll(currentQuestions) {
+
+
+
+
     let filteredQuestions = this.sortQuestions(currentQuestions);
 
     //get answers
@@ -86,6 +126,8 @@ class QnAClientHelpers {
       answers.push(question.answers)
 
     })
+    // console.log(filteredQuestions)
+
 
     let answerVals = []
 
@@ -95,6 +137,8 @@ class QnAClientHelpers {
       answerVals.push(values)
     })
 
+
+
     let filteredAnswers = this.sortAnswers(answerVals)
 
 
@@ -103,6 +147,7 @@ class QnAClientHelpers {
   }
 
   filterSearchInput(currentQuestions, searchTerm) {
+
 
     let newQuestions = currentQuestions.filter((question) => {
       let lowerCaseQuestion = question.question_body.toLowerCase().replace(/\s+/g, '')
@@ -114,6 +159,7 @@ class QnAClientHelpers {
       }
 
     })
+
 
     return newQuestions
   }

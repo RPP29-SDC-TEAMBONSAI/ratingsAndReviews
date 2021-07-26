@@ -24,5 +24,15 @@ module.exports = {
         return data
       })
 
+  },
+
+  postQuestion(newQuestion) {
+
+    return axios.post(`/qa/questions`, newQuestion)
+      .then(data => {
+        return data
+        console.log(data, "🙏")
+      })
+
   }
 }

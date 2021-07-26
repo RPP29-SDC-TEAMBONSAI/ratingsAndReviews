@@ -132,3 +132,44 @@ h3.loadMoreAnswersButton:hover {
   overflow-y: scroll;
 
 }
+.qFormHide {
+  display:  none;
+}
+.qForm {
+  flex-direction: column;
+
+  z-index: 10;
+
+  position:absolute;
+  display: block;
+  height: 100%;
+  background-color: wheat;
+  flex-direction: center;
+
+
+  justify-content:end;
+}
+.app {
+  z-index: 1;
+  display: fixed;
+}
+/* .questionList.container {
+  z-index:0;
+}
+.questionListTitle.container {
+  z-index: 0;
+  width: 50vh;
+
+}
+
+.qFormData{
+
+}
+
+*/
+.body{
+  z-index: 0;
+}
+.userAddQuestionForm{
+
+}

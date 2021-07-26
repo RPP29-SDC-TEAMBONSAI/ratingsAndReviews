@@ -2,6 +2,7 @@ import React from 'react';
 import Search from './sub-components/search.jsx'
 import QuestionsContainer from './sub-components/questionContainer.jsx';
 import QnAClientHelpers from '../helpers/qnAHelper.js';
+import UserQuestion from './sub-components/mini-components/userQuestion.jsx';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import {updateHelpfulness, questions, updateAnswerHelpfulness} from '../clientRoutes/qa';
@@ -27,7 +28,8 @@ class QuestionsNAnswers extends React.Component {
       question_id: null,
       helpfulAnswerCount: 0,
       answer_id: 0,
-      answerHelpfulnessCount: 0
+      answerHelpfulnessCount: 0,
+      qFormShowOrHide: 'qFormHide'
 
 
     };
@@ -46,12 +48,15 @@ class QuestionsNAnswers extends React.Component {
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
     this.helpfulAnswerClick = this.helpfulAnswerClick.bind(this)
+    this.updateQuestions = this.updateQuestions.bind(this)
+    this.addQuestion = this.addQuestion.bind(this)
 
 
   }
 
   componentDidUpdate(prevProps, prevState) {
     let copy = this.props.data.slice()
+
     if (prevProps.data.length !== this.props.data.length) {
 
       let sortedData = this.filterAnswersNQuestions(copy)
@@ -59,7 +64,7 @@ class QuestionsNAnswers extends React.Component {
 
       this.setState({
         questions: sortedData[0],
-        answers: sortedData[1],
+        answers:sortedData[1],
         showQuestionButton: showButton,
 
       })
@@ -155,14 +160,8 @@ class QuestionsNAnswers extends React.Component {
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
     let original = this.props.QuestionSavedData
-    console.log(this.props, "🤙")
-    console.log(this.state.qSearchCharCount)
-    console.log(searchValue.length)
-
 
     if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
-
-
       this.setState({
         questions: original
       })
@@ -170,9 +169,12 @@ class QuestionsNAnswers extends React.Component {
     } else {
 
       let newQuestions = this.helper().filterSearchInput(copy, searchValue);
+      let newQnA = this.helper().filterAll(newQuestions)
 
         this.setState({
-          questions: newQuestions
+          questions: newQnA[0],
+          answers: newQnA[1]
+
         })
       }
   }
@@ -226,10 +228,28 @@ class QuestionsNAnswers extends React.Component {
       })
     }
   }
+  updateQuestions (questions) {
+    let filtered = this.helper().filterAll(questions);
+    console.log(filtered, "🤙")
+    this.setState({
+      questions: filtered[0],
+      answers: filtered[1]
+    })
+
+  }
+
+  addQuestion(e) {
+
+    this.setState({
+      qFormShowOrHide: 'qForm'
+    })
+
+  }
 
   render () {
     let showButtonClass = this.showButton()
     let scrollContainerClass = this.showScrollContainer()
+
 
     return (
 
@@ -242,7 +262,16 @@ class QuestionsNAnswers extends React.Component {
 
           />
         </div>
-        <div className={scrollContainerClass? scrollContainerClass : ''}>
+        <div className={this.state.qFormShowOrHide}>
+          <UserQuestion
+            currentItemName={this.props.currentItemName}
+            product_id={this.props.product_id}
+            updateQuestions={this.updateQuestions}
+            qFormShowOrHide={this.state.qFormShowOrHide}
+            addQuestion={this.addQuestion}
+          />
+        </div>
+        <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
           <div className={`List container`}>
             {this.state.questions.map((question, index) => {
 
@@ -267,8 +296,10 @@ class QuestionsNAnswers extends React.Component {
                       answerScroll={this.state.answerScroll}
                       questionCount={this.state.questionClickCount}
                       answerCount={this.state.answerClickCount}
-                      classname={currentClass} answers={this.state.answers}
+                      classname={currentClass}
+                      answers={this.state.answers[index]}
                       question={question}
+
                     />
             })}
           </div>
@@ -280,8 +311,9 @@ class QuestionsNAnswers extends React.Component {
           <button className={showButtonClass ? showButtonClass : 'moreAnsweredBtn Hide'}
                   onClick={this.loadQuestionClick}>MORE ANSWERED QUESTIONS
           </button>
-          <button className='moreAnsweredBtn'>ADD A QUESTION +</button>
+          <button className='moreAnsweredBtn' onClick={this.addQuestion}>ADD A QUESTION +</button>
         </div>
+
       </div>
 
     )
@@ -289,6 +321,7 @@ class QuestionsNAnswers extends React.Component {
 }
 
 QuestionsNAnswers.propTypes = {
+  currentItemName: propTypes.string.isRequired,
   QuestionSavedData: propTypes.array.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,

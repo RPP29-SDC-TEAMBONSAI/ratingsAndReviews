@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 const QuestionList = (props) => {
 
+
   let scrollClass = props.addAnswerScroll(props.answerCount)
 
   return (
@@ -10,7 +11,7 @@ const QuestionList = (props) => {
       <h4 className={''}>Q: {props.question.question_body}</h4>
       <div className={scrollClass ? scrollClass : 'list container'}>
 
-      {props.answers[props.currentI].map((answer, index) => {
+      {props.answers.map((answer, index) => {
 
         let _class= props.answerHide(props.classname, index)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
@@ -22,9 +23,9 @@ const QuestionList = (props) => {
         }
 
         return (
-          <div className={showClass ? showClass : _class} key={index}>
-            <h4  className={`answerText${props.currentI.toString()} answerText`}>A: {answer.body}</h4>
-            <table className=''key={index}>
+          <div className={showClass ? showClass: _class} key={index}>
+            <h4 className={`answerText`}>A: {answer.body}</h4>
+            <table className=''>
               <tbody >
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
@@ -37,6 +38,7 @@ const QuestionList = (props) => {
             </table>
           </div>
         )
+
       })}
       </div>
     </div>
