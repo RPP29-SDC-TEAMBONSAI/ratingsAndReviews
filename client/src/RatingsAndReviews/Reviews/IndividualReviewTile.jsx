@@ -18,7 +18,17 @@ const IndividualReviewTile = (props) => {
       <div className="irt-review-body">
         <div className="irt-body-text">{props.review.body}</div>
         <div className="irt-body-show"></div>
-        <div className="irt-photos"></div>
+        <div className="irt-photos">
+          {props.review.photos.map((photo, index) => {
+            return (
+              <img
+                className="irt-photo"
+                key={index} src={photo.url}
+                alt="image"
+                onClick={props.viewPhoto}/>
+            )
+          })}
+        </div>
       </div>
       <div className="irt-additional-info">
         {createRecommendDiv(props.review.recommend)}
@@ -30,13 +40,13 @@ const IndividualReviewTile = (props) => {
           <div className="irt-report-clickable">Report</div>
         </div>
       </div>
-      <hr className="irt-hr"/>
     </div>
   );
 };
 
 IndividualReviewTile.propTypes = {
   review: PropTypes.object,
+  viewPhoto: PropTypes.func
 };
 
 export default IndividualReviewTile;

@@ -7,7 +7,12 @@ const ReviewsList = (props) => {
     <div className="reviews-list">
       {props.reviews.map((review, index) => {
         if (index <= props.loaded) {
-          return <IndividualReviewTile key={index} review={review}/>
+          return (
+            <IndividualReviewTile
+              key={index}
+              review={review}
+              viewPhoto={props.viewPhoto}/>
+          )
         }
       })}
     </div>
@@ -16,7 +21,8 @@ const ReviewsList = (props) => {
 
 ReviewsList.propTypes = {
   reviews: PropTypes.array,
-  loaded: PropTypes.number
+  loaded: PropTypes.number,
+  viewPhoto: PropTypes.func
 };
 
 export default ReviewsList;
