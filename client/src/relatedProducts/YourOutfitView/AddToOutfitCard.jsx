@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 
 const AddToOutfitCard = (props) => {
-  console.log(props);
+
   return (
     <div className='addToOutfitCard'>
         <button className='addToOutfitButton'
