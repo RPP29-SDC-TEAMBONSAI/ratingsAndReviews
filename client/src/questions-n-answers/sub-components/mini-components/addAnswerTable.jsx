@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 
 const AddAnswer = (props) => {
+  console.log(props)
   return (
     <table className={`answerTable ${props.classname}`}>
       <tbody>
@@ -10,7 +11,7 @@ const AddAnswer = (props) => {
           <td className='aHelpful'>Helpful?</td>
           <td id={props.currentI.toString()} className='qhelpfulIndicator' onClick={props.helpfulQuestionClick}>Yes</td>
           <td className='helpfulCount'>({props.data ? props.data : 0})</td>
-          <td className='addAnswerText'>Add Answer</td>
+          <td className='addAnswerText' onClick={(e) => props.addAnswerOnClick(e, props.questionName)}>Add Answer</td>
         </tr>
       </tbody>
     </table>

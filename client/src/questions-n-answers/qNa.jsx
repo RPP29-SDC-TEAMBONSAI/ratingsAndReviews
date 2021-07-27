@@ -4,6 +4,7 @@ import QuestionsContainer from './sub-components/questionContainer.jsx';
 import QnAClientHelpers from '../helpers/qnAHelper.js';
 import UserQuestion from './sub-components/mini-components/userQuestion.jsx';
 import propTypes from 'prop-types';
+import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
 import axios from 'axios';
 import {updateHelpfulness, questions, updateAnswerHelpfulness, answers} from '../clientRoutes/qa';
 
@@ -29,7 +30,9 @@ class QuestionsNAnswers extends React.Component {
       helpfulAnswerCount: 0,
       answer_id: 0,
       answerHelpfulnessCount: 0,
-      qFormShowOrHide: 'qFormHide'
+      qFormShowOrHide: 'qFormHide',
+      aFormShowOrHide: 'aFormHide',
+      currentQuestion:''
 
 
     };
@@ -50,6 +53,9 @@ class QuestionsNAnswers extends React.Component {
     this.helpfulAnswerClick = this.helpfulAnswerClick.bind(this)
     this.updateQuestions = this.updateQuestions.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
+    this.updateAnswers = this.updateAnswers.bind(this)
+    this.addAnswer = this.addAnswer.bind(this)
+    this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
 
 
   }
@@ -257,6 +263,25 @@ class QuestionsNAnswers extends React.Component {
     }
   }
 
+  updateAnswers(answers) {
+
+  }
+
+ addAnswer() {
+
+ }
+ addAnswerOnClick(e, question) {
+   console.log(question)
+
+   this.setState({
+    aFormShowOrHide: 'aForm',
+    currentQuestion: question
+
+   })
+
+
+ }
+
   render () {
     let showButtonClass = this.showButton()
     let scrollContainerClass = this.showScrollContainer()
@@ -269,18 +294,27 @@ class QuestionsNAnswers extends React.Component {
           <Search
             currentInput={this.state.questionSearchVal}
             questionSearchChange={this.questionSearchChange}
-
           />
         </div>
 
         <div className={this.state.qFormShowOrHide}>
-          {/* <div className='qForm'>  </div> */}
+
           <UserQuestion
             currentItemName={this.props.currentItemName}
             product_id={this.props.product_id}
             updateQuestions={this.updateQuestions}
             qFormShowOrHide={this.state.qFormShowOrHide}
-            addQuestion={this.addQuestion}
+            // addQuestion={this.addQuestion}
+          />
+
+        </div>
+        <div className={this.state.aFormShowOrHide}>
+          <UserAnswer
+            currentItemName={this.props.currentItemName}
+            product_id={this.props.product_id}
+            updateAnswers={this.updateAnswers}
+            addAnswer={this.addAnswer}
+            currentQuestion={this.state.currentQuestion}
           />
 
         </div>
@@ -312,6 +346,7 @@ class QuestionsNAnswers extends React.Component {
                       classname={currentClass}
                       answers={this.state.answers[index]}
                       question={question}
+                      addAnswerOnClick={this.addAnswerOnClick}
 
                     />
             })}

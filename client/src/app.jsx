@@ -63,7 +63,8 @@ class App extends React.Component {
           productInformation: results[1].data,
           styles: results[2].data,
           qNa: results[4].data,
-          savedQnA: results[4].data
+          savedQnA: results[4].data,
+          productName: results[1].data.name
         });
       })
       .catch((err) => {
@@ -83,7 +84,8 @@ class App extends React.Component {
           <QuestionsNAnswers
             product_id={this.state.product_id}
             data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}/>
+            QuestionSavedData ={this.state.savedQnA}
+            currentItemName={this.state.productName}/>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>

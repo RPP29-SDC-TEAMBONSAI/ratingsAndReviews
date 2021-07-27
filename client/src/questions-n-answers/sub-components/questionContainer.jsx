@@ -25,9 +25,11 @@ const QuestionsContainer = (props) => {
       </div>
       <div className='qna table'>
         <AddAnswer
+          addAnswerOnClick={props.addAnswerOnClick}
           currentI={props.currentI}
           helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
+          questionName={props.question.question_body}
           classname={showQuestionClass ? showQuestionClass : props.classname}
         />
       </div>

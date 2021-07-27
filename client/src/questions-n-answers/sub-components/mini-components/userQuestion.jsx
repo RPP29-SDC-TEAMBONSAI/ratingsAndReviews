@@ -49,11 +49,18 @@ class UserQuestion extends React.Component {
       [e.target.name]: e.target.value
 
     })
+    this.onAnswerSubmit = this.onAnswerSubmit.bind(this)
   }
+
+  onAnswerSubmit(e) {
+    e.preventDefault()
+
+  }
+
   render() {
     return (
 
-      <form  className={'qFormData'} onSubmit={this.onQuestionSubmit}>
+      <form  className={'qFormData'} onSubmit={this.onAnswerSubmit}>
         <div  className='askQuestionForm'>
          <h4>Ask Your Question</h4>
          <h3 > {`About the [${this.props.currentItemName}]`} </h3>
