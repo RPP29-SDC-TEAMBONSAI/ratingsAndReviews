@@ -11,6 +11,7 @@ const QuestionsContainer = (props) => {
     <div className={showQuestionClass ? ` qna ${showQuestionClass} Container `: `qna ${props.classname} Container`}>
       <div className='questionAndAnswer'>
         <QuestionList
+          helpfulAnswerClick= {props.helpfulAnswerClick}
           answerHide={props.answerHide}
           addAnswerScroll={props.addAnswerScroll}
           answerTableHide={props.answerTableHide}
@@ -24,6 +25,8 @@ const QuestionsContainer = (props) => {
       </div>
       <div className='qna table'>
         <AddAnswer
+          currentI={props.currentI}
+          helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
           classname={showQuestionClass ? showQuestionClass : props.classname}
         />
@@ -32,10 +35,10 @@ const QuestionsContainer = (props) => {
   )
 }
 
-
 QuestionsContainer.propTypes = {
+  helpfulAnswerClick: propTypes.func.isRequired,
+  helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,
-  data: propTypes.array.isRequired,
   questionCount: propTypes.number.isRequired,
   answerCount: propTypes.number.isRequired,
   classname: propTypes.string.isRequired,
@@ -44,6 +47,6 @@ QuestionsContainer.propTypes = {
   answerTableHide: propTypes.func.isRequired,
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
-  question: propTypes.string.isRequired
+  question: propTypes.object.isRequired
 }
 export default QuestionsContainer;

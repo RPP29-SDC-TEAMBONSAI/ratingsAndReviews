@@ -19,7 +19,7 @@ const Search = (props) => {
 }
 
 Search.propTypes = {
-  searchFilter: propTypes.func.isRequired,
+
   currentInput: propTypes.string.isRequired,
   questionSearchChange: propTypes.func.isRequired
 }

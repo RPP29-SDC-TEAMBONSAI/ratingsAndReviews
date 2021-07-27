@@ -27,25 +27,33 @@ class RatingsBreakdown extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      getStateData();
+      this.getStateData();
     }
   }
 
   getStateData() {
     reviewsMeta(this.props.product_id)
     .then(({ data }) => {
-      const { count, average, countsForEach, percentages } = ratingsToTotalAverageAndPercentages(data.ratings);
-      const recommendPercentage = recommendedToPercentage(data.recommended);
-      const characteristics = mapCharacteristicsToProps(data.characteristics);
+      // if no review are present hide the entire component
+      if (Object.keys(data.ratings).length === 0) {
+        this.props.hideIfNoReviews(true);
+      } else {
+        const { count, average, countsForEach, percentages } = ratingsToTotalAverageAndPercentages(data.ratings);
+        const recommendPercentage = recommendedToPercentage(data.recommended);
+        const characteristics = mapCharacteristicsToProps(data.characteristics);
 
-      this.setState({
-        totalRatings: count,
-        averageRating: average,
-        countsForEach: countsForEach,
-        percentages: percentages,
-        recommendPercentage: recommendPercentage,
-        characteristics: characteristics
-      });
+        this.setState(
+          {
+            totalRatings: count,
+            averageRating: average,
+            countsForEach: countsForEach,
+            percentages: percentages,
+            recommendPercentage: recommendPercentage,
+            characteristics: characteristics
+          },
+          this.props.hideIfNoReviews(false)
+        );
+      }
     })
     .catch(err => console.log("REVIEWS MOUNT ERR", err));
   }
@@ -59,7 +67,8 @@ class RatingsBreakdown extends React.Component {
           percent={this.state.recommendPercentage}/>
         <RatingBreakdown
           percentages={this.state.percentages}
-          counts={this.state.countsForEach}/>
+          counts={this.state.countsForEach}
+          starFilterClick={this.props.starFilterClick}/>
         <ProductBreakdown
           characteristics={this.state.characteristics}/>
       </div>
@@ -68,7 +77,9 @@ class RatingsBreakdown extends React.Component {
 };
 
 RatingsBreakdown.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  starFilterClick: PropTypes.func,
+  hideIfNoReviews: PropTypes.func
 }
 
 export default RatingsBreakdown;

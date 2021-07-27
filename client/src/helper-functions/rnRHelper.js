@@ -1,45 +1,36 @@
 import React from 'react';
 
 const factorDetail = {
-  Size: ['A size too small',
-    '½ a size too small',
+  Size: [
+    'A size too small',
     'Perfect',
-    '½ a size too big',
-    'A size too wide',
+    'A size too wide'
   ],
   Width: [
     'Too narrow',
-    'Slightly narrow',
     'Perfect',
-    'Slightly wide',
     'Too wide'
   ],
   Comfort: [
     'Uncomfortable',
-    'Slightly uncomfortable',
-    'Ok',
-    'Comfortable',
+    '',
+    '',
     'Perfect'
   ],
   Quality: [
     'Poor',
-    'Below average',
-    'What I expected',
-    'Pretty great',
-    'Perfect'
+    '',
+    '',
+    'Perfect',
   ],
   Length: [
     'Runs Short',
-    'Runs slightly short',
     'Perfect',
-    'Runs slightly long',
     'Runs long'
   ],
   Fit: [
     'Runs tight',
-    'Runs slightly tight',
     'Perfect',
-    'Runs slightly long',
     'Runs long'
   ]
 };
@@ -110,10 +101,13 @@ const helper = {
         key: characteristics[char].id,
         title: char,
         levels: helper.getFactorDetailArray(char),
-        percent: Math.round(characteristics[char].value / 5 * 100)
+        percent: Math.round((characteristics[char].value - 1) / 4 * 100)
       });
     }
     return props;
+  },
+  sortByRelevance: (reviews) => {
+    return reviews;
   }
 }
 

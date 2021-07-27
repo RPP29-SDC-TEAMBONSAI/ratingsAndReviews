@@ -24,29 +24,46 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
-      qNa: []
-
+      qNa: [],
+      savedQnA: [],
+      loaded: false
     }
-    this.searchQuestionHandler = this.searchQuestionHandler.bind(this)
-
+    this.handleProductChange = this.handleProductChange.bind(this);
+    this.getStateData = this.getStateData.bind(this);
   }
+
   componentDidMount() {
+    this.getStateData();
+    this.setState({
+      loaded: true
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.product_id !== this.state.product_id) {
+      this.getStateData();
+    }
+  }
+
+  handleProductChange(newProductId) {
+    this.setState({
+      product_id: newProductId
+    })
+  }
+
+  getStateData() {
     Promise.all([
-      // REVIEW REQUESTS
-      reviews(), reviewsMeta(),
-      // PRODUCT REQUESTS
       products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
-      // QNA REQUESTS
-      questions(), answers(),
-      // CART REQUESTS
+      questions(this.state.product_id),
       cart()
     ])
       .then((results) => {
+        console.log(results)
         this.setState({
-          productId: results[3].data.id,
-          productInformation: results[3].data,
-          styles: results[4].data,
-          qNa: this.props.qNaTestData
+          productInformation: results[1].data,
+          styles: results[2].data,
+          qNa: results[4].data,
+          savedQnA: results[4].data
         });
       })
       .catch((err) => {
@@ -54,28 +71,32 @@ class App extends React.Component {
       });
   }
 
-  searchQuestionHandler(newState) {
-    console.log(newState)
-    this.setState({
-      qNa: newState
-    })
-
-  }
-
   render() {
-    return (
-      <div className='app'>
-        <Overview state = {this.state}/>
-        <RelatedProducts state={this.state} />
-        <QuestionsNAnswers data={this.state.qNa} searchQuestionHandler={this.searchQuestionHandler}/>
-        <RatingsAndReviews />
-      </div>
-    )
+    if (this.state.loaded) {
+      return (
+        <div className='app'>
+          <Overview
+            state = {this.state}/>
+          <RelatedProducts
+            state={this.state}
+            handleProductChange={this.handleProductChange}/>
+          <QuestionsNAnswers
+            product_id={this.state.product_id}
+            data={this.state.qNa}
+            QuestionSavedData ={this.state.savedQnA}/>
+          <RatingsAndReviews
+            product_id={this.state.product_id}/>
+        </div>
+      )
+    } else {
+      return <div>Loading</div>
+    }
   }
 }
 
 App.propTypes ={
   qNaTestData: propTypes.array.isRequired
+
 }
 
 

@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import propTypes from 'prop-types';
 
 const QuestionList = (props) => {
@@ -10,7 +10,7 @@ const QuestionList = (props) => {
       <h4 className={''}>Q: {props.question.question_body}</h4>
       <div className={scrollClass ? scrollClass : 'list container'}>
 
-      {props.answers[props.currentI].map((answer, index) => {
+      {props.answers.map((answer, index) => {
 
         let _class= props.answerHide(props.classname, index)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
@@ -22,14 +22,14 @@ const QuestionList = (props) => {
         }
 
         return (
-          <div className={showClass ? showClass : _class} key={index}>
-            <h4 className='answerText'>A: {answer.body}</h4>
-            <table className=''key={index}>
-              <tbody>
+          <div className={showClass ? showClass: _class} key={index}>
+            <h4 className={`answerText`}>A: {answer.body}</h4>
+            <table className=''>
+              <tbody >
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
-                    <td className='userHelpfulBtn'>Yes</td>
+                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
                     <td className='userReportBtn'>report</td>
                   </tr>
@@ -37,6 +37,7 @@ const QuestionList = (props) => {
             </table>
           </div>
         )
+
       })}
       </div>
     </div>
@@ -44,6 +45,9 @@ const QuestionList = (props) => {
 }
 
 QuestionList.propTypes = {
+  helpfulAnswerClick:propTypes.func.isRequired,
+  currentI: propTypes.number.isRequired,
+
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,
@@ -51,8 +55,7 @@ QuestionList.propTypes = {
   answerTableHide: propTypes.func.isRequired,
   classname: propTypes.string.isRequired,
   answerCount: propTypes.number.isRequired,
-  question: propTypes.string.isRequired
-
+  question: propTypes.object.isRequired
 }
 
 export default QuestionList
