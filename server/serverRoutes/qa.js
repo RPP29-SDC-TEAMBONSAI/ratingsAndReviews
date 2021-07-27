@@ -41,7 +41,7 @@ module.exports = {
   },
 
   updateAnswerHelpfulness(req, res) {
-    console.log(req.url)
+    //console.log(req.url)
     let id = Number(req.url.split('=')[1])
     axios.put(api + `qa/answers/${id}/helpful`, id.toString(), {
       headers: {
