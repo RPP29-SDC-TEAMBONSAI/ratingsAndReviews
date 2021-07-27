@@ -14,20 +14,23 @@ class Overview extends React.Component {
       quantityAvailable: 0,
       quantitySelected: 0,
       sizeSelected: '',
-      bag: []
+      bag: [],
+      mainPhoto: 0
 
     }
     this.changeAvailableQuantity = this.changeAvailableQuantity.bind(this);
     this.addToBag = this.addToBag.bind(this);
     this.changeSelectedQuantity = this.changeSelectedQuantity.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
+    this.changeMainPhoto = this.changeMainPhoto.bind(this);
   }
 
   changeStyle (e) {
     this.setState({
       styleIndex: e.target.attributes.value.value,
       sizeSelected: '',
-      quantitySelected: 0
+      quantitySelected: 0,
+      mainPhoto: 0
     })
 
   }
@@ -46,6 +49,13 @@ class Overview extends React.Component {
     })
   }
 
+  changeMainPhoto (e) {
+    this.setState({
+      mainPhoto: e.target.attributes.value.value
+
+    })
+  }
+
   addToBag () {
     if (this.state.sizeSelected.length === 0) {
       alert('Please Select Size')
@@ -56,29 +66,33 @@ class Overview extends React.Component {
         styleIndex: this.state.styleIndex,
         size: this.state.sizeSelected,
         quantity: this.state.quantitySelected}
-        console.log('item', item)
+
+        let cart = this.state.bag;
+        cart.push(item);
+
 
         this.setState({
-          bag: this.state.bag.push(item)
-
+          bag: cart
         })
+
       }
-
-
-
-
   }
 
 
   render() {
     return (
-      <div>
+      <div className = "overview">
+        <div className = "column-one">
+        <ImageGallery state = {this.props.state} OverviewState = {this.state} changeMainPhoto = {this.changeMainPhoto}/>
+        </div>
+        <div className = "column-two">
         <ProductInfo state = {this.props.state} OverviewState = {this.state}/>
         <StyleSelector state = {this.props.state} OverviewState = {this.state} changeStyle = {this.changeStyle}/>
         <AddToCart state = {this.props.state} OverviewState = {this.state}
         changeAvailableQuantity = {this.changeAvailableQuantity} addToBag = {this.addToBag}
         changeSelectedQuantity = {this.changeSelectedQuantity}/>
-        <ImageGallery state = {this.props.state} OverviewState = {this.state}/>
+        </div>
+
       </div>
 
     )
