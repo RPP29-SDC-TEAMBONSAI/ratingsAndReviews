@@ -1,5 +1,5 @@
 const helper = {
-  compileDataToProps: (relatedProducts, relatedProductsStyles) => {
+  compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles) => {
     let allPropsObj = {};
     let relatedProductsCopy = Object.assign(relatedProducts);
     let relatedProductsStylesCopy= Object.assign(relatedProductsStyles);
@@ -32,6 +32,47 @@ const helper = {
     })
     //console.log(`allPropsObj: ${JSON.stringify(Object.values(allPropsObj))}`)
     return Object.values(allPropsObj);
+  },
+
+  compileYourOutfitDataToProps: (currentProductInfo, currentProductsStyles) => {
+    let outfitPropsObj = {};
+    let currentProductInfoCopy = [Object.assign(currentProductInfo)];
+    let currentProductStylesCopy= Object.assign(currentProductsStyles);
+
+
+    currentProductInfoCopy.forEach(item => {
+      let itemDetail = {};
+      itemDetail['itemId'] = item['id'];
+      itemDetail['itemName'] = item['name'];
+      itemDetail['itemCategory'] = item['category'];
+
+      outfitPropsObj[item['id']] = itemDetail;
+    })
+
+
+    let styleDetail = {};
+    styleDetail['itemId'] = currentProductStylesCopy.product_id;
+    const defaultResult = currentProductStylesCopy.results.filter(result => result['default?'] === true)[0] ?? currentProductStylesCopy.results[0];
+
+
+    outfitPropsObj[currentProductStylesCopy.product_id] = {
+      ...outfitPropsObj[currentProductStylesCopy.product_id],
+      'originalPrice':  defaultResult['original_price'],
+      'salePrice': defaultResult['sale_price'],
+      'photoUrl': defaultResult['photos'][0]
+    };
+
+    //console.log(`🤠 outfitPropsObj: ${JSON.stringify(outfitPropsObj)}`)
+    return Object.values(outfitPropsObj);
+
+  },
+
+  addIdToStylesData: (stylesData, productId) => {
+    let stateStylesCopy = Object.assign(stylesData);
+    let productStylesWithId = {};
+    productStylesWithId['product_id'] = productId;
+    productStylesWithId['results'] = stateStylesCopy;
+    return productStylesWithId;
   }
 
 }
