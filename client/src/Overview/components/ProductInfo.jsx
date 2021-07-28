@@ -5,15 +5,14 @@ import React from 'react';
 const ProductInfo = (props) => {
 
   if (props.state.styles.length > 0) {
-
-
     return (
+      <div className = "product-info">
       <div>
-      <div className = "productInfo">
       <div className = "reviewStars">⭒⭒⭒⭒⭒</div>
       <a href="#link_to_reviews">Read all # Reviews</a>
       </div>
-      <h2 className = "expandedProductName">{props.state.productInformation.name}</h2>
+      <h3 className = "expandedProductCatagory">{props.state.productInformation.category}</h3>
+      <h1 className = "expandedProductName">{props.state.productInformation.name}</h1>
       <h3 className = "expandedProductStyleName">{props.state.styles[props.OverviewState.styleIndex].name}</h3>
       <p className = "productDescription">{props.state.productInformation.description}</p>
       {function () {

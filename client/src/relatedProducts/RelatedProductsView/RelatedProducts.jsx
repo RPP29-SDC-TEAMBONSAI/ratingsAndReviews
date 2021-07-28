@@ -22,13 +22,12 @@ export default class RelatedProducts extends React.Component {
   render() {
     let allPropsObj = helper.compileDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
 
-
     return (
       <div className='relatedProducts'>
         <RelatedProductsList allProps={allPropsObj} handleProductChange={this.props.handleProductChange} />
         <YourOutfitList allProps={allPropsObj} />
       </div>
-      )
+    );
   }
 }
 
