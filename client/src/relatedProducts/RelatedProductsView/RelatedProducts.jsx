@@ -30,8 +30,12 @@ export default class RelatedProducts extends React.Component {
 
   componentDidMount () {
     this.getRelatedStateData();
+  }
 
-
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.state.product_id !== this.props.state.product_id) {
+      this.getRelatedStateData();
+    }
   }
 
   getRelatedStateData() {
