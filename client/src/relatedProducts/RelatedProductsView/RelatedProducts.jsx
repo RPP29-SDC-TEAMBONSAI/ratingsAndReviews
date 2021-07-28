@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
-import {currentProduct, currentProductStyles, relatedProducts, relatedProductsInfo, relatedProductsStyles} from '../exampleData.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle} from "../../clientRoutes/products.js";
 
@@ -80,7 +79,7 @@ export default class RelatedProducts extends React.Component {
         <RelatedProductsList allProps={this.state.allPropsObj} handleProductChange={this.props.handleProductChange} />
         <YourOutfitList allProps={this.state.outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} />
       </div>
-      )
+    );
   }
 }
 

@@ -406,7 +406,6 @@
 
 .empty-stars:before, .full-stars:before {
   /* content contains unicode characters 200A is "HAIR SPACE" 2605 is a star */
-  content: "\200A\2605\200A\200A\2605\200A\200A\2605\200A\200A\2605\200A\200A\2605\200A";
   font-size: 14pt;
 }
 
@@ -420,7 +419,8 @@
 
 /* PHOTO MODAL */
 
-.review-photo-open {
+.review-photo-open
+, .add-review-open {
   position: fixed;
   left: 0;
   top: 0;
@@ -436,4 +436,17 @@
   height: 90vh;
   margin-top: 5vh;
   width: auto;
+}
+
+/* ADD REVIEW MODAL */
+
+.add-review-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 90vh;
+  width: 40vw;
+  margin-top: 5vh;
+  background-color: white;
+  border-radius: 5px;
 }

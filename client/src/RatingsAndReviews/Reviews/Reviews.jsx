@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewsHeader from './ReviewsHeader.jsx';
 import ReviewsList from './ReviewsList.jsx';
+import AddReview from './AddReview.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
 const { sortByRelevance } = helper;
@@ -14,13 +15,15 @@ class Reviews extends React.Component {
       loaded: 0,
       sortBy: 'newest',
       photo: null,
-      photoOpen: false
+      photoOpen: false,
+      addReviewOpen: false
     };
 
     this.getStateData = this.getStateData.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
     this.viewPhoto = this.viewPhoto.bind(this);
     this.loadTwoMore = this.loadTwoMore.bind(this);
+    this.openAddReview = this.openAddReview.bind(this);
   };
 
   componentDidMount() {
@@ -58,6 +61,12 @@ class Reviews extends React.Component {
     });
   }
 
+  openAddReview() {
+    this.setState({
+      addReviewOpen: !this.state.addReviewOpen
+    });
+  }
+
   loadTwoMore() {
     this.setState({loaded: this.state.loaded + 2})
   }
@@ -65,12 +74,21 @@ class Reviews extends React.Component {
   render() {
     return (
       <div>
+        {/* PHOTO MODAL */}
         <div
           className="review-photo-open"
           style={{display: this.state.photoOpen ? "block" : "none"}}
           onClick={this.viewPhoto}>
             <img className="review-photo-url" src={this.state.photo}/>
         </div>
+        {/* FORM MODAL */}
+        <div
+          className="add-review-open"
+          style={{display: this.state.addReviewOpen ? "block" : "none"}}
+          onClick={this.openAddReview}>
+            <AddReview/>
+        </div>
+        {/* MAIN REVIEWS COMPONENT */}
         <div className="reviews">
           <ReviewsHeader
             starFilters={this.props.starFilters}
@@ -89,7 +107,11 @@ class Reviews extends React.Component {
               style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
                 MORE REVIEWS
             </button>
-            <button className="review-button">ADD A REVIEW +</button>
+            <button
+              className="review-button"
+              onClick={this.openAddReview}>
+                ADD A REVIEW +
+            </button>
           </div>
         </div>
       </div>
