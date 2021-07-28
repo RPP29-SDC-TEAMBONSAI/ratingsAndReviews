@@ -65,6 +65,14 @@ const helper = {
     //console.log(`🤠 outfitPropsObj: ${JSON.stringify(outfitPropsObj)}`)
     return Object.values(outfitPropsObj);
 
+  },
+
+  addIdToStylesData: (stylesData, productId) => {
+    let stateStylesCopy = Object.assign(stylesData);
+    let productStylesWithId = {};
+    productStylesWithId['product_id'] = productId;
+    productStylesWithId['results'] = stateStylesCopy;
+    return productStylesWithId;
   }
 
 }

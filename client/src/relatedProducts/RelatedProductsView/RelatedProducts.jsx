@@ -29,12 +29,7 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-   let stateStylesCopy = Object.assign(this.props.state.styles);
-   let productStylesWithId = {};
-   productStylesWithId['product_id'] = this.props.state.product_id;
-   productStylesWithId['results'] = stateStylesCopy;
-
-
+    let productStylesWithId = helper.addIdToStylesData(this.props.state.styles, this.props.state.product_id);
     let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
     let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , productStylesWithId);
 
@@ -45,8 +40,8 @@ export default class RelatedProducts extends React.Component {
   }
 
   render() {
-
-    console.log(`allprops: ${JSON.stringify(this.state.allPropsObj)}`)
+    console.log
+    //console.log(`allprops: ${JSON.stringify(this.state.allPropsObj)}`)
     //console.log(`outfitprops: ${JSON.stringify(this.state.outfitPropsObj)}`)
 
     if (!this.props.state.loaded) {
