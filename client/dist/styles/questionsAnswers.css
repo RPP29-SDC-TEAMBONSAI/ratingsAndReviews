@@ -114,7 +114,7 @@ h3.loadMoreAnswersButton:hover {
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }
 .list.scroll.container {
-  height: 6.5vh;
+  height: 18vh;
   overflow-y:scroll;
 
 }
@@ -214,7 +214,7 @@ h3.loadMoreAnswersButton:hover {
   width: 75%;
   height: 90%;
   position: fixed;
-top: 0%;
+  top: 0%;
   left: 10%;
   background-color: #B2D2A4;
   border-radius: 25px;
@@ -229,4 +229,18 @@ top: 0%;
   padding: 5px; /* Some padding */
   width: 10vh; /* Set a small width */
   height: 10vh;
+}
+.answerThumbnail {
+  border: .01rem solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 10vh; /* Set a small width */
+  height: 10vh;
+}
+.answerThumbnail.Hide{
+  display: none;
+}
+
+.answererDetails{
+  margin-bottom: 5vh;
 }

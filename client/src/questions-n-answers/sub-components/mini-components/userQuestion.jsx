@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import {postQuestion, questions} from '../../../clientRoutes/qa.js'
 import propTypes from 'prop-types';
 

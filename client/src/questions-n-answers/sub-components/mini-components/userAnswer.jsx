@@ -1,14 +1,17 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import {postAnswer, getUrl} from '../../../clientRoutes/qa'
+import AnswerImages from '../mini-components/answerImages.jsx'
 
 
+let key = '7d548a85605b208'
 
 class UserAnswer extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      yourAnswer: 'Your Answer',
+      yourAnswer: '',
       nickName: 'Example: jack543!',
       email:'Example: jack@email.com',
       photos: [],
@@ -17,8 +20,6 @@ class UserAnswer extends React.Component {
       data: '',
       confirmationState: 'photoConfirmationHide',
       checked: false
-
-
     }
 
     this.answerFormChange = this.answerFormChange.bind(this)
@@ -28,10 +29,58 @@ class UserAnswer extends React.Component {
     this.photoConfirm = this.photoConfirm.bind(this)
     this.checkbox = this.checkbox.bind(this)
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
+
+      let newPhotos = prevState.photos.concat(this.state.photos.slice())
+      if (!this.state.photos.length) {
+        this.setState({
+          photos: []
+        })
+      } else {
+      this.setState({
+        photos: newPhotos,
+        checked: false
+      })
+    }
+
+    }
+
+
+  }
 
 
   onAnswerSubmit(e) {
     e.preventDefault()
+    let currentId = this.props.question_id
+    let newObj = {
+      body: this.state.yourAnswer.substring(0),
+      name: this.state.nickName.substring(0),
+      email: this.state.email.substring(0),
+      photos: this.state.photos.slice(),
+      currentId: currentId
+
+    }
+
+    postAnswer(newObj)
+      .then(confirmation=> {
+        console.log(confirmation, "✅")
+        if (confirmation.status === 201) {
+          this.props.updateAnswers();
+        }
+      })
+
+      this.setState({
+        yourAnswer: '',
+        nickName: 'Example: jack543!',
+        email:'Example: jack@email.com',
+        photos: [],
+        hideButton: null,
+        tempPhoto:null,
+        data: '',
+        confirmationState: 'photoConfirmationHide',
+        checked: false
+      })
   }
 
   answerFormChange(e) {
@@ -42,67 +91,56 @@ class UserAnswer extends React.Component {
 
   userPhotoUpload(e) {
     let reader = new FileReader()
+    let newForm = new FormData()
+    newForm.append('image', this.state.tempPhoto)
 
+    reader.readAsDataURL(this.state.tempPhoto, 'base64')
 
-   reader.readAsDataURL(this.state.tempPhoto, 'base64')
-    // let url = 'process'
-   reader.onload = () => {
+    reader.onload = () => {
 
       this.setState({
         data: reader.result,
         confirmationState: 'photoConfirmation'
       })
     }
-
-
-
-
-
-
-
-  //  console.log(Buffer.from(this.state.tempPhoto[0]))
-
   }
+
   userFileChange(e) {
-
-
 
     this.setState({
 
       tempPhoto: e.target.files[0]
     })
-
-
-
   }
 
   photoConfirm(e) {
     let url = this.state.data.substring(0)
     let photos = this.state.photos.slice()
     let uploadClass;
+    console.log(this.state.tempPhoto.size)
 
-
-    let checkbox = document.getElementById('checkbox1')
 
     photos.push(url.toString())
-    console.log(this.state.photos.length === 4)
+
     if (this.state.photos.length === 4) {
       uploadClass = 'uploadButtonHide'
     }
 
-    this.setState({
-      data:'',
-      confirmationState:'photoConfirmationHide',
-      photos: photos,
-      hideButton: uploadClass ? uploadClass: null,
-      checked: false
+    getUrl(url)
+      .then(newUrl => {
+        console.log
+        let newPhotos =[]
+        newPhotos.push(newUrl)
 
-    })
-
+        this.setState({
+          photos: newPhotos,
+          confirmationState:'photoConfirmationHide',
+        })
+      })
 
   }
-  checkbox(e) {
 
+  checkbox(e) {
    this.setState({
      checked: true
    })
@@ -114,13 +152,12 @@ class UserAnswer extends React.Component {
       <form  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
 
         <div  className=''>
-          {/* <h4>Ask Your Question</h4> */}
           <h3 > {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
         </div>
 
         <div className=''>
           <h3>Your Answer</h3>
-          <textarea className='' maxLength='1000' type='text' value='' onChange={this.answerFormChange} name='yourAnswer'></textarea>
+          <textarea className='' maxLength='1000' type='text' value={this.state.yourAnswer} onChange={this.answerFormChange} name='yourAnswer'></textarea>
         </div>
 
         <div className=''>
@@ -136,11 +173,11 @@ class UserAnswer extends React.Component {
         <div>
           <h3>Upload Your Photos</h3>
           <input onChange={this.userFileChange} name='file' className='photos' type='file' accept='image/png, image/jpeg'></input>
-          <button className={this.state.hideButton} onClick={this.userPhotoUpload}>Upload</button>
+          <button className={this.state.hideButton} type='button' onClick={this.userPhotoUpload}>Upload</button>
         </div>
 
         <div className=''>
-          <button className='' type='submit' >Submit Your Answer</button>
+          <input type='submit' value='Submit Your Answer' ></input>
         </div>
 
        <div className={this.state.confirmationState}>
@@ -148,26 +185,27 @@ class UserAnswer extends React.Component {
          <input id='checkbox1' type='checkbox'  checked={this.state.checked} onChange={this.checkbox}/>
          <label htmlFor='checkbox1'><img src={this.state.data}></img></label>
          <div>
-           <button onClick={this.photoConfirm}>Confirm</button>
+           <button type='button' onClick={this.photoConfirm}>Confirm</button>
          </div>
        </div>
 
        <div>
-         <img className='thumbnail' src={this.state.photos[0]}></img>
-         <img className='thumbnail' src={this.state.photos[1]}></img>
-         <img className='thumbnail' src={this.state.photos[2]}></img>
-         <img className='thumbnail' src={this.state.photos[3]}></img>
-         <img className='thumbnail' src={this.state.photos[4]}></img>
+         {this.state.photos.map((photo, index) => {
+           return <AnswerImages key={index} photo={photo}/>
+         })}
        </div>
-
-
-
-
 
       </form>
 
     )
   }
+}
+
+UserAnswer.propTypes = {
+  question_id: propTypes.number.isRequired,
+  updateAnswers: propTypes.func.isRequired,
+  currentItemName: propTypes.string.isRequired,
+  currentQuestion: propTypes.string.isRequired,
 }
 
 export default UserAnswer;

@@ -21,7 +21,7 @@ module.exports = {
   productsWithId: (req, res) => {
     // console.log('product id req', req)28212
     let request = req.originalUrl.split('?');
-    console.log(request, "🔥")
+    // console.log(request, "🔥")
     axios.get(api + `products/${request[1]}`, {
       headers: {
         'Authorization': TOKEN

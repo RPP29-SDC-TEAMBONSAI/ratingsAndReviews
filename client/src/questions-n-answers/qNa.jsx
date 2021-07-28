@@ -32,7 +32,8 @@ class QuestionsNAnswers extends React.Component {
       answerHelpfulnessCount: 0,
       qFormShowOrHide: 'qFormHide',
       aFormShowOrHide: 'aFormHide',
-      currentQuestion:''
+      currentQuestion:'',
+      current_id: 0
 
 
     };
@@ -263,19 +264,30 @@ class QuestionsNAnswers extends React.Component {
     }
   }
 
-  updateAnswers(answers) {
+  updateAnswers() {
+    questions(this.props.product_id)
+      .then(currentQuestions => {
+        console.log(currentQuestions)
+        let filter= this.helper().filterAll(currentQuestions.data)
+        this.setState({
+          questions: filter[0],
+          answers: filter[1],
+          aFormShowOrHide: 'aFormHide'
+        })
+      })
 
   }
 
  addAnswer() {
 
  }
- addAnswerOnClick(e, question) {
-   console.log(question)
+ addAnswerOnClick(e, arr) {
+
 
    this.setState({
     aFormShowOrHide: 'aForm',
-    currentQuestion: question
+    currentQuestion: arr[0],
+    question_id: arr[1]
 
    })
 
@@ -301,7 +313,6 @@ class QuestionsNAnswers extends React.Component {
 
           <UserQuestion
             currentItemName={this.props.currentItemName}
-            product_id={this.props.product_id}
             updateQuestions={this.updateQuestions}
             qFormShowOrHide={this.state.qFormShowOrHide}
             // addQuestion={this.addQuestion}
@@ -311,7 +322,7 @@ class QuestionsNAnswers extends React.Component {
         <div className={this.state.aFormShowOrHide}>
           <UserAnswer
             currentItemName={this.props.currentItemName}
-            product_id={this.props.product_id}
+            question_id={this.state.question_id}
             updateAnswers={this.updateAnswers}
             addAnswer={this.addAnswer}
             currentQuestion={this.state.currentQuestion}
@@ -347,7 +358,7 @@ class QuestionsNAnswers extends React.Component {
                       answers={this.state.answers[index]}
                       question={question}
                       addAnswerOnClick={this.addAnswerOnClick}
-
+                      question_id={question.question_id}
                     />
             })}
           </div>
