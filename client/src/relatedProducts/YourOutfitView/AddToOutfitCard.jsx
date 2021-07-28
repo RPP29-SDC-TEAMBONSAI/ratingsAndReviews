@@ -3,14 +3,13 @@ import propTypes from 'prop-types';
 
 
 const AddToOutfitCard = (props) => {
-
+  //console.log(`stateProps: ${JSON.stringify(props.state)}`)
   return (
     <div className='addToOutfitCard'>
         <button className='addToOutfitButton'
         style={{'fontSize': '50px'}}
-        onClick={props.handleAddToOutfit}
+        onClick={() => {props.handleAddToOutfit(props.state.product_id)}}
         >+</button>
-
     </div>
   )
 
@@ -18,7 +17,8 @@ const AddToOutfitCard = (props) => {
 
 AddToOutfitCard.propTypes = {
   handleAddToOutfit: propTypes.func,
-  allProps: propTypes.array
+  outfitProps: propTypes.array,
+  state: propTypes.any
   };
 
   export default AddToOutfitCard;

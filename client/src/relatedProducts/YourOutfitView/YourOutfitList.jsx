@@ -9,7 +9,7 @@ const YourOutfitList = (props) => {
     <div className='yourOutfitListContainer'>
       <h2>Your Outfit: </h2>
     <div className='yourOutfitList'>
-    <AddToOutfitCard handleAddToOutfit={props.handleAddToOutfit} allProps={props.allProps} />
+    <AddToOutfitCard handleAddToOutfit={props.handleAddToOutfit} outfitProps={props.outfitProps} state={props.state} />
 
     </div>
     </div>
@@ -18,7 +18,8 @@ const YourOutfitList = (props) => {
 
 YourOutfitList.propTypes = {
   handleAddToOutfit: propTypes.func,
-  allProps: propTypes.array
+  outfitProps: propTypes.array,
+  state: propTypes.any
   };
 
 export default YourOutfitList;

@@ -24,10 +24,6 @@ export default class RelatedProducts extends React.Component {
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
   }
 
-  handleAddToOutfit () {
-    //console.log('item added to outfit! 🐮', outfitItem);
-  }
-
   componentDidMount () {
     this.getRelatedStateData();
   }
@@ -72,6 +68,16 @@ export default class RelatedProducts extends React.Component {
     });
     }
 
+    handleAddToOutfit (outfitItem) {
+      console.log('item added to outfit! 🐮', outfitItem);
+      this.setState({
+        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
+      })
+      setTimeout(() => {
+        console.log(`your currentoutfit: ${this.state.yourOutfitItems}`);
+      }, 500)
+    }
+
   render() {
     if (this.props.state.loaded === false || this.state.loaded === false) {
       return <div className='isLoading'>Loading...</div>
@@ -80,7 +86,7 @@ export default class RelatedProducts extends React.Component {
     return (
       <div className='relatedProducts'>
         <RelatedProductsList allProps={this.state.allPropsObj} handleProductChange={this.props.handleProductChange} />
-        <YourOutfitList allProps={this.state.outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} />
+        <YourOutfitList outfitProps={this.state.outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} state={this.props.state} />
       </div>
     );
   }
