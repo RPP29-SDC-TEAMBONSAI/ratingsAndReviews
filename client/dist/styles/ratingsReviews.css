@@ -406,7 +406,6 @@
 
 .empty-stars:before, .full-stars:before {
   /* content contains unicode characters 200A is "HAIR SPACE" 2605 is a star */
-  content: "\200A\2605\200A\200A\2605\200A\200A\2605\200A\200A\2605\200A\200A\2605\200A";
   font-size: 14pt;
 }
 
@@ -443,6 +442,7 @@
 
 .add-review-form {
   display: flex;
+  flex-direction: column;
   margin: auto;
   height: 90vh;
   width: 40vw;
