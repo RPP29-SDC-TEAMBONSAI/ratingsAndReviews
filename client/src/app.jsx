@@ -35,9 +35,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getStateData();
-    this.setState({
-      loaded: true
-    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -69,7 +66,12 @@ class App extends React.Component {
           relatedProducts: results[3].data,
           qNa: results[4].data,
           savedQnA: results[4].data
-        });
+        })
+      })
+      .then(() => {
+        this.setState({
+          loaded: true
+        })
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)

@@ -17,38 +17,46 @@ export default class RelatedProducts extends React.Component {
       relatedProducts: relatedProductsInfo,
       relatedProductsStyles: relatedProductsStyles,
       yourOutfitItems:[],
+      allPropsObj: [],
+      outfitPropsObj: [],
+
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
   }
 
-  handleAddToOutfit (outfitItem) {
+  handleAddToOutfit () {
     //console.log('item added to outfit! 🐮', outfitItem);
   }
 
-
-  render() {
-
+  componentDidMount () {
    let stateStylesCopy = Object.assign(this.props.state.styles);
    let productStylesWithId = {};
    productStylesWithId['product_id'] = this.props.state.product_id;
    productStylesWithId['results'] = stateStylesCopy;
 
+
     let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
-    let outfitPropsObj;
+    let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , productStylesWithId);
 
-    if (productStylesWithId['results'].length > 2) {
-      outfitPropsObj = helper.compileYourOutfitDataToProps((this.props.state.productInformation || this.state.currentProductInfo), productStylesWithId);
-    } else {
-      outfitPropsObj = helper.compileYourOutfitDataToProps((this.props.state.productInformation || this.state.currentProductInfo), (this.state.currentProductStyles));
+    this.setState({
+      allPropsObj: allPropsObj,
+      outfitPropsObj: outfitPropsObj
+    })
+  }
 
+  render() {
+
+    console.log(`allprops: ${JSON.stringify(this.state.allPropsObj)}`)
+    //console.log(`outfitprops: ${JSON.stringify(this.state.outfitPropsObj)}`)
+
+    if (!this.props.state.loaded) {
+      return <div className='isLoading'>Loading...</div>
     }
-
-
 
     return (
       <div className='relatedProducts'>
-        <RelatedProductsList allProps={allPropsObj} handleProductChange={this.props.handleProductChange} />
-        <YourOutfitList allProps={outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} />
+        <RelatedProductsList allProps={this.state.allPropsObj} handleProductChange={this.props.handleProductChange} />
+        <YourOutfitList allProps={this.state.outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} />
       </div>
       )
   }
