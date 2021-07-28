@@ -24,6 +24,7 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
+      relatedProducts: [],
       qNa: [],
       savedQnA: [],
       loaded: false
@@ -34,9 +35,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getStateData();
-    this.setState({
-      loaded: true
-    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -53,19 +51,27 @@ class App extends React.Component {
 
   getStateData() {
     Promise.all([
-      products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
+      products(),
+      productsWithId(this.state.product_id),
+      productsStyle(this.state.product_id),
+      productsRelated(this.state.product_id),
       questions(this.state.product_id),
       cart()
     ])
       .then((results) => {
-
+        //console.log(results)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
+          relatedProducts: results[3].data,
           qNa: results[4].data,
-          savedQnA: results[4].data,
-          productName: results[1].data.name
-        });
+          savedQnA: results[4].data
+        })
+      })
+      .then(() => {
+        this.setState({
+          loaded: true
+        })
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
@@ -73,6 +79,7 @@ class App extends React.Component {
   }
 
   render() {
+
     if (this.state.loaded) {
       return (
         <div className='app'>

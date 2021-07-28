@@ -10,7 +10,7 @@ const RelatedProductsCard = (props) => {
         <h3 className='productCategory'>{props.category}</h3>
         <h3 className='originalProductPrice'>{props.originalPrice}</h3>
         <h3 className='saleroductPrice'>{props.salePrice}</h3>
-        <img src={props.photo}></img>
+        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}></img>
 
         <span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span><span className="material-icons actionStar">star</span>
     </div>
