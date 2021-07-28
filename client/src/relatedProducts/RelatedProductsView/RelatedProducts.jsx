@@ -59,18 +59,17 @@ export default class RelatedProducts extends React.Component {
         this.setState({
           allPropsObj: allPropsObj,
           outfitPropsObj: outfitPropsObj
-    })
+        })
       })
       .then(() => {
         this.setState({
           loaded: true,
         })
-       //console.log(`comp state 🥶: ${JSON.stringify(this.state)}`)
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
       });
-    })
+    });
     }
 
   render() {
