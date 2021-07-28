@@ -4,24 +4,25 @@ import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
 import {currentProduct, currentProductStyles, relatedProducts, relatedProductsInfo, relatedProductsStyles} from '../exampleData.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
-
+import {productsWithId, productsStyle} from "../../clientRoutes/products.js";
 
 
 export default class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductInfo: currentProduct,
-      currentProductStyles: currentProductStyles,
-      relatedProductIds: relatedProducts,
-      relatedProducts: relatedProductsInfo,
-      relatedProductsStyles: relatedProductsStyles,
+      currentProductInfo: '',
+      currentProductStyles: '',
+      relatedProducts: [],
+      relatedProductsStyles: [],
       yourOutfitItems:[],
       allPropsObj: [],
       outfitPropsObj: [],
+      loaded: false
 
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
+    this.getRelatedStateData = this.getRelatedStateData.bind(this);
   }
 
   handleAddToOutfit () {
@@ -29,22 +30,48 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-    let productStylesWithId = helper.addIdToStylesData(this.props.state.styles, this.props.state.product_id);
-    let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
-    let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , productStylesWithId);
+    this.getRelatedStateData();
 
-    this.setState({
-      allPropsObj: allPropsObj,
-      outfitPropsObj: outfitPropsObj
-    })
+
   }
 
-  render() {
-    console.log
-    //console.log(`allprops: ${JSON.stringify(this.state.allPropsObj)}`)
-    //console.log(`outfitprops: ${JSON.stringify(this.state.outfitPropsObj)}`)
+  getRelatedStateData() {
+    this.props.state.relatedProducts.forEach((productId) => {
+      Promise.all([
+        productsWithId(productId),
+        productsStyle(productId)
+      ])
+      .then((results) => {
+        let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
+        this.setState({
+          relatedProducts: [...this.state.relatedProducts, results[0].data],
+          relatedProductsStyles: [...this.state.relatedProductsStyles, resultStyleWithId]
+        })
+      })
+      .then(() => {
+        let productStylesWithId = helper.addIdToStylesData(this.props.state.styles, this.props.state.product_id);
+        let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
+        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , productStylesWithId);
 
-    if (!this.props.state.loaded) {
+        this.setState({
+          allPropsObj: allPropsObj,
+          outfitPropsObj: outfitPropsObj
+    })
+      })
+      .then(() => {
+        this.setState({
+          loaded: true,
+        })
+       //console.log(`comp state 🥶: ${JSON.stringify(this.state)}`)
+      })
+      .catch((err) => {
+        console.log('this is the err 🥲 ', err)
+      });
+    })
+    }
+
+  render() {
+    if (this.props.state.loaded === false || this.state.loaded === false) {
       return <div className='isLoading'>Loading...</div>
     }
 

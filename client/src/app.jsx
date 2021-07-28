@@ -59,7 +59,7 @@ class App extends React.Component {
       cart()
     ])
       .then((results) => {
-        console.log(results)
+        //console.log(results)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,

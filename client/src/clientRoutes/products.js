@@ -5,9 +5,11 @@ module.exports = {
     return axios.get('/products');
   },
   productsWithId: (id) => {
+    console.log(`product info client req for ${id}`)
     return axios.get(`/products/:product_id?${id}`);
   },
   productsStyle: (id) => {
+    console.log(`product style client req for ${id}`)
     return axios.get(`/products/:product_id/styles?${id}`);
   },
   productsRelated: (id) => {
