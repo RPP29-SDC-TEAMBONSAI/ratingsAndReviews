@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import {postQuestion, questions} from '../../../clientRoutes/qa.js'
 import propTypes from 'prop-types';
 
@@ -18,20 +17,23 @@ class UserQuestion extends React.Component {
 
   onQuestionSubmit(e) {
     e.preventDefault()
-    console.log(e)
+
     let newObj = {
       body: this.state.yourQuestion,
       name: this.state.nickName,
       email: this.state.email,
       product_id: this.props.product_id
     }
+    console.log(newObj)
 
     postQuestion(newObj)
       .then(data => {
-        questions(this.props.product_id)
-          .then(d => {
-            this.props.updateQuestions(d.data)
-          })
+
+        // questions(this.props.product_id)
+        //   .then(d => {
+            // console.log(d.data, "🔥")
+            this.props.updateQuestions()
+          // })
       })
 
     this.setState({
@@ -49,7 +51,10 @@ class UserQuestion extends React.Component {
       [e.target.name]: e.target.value
 
     })
+
   }
+
+
   render() {
     return (
 

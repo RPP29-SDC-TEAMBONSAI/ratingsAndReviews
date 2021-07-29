@@ -27,7 +27,7 @@ class App extends React.Component {
       relatedProducts: [],
       qNa: [],
       savedQnA: [],
-      loaded: false
+      loaded: false,
     }
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
@@ -39,7 +39,8 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.product_id !== this.state.product_id) {
-      this.getStateData();
+      this.getStateData()
+
     }
   }
 
@@ -59,18 +60,24 @@ class App extends React.Component {
       cart()
     ])
       .then((results) => {
-        //console.log(results)
+        console.log(results)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
           relatedProducts: results[3].data,
+          //do not remove please
           qNa: results[4].data,
-          savedQnA: results[4].data
+          savedQnA: results[4].data,
+          currentItemName:results[1].data.name,
+          product_id:results[1].data.id
+          //do not remove
+
         })
       })
       .then(() => {
         this.setState({
-          loaded: true
+          loaded: true,
+
         })
       })
       .catch((err) => {
@@ -91,7 +98,8 @@ class App extends React.Component {
           <QuestionsNAnswers
             product_id={this.state.product_id}
             data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}/>
+            QuestionSavedData ={this.state.savedQnA}
+            currentItemName={this.state.currentItemName}/>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>
@@ -106,9 +114,6 @@ App.propTypes ={
   qNaTestData: propTypes.array.isRequired
 
 }
-
-
-
 
 ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
 
