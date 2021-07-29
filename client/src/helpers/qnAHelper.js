@@ -160,7 +160,6 @@ class QnAClientHelpers {
 
     })
 
-
     return newQuestions
   }
 

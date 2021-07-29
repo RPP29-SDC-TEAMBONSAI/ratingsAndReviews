@@ -113,6 +113,18 @@ class QuestionsNAnswers extends React.Component {
 
           )
       }
+      if (prevState.questions.length !== this.state.questions.length) {
+        let copy = this.props.data.slice()
+        let sortedData= this.filterAnswersNQuestions(copy)
+        let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+        console.log(sortedData)
+        this.setState({
+          questions: sortedData[0],
+          answers: sortedData[1],
+          showQuestionButton: showButton
+        })
+
+      }
     }
 
     if (prevState.answerHelpfulnessCount !== this.state.answerHelpfulnessCount) {
@@ -253,13 +265,23 @@ class QuestionsNAnswers extends React.Component {
     }
   }
 
-  updateQuestions (questions) {
-    let filtered = this.helper().filterAll(questions);
-    console.log(filtered, "🤙")
-    this.setState({
-      questions: filtered[0],
-      answers: filtered[1]
-    })
+  updateQuestions () {
+
+    return questions(this.props.product_id)
+      .then(data => {
+        let questions = data.data
+        console.log(questions)
+        let filtered = this.helper().filterAll(questions);
+        let showButton = this.helper().showMoreAnsweredQuestions(filtered)
+
+        this.setState({
+          questions: filtered[0],
+          answers: filtered[1],
+          showQuestionButton: showButton
+
+        })
+      })
+
   }
 
   addQuestion(e) {

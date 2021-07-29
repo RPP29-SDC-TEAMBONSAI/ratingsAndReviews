@@ -29,11 +29,11 @@ class UserQuestion extends React.Component {
     postQuestion(newObj)
       .then(data => {
 
-        questions(this.props.product_id)
-          .then(d => {
-            console.log(d.data, "🔥")
-            this.props.updateQuestions(d.data)
-          })
+        // questions(this.props.product_id)
+        //   .then(d => {
+            // console.log(d.data, "🔥")
+            this.props.updateQuestions()
+          // })
       })
 
     this.setState({
