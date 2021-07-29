@@ -327,7 +327,8 @@ class QuestionsNAnswers extends React.Component {
             currentItemName={this.props.currentItemName}
             updateQuestions={this.updateQuestions}
             qFormShowOrHide={this.state.qFormShowOrHide}
-            // addQuestion={this.addQuestion}
+            addQuestion={this.addQuestion}
+            product_id={this.props.product_id}
           />
 
         </div>

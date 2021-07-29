@@ -65,9 +65,12 @@ class App extends React.Component {
           productInformation: results[1].data,
           styles: results[2].data,
           relatedProducts: results[3].data,
+          //do not remove please
           qNa: results[4].data,
           savedQnA: results[4].data,
-          currentItemName:results[1].data.name
+          currentItemName:results[1].data.name,
+          product_id:results[1].data.id
+          //do not remove
 
         })
       })

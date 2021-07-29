@@ -17,18 +17,21 @@ class UserQuestion extends React.Component {
 
   onQuestionSubmit(e) {
     e.preventDefault()
-    console.log(e)
+
     let newObj = {
       body: this.state.yourQuestion,
       name: this.state.nickName,
       email: this.state.email,
       product_id: this.props.product_id
     }
+    console.log(newObj)
 
     postQuestion(newObj)
       .then(data => {
+
         questions(this.props.product_id)
           .then(d => {
+            console.log(d.data, "🔥")
             this.props.updateQuestions(d.data)
           })
       })
@@ -48,18 +51,14 @@ class UserQuestion extends React.Component {
       [e.target.name]: e.target.value
 
     })
-    this.onAnswerSubmit = this.onAnswerSubmit.bind(this)
-  }
-
-  onAnswerSubmit(e) {
-    e.preventDefault()
 
   }
+
 
   render() {
     return (
 
-      <form  className={'qFormData'} onSubmit={this.onAnswerSubmit}>
+      <form  className={'qFormData'} onSubmit={this.onQuestionSubmit}>
         <div  className='askQuestionForm'>
          <h4>Ask Your Question</h4>
          <h3 > {`About the [${this.props.currentItemName}]`} </h3>
