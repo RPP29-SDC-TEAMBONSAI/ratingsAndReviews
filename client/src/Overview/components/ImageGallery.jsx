@@ -11,16 +11,30 @@ const ImageGallery = (props) => {
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
             (photo) => {
               keyOne += 1;
-              return (
-                <img
+              if (keyOne == props.OverviewState.mainPhoto) {
+                return (
+                  <img
+                    className="selected-image gallery-image"
+                    key={keyOne}
+                    value={keyOne}
+                    src={photo.url}
+                    onClick={props.changeMainPhoto}
+                  ></img>
+                )
+
+              } else {
+
+                return (
+                  <img
                   className="gallery-image"
                   key={keyOne}
                   value={keyOne}
                   src={photo.url}
                   onClick={props.changeMainPhoto}
-                ></img>
-              );
-            }
+                  ></img>
+                  );
+                }
+              }
           )}
         </div>
         <div>

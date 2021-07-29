@@ -42,7 +42,15 @@
   height: 600px;
   margin-left: -55px;
   justify-content: flex-start;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 
+}
+
+.selected-image {
+  filter: brightness(140%);
+  opacity: 70%;
 }
 
 .gallery-image {
@@ -69,6 +77,16 @@
   width: 50px;
   height: 50px;
   border-radius: 50%
+}
+
+.check-mark {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: -20px;
+  margin-bottom: -20px;
+  position: relative;
+  z-index: 1;
+  color: #4d4d4d;
 }
 
 

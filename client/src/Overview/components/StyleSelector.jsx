@@ -16,11 +16,20 @@ const StyleSelector = (props) => {
              if (keyOne >= 4) {
                return;
              } else {
+               if (props.OverviewState.styleIndex == keyOne) {
+                return (
+                  <td key = {keyOne} onClick = {props.changeStyle}>
+                    <div className = "check-mark">✓</div>
+             <img value = {keyOne} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>
+             </td>
+             )} else {
+
                return (
                  <td key = {keyOne} onClick = {props.changeStyle}>
             <img value = {keyOne} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>
             </td>
             )
+          }
           }
         })
        }
@@ -31,11 +40,20 @@ const StyleSelector = (props) => {
              if (keyTwo < 4) {
                return;
              } else {
+              if (props.OverviewState.styleIndex == keyTwo) {
+                return (
+                  <td key = {keyTwo} onClick = {props.changeStyle}>
+                    <div className = "check-mark">✓</div>
+             <img value = {keyTwo} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>
+             </td>
+             )} else {
+
                return (
-            <td key = {keyTwo} onClick = {props.changeStyle}>
+                 <td key = {keyTwo} onClick = {props.changeStyle}>
             <img value = {keyTwo} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>
             </td>
             )
+          }
           }
         })
        }
