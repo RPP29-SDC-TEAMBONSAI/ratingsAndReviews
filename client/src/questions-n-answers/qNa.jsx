@@ -72,7 +72,7 @@ class QuestionsNAnswers extends React.Component {
          answer.forEach(obj => {
           //  console.log(obj.id)
            if (answerIds.includes(obj.id)) {
-             console.log(obj)
+            //  console.log(obj)
              obj.report = 'reported'
            } else {
              obj.report = 'report'
@@ -105,7 +105,7 @@ class QuestionsNAnswers extends React.Component {
          answer.forEach(obj => {
           //  console.log(obj.id)
            if (answerIds.includes(obj.id)) {
-             console.log(obj)
+            //  console.log(obj)
              obj.report = 'reported'
            } else {
              obj.report = 'report'
@@ -146,7 +146,7 @@ class QuestionsNAnswers extends React.Component {
                 answer.forEach(obj => {
                 //  console.log(obj.id)
                   if (answerIds.includes(obj.id)) {
-                    console.log(obj)
+                    // console.log(obj)
                     obj.report = 'reported'
                   } else {
                     obj.report = 'report'
@@ -172,14 +172,14 @@ class QuestionsNAnswers extends React.Component {
           answer.forEach(obj => {
           //  console.log(obj.id)
             if (answerIds.includes(obj.id)) {
-              console.log(obj)
+              // console.log(obj)
               obj.report = 'reported'
             } else {
               obj.report = 'report'
             }
           })
 
-        console.log(sortedData)
+        // console.log(sortedData)
         this.setState({
           questions: sortedData[0],
           answers: sortedData[1],
@@ -210,7 +210,7 @@ class QuestionsNAnswers extends React.Component {
                   answer.forEach(obj => {
                   //  console.log(obj.id)
                     if (answerIds.includes(obj.id)) {
-                      console.log(obj)
+                      // console.log(obj)
                       obj.report = 'reported'
                     } else {
                       obj.report = 'report'
@@ -227,7 +227,7 @@ class QuestionsNAnswers extends React.Component {
       }
     }
     if(prevState.answers.length !== this.state.answers.length) {
-      console.log(prevState.answers, this.state.answers)
+      // console.log(prevState.answers, this.state.answers)
       let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
       let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
       let answerIds = this.state.answers.slice()
@@ -235,7 +235,7 @@ class QuestionsNAnswers extends React.Component {
         answer.forEach(obj => {
         //  console.log(obj.id)
           if (answerIds.includes(obj.id)) {
-            console.log(obj)
+            // console.log(obj)
             obj.report = 'reported'
           } else {
             obj.report = 'report'
@@ -392,7 +392,7 @@ class QuestionsNAnswers extends React.Component {
     return questions(this.props.product_id)
       .then(data => {
         let questions = data.data
-        console.log(questions)
+        // console.log(questions)
         let filtered = this.helper().filterAll(questions);
         let showButton = this.helper().showMoreAnsweredQuestions(filtered)
 
@@ -423,7 +423,7 @@ class QuestionsNAnswers extends React.Component {
   updateAnswers() {
     questions(this.props.product_id)
       .then(currentQuestions => {
-        console.log(currentQuestions)
+        // console.log(currentQuestions)
         let sortedData= this.helper().filterAll(currentQuestions.data)
         let answerIds = this.state.reported
 
@@ -431,20 +431,20 @@ class QuestionsNAnswers extends React.Component {
           answer.forEach(obj => {
            //  console.log(obj.id)
             if (answerIds.includes(obj.id)) {
-              console.log(obj)
+              // console.log(obj)
               obj.report = 'reported'
             } else {
               obj.report = 'report'
             }
 
           })
-        this.setState({
-          questions: sortedData[0],
-          answers: sortedData[1],
-          aFormShowOrHide: 'aFormHide',
-          reported: answerIds
+          this.setState({
+            questions: sortedData[0],
+            answers: sortedData[1],
+            aFormShowOrHide: 'aFormHide',
+            reported: answerIds
+          })
         })
-      })
       })
 
   }
@@ -454,7 +454,6 @@ class QuestionsNAnswers extends React.Component {
  }
  addAnswerOnClick(e, arr) {
 
-
    this.setState({
     aFormShowOrHide: 'aForm',
     currentQuestion: arr[0],
@@ -462,11 +461,10 @@ class QuestionsNAnswers extends React.Component {
 
    })
 
-
  }
 
  addToReported(e, ansId) {
-   console.log(ansId)
+  //  console.log(ansId)
 
 
    addToReported(ansId)
