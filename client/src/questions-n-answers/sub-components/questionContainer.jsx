@@ -11,6 +11,7 @@ const QuestionsContainer = (props) => {
     <div className={showQuestionClass ? ` qna ${showQuestionClass} Container `: `qna ${props.classname} Container`}>
       <div className='questionAndAnswer'>
         <QuestionList
+          addToReported={props.addToReported}
           helpfulAnswerClick= {props.helpfulAnswerClick}
           answerHide={props.answerHide}
           addAnswerScroll={props.addAnswerScroll}
@@ -40,6 +41,7 @@ const QuestionsContainer = (props) => {
 }
 
 QuestionsContainer.propTypes = {
+  addToReported:propTypes.func.isRequired,
   question_id: propTypes.number.isRequired,
   addAnswerOnClick: propTypes.func.isRequired,
   helpfulAnswerClick: propTypes.func.isRequired,

@@ -3,6 +3,9 @@ const TOKEN = require("../../config.js").GITHUB_TOKEN;
 const api = require("../../config.js").API;
 const key = require("../../config.js").imgBBKey
 const imgbbUploader = require('imgbb-uploader')
+const fs = require('fs')
+
+const { Buffer } = require('buffer');
 
 module.exports = {
   questions: (req, res) => {
@@ -98,6 +101,62 @@ module.exports = {
     };
     imgbbUploader(options)
      .then((response) =>res.send(response.url))
+  },
+
+  addToReported: (req, res) => {
+    console.log(req.body)
+
+    // client/src/questions-n-answers/reviewAnswers
+    const data = new Uint8Array(Buffer.from(req.body.id.toString()))
+    console.log(data)
+    let write = async() => {
+      let value = new Promise((resolve, reject) => {
+        fs.writeFile(`./client/src/questions-n-answers/reviewAnswers/${req.body.id.toString()}.txt`, data, (err) => {
+          if (err) { console.log(err, "😢")}
+
+          resolve(true)
+        })
+      })
+     let final= await(value);
+      return final
+    }
+
+     write().then(data => {
+       fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
+        //  console.log(files, )
+         let answerIds = [];
+
+         files.forEach((file) => {
+           let newFile = Number(file.split('.')[0])
+           answerIds.push(newFile)
+
+         })
+         res.send(answerIds)
+        //  console.log(answerIds, "🔥")
+       })
+     })
+
+    // fs.writeFile('../../client/src/questions-n-answers/reviewAnswers/reported.json', JSON.stringify(req.body), 'utf-8', (data) => {
+    //   console.log(data, "🔥")
+    // })
+
+  },
+  getReported: (req, res) => {
+
+    return fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
+      //  console.log(files, )
+       let answerIds = [];
+
+       files.forEach((file) => {
+         let newFile = Number(file.split('.')[0])
+         answerIds.push(newFile)
+
+       })
+       res.send(answerIds)
+
+     })
   }
+
+
 
 }

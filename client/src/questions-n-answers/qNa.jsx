@@ -5,8 +5,7 @@ import QnAClientHelpers from '../helpers/qnAHelper.js';
 import UserQuestion from './sub-components/mini-components/userQuestion.jsx';
 import propTypes from 'prop-types';
 import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
-import axios from 'axios';
-import {updateHelpfulness, questions, updateAnswerHelpfulness, answers} from '../clientRoutes/qa';
+import {updateHelpfulness, questions, updateAnswerHelpfulness, addToReported, getReportedAns} from '../clientRoutes/qa';
 
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
@@ -33,7 +32,8 @@ class QuestionsNAnswers extends React.Component {
       qFormShowOrHide: 'qFormHide',
       aFormShowOrHide: 'aFormHide',
       currentQuestion:'',
-      current_id: 0
+      current_id: 0,
+      reported: []
 
 
     };
@@ -57,20 +57,37 @@ class QuestionsNAnswers extends React.Component {
     this.updateAnswers = this.updateAnswers.bind(this)
     this.addAnswer = this.addAnswer.bind(this)
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
-
+    this.addToReported = this.addToReported.bind(this)
 
   }
   componentDidMount() {
-    console.log(this.props)
-    let copy = this.props.data.slice()
-    let sortedData= this.filterAnswersNQuestions(copy)
-    let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
-    console.log(sortedData)
-    this.setState({
-      questions: sortedData[0],
-      answers: sortedData[1],
-      showQuestionButton: showButton
-    })
+    getReportedAns()
+     .then(data => {
+       let answerIds = data.data
+       let copy = this.props.data.slice()
+       let sortedData= this.filterAnswersNQuestions(copy)
+       let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+
+       sortedData[1].forEach((answer) => {
+         answer.forEach(obj => {
+          //  console.log(obj.id)
+           if (answerIds.includes(obj.id)) {
+             console.log(obj)
+             obj.report = 'reported'
+           } else {
+             obj.report = 'report'
+           }
+         })
+         this.setState({
+          questions: sortedData[0],
+          answers: sortedData[1],
+          showQuestionButton: showButton,
+          reported: answerIds
+        })
+
+       })
+     })
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -81,13 +98,29 @@ class QuestionsNAnswers extends React.Component {
       let sortedData = this.filterAnswersNQuestions(copy)
       let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
 
-      this.setState({
-        questions: sortedData[0],
-        answers:sortedData[1],
-        showQuestionButton: showButton,
+      let answerIds = this.state.reported
 
+
+       sortedData[1].forEach((answer) => {
+         answer.forEach(obj => {
+          //  console.log(obj.id)
+           if (answerIds.includes(obj.id)) {
+             console.log(obj)
+             obj.report = 'reported'
+           } else {
+             obj.report = 'report'
+           }
+
+         })
+
+        this.setState({
+          questions: sortedData[0],
+          answers:sortedData[1],
+          showQuestionButton: showButton,
+        })
       })
     }
+
     if (prevState.qSearchCharCount !== this.state.qSearchCharCount) {
 
       if (this.state.qSearchCharCount >= 3) {
@@ -105,11 +138,28 @@ class QuestionsNAnswers extends React.Component {
           .then(data=>
             questions(this.props.product_id)
               .then(newData => {
+                let sortedData = this.filterAnswersNQuestions(newData.data)
+
+
+
+              sortedData[1].forEach((answer) => {
+                answer.forEach(obj => {
+                //  console.log(obj.id)
+                  if (answerIds.includes(obj.id)) {
+                    console.log(obj)
+                    obj.report = 'reported'
+                  } else {
+                    obj.report = 'report'
+                  }
+                })
                 this.setState({
-                  questions: newData.data
+                  questions: sortedData[0],
+                  // answers: sortedData[1],
+
 
                 })
               })
+            })
 
           )
       }
@@ -117,12 +167,26 @@ class QuestionsNAnswers extends React.Component {
         let copy = this.props.data.slice()
         let sortedData= this.filterAnswersNQuestions(copy)
         let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+        let answerIds = this.state.reported
+        sortedData[1].forEach((answer) => {
+          answer.forEach(obj => {
+          //  console.log(obj.id)
+            if (answerIds.includes(obj.id)) {
+              console.log(obj)
+              obj.report = 'reported'
+            } else {
+              obj.report = 'report'
+            }
+          })
+
         console.log(sortedData)
         this.setState({
           questions: sortedData[0],
           answers: sortedData[1],
-          showQuestionButton: showButton
+          showQuestionButton: showButton,
+          reported: answerIds
         })
+      })
 
       }
     }
@@ -137,15 +201,73 @@ class QuestionsNAnswers extends React.Component {
           .then(data => {
             questions(this.props.product_id)
               .then(newData => {
-                let filtered =this.filterAnswersNQuestions(newData.data)
-                console.log(filtered)
-                this.setState({
-                  answers: filtered[1]
+
+                let sortedData = this.filterAnswersNQuestions(newData.data)
+                let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+                let answerIds = this.state.reported.slice()
+
+                sortedData[1].forEach((answer) => {
+                  answer.forEach(obj => {
+                  //  console.log(obj.id)
+                    if (answerIds.includes(obj.id)) {
+                      console.log(obj)
+                      obj.report = 'reported'
+                    } else {
+                      obj.report = 'report'
+                    }
+                  })
+                  this.setState({
+                    answers: sortedData[1],
+                    reported: answerIds
+
+                  })
                 })
               })
           })
       }
     }
+    if(prevState.answers.length !== this.state.answers.length) {
+      console.log(prevState.answers, this.state.answers)
+      let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
+      let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+      let answerIds = this.state.answers.slice()
+      sortedData[1].forEach((answer) => {
+        answer.forEach(obj => {
+        //  console.log(obj.id)
+          if (answerIds.includes(obj.id)) {
+            console.log(obj)
+            obj.report = 'reported'
+          } else {
+            obj.report = 'report'
+          }
+        })
+        this.setState({
+          showQuestionButton: showButton,
+          answers: sortedData[1],
+          questions: sortedData[0]
+
+        })
+      })
+    }
+    if (prevState.reported.length !== this.state.reported.length) {
+      // console.log(this.state.reported)
+      // console.log(prevState.reported)
+      let answerIds = this.state.reported.slice()
+      let answers = this.state.answers.slice()
+      answers.forEach((answer) => {
+        answer.forEach(obj => {
+          if (answerIds.includes(obj.id)) {
+            obj.report = 'reported'
+          }
+        })
+      })
+      this.setState({
+        reported: this.state.reported,
+        answers: answers
+      })
+    }
+
+
   }
 
 
@@ -302,12 +424,27 @@ class QuestionsNAnswers extends React.Component {
     questions(this.props.product_id)
       .then(currentQuestions => {
         console.log(currentQuestions)
-        let filter= this.helper().filterAll(currentQuestions.data)
+        let sortedData= this.helper().filterAll(currentQuestions.data)
+        let answerIds = this.state.reported
+
+        sortedData[1].forEach((answer) => {
+          answer.forEach(obj => {
+           //  console.log(obj.id)
+            if (answerIds.includes(obj.id)) {
+              console.log(obj)
+              obj.report = 'reported'
+            } else {
+              obj.report = 'report'
+            }
+
+          })
         this.setState({
-          questions: filter[0],
-          answers: filter[1],
-          aFormShowOrHide: 'aFormHide'
+          questions: sortedData[0],
+          answers: sortedData[1],
+          aFormShowOrHide: 'aFormHide',
+          reported: answerIds
         })
+      })
       })
 
   }
@@ -325,6 +462,19 @@ class QuestionsNAnswers extends React.Component {
 
    })
 
+
+ }
+
+ addToReported(e, ansId) {
+   console.log(ansId)
+
+
+   addToReported(ansId)
+     .then(data => {
+       this.setState({
+         reported: data
+       })
+     })
 
  }
 
@@ -377,6 +527,7 @@ class QuestionsNAnswers extends React.Component {
               }
               return <QuestionsContainer
                       key={index}
+                      addToReported={this.addToReported}
                       helpfulAnswerClick={this.helpfulAnswerClick}
                       helpfulQuestionClick={this.helpfulQuestionClick}
                       currentI={index}

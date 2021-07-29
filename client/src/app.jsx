@@ -9,7 +9,7 @@ import propTypes from 'prop-types';
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
 import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
-import { questions, answers } from "./clientRoutes/qa.js";
+import { questions, getReported } from "./clientRoutes/qa.js";
 import { cart } from "./clientRoutes/cart.js";
 
 //questions/answers test data
@@ -58,6 +58,7 @@ class App extends React.Component {
       productsRelated(this.state.product_id),
       questions(this.state.product_id),
       cart()
+
     ])
       .then((results) => {
         console.log(results)
