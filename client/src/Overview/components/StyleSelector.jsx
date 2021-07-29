@@ -47,7 +47,6 @@ const StyleSelector = (props) => {
              <img value = {keyTwo} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>
              </td>
              )} else {
-
                return (
                  <td key = {keyTwo} onClick = {props.changeStyle}>
             <img value = {keyTwo} src={style.photos[0].thumbnail_url} className = "style-selector-image"></img>

@@ -6,7 +6,7 @@ const AddToCart = (props) => {
     return (
       <div>
         <select className="selectSize" onChange={props.changeAvailableQuantity}>
-          <option id = "selectSize">SELECT SIZE</option>
+          <option id = "select-size">SELECT SIZE</option>
           {Object.entries(
             props.state.styles[props.OverviewState.styleIndex].skus
           ).map(([key, value]) => {
@@ -23,7 +23,7 @@ const AddToCart = (props) => {
         <select className="quantity" onChange = {props.changeSelectedQuantity}>
           {(function () {
             let jsxElements = [];
-            if (props.OverviewState.quantityAvailable > 0) {
+            if (props.OverviewState.quantityAvailable > 0 && props.OverviewState.sizeSelected.length > 0) {
               if (props.OverviewState.quantityAvailable > 15) {
                 for (let i = 1; i <= 15; i++) {
                   jsxElements.push(<option key={i}>{i}</option>);

@@ -26,7 +26,8 @@ class App extends React.Component {
       styles: [],
       qNa: [],
       savedQnA: [],
-      loaded: false
+      loaded: false,
+      ratings: {}
     }
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
@@ -54,16 +55,16 @@ class App extends React.Component {
   getStateData() {
     Promise.all([
       products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
-      questions(this.state.product_id),
+      questions(this.state.product_id), reviewsMeta(this.state.product_id),
       cart()
     ])
       .then((results) => {
-        console.log(results)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
           qNa: results[4].data,
-          savedQnA: results[4].data
+          savedQnA: results[4].data,
+          ratings: results[5].data.ratings
         });
       })
       .catch((err) => {

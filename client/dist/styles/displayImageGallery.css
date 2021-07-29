@@ -64,7 +64,17 @@
 /*Product Info */
 .product-info {
 
+
 }
+
+.product-original-price {
+  text-decoration: line-through;
+}
+
+.product-sale-price {
+  color: red;
+}
+
 
 .style-selector {
 
