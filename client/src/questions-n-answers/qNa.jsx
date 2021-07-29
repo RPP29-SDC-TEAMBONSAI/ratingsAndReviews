@@ -60,6 +60,18 @@ class QuestionsNAnswers extends React.Component {
 
 
   }
+  componentDidMount() {
+    console.log(this.props)
+    let copy = this.props.data.slice()
+    let sortedData= this.filterAnswersNQuestions(copy)
+    let showButton = this.helper().showMoreAnsweredQuestions(sortedData)
+    console.log(sortedData)
+    this.setState({
+      questions: sortedData[0],
+      answers: sortedData[1],
+      showQuestionButton: showButton
+    })
+  }
 
   componentDidUpdate(prevProps, prevState) {
     let copy = this.props.data.slice()

@@ -73,7 +73,8 @@ class App extends React.Component {
       })
       .then(() => {
         this.setState({
-          loaded: true
+          loaded: true,
+
         })
       })
       .catch((err) => {
