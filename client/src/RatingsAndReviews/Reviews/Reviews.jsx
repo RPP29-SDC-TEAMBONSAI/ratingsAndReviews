@@ -85,7 +85,7 @@ class Reviews extends React.Component {
         <div
           className="add-review-open"
           style={{display: this.state.addReviewOpen ? "block" : "none"}}
-          onClick={this.openAddReview}>
+          onClick={() => {}/* this.openAddReview */}>
             <AddReview/>
         </div>
         {/* MAIN REVIEWS COMPONENT */}
