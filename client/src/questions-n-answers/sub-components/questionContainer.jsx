@@ -25,10 +25,14 @@ const QuestionsContainer = (props) => {
       </div>
       <div className='qna table'>
         <AddAnswer
+          addAnswerOnClick={props.addAnswerOnClick}
           currentI={props.currentI}
           helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
+          questionName={props.question.question_body}
           classname={showQuestionClass ? showQuestionClass : props.classname}
+          question_id={props.question_id}
+
         />
       </div>
     </div>
@@ -36,6 +40,8 @@ const QuestionsContainer = (props) => {
 }
 
 QuestionsContainer.propTypes = {
+  question_id: propTypes.number.isRequired,
+  addAnswerOnClick: propTypes.func.isRequired,
   helpfulAnswerClick: propTypes.func.isRequired,
   helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,

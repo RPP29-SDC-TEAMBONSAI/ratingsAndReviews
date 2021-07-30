@@ -10,7 +10,7 @@ module.exports = {
   productsStyle: (id) => {
     return axios.get(`/products/:product_id/styles?${id}`);
   },
-  productsRelated: () => {
-    return axios.get('/products/:product_id/related');
+  productsRelated: (id) => {
+    return axios.get(`/products/:product_id/related?${id}`);
   }
 }

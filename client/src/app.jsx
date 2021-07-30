@@ -24,9 +24,10 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
+      relatedProducts: [],
       qNa: [],
       savedQnA: [],
-      loaded: false
+      loaded: false,
     }
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
@@ -34,14 +35,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getStateData();
-    this.setState({
-      loaded: true
-    })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.product_id !== this.state.product_id) {
-      this.getStateData();
+      this.getStateData()
+
     }
   }
 
@@ -53,7 +52,10 @@ class App extends React.Component {
 
   getStateData() {
     Promise.all([
-      products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
+      products(),
+      productsWithId(this.state.product_id),
+      productsStyle(this.state.product_id),
+      productsRelated(this.state.product_id),
       questions(this.state.product_id),
       cart()
     ])
@@ -62,9 +64,21 @@ class App extends React.Component {
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
+          relatedProducts: results[3].data,
+          //do not remove please
           qNa: results[4].data,
-          savedQnA: results[4].data
-        });
+          savedQnA: results[4].data,
+          currentItemName:results[1].data.name,
+          product_id:results[1].data.id
+          //do not remove
+
+        })
+      })
+      .then(() => {
+        this.setState({
+          loaded: true,
+
+        })
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
@@ -72,6 +86,7 @@ class App extends React.Component {
   }
 
   render() {
+
     if (this.state.loaded) {
       return (
         <div className='app'>
@@ -83,7 +98,8 @@ class App extends React.Component {
           <QuestionsNAnswers
             product_id={this.state.product_id}
             data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}/>
+            QuestionSavedData ={this.state.savedQnA}
+            currentItemName={this.state.currentItemName}/>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>
@@ -98,9 +114,6 @@ App.propTypes ={
   qNaTestData: propTypes.array.isRequired
 
 }
-
-
-
 
 ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
 
