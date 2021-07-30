@@ -84,9 +84,8 @@ class Reviews extends React.Component {
         {/* FORM MODAL */}
         <div
           className="add-review-open"
-          style={{display: this.state.addReviewOpen ? "block" : "none"}}
-          onClick={() => {}/* this.openAddReview */}>
-            <AddReview/>
+          style={{display: this.state.addReviewOpen ? "block" : "none"}}>
+            <AddReview close={this.openAddReview}/>
         </div>
         {/* MAIN REVIEWS COMPONENT */}
         <div className="reviews">

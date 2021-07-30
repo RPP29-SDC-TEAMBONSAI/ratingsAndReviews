@@ -18,7 +18,7 @@ class AddReview extends React.Component {
 
   handleChange(event) {
     const stateVal = event.target.getAttribute('stateVal');
-    const value = event.target.getAttribute('value');
+    const value = event.target.value || event.target.getAttribute('value');
     console.log(value);
     this.setState({
       [stateVal]: value
@@ -50,23 +50,25 @@ class AddReview extends React.Component {
   render() {
     return (
       <div className="add-review-form">
-        <div style={{"z-index": "3", position: 'relative', top: '0px', right: '0px'}}>x</div>
-        <div>Write Your Review</div>
-        <div>About the {this.props.productName}</div>
-        {/* OVERALL RATING INPUT */}
-        <div className="review-input">
-          <div>Overall rating</div>
-          {Stars(this.state.overallRating, this.handleOverallRatingChange)}
+        <div className="add-review-top">
+          <div className="x" onClick={this.props.close}>✕</div>
+          <div className="review-title">Write Your Review</div>
+          <div className="review-subtitle">About the {this.props.productName}</div>
+          {/* OVERALL RATING INPUT */}
+          <div className="review-input">
+            <div className="ri-title">How would you rate this overall?</div>
+            {Stars(this.state.overallRating, this.handleOverallRatingChange)}
+          </div>
         </div>
         {/* RECOMMEND RADIO GROUP */}
-        <div className="radio-options-wrapper">
-          <div className="radio-options-title">Do you recommend this product?</div>
-          <div className="radio-options">
+        <div className="radio-options-wrapper-column">
+          <div className="radio-factor-title">Do you recommend this product?</div>
+          <div className="radio-options rcolumn">
             {this.createRadioOptions(['Yes', 'No'], 'radio-option', 'recommendThis')}
           </div>
         </div>
         {/* FACTOR INPUTS */}
-        <div>Rank the following factors for this product</div>
+        <div className="radio-factor-title">Rank the following factors for this product</div>
         {['Size','Width','Comfort','Quality','Length','Fit'].map((factor, index) => {
           return (
             <div className="radio-options-wrapper" key={index}>
@@ -78,28 +80,50 @@ class AddReview extends React.Component {
           );
         })}
         {/* REVIEW SUMMARY */}
-        <div>
-          <label>Write a short review summary</label>
-          <input/>
+        <div className="r-summary">
+          <label className="r-title">Write a short review summary</label>
+          <input
+            className="r-input-small"
+            // placeholder="Enter Summary..."
+            stateVal="summary"
+            value={this.state.summary}
+            onChange={this.handleChange}/>
         </div>
         {/* REVIEW BODY */}
-        <div>
-          <label>Write your full review</label>
-          <textarea/>
+        <div className="r-full">
+          <label className="r-title">Write your full review</label>
+          <textarea className="r-full-input"
+          placeholder="Enter Review..."
+          stateVal="full"
+          value={this.state.full}
+          onChange={this.handleChange}/>
         </div>
         {/* UPLOAD YOUR PHOTOS */}
 
-        {/* WHAT IS YOUR NAME */}
-        <div>
-          <label>Enter Your Name</label>
-          <input/>
+        <div className="r-name-email-submit">
+          <div className="r-name-email">
+          {/* WHAT IS YOUR NAME */}
+            <div className="r-name">
+              <label className="r-title">Enter Your Name</label>
+              <input className="r-input-small"
+              placeholder="John Doe..."
+              stateVal="name"
+              value={this.state.name}
+              onChange={this.handleChange}/>
+            </div>
+            {/* YOUR EMAIL */}
+            <div className="r-email">
+              <label className="r-title">Enter a valid email</label>
+              <input className="r-input-small"
+              placeholder="johndoe@missing.com..."
+              stateVal="email"
+              value={this.state.email}
+              onChange={this.handleChange}/>
+            </div>
+          </div>
+          {/* SUBMIT BUTTON */}
+          <button className="r-submit">Sumbit Review</button>
         </div>
-        {/* YOUR EMAIL */}
-        <div>
-          <label>Enter a valid email</label>
-          <input/>
-        </div>
-        {/* SUBMIT BUTTON */}
 
       </div>
     );
@@ -107,7 +131,8 @@ class AddReview extends React.Component {
 }
 
 AddReview.propTypes = {
-  productName: PropTypes.string
+  productName: PropTypes.string,
+  close: PropTypes.func
 }
 
 export default AddReview;

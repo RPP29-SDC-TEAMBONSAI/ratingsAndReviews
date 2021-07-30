@@ -45,6 +45,8 @@
 
 .average-rating-stars {
   justify-content: flex-start; /* this is wrong */
+  font-size: large;
+  width: max-content;
 }
 
 .count-of-reviews {
@@ -377,7 +379,8 @@
   padding: 10px 0px 10px 0px;
 }
 
-.review-button {
+.review-button
+, .r-submit {
   height: 50px;
   margin-right: 10px;
   padding: 0px 20px 0px 20px;
@@ -444,11 +447,62 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  height: 600px;
+  height: 800px;
   width: 600px;
   margin-top: 5vh;
   background-color: white;
   border-radius: 5px;
+  overflow: scroll;
+}
+
+.add-review-top {
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid darkgray;
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+.x {
+  background: lightgray;
+  width: 10px;
+  padding: 5px;
+  position: fixed;
+  border-radius: 100px;
+  height: 10px;
+  margin: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.x:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+.review-title {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0 5px 0px;
+}
+
+.review-subtitle {
+  text-align: center;
+}
+
+.review-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  font-size: large;
+}
+
+.review-input > .stars {
+  font-size: x-large;
 }
 
 .radio-options-wrapper {
@@ -456,27 +510,46 @@
   flex-direction: row;
 }
 
+.radio-options-wrapper-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .radio-options-title {
-  text-align: center;
+  text-align: start;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100px;
+  justify-content: left;
+  min-width: 55px;
+  padding: 20px;
 }
 
 .radio-options {
   display: flex;
   padding: 10px;
-  width: 100%;
   margin: 0 auto;
   text-align: center;
   flex-grow: 1;
+  align-content: center;
+  height: 33px;
+}
+
+.rcolumn {
+  justify-content: center;
+}
+
+.radio-factor-title {
+  text-align: center;
+  padding: 20px;
+  font-size: large;
 }
 
 .radio-options > div {
   border-right: 1px solid #284b63;
   border-top: 1px solid #284b63;
   border-bottom: 1px solid #284b63;
+  width: 75px;
 }
 
 .radio-label:first-child {
@@ -505,4 +578,60 @@
 .is-true {
   background-color: #284b63;
   color: white;
+}
+
+.r-summary
+, .r-full
+, .r-name
+, .r-email {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px 10px 15px;
+}
+
+.r-name-email-submit {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 15px;
+}
+
+.r-name
+, .r-email {
+  padding: 0px;
+}
+
+.r-name {
+  padding-bottom: 20px;
+}
+
+.r-title {
+  padding-bottom: 3px;
+}
+
+.r-submit {
+  flex-grow: 1;
+  margin: 0px;
+  margin-top: 70px;
+}
+
+.r-input-small {
+  border: none;
+  border-bottom: 1px solid darkgray;
+  outline: none;
+}
+
+.r-name-email {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 4;
+  margin-right: 150px;
+}
+
+.r-full-input {
+  resize: none;
+  height: 100px;
+  outline: none;
+  border: 1px solid darkgray;
+  font-family: arial;
 }
