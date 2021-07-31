@@ -6,13 +6,9 @@
   "scripts": {
     "build": "webpack --mode development --watch",
     "start": "nodemon node server/index.js",
-<<<<<<< HEAD
-    "test": "jest --updateSnapshot"
-=======
     "test": "jest --updateSnapshot",
     "test:watch": "jest --watch"
 
->>>>>>> 56dd9c24c03b6ff15170e786fb6645b729c1176f
   },
   "jest": {
     "setupFilesAfterEnv": [
@@ -66,11 +62,6 @@
     "multer": "^1.4.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-<<<<<<< HEAD
     "react-test-renderer": "^17.0.2"
-=======
-    "react-test-renderer": "^17.0.2",
-    "uninstall": "0.0.0"
->>>>>>> 56dd9c24c03b6ff15170e786fb6645b729c1176f
   }
 }
