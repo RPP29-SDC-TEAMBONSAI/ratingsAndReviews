@@ -60,6 +60,31 @@ module.exports = {
 
       })
 
-  }
+  },
+
+  addToReported(ansId) {
+    let obj = {
+      id: ansId
+    };
+
+    return axios.post('/qa/questions/store-reported-answer', obj)
+      .then(data => {
+        // console.log(data, "🤙")
+        return data.data
+
+      })
+
+  },
+  getReportedAns :() =>  {
+
+    return axios.get('/reported/answers')
+    // return axios.get(`/qa/questions/:reported/answers${'test'}`);
+      // .then(data => {
+      //   // console.log(data)
+
+      // })
+      // .catch(err => console.log(err))
+  },
+
 
 }

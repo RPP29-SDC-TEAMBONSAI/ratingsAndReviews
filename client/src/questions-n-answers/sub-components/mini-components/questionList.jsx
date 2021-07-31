@@ -38,7 +38,7 @@ const QuestionList = (props) => {
                     <td>helpful?</td>
                     <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn'>report</td>
+                    <td className='userReportBtn' onClick={(e) => props.addToReported(e, answer.id)}>{answer.report}</td>
                   </tr>
               </tbody>
             </table>
@@ -56,7 +56,7 @@ const QuestionList = (props) => {
 QuestionList.propTypes = {
   helpfulAnswerClick:propTypes.func.isRequired,
   currentI: propTypes.number.isRequired,
-
+  addToReported: propTypes.func.isRequired,
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,

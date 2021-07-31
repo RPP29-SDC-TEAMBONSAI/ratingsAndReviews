@@ -24,16 +24,12 @@ class UserQuestion extends React.Component {
       email: this.state.email,
       product_id: this.props.product_id
     }
-    console.log(newObj)
+    // console.log(newObj)
 
     postQuestion(newObj)
       .then(data => {
+        this.props.updateQuestions()
 
-        // questions(this.props.product_id)
-        //   .then(d => {
-            // console.log(d.data, "🔥")
-            this.props.updateQuestions()
-          // })
       })
 
     this.setState({
@@ -45,7 +41,7 @@ class UserQuestion extends React.Component {
 
   }
   questionFormChange(e) {
-    console.log(e.target.value)
+    // console.log(e.target.value)
 
     this.setState({
       [e.target.name]: e.target.value
