@@ -26,14 +26,18 @@ let wrapper;
 
 
 describe('QuestionsNAnswers', () => {
-  beforeEach(() => {
-    wrapper = shallow(<QuestionsNAnswers {...props}/>)
-  })
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+
+  // test('')
+
+
   describe('ComponentDidMount', () => {
-    test('on mount, it should execute componentDidMount, filterAnswerNQUestions, showMoreAnsweredQuestions, ShowReportedClass all once', () => {
+    beforeEach(() => {
+      wrapper = shallow(<QuestionsNAnswers {...props}/>)
+    })
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+    test('on mount, it executes componentDidMount, filterAnswerNQUestions, showMoreAnsweredQuestions, ShowReportedClass all only once', () => {
 
     let wrapper = shallow(<QuestionsNAnswers {...props} />)
     const instance = wrapper.instance()
@@ -47,6 +51,7 @@ describe('QuestionsNAnswers', () => {
 
         jest.spyOn(instance, 'filterAnswersNQuestions')
         let sortedData = instance.filterAnswersNQuestions(props.data)
+        // console.log(sortedData[1])
 
         jest.spyOn(helper, 'showMoreAnsweredQuestions')
         let showButton = helper.showMoreAnsweredQuestions(sortedData)
@@ -65,6 +70,7 @@ describe('QuestionsNAnswers', () => {
 
     test('on mount, state questions should be sorted by helpfulness', () => {
       const instance = wrapper.instance()
+      // console.log(instance.state.answers, "✅")
 
       return instance.getReportedAns().then(data => {
 
@@ -84,26 +90,71 @@ describe('QuestionsNAnswers', () => {
       })
     })
 
-    test('on mount, state answers should be sorted by helpfulness', () => {
+    test('on mount, state answers should be sorted by seller, then helpfullness - seller answers should also be sorted by helpfulness', () => {
       const instance = wrapper.instance()
 
       return instance.getReportedAns().then(data => {
-
         let result = false
-        instance.state.answers.forEach((question, index) => {
+        let sellerResult =false
+        let sellerIndex;
 
+        instance.state.answers.forEach((answerArr, index) => {
           if (instance.state.answers[index + 1]) {
-            if(question.question_helpfulness > instance.state.answers[index+1].question_helpfulness || question.question_helpfulness === instance.state.answers[index+1].question_helpfulness) {
-              result = true
-            } else {
-              result = false
-            }
+            answerArr.forEach((answer, i) => {
+
+              if (answer.answerer_name !== 'Seller') {
+                if (answerArr[i+1]) {
+                  if (answer.helpfulness > answerArr[i + 1].helpfulness) {
+                    result = true
+                  }
+                }
+
+              } else {
+
+                if (index === 0) {
+                  sellerIndex = 0
+                }
+
+                if(answerArr[i + 1]) {
+                  if (answer.helpfulness > answerArr[i + 1].helpfulness) {
+                    sellerResult = true
+                  }
+                }
+
+              }
+            })
           }
           return result
         })
         expect(result).toEqual(true)
+        expect(sellerResult).toEqual(true)
+        expect(sellerIndex).toEqual(0)
       })
+    })
 
+    test('on mount, there should be as many answerArrays as questions', () => {
+      const instance = wrapper.instance()
+
+      return instance.getReportedAns().then(data => {
+        let result = instance.state.questions.length === instance.state.answers.length
+        expect(result).toEqual(true)
+      })
+    })
+
+    test('on mount, answers at a given index in the answers state, correlate to their parent question in the questions state at index', () => {
+      const instance = wrapper.instance()
+
+      return instance.getReportedAns().then(data => {
+        let index = 0
+        let index1 = 1
+        let matcher0 = '2171422'
+        let matcher1 = '2171483'
+        let resultAtIndex0 = instance.state.questions[index].answers[matcher0].id === instance.state.answers[index][index].id
+        let resultAtIndex1 = instance.state.questions[index1].answers[matcher1].id === instance.state.answers[index1][index].id
+
+        expect(resultAtIndex0).toEqual(true)
+        expect(resultAtIndex1).toEqual(true)
+      })
     })
 
     test('on mount, all answers should contain a report property', () => {
@@ -131,18 +182,15 @@ describe('QuestionsNAnswers', () => {
     })
 
     test('on mount, if there are more than two questions a moreAnsweredQuestions button will appear', () => {
-
       const component = renderer.create(<QuestionsNAnswers {...props}/>)
       const instance = component.getInstance()
       instance.componentDidMount()
-      return instance.getReportedAns().then(data => {
-        let currentClass = component.toJSON().children[4].children[1].props.className
-        let result = currentClass === 'moreAnsweredBtn'
-        expect(result).toEqual(true)
+        return instance.getReportedAns().then(data => {
+          let currentClass = component.toJSON().children[4].children[1].props.className
+          let result = currentClass === 'moreAnsweredBtn'
+          expect(result).toEqual(true)
 
-      })
-
-
+        })
       })
     })
 
@@ -153,10 +201,12 @@ describe('QuestionsNAnswers', () => {
 
       return instance.getReportedAns().then(data => {
         let currentClass = component.toJSON().children[4].children[1].props.className
+        // console.log(component.toJSON().children)
         let result = currentClass === 'moreAnsweredBtn Hide';
         expect(result).toEqual(true)
       })
     })
+
     test('on mount, if there are more than two questions, only two questions and two answers should be displayed', () => {
       const component = renderer.create(<QuestionsNAnswers {...props}/>)
       const instance = component.getInstance()
@@ -164,15 +214,14 @@ describe('QuestionsNAnswers', () => {
 
       return instance.getReportedAns().then(data => {
         let classes = component.toJSON().children[3].children
+        let result = false;
+
         classes.forEach((obj) => {
-          console.log(obj.children)
+          if(obj.children[0].props.className=== 'question Container' && obj.children[1].props.className === 'question Container') {
+            result =true;
+          }
         })
+        expect(result).toEqual(true)
       })
     })
-
-
-    // test('')
-
-
-  // })
 })

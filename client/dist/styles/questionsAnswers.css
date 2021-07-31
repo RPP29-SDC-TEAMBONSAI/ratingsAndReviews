@@ -119,8 +119,15 @@ h3.loadMoreAnswersButton:hover {
 
 }
 
-.qna.questionText.Container {
+.question.Container {
   margin-bottom: 5vh;
+  display: flex;
+
+  flex-direction: row;
+}
+.questionHide.Container{
+  display:none
+
 }
 
 .moreAnsweredBtn.Hide {

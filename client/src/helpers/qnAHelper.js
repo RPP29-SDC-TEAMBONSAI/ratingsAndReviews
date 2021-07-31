@@ -93,18 +93,37 @@ module.exports = {
       })
       let filterSeller = current[0].filter((answer) => {
         if (answer.answerer_name === 'Seller') {
+
           return answer
         }
       })
-      if (filterSeller.length) {
+      let sellerCountArr = filterSeller.map((answer) => {
+        return answer.helpfulness
+      })
+      sellerCountArr = sellerCountArr.sort().reverse()
 
-        sortedArr = filterSeller.concat(sortedArr)
+      let sellerSortArr =[]
+
+
+      sellerCountArr.forEach(number => {
+        filterSeller.forEach(answer => {
+          if (number === answer.helpfulness) {
+            sellerSortArr.push(answer)
+          }
+        })
+      })
+
+      if (sellerSortArr.length) {
+
+
+        sortedArr = sellerSortArr.concat(sortedArr)
       }
       final.push(sortedArr)
       count --
       this.sortAnswers(answers, count, final)
 
     }
+
     return final
   },
 
@@ -157,19 +176,12 @@ module.exports = {
       return showButton
   },
 
-  showMoreAnsweredBtnClass(bool, qClickCount, index) {
-    let newClass;
-    if (bool) {
-      newClass = 'moreAnsweredBtn'
+  moreAnsweredQButtonDisplay(qClickCount, index) {
+    let result = true;
+    if (qClickCount === index || qClickCount + 1 === index) {
+      result= false;
     }
-
-    if (qClickCount === index|| qClickCount - 1 === index) {
-      // console.log('hi')
-      newClass = 'moreAnswerBtn Hide'
-    }
-
-    return newClass
-
+    return result
   },
 
   loadAnswerButtonText(currentCount) {
@@ -262,6 +274,8 @@ module.exports = {
 
 
   }
+
+
 
 }
 

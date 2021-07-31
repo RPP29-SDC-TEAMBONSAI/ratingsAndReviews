@@ -16,6 +16,7 @@ class QuestionsNAnswers extends React.Component {
       answers: [],
       answerClickCount: 0,
       questionClickCount: 1,
+      currentQuestionIndex: null,
       questionHide: 'Hide',
       answerScroll: 'list scroll container',
       loadButtonText: 'Load More Answers',
@@ -40,7 +41,6 @@ class QuestionsNAnswers extends React.Component {
 
     this.loadAnswerClick = this.loadAnswerClick.bind(this)
     this.loadQuestionClick = this.loadQuestionClick.bind(this)
-    this.showButton = this.showButton.bind(this)
     this.showScrollContainer = this.showScrollContainer.bind(this)
     this.searchFilter = this.searchFilter.bind(this)
     this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
@@ -48,7 +48,6 @@ class QuestionsNAnswers extends React.Component {
     this.answerTableHide = this.answerTableHide.bind(this)
     this.addAnswerScroll = this.addAnswerScroll.bind(this)
     this.showQuestions = this.showQuestions.bind(this)
-    // this.helper = this.helper.bind(this)
     this.getReportedAns = getReportedAns.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
@@ -83,6 +82,11 @@ class QuestionsNAnswers extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // console.log(this.state, prevState)
     let copy = this.props.data.slice()
+    if (prevProps.product_id !== this.props.product_id) {
+      this.setState({
+        questionClickCount:1
+      })
+    }
 
     if (prevProps.data.length !== this.props.data.length) {
 
@@ -272,15 +276,13 @@ class QuestionsNAnswers extends React.Component {
       })
     }
 
-
+    if (prevState.questionClickCount !== this.state.questionClickCount) {
+      let showOrHide = helper.moreAnsweredQButtonDisplay(this.state.questionClickCount, this.state.lastIndex)
+      this.setState({
+        showQuestionButton: showOrHide
+      })
+    }
   }
-
-
-  // helper() {
-  //   return new QnAClientHelpers()
-  // }
-
-
 
   filterAnswersNQuestions(currentQuestions) {
     let filtered = helper.filterAll(currentQuestions)
@@ -305,11 +307,6 @@ class QuestionsNAnswers extends React.Component {
       questionClickCount: count,
       lastIndex: lastI
     })
-  }
-
-  showButton() {
-    let newClass = helper.showMoreAnsweredBtnClass(this.state.showQuestionButton, this.state.questionClickCount, this.state.lastIndex);
-    return newClass
   }
 
   showScrollContainer() {
@@ -360,7 +357,12 @@ class QuestionsNAnswers extends React.Component {
 
   showQuestions(currentCount, index) {
     let newClass = helper.showQuestionsClass(currentCount, index);
+    let currentQuestionIndex = index
+    // this.setState({
+    //   currentQuestionIndex: currentQuestionIndex
+    // })
     return newClass
+
   }
 
   questionSearchChange(e) {
@@ -493,7 +495,7 @@ class QuestionsNAnswers extends React.Component {
  }
 
   render () {
-    let showButtonClass = this.showButton()
+    // let showButtonClass = this.showButton()
     let scrollContainerClass = this.showScrollContainer()
 
     return (
@@ -549,10 +551,10 @@ class QuestionsNAnswers extends React.Component {
                       addAnswerScroll={this.addAnswerScroll}
                       answerTableHide={this.answerTableHide}
                       answerHide={this.answerHide}
-                      showButton={this.showButton}
+                      // showButton={this.showButton}
                       lastI={this.state.lastIndex}
                       answerScroll={this.state.answerScroll}
-                      questionCount={this.state.questionClickCount}
+                      questionClickCount={this.state.questionClickCount}
                       answerCount={this.state.answerClickCount}
                       classname={currentClass}
                       answers={this.state.answers[index]}
