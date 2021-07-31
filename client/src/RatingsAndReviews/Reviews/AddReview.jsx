@@ -84,7 +84,7 @@ class AddReview extends React.Component {
           <label className="r-title">Write a short review summary</label>
           <input
             className="r-input-small"
-            // placeholder="Enter Summary..."
+            placeholder="Enter Summary..."
             stateVal="summary"
             value={this.state.summary}
             onChange={this.handleChange}/>
