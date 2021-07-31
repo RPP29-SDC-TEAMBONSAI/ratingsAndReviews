@@ -3,16 +3,15 @@ import propTypes from 'prop-types';
 
 
 const AddToOutfitCard = (props) => {
-  //console.log(`stateProps: ${JSON.stringify(props.state)}`)
+  //console.log(`oufitProps: ${JSON.stringify(props.outfitProps)}`)
   return (
     <div className='addToOutfitCard'>
         <button className='addToOutfitButton'
         style={{'fontSize': '50px'}}
-        onClick={() => {props.handleAddToOutfit(props.state.product_id)}}
+        onClick={() => {props.handleAddToOutfit(props.outfitProps)}}
         >+</button>
     </div>
   )
-
 }
 
 AddToOutfitCard.propTypes = {

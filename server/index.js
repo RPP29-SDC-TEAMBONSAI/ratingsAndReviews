@@ -4,7 +4,7 @@ const PORT = 3000;
 
 // SERVER ROUTES
 const { reviews, reviewsMeta } = require("./serverRoutes/reviews.js");
-const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
+const { products, productsWithId, productsStyle, productsRelated} = require("./serverRoutes/products.js");
 const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion} = require("./serverRoutes/qa.js");
 const { cart } = require("./serverRoutes/cart.js");
 

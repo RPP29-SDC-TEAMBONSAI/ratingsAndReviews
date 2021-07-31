@@ -66,7 +66,6 @@ module.exports = {
       console.log('err err errrr, ', err);
       res.status(500).end();
     })
-
   }
 }
 

@@ -50,6 +50,9 @@ class App extends React.Component {
   }
 
   getStateData() {
+    this.setState({
+      loaded: false
+    })
     Promise.all([
       products(),
       productsWithId(this.state.product_id),
