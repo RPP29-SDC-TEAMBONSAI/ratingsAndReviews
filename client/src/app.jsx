@@ -61,8 +61,8 @@ class App extends React.Component {
 
     ])
       .then((results) => {
-        console.log(results)
-        console.log(results[4].data)
+        //console.log(results)
+        //console.log(results[4].data)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
