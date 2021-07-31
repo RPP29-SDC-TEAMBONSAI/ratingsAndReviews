@@ -201,6 +201,7 @@
   font-family: inherit;
   font-size: inherit;
   outline: none;
+  cursor: pointer;
 }
 
 .sort-options-selected {
@@ -386,6 +387,7 @@
   padding: 0px 20px 0px 20px;
   background-color: white;
   border: 1px solid black;
+  cursor: pointer;
 }
 
 /* STARS */
@@ -504,6 +506,9 @@
 .review-input > .stars {
   font-size: x-large;
 }
+.review-input > .stars:hover {
+  cursor: pointer;
+}
 
 .radio-options-wrapper {
   display: flex;
@@ -532,7 +537,7 @@
   text-align: center;
   flex-grow: 1;
   align-content: center;
-  height: 33px;
+  height: 28px;
 }
 
 .rcolumn {

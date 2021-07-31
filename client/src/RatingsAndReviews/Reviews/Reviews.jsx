@@ -12,7 +12,7 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      loaded: 0,
+      loaded: 1,
       sortBy: 'newest',
       photo: null,
       photoOpen: false,
@@ -27,31 +27,30 @@ class Reviews extends React.Component {
   };
 
   componentDidMount() {
-    this.getStateData();
+    this.getStateData(this.state.loaded, this.state.sortBy);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      this.getStateData();
+      this.getStateData(this.state.loaded, this.state.sortBy);
     }
   }
 
-  getStateData() {
-    reviews(1, 1000, 'newest', this.props.product_id)
+  getStateData(loaded, sortBy) {
+    reviews(1, 1000, sortBy, this.props.product_id)
       .then(({ data }) => {
         // sortByRelevance(data);
         this.setState({
           reviews: data,
-          loaded: 1
+          loaded: loaded,
+          sortBy: sortBy
         });
       })
       .catch(err => console.log("REVIEWS MOUNT ERR", err));
   }
 
   handleSortChange(event) {
-    this.setState({
-      sortBy: event.target.value
-    });
+    this.getStateData(this.state.loaded, event.target.value);
   }
 
   viewPhoto(event) {
