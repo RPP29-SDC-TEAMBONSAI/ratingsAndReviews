@@ -5,10 +5,18 @@ import QuestionList from './mini-components/questionList.jsx';
 
 const QuestionsContainer = (props) => {
 
-  let showQuestionClass = props.showQuestions(props.questionCount, props.currentI)
+  let showQuestionClass = props.showQuestions(props.questionClickCount, props.currentI)
+  let show = false;
+  if (props.questionClickCount === 1 && props.currentI <= props.questionClickCount) {
+    show = true
+  }
+  if (props.questionClickCount >= 3 && props.currentI<= props.questionClickCount) {
+    show = true
+  }
+
 
   return (
-    <div className={showQuestionClass ? ` qna ${showQuestionClass} Container `: `qna ${props.classname} Container`}>
+    <div className={show ? `question Container`: `questionHide Container`}>
       <div className='questionAndAnswer'>
         <QuestionList
           addToReported={props.addToReported}
@@ -19,7 +27,7 @@ const QuestionsContainer = (props) => {
           question={props.question}
           currentI={props.currentI}
           answers={props.answers}
-          questionCount={props.questionCount}
+          questionCount={props.questionClickCount}
           answerCount={props.answerCount}
           classname={showQuestionClass ? showQuestionClass : props.classname}
         />
@@ -47,7 +55,7 @@ QuestionsContainer.propTypes = {
   helpfulAnswerClick: propTypes.func.isRequired,
   helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,
-  questionCount: propTypes.number.isRequired,
+  questionClickCount: propTypes.number.isRequired,
   answerCount: propTypes.number.isRequired,
   classname: propTypes.string.isRequired,
   currentI: propTypes.number.isRequired,

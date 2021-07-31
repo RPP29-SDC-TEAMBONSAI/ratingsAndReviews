@@ -13,9 +13,6 @@ import { questions, getReported } from "./clientRoutes/qa.js";
 import { cart } from "./clientRoutes/cart.js";
 
 //questions/answers test data
-import qNa_testData from '../../tests/QnA-testData';
-
-let qNa = qNa_testData.results
 
 class App extends React.Component {
   constructor(props) {
@@ -64,7 +61,8 @@ class App extends React.Component {
 
     ])
       .then((results) => {
-        // console.log(results)
+        console.log(results)
+        console.log(results[4].data)
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
@@ -119,5 +117,5 @@ App.propTypes ={
 
 }
 
-ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 
