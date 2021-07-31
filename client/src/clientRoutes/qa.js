@@ -31,8 +31,60 @@ module.exports = {
     return axios.post(`/qa/questions`, newQuestion)
       .then(data => {
         return data
-        console.log(data, "🙏")
+
       })
 
-  }
+  },
+
+  postAnswer(newAnswer) {
+
+    return axios.post(`/qa/questions/:question_id=${''}/answers`, newAnswer)
+      .then(data => {
+        return data
+
+      })
+
+
+
+  },
+
+  getUrl(base64Str){
+    let newObj ={
+      file: base64Str
+    }
+    // console.log(base64Str,)
+    return axios.post('/qa/questions/get/photo-url', newObj)
+      .then((newUrl) => {
+        // console.log(newUrl,  "🔥")
+        return newUrl.data
+
+      })
+
+  },
+
+  addToReported(ansId) {
+    let obj = {
+      id: ansId
+    };
+
+    return axios.post('/qa/questions/store-reported-answer', obj)
+      .then(data => {
+        // console.log(data, "🤙")
+        return data.data
+
+      })
+
+  },
+  getReportedAns :() =>  {
+
+    return axios.get('/reported/answers')
+    // return axios.get(`/qa/questions/:reported/answers${'test'}`);
+      // .then(data => {
+      //   // console.log(data)
+
+      // })
+      // .catch(err => console.log(err))
+  },
+
+
 }
