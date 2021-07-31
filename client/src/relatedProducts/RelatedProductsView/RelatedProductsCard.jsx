@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 
 const RelatedProductsCard = (props) => {
-
+  console.log(`rpProps: ${JSON.stringify(props)}`);
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
