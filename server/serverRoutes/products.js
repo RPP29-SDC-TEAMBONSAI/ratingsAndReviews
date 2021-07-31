@@ -51,10 +51,21 @@ module.exports = {
     })
   },
   productsRelated: (req, res) => {
-    //console.log('related products req', req)
-    res.status(200).end();
-    //implement API request for related products
-    //send info to client
+    let request = req.originalUrl.split('?');
+    //console.log('🐮' ,request);
+    axios.get(api + `products/${request[1]}/related`, {
+      headers: {
+        'Authorization': TOKEN
+      }
+    })
+    .then((data) => {
+      res.send(data.data)
+    })
+    .catch((err) => {
+      console.log('err err errrr, ', err);
+      res.status(500).end();
+    })
+
   }
 }
 

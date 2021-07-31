@@ -9,13 +9,10 @@ import propTypes from 'prop-types';
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
 import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
-import { questions, answers } from "./clientRoutes/qa.js";
+import { questions, getReported } from "./clientRoutes/qa.js";
 import { cart } from "./clientRoutes/cart.js";
 
 //questions/answers test data
-import qNa_testData from '../../tests/QnA-testData';
-
-let qNa = qNa_testData.results
 
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +21,7 @@ class App extends React.Component {
       product_id: 28212,
       productInformation: {},
       styles: [],
+      relatedProducts: [],
       qNa: [],
       savedQnA: [],
       loaded: false,
@@ -35,14 +33,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getStateData();
-    this.setState({
-      loaded: true
-    })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.product_id !== this.state.product_id) {
-      this.getStateData();
+      this.getStateData()
+
     }
   }
 
@@ -54,18 +50,35 @@ class App extends React.Component {
 
   getStateData() {
     Promise.all([
-      products(), productsWithId(this.state.product_id), productsStyle(this.state.product_id), productsRelated(),
-      questions(this.state.product_id), reviewsMeta(this.state.product_id),
+      products(),
+      productsWithId(this.state.product_id),
+      productsStyle(this.state.product_id),
+      productsRelated(this.state.product_id),
+      questions(this.state.product_id),
+      reviewsMeta(this.state.product_id),
       cart()
+
     ])
       .then((results) => {
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
+          relatedProducts: results[3].data,
+          //do not remove please
           qNa: results[4].data,
           savedQnA: results[4].data,
+          currentItemName:results[1].data.name,
+          product_id:results[1].data.id,
           ratings: results[5].data.ratings
-        });
+          //do not remove
+
+        })
+      })
+      .then(() => {
+        this.setState({
+          loaded: true,
+
+        })
       })
       .catch((err) => {
         console.log('this is the err 🥲 ', err)
@@ -73,6 +86,7 @@ class App extends React.Component {
   }
 
   render() {
+
     if (this.state.loaded) {
       return (
         <div className='app'>
@@ -84,7 +98,8 @@ class App extends React.Component {
           <QuestionsNAnswers
             product_id={this.state.product_id}
             data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}/>
+            QuestionSavedData ={this.state.savedQnA}
+            currentItemName={this.state.currentItemName}/>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>
@@ -100,8 +115,5 @@ App.propTypes ={
 
 }
 
-
-
-
-ReactDOM.render(<App qNaTestData={qNa}/>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 

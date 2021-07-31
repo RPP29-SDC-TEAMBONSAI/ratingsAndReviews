@@ -1,5 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import AnswerImages from './answerImages.jsx';
+
 
 const QuestionList = (props) => {
 
@@ -24,17 +26,24 @@ const QuestionList = (props) => {
         return (
           <div className={showClass ? showClass: _class} key={index}>
             <h4 className={`answerText`}>A: {answer.body}</h4>
-            <table className=''>
+            <div className='answerImage container'>
+              {answer.photos.map((photo, index) => {
+                return <AnswerImages key={index} photo={photo}/>
+              })}
+            </div>
+            <table className='answererDetails'>
               <tbody >
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
                     <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn'>report</td>
+                    <td className='userReportBtn' onClick={(e) => props.addToReported(e, answer.id)}>{answer.report}</td>
                   </tr>
               </tbody>
             </table>
+
+
           </div>
         )
 
@@ -47,7 +56,7 @@ const QuestionList = (props) => {
 QuestionList.propTypes = {
   helpfulAnswerClick:propTypes.func.isRequired,
   currentI: propTypes.number.isRequired,
-
+  addToReported: propTypes.func.isRequired,
   addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,

@@ -1,7 +1,4 @@
-class QnAClientHelpers {
-  constructor() {
-
-  }
+module.exports = {
   sortQuestions (questions) {
     let newArr = []
     let sortedCount = []
@@ -65,7 +62,7 @@ class QnAClientHelpers {
 
     return newArr;
 
-  }
+  },
 
   sortAnswers(answers, count = answers.length -1, final =[]) {
 
@@ -96,55 +93,60 @@ class QnAClientHelpers {
       })
       let filterSeller = current[0].filter((answer) => {
         if (answer.answerer_name === 'Seller') {
+
           return answer
         }
       })
-      if (filterSeller.length) {
+      let sellerCountArr = filterSeller.map((answer) => {
+        return answer.helpfulness
+      })
+      sellerCountArr = sellerCountArr.sort().reverse()
 
-        sortedArr = filterSeller.concat(sortedArr)
+      let sellerSortArr =[]
+
+
+      sellerCountArr.forEach(number => {
+        filterSeller.forEach(answer => {
+          if (number === answer.helpfulness) {
+            sellerSortArr.push(answer)
+          }
+        })
+      })
+
+      if (sellerSortArr.length) {
+
+
+        sortedArr = sellerSortArr.concat(sortedArr)
       }
       final.push(sortedArr)
       count --
       this.sortAnswers(answers, count, final)
 
     }
+
     return final
-  }
+  },
 
   filterAll(currentQuestions) {
 
-
-
-
     let filteredQuestions = this.sortQuestions(currentQuestions);
-
-    //get answers
     let answers = []
+
     currentQuestions.forEach((question) => {
-
-
       answers.push(question.answers)
 
     })
-    // console.log(filteredQuestions)
-
 
     let answerVals = []
-
     filteredQuestions.forEach((question) => {
       let values = Object.values(question.answers)
-
       answerVals.push(values)
     })
 
-
-
     let filteredAnswers = this.sortAnswers(answerVals)
-
-
     return [filteredQuestions, filteredAnswers]
 
-  }
+  },
 
   filterSearchInput(currentQuestions, searchTerm) {
 
@@ -160,11 +162,11 @@ class QnAClientHelpers {
 
     })
 
-
     return newQuestions
-  }
+  },
 
   showMoreAnsweredQuestions(arr) {
+
     let showButton;
       if (arr[0].length > 2) {
         showButton = true;
@@ -172,22 +174,15 @@ class QnAClientHelpers {
         showButton = false
       }
       return showButton
-  }
+  },
 
-  showMoreAnsweredBtnClass(bool, qClickCount, index) {
-    let newClass;
-    if (bool) {
-      newClass = 'moreAnsweredBtn'
+  moreAnsweredQButtonDisplay(qClickCount, index) {
+    let result = true;
+    if (qClickCount === index || qClickCount + 1 === index) {
+      result= false;
     }
-
-    if (qClickCount === index|| qClickCount - 1 === index) {
-      // console.log('hi')
-      newClass = 'moreAnswerBtn Hide'
-    }
-
-    return newClass
-
-  }
+    return result
+  },
 
   loadAnswerButtonText(currentCount) {
     let text;
@@ -199,7 +194,7 @@ class QnAClientHelpers {
       text = 'Load More Answers'
     }
     return text
-  }
+  },
 
   qListScrollClass (count) {
     let newClass;
@@ -208,7 +203,7 @@ class QnAClientHelpers {
     }
     return newClass
 
-  }
+  },
 
   answerHideClass(classname, index) {
     let newClass
@@ -223,7 +218,7 @@ class QnAClientHelpers {
       newClass = 'answerListTable Hide'
     }
     return newClass
-  }
+  },
 
   answerTableHideClass(count, i) {
     let newClass;
@@ -242,7 +237,7 @@ class QnAClientHelpers {
     }
     return newClass
 
-  }
+  },
 
   answerScrollClass(count){
     let newClass;
@@ -252,20 +247,36 @@ class QnAClientHelpers {
     }
 
     return newClass
-  }
+  },
 
-  showQuestionsClass(count, index) {
+  showQuestionsClass(clickCount, index) {
+
     let newClass;
-
-    if (count % 2 !== 0) {
-      if (index <= count) {
+    if (clickCount % 2 !== 0) {
+      if (index <= clickCount) {
         newClass = 'questionText'
       }
     }
     return newClass
+  },
+
+  showReportedClass(answers, ids) {
+    answers.forEach((answer) => {
+      answer.forEach((obj) => {
+        if (ids.includes(obj.id)) {
+          obj.report = 'reported'
+        } else {
+          obj.report = 'report'
+        }
+      })
+    })
+    return answers;
+
+
   }
+
 
 
 }
 
-export default QnAClientHelpers;
+
