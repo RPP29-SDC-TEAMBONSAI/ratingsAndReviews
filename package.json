@@ -8,7 +8,6 @@
     "start": "nodemon node server/index.js",
     "test": "jest --updateSnapshot",
     "test:watch": "jest --watch"
-
   },
   "jest": {
     "setupFilesAfterEnv": [
@@ -16,8 +15,7 @@
     ],
     "testPathIgnorePatterns": [
       "./node_modules/"
-    ],
-    "testEnvironment": "jsdom"
+    ]
   },
   "babel": {
     "presets": [
