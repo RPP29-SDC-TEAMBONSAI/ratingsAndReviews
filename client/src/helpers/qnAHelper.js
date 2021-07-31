@@ -1,7 +1,4 @@
-class QnAClientHelpers {
-  constructor() {
-
-  }
+module.exports = {
   sortQuestions (questions) {
     let newArr = []
     let sortedCount = []
@@ -65,7 +62,7 @@ class QnAClientHelpers {
 
     return newArr;
 
-  }
+  },
 
   sortAnswers(answers, count = answers.length -1, final =[]) {
 
@@ -109,42 +106,28 @@ class QnAClientHelpers {
 
     }
     return final
-  }
+  },
 
   filterAll(currentQuestions) {
 
-
-
-
     let filteredQuestions = this.sortQuestions(currentQuestions);
-
-    //get answers
     let answers = []
+
     currentQuestions.forEach((question) => {
-
-
       answers.push(question.answers)
 
     })
-    // console.log(filteredQuestions)
-
 
     let answerVals = []
-
     filteredQuestions.forEach((question) => {
       let values = Object.values(question.answers)
-
       answerVals.push(values)
     })
 
-
-
     let filteredAnswers = this.sortAnswers(answerVals)
-
-
     return [filteredQuestions, filteredAnswers]
 
-  }
+  },
 
   filterSearchInput(currentQuestions, searchTerm) {
 
@@ -161,9 +144,10 @@ class QnAClientHelpers {
     })
 
     return newQuestions
-  }
+  },
 
   showMoreAnsweredQuestions(arr) {
+
     let showButton;
       if (arr[0].length > 2) {
         showButton = true;
@@ -171,7 +155,7 @@ class QnAClientHelpers {
         showButton = false
       }
       return showButton
-  }
+  },
 
   showMoreAnsweredBtnClass(bool, qClickCount, index) {
     let newClass;
@@ -186,7 +170,7 @@ class QnAClientHelpers {
 
     return newClass
 
-  }
+  },
 
   loadAnswerButtonText(currentCount) {
     let text;
@@ -198,7 +182,7 @@ class QnAClientHelpers {
       text = 'Load More Answers'
     }
     return text
-  }
+  },
 
   qListScrollClass (count) {
     let newClass;
@@ -207,7 +191,7 @@ class QnAClientHelpers {
     }
     return newClass
 
-  }
+  },
 
   answerHideClass(classname, index) {
     let newClass
@@ -222,7 +206,7 @@ class QnAClientHelpers {
       newClass = 'answerListTable Hide'
     }
     return newClass
-  }
+  },
 
   answerTableHideClass(count, i) {
     let newClass;
@@ -241,7 +225,7 @@ class QnAClientHelpers {
     }
     return newClass
 
-  }
+  },
 
   answerScrollClass(count){
     let newClass;
@@ -251,20 +235,34 @@ class QnAClientHelpers {
     }
 
     return newClass
-  }
+  },
 
-  showQuestionsClass(count, index) {
+  showQuestionsClass(clickCount, index) {
+
     let newClass;
-
-    if (count % 2 !== 0) {
-      if (index <= count) {
+    if (clickCount % 2 !== 0) {
+      if (index <= clickCount) {
         newClass = 'questionText'
       }
     }
     return newClass
-  }
+  },
 
+  showReportedClass(answers, ids) {
+    answers.forEach((answer) => {
+      answer.forEach((obj) => {
+        if (ids.includes(obj.id)) {
+          obj.report = 'reported'
+        } else {
+          obj.report = 'report'
+        }
+      })
+    })
+    return answers;
+
+
+  }
 
 }
 
-export default QnAClientHelpers;
+
