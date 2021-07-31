@@ -77,6 +77,7 @@ export default class RelatedProducts extends React.Component {
     this.setState({
       loaded: false
     });
+
     axios.get(api + `products/${this.props.state.product_id}/styles`, {
       headers: {
         'Authorization': TOKEN
@@ -92,7 +93,7 @@ export default class RelatedProducts extends React.Component {
       })
     })
     .catch((err) => {
-      console.log('erroryuh', err)
+      console.log('err errrr', err)
       res.status(500).end()
     })
 
