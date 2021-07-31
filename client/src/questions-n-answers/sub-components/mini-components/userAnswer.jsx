@@ -3,9 +3,6 @@ import propTypes from 'prop-types';
 import {postAnswer, getUrl} from '../../../clientRoutes/qa'
 import AnswerImages from '../mini-components/answerImages.jsx'
 
-
-let key = '7d548a85605b208'
-
 class UserAnswer extends React.Component {
   constructor(props) {
     super(props)
@@ -64,7 +61,7 @@ class UserAnswer extends React.Component {
 
     postAnswer(newObj)
       .then(confirmation=> {
-        console.log(confirmation, "✅")
+        // console.log(confirmation, "✅")
         if (confirmation.status === 201) {
           this.props.updateAnswers();
         }
@@ -117,7 +114,7 @@ class UserAnswer extends React.Component {
     let url = this.state.data.substring(0)
     let photos = this.state.photos.slice()
     let uploadClass;
-    console.log(this.state.tempPhoto.size)
+    // console.log(this.state.tempPhoto.size)
 
 
     photos.push(url.toString())
@@ -128,7 +125,7 @@ class UserAnswer extends React.Component {
 
     getUrl(url)
       .then(newUrl => {
-        console.log
+        // console.log
         let newPhotos =[]
         newPhotos.push(newUrl)
 
