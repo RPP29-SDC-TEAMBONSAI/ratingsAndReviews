@@ -8,9 +8,18 @@ const ImageGallery = (props) => {
     return (
       <div className="image-gallery">
         <div className="image-sidebar">
+          {function () {
+            if (props.OverviewState.mainPhoto > 0) {
+              return (
+                <button className = "upArrow" onClick = {props.upArrow}>^</button>
+              )
+            }
+          }()}
+
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
             (photo) => {
               keyOne += 1;
+              if (keyOne < 7) {
               if (keyOne == props.OverviewState.mainPhoto) {
                 return (
                   <img
@@ -19,11 +28,10 @@ const ImageGallery = (props) => {
                     value={keyOne}
                     src={photo.url}
                     onClick={props.changeMainPhoto}
-                  ></img>
+                    ></img>
                 )
 
               } else {
-
                 return (
                   <img
                   className="gallery-image"
@@ -35,14 +43,36 @@ const ImageGallery = (props) => {
                   );
                 }
               }
+            }
           )}
+          {function () {
+            if (props.OverviewState.mainPhoto < props.state.styles[props.OverviewState.styleIndex].photos.length -1) {
+              return (
+                 <button className = "downArrow" onClick = {props.downArrow}>v</button>
+              )
+            }
+          }()}
+
         </div>
-        <div>
+
+        <div key = "div">
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
               (photo) => {
                 keyTwo += 1;
                 if (keyTwo == props.OverviewState.mainPhoto) {
                   return (
+                    <div className = "main-image">
+                      {function() {
+                        console.log('left', props.OverviewState.mainPhoto)
+                        if (props.OverviewState.mainPhoto > 0) {
+                          return (
+                            <button className = "main-image-left-arrow" onClick = {props.mainImageLeftArrow}>{function() {
+                              return '<'
+                            }()}</button>
+                            )
+                        }
+                      }()
+                    }
                     <img
                       className="main-photo"
                       key={keyTwo}
@@ -50,6 +80,14 @@ const ImageGallery = (props) => {
                       src={photo.url}
                       onClick={props.changeMainPhoto}
                     ></img>
+                    {function() {
+                      if (props.OverviewState.mainPhoto < props.state.styles[props.OverviewState.styleIndex].photos.length -1) {
+                        return (
+                          <button className = "main-image-right-arrow" onClick = {props.mainImageRightArrow}>></button>
+                          )
+                      }
+                    }()}
+                    </div>
                   );
                 }
               }

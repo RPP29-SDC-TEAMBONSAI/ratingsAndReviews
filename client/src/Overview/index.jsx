@@ -22,11 +22,13 @@ class Overview extends React.Component {
     this.changeSelectedQuantity = this.changeSelectedQuantity.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
     this.changeMainPhoto = this.changeMainPhoto.bind(this);
+    this.mainImageLeftArrow = this.mainImageLeftArrow.bind(this);
+    this.mainImageRightArrow = this.mainImageRightArrow.bind(this);
+    this.upArrow = this.upArrow.bind(this);
+    this.downArrow = this.downArrow.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("prevProps", prevProps);
-    console.log("current props", this.props);
     if (prevProps.state.product_id !== this.props.state.product_id) {
       this.setState({
         styleIndex: 0,
@@ -120,6 +122,30 @@ class Overview extends React.Component {
     }
   }
 
+  mainImageLeftArrow () {
+    console.log('left')
+    this.setState({
+      mainPhoto: this.state.mainPhoto - 1
+    })
+
+  }
+
+  mainImageRightArrow() {
+    console.log('right')
+    this.setState({
+      mainPhoto: this.state.mainPhoto + 1
+    })
+
+}
+
+upArrow() {
+
+}
+
+downArrow() {
+
+}
+
   render() {
     return (
       <div className="overview">
@@ -128,6 +154,8 @@ class Overview extends React.Component {
             state={this.props.state}
             OverviewState={this.state}
             changeMainPhoto={this.changeMainPhoto}
+            mainImageLeftArrow = {this.mainImageLeftArrow}
+            mainImageRightArrow = {this.mainImageRightArrow}
           />
         </div>
         <div className="column-two">

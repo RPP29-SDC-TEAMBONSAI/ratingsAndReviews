@@ -10,12 +10,4 @@ test('concatenates 3 words', () => {
 });
 
 
-//OVERVIEW TESTS
-//  unit tests:
-//   1. does index render?
-//   2. does it render current product name/price/catagory?
-//   3. does it show appropriate stars?
-//   4. does it render 8 images of different styles?
-//   5. does 'select size' show all sizes in stock?
-//   6. does quantity show integers from 1 to stock or 15 max?
-//   7. does add to cart do what its supposed to?
+
