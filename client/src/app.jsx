@@ -101,7 +101,7 @@ class App extends React.Component {
             QuestionSavedData ={this.state.savedQnA}
             currentItemName={this.state.currentItemName}/>
           <RatingsAndReviews
-            product_id={this.state.product_id}/>
+            product_id={28213}/>
         </div>
       )
     } else {

@@ -16,7 +16,7 @@ const QuestionsContainer = (props) => {
 
 
   return (
-    <div className={show ? `question Container`: `questionHide Container`}>
+    <div className={show ? `question container`: `questionHide container`}>
       <div className='questionAndAnswer'>
         <QuestionList
           addToReported={props.addToReported}
@@ -30,6 +30,8 @@ const QuestionsContainer = (props) => {
           questionCount={props.questionClickCount}
           answerCount={props.answerCount}
           classname={showQuestionClass ? showQuestionClass : props.classname}
+          show={show}
+          questionClickCount={props.questionClickCount}
         />
       </div>
       <div className='qna table'>

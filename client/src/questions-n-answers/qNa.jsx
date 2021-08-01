@@ -67,15 +67,21 @@ class QuestionsNAnswers extends React.Component {
        let answerIds = data.data
        let copy = this.props.data.slice()
        let sortedData= this.filterAnswersNQuestions(copy)
+      //  console.log(sortedData, '🤙')
        let showButton = helper.showMoreAnsweredQuestions(sortedData)
-      //  console.log(showButton)
+      //  console.log(sortedData)
+      // console.log(copy)
        let answers = helper.showReportedClass(sortedData[1], answerIds)
+
+
+
          this.setState({
           questions: sortedData[0],
           answers: answers,
           showQuestionButton: showButton,
           reported: answerIds
         })
+
        })
   }
 
@@ -286,6 +292,7 @@ class QuestionsNAnswers extends React.Component {
 
   filterAnswersNQuestions(currentQuestions) {
     let filtered = helper.filterAll(currentQuestions)
+
     return filtered
   }
 
