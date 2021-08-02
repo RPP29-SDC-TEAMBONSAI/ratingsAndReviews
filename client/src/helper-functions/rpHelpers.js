@@ -1,6 +1,6 @@
 const helper = {
   compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles, starRating) => {
-    console.log(JSON.stringify(starRating));
+
     let allPropsObj = {};
     let relatedProductsCopy = Object.assign(relatedProducts);
     let relatedProductsStylesCopy= Object.assign(relatedProductsStyles);

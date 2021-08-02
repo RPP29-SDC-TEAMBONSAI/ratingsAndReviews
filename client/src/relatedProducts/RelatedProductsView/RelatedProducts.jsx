@@ -123,7 +123,7 @@ export default class RelatedProducts extends React.Component {
     if (this.props.state.loaded === false || this.state.rpLoaded === false || this.state.yoLoaded === false) {
       return <div className='isLoading'>Loading...</div>
     }
-    console.log(`allProps: ${JSON.stringify(this.state.allPropsObj)}`)
+
     return (
       <div className='relatedProducts'>
         <RelatedProductsList
