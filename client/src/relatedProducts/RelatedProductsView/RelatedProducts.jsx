@@ -26,6 +26,7 @@ export default class RelatedProducts extends React.Component {
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
+    this.handleCompareItems = this.handleCompareItems.bind(this);
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
     this.getOutfitData = this.getOutfitData.bind(this);
   }
@@ -145,6 +146,11 @@ export default class RelatedProducts extends React.Component {
       })
     }
 
+    handleCompareItems(item, e) {
+      e.preventDefault();
+      console.log(`item to compare: ${JSON.stringify(item)}`);
+    }
+
 
   render() {
     if (this.props.state.loaded === false || this.state.rpLoaded === false || this.state.yoLoaded === false) {
@@ -156,6 +162,7 @@ export default class RelatedProducts extends React.Component {
         <RelatedProductsList
         allProps={this.state.allPropsObj}
         handleProductChange={this.props.handleProductChange}
+        handleCompareItems={this.handleCompareItems}
         state={this.props.state} />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}

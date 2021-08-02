@@ -24,6 +24,7 @@ const RelatedProductsCard = (props) => {
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
+        <button className='yourOutfitActionButton' onClick={(e) => {props.handleCompareItems(props.name, e)}}>X</button>
         <h3 className='productCategory'>{props.category}</h3>
         {(function() {
           if (props.salePrice === null) {
@@ -52,7 +53,8 @@ RelatedProductsCard.propTypes = {
   originalPrice: propTypes.any,
   category: propTypes.any,
   name: propTypes.any,
-  handleProductChange: propTypes.any,
+  handleProductChange: propTypes.func,
+  handleCompareItems: propTypes.func,
   id: propTypes.any,
   starRating: propTypes.object
   };

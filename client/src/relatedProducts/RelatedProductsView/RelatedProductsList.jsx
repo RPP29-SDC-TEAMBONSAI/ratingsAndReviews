@@ -20,6 +20,7 @@ const RelatedProductsList = (props) => {
                photo={product.photoUrl.thumbnail_url}
                id={product.itemId}
                handleProductChange={props.handleProductChange}
+               handleCompareItems={props.handleCompareItems}
                starRating={product.starRating}
        />
 
@@ -33,7 +34,8 @@ const RelatedProductsList = (props) => {
 
 RelatedProductsList.propTypes = {
   allProps: propTypes.any,
-  handleProductChange: propTypes.any,
+  handleProductChange: propTypes.func,
+  handleCompareItems: propTypes.func
   };
 
 export default RelatedProductsList;
