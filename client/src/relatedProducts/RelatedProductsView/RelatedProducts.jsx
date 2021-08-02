@@ -3,15 +3,18 @@ import propTypes from 'prop-types';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
-import {productsWithId, productsStyle} from "../../clientRoutes/products.js";
+import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
+import axios from 'axios';
+
+const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
+const api = require("../../../../config.js").API;
+
 
 
 export default class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductInfo: '',
-      currentProductStyles: '',
       relatedProducts: [],
       relatedProductsStyles: [],
       yourOutfitItems:[],
@@ -22,23 +25,26 @@ export default class RelatedProducts extends React.Component {
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
-  }
-
-  handleAddToOutfit () {
-    //console.log('item added to outfit! 🐮', outfitItem);
+    this.getOutfitData = this.getOutfitData.bind(this);
   }
 
   componentDidMount () {
     this.getRelatedStateData();
+    this.getOutfitData();
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevProps.state.product_id !== this.props.state.product_id) {
+    if (prevProps.state.product_id !== this.props.state.product_id ||
+        prevState.yourOutfitItems !== this.state.yourOutfitItems) {
       this.getRelatedStateData();
+      this.getOutfitData();
     }
   }
 
   getRelatedStateData() {
+    this.setState({
+      loaded: false
+    });
     this.props.state.relatedProducts.forEach((productId) => {
       Promise.all([
         productsWithId(productId),
@@ -52,13 +58,10 @@ export default class RelatedProducts extends React.Component {
         })
       })
       .then(() => {
-        let productStylesWithId = helper.addIdToStylesData(this.props.state.styles, this.props.state.product_id);
         let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
-        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , productStylesWithId);
 
         this.setState({
           allPropsObj: allPropsObj,
-          outfitPropsObj: outfitPropsObj
         })
       })
       .then(() => {
@@ -72,6 +75,42 @@ export default class RelatedProducts extends React.Component {
     });
     }
 
+    getOutfitData () {
+    this.setState({
+      loaded: false
+    });
+
+    axios.get(api + `products/${this.props.state.product_id}/styles`, {
+      headers: {
+        'Authorization': TOKEN
+      }
+    })
+    .then((styleData)=> {
+      let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+      return outfitPropsObj;
+    })
+    .then(outfitPropsObj => {
+      this.setState({
+        outfitPropsObj: outfitPropsObj,
+        loaded: true
+      })
+    })
+    .catch((err) => {
+      console.log('err errrr', err)
+      res.status(500).end()
+    })
+
+    }
+
+    handleAddToOutfit (outfitItem, e) {
+      //console.log(`handler received ${outfitItem}`);
+      e.preventDefault();
+      this.setState({
+        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
+      })
+    }
+
+
   render() {
     if (this.props.state.loaded === false || this.state.loaded === false) {
       return <div className='isLoading'>Loading...</div>
@@ -79,8 +118,15 @@ export default class RelatedProducts extends React.Component {
 
     return (
       <div className='relatedProducts'>
-        <RelatedProductsList allProps={this.state.allPropsObj} handleProductChange={this.props.handleProductChange} />
-        <YourOutfitList allProps={this.state.outfitPropsObj} handleAddToOutfit={this.handleAddToOutfit} />
+        <RelatedProductsList
+        allProps={this.state.allPropsObj}
+        handleProductChange={this.props.handleProductChange}
+        state={this.props.state} />
+        <YourOutfitList
+        outfitProps={this.state.outfitPropsObj}
+        handleAddToOutfit={this.handleAddToOutfit}
+        outfitItems={this.state.yourOutfitItems}
+        state={this.props.state} />
       </div>
     );
   }
