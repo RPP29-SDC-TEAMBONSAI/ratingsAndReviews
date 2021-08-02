@@ -20,7 +20,8 @@ export default class RelatedProducts extends React.Component {
       yourOutfitItems:[],
       allPropsObj: [],
       outfitPropsObj: [],
-      loaded: false
+      rpLoaded: false,
+      yoLoaded: false
 
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
@@ -43,7 +44,7 @@ export default class RelatedProducts extends React.Component {
 
   getRelatedStateData() {
     this.setState({
-      loaded: false
+      rpLoaded: false
     });
     this.props.state.relatedProducts.forEach((productId) => {
       Promise.all([
@@ -51,6 +52,7 @@ export default class RelatedProducts extends React.Component {
         productsStyle(productId)
       ])
       .then((results) => {
+        console.log(JSON.stringify(results[1].data));
         let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
         this.setState({
           relatedProducts: [...this.state.relatedProducts, results[0].data],
@@ -66,7 +68,7 @@ export default class RelatedProducts extends React.Component {
       })
       .then(() => {
         this.setState({
-          loaded: true,
+          rpLoaded: true,
         })
       })
       .catch((err) => {
@@ -77,7 +79,7 @@ export default class RelatedProducts extends React.Component {
 
     getOutfitData () {
     this.setState({
-      loaded: false
+      yoLoaded: false
     });
 
     axios.get(api + `products/${this.props.state.product_id}/styles`, {
@@ -92,7 +94,7 @@ export default class RelatedProducts extends React.Component {
     .then(outfitPropsObj => {
       this.setState({
         outfitPropsObj: outfitPropsObj,
-        loaded: true
+        yoLoaded: true
       })
     })
     .catch((err) => {
@@ -103,11 +105,14 @@ export default class RelatedProducts extends React.Component {
     }
 
     handleAddToOutfit (outfitItem, e) {
-      //console.log(`handler received ${outfitItem}`);
       e.preventDefault();
+      console.log(`❤️ handler received ${JSON.stringify(outfitItem)}`);
+      console.log(`💙 yourOutfitItemsbefore: ${JSON.stringify(this.state.yourOutfitItems)}`)
+      localStorage.setItem('outfitItem', outfitItem);
       this.setState({
         yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
       })
+      console.log(`🧡 yourOutfitItemsafter: ${JSON.stringify(this.state.yourOutfitItems)}`)
     }
 
 

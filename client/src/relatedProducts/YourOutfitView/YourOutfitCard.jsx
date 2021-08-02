@@ -19,7 +19,7 @@ const getStars = function (starsObject) {
 };
 
 const YourOutfitCard = (props) => {
-  console.log(`card props: ${JSON.stringify(props)}`)
+  //console.log(`card props: ${JSON.stringify(props)}`)
   return (
     <div className='yourOutfitCard'>
         <h2 className='productName'>{props.outfitProps.name}</h2>
