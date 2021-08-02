@@ -48,6 +48,16 @@ export default class RelatedProducts extends React.Component {
     if (prevProps.state.product_id !== this.props.state.product_id) {
       this.getRelatedStateData();
       this.getOutfitData();
+      let values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+      while ( i-- ) {
+          values.push( JSON.parse(localStorage.getItem(keys[i])) );
+      }
+      this.setState({
+        yourOutfitItems: values
+      })
     }
   }
 
@@ -115,7 +125,9 @@ export default class RelatedProducts extends React.Component {
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
       localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
-
+      this.setState({
+        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
+      })
     }
 
 
