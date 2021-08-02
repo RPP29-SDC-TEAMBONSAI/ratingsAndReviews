@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-//import helper from './helper-functions/rpHelpers.js';
+//import helper from '../helper-functions/rpHelpers.js';
 //import exampleData from './RelatedProducts/exampleData.jsx';
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
 import RelatedProductsCard from '../RelatedProducts/RelatedProductsView/RelatedProductsCard.jsx';
