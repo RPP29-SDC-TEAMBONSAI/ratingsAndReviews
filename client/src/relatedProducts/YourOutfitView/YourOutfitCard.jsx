@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Stars from "../../stars/stars.jsx";
 
+
 const getStars = function (starsObject) {
   let total = 0;
   let numberOfRatings = 0;

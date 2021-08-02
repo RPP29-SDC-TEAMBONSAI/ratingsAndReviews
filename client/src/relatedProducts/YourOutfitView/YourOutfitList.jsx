@@ -27,7 +27,7 @@ const YourOutfitList = (props) => {
 
 YourOutfitList.propTypes = {
   handleAddToOutfit: propTypes.func,
-  outfitProps: propTypes.array,
+  outfitProps: propTypes.any,
   state: propTypes.object,
   outfitItems: propTypes.array
   };

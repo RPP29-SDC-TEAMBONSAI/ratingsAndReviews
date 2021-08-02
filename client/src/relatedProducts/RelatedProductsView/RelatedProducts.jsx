@@ -102,8 +102,9 @@ export default class RelatedProducts extends React.Component {
 
     }
 
-    handleAddToOutfit (outfitItem) {
+    handleAddToOutfit (outfitItem, e) {
       //console.log(`handler received ${outfitItem}`);
+      e.preventDefault();
       this.setState({
         yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
       })

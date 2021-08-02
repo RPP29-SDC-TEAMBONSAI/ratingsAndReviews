@@ -8,7 +8,7 @@ const AddToOutfitCard = (props) => {
     <div className='addToOutfitCard'>
         <button className='addToOutfitButton'
         style={{'fontSize': '50px'}}
-        onClick={() => {props.handleAddToOutfit(props.outfitProps)}}
+        onClick={(e) => {props.handleAddToOutfit(props.outfitProps, e)}}
         >+</button>
     </div>
   )
@@ -16,8 +16,8 @@ const AddToOutfitCard = (props) => {
 
 AddToOutfitCard.propTypes = {
   handleAddToOutfit: propTypes.func,
-  outfitProps: propTypes.array,
-  state: propTypes.any
+  outfitProps: propTypes.any,
+  state: propTypes.object
   };
 
   export default AddToOutfitCard;
