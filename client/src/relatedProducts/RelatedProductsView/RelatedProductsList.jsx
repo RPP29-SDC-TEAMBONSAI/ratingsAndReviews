@@ -20,6 +20,7 @@ const RelatedProductsList = (props) => {
                photo={product.photoUrl.thumbnail_url}
                id={product.itemId}
                handleProductChange={props.handleProductChange}
+               starRating={props.state.ratings}
        />
 
        </div>
@@ -32,7 +33,8 @@ const RelatedProductsList = (props) => {
 
 RelatedProductsList.propTypes = {
   allProps: propTypes.any,
-  handleProductChange: propTypes.any
+  handleProductChange: propTypes.any,
+  state: propTypes.object
   };
 
 export default RelatedProductsList;

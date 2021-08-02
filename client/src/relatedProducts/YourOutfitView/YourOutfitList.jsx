@@ -16,6 +16,7 @@ const YourOutfitList = (props) => {
                <YourOutfitCard
                 key={outfitItem.id}
                 outfitProps={outfitItem}
+                starRating={props.state.ratings}
                 />
              </div>)
     })}
@@ -26,7 +27,7 @@ const YourOutfitList = (props) => {
 
 YourOutfitList.propTypes = {
   handleAddToOutfit: propTypes.func,
-  outfitProps: propTypes.object,
+  outfitProps: propTypes.array,
   state: propTypes.object,
   outfitItems: propTypes.array
   };

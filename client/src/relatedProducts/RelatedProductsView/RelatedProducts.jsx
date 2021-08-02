@@ -5,6 +5,7 @@ import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
 import axios from 'axios';
+
 const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
 
@@ -58,6 +59,7 @@ export default class RelatedProducts extends React.Component {
       })
       .then(() => {
         let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
+
         this.setState({
           allPropsObj: allPropsObj,
         })
@@ -82,9 +84,10 @@ export default class RelatedProducts extends React.Component {
       headers: {
         'Authorization': TOKEN
       }
-    }).then((styleData)=> {
+    })
+    .then((styleData)=> {
       let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-      return outfitPropsObj
+      return outfitPropsObj;
     })
     .then(outfitPropsObj => {
       this.setState({
@@ -116,7 +119,8 @@ export default class RelatedProducts extends React.Component {
       <div className='relatedProducts'>
         <RelatedProductsList
         allProps={this.state.allPropsObj}
-        handleProductChange={this.props.handleProductChange} />
+        handleProductChange={this.props.handleProductChange}
+        state={this.props.state} />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
         handleAddToOutfit={this.handleAddToOutfit}
