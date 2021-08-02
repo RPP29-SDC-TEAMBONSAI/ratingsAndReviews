@@ -42,6 +42,7 @@ export default class RelatedProducts extends React.Component {
   }
 
   getRelatedStateData() {
+    console.log('hi')
     this.setState({
       loaded: false
     });
