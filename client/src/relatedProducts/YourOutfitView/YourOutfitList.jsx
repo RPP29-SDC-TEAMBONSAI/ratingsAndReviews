@@ -4,19 +4,18 @@ import YourOutfitCard from './YourOutfitCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const YourOutfitList = (props) => {
-  //console.log(`outfititms ${JSON.stringify(props.outfitItems)}`)
   return (
     <div className='yourOutfitListContainer'>
       <h2>Your Outfit: </h2>
     <div className='yourOutfitList'>
     <AddToOutfitCard handleAddToOutfit={props.handleAddToOutfit} outfitProps={props.outfitProps} state={props.state} />
     {props.outfitItems.map((outfitItem, i) => {
-      //console.log(`🐥 outfitItembeing cardified: ${JSON.stringify(outfitItem)}`)
       return (<div className='outfitItem' key={i}>
                <YourOutfitCard
                 key={outfitItem.id}
                 outfitProps={outfitItem}
                 starRating={props.state.ratings}
+                handleRemoveFromOutfit={props.handleRemoveFromOutfit}
                 />
              </div>)
     })}
@@ -27,9 +26,10 @@ const YourOutfitList = (props) => {
 
 YourOutfitList.propTypes = {
   handleAddToOutfit: propTypes.func,
-  outfitProps: propTypes.any,
+  handleRemoveFromOutfit: propTypes.func,
+  outfitProps: propTypes.object,
   state: propTypes.object,
-  outfitItems: propTypes.array
+  outfitItems: propTypes.array,
   };
 
 export default YourOutfitList;

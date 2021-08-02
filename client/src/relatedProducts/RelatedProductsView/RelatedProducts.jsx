@@ -25,6 +25,7 @@ export default class RelatedProducts extends React.Component {
 
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
+    this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
     this.getOutfitData = this.getOutfitData.bind(this);
   }
@@ -36,8 +37,8 @@ export default class RelatedProducts extends React.Component {
       keys = Object.keys(localStorage),
       i = keys.length;
 
-      while ( i-- ) {
-          values.push( JSON.parse(localStorage.getItem(keys[i])) );
+      while (i-- ) {
+        values.push( JSON.parse(localStorage.getItem(keys[i])) );
       }
       this.setState({
         yourOutfitItems: values
@@ -130,6 +131,20 @@ export default class RelatedProducts extends React.Component {
       })
     }
 
+    handleRemoveFromOutfit(outfitItem, e) {
+      e.preventDefault();
+
+      let removedItemId = outfitItem.product_id;
+      let outfitItemsCopy = Object.assign(this.state.yourOutfitItems);
+      let filtered = outfitItemsCopy.filter(product => {
+        return product.product_id !== removedItemId
+      });
+      localStorage.removeItem(removedItemId);
+      this.setState({
+        yourOutfitItems: filtered
+      })
+    }
+
 
   render() {
     if (this.props.state.loaded === false || this.state.rpLoaded === false || this.state.yoLoaded === false) {
@@ -145,6 +160,7 @@ export default class RelatedProducts extends React.Component {
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
         handleAddToOutfit={this.handleAddToOutfit}
+        handleRemoveFromOutfit={this.handleRemoveFromOutfit}
         outfitItems={this.state.yourOutfitItems}
         state={this.props.state} />
       </div>
