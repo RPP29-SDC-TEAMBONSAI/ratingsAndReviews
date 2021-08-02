@@ -32,11 +32,20 @@ export default class RelatedProducts extends React.Component {
   componentDidMount () {
     this.getRelatedStateData();
     this.getOutfitData();
+    let values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+      while ( i-- ) {
+          values.push( JSON.parse(localStorage.getItem(keys[i])) );
+      }
+      this.setState({
+        yourOutfitItems: values
+      })
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevProps.state.product_id !== this.props.state.product_id ||
-        prevState.yourOutfitItems !== this.state.yourOutfitItems) {
+    if (prevProps.state.product_id !== this.props.state.product_id) {
       this.getRelatedStateData();
       this.getOutfitData();
     }
@@ -52,7 +61,6 @@ export default class RelatedProducts extends React.Component {
         productsStyle(productId)
       ])
       .then((results) => {
-        console.log(JSON.stringify(results[1].data));
         let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
         this.setState({
           relatedProducts: [...this.state.relatedProducts, results[0].data],
@@ -60,7 +68,7 @@ export default class RelatedProducts extends React.Component {
         })
       })
       .then(() => {
-        let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
+        let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles, this.props.state.ratings);
 
         this.setState({
           allPropsObj: allPropsObj,
@@ -106,21 +114,16 @@ export default class RelatedProducts extends React.Component {
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-      console.log(`❤️ handler received ${JSON.stringify(outfitItem)}`);
-      console.log(`💙 yourOutfitItemsbefore: ${JSON.stringify(this.state.yourOutfitItems)}`)
-      localStorage.setItem('outfitItem', outfitItem);
-      this.setState({
-        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
-      })
-      console.log(`🧡 yourOutfitItemsafter: ${JSON.stringify(this.state.yourOutfitItems)}`)
+      localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
+
     }
 
 
   render() {
-    if (this.props.state.loaded === false || this.state.loaded === false) {
+    if (this.props.state.loaded === false || this.state.rpLoaded === false || this.state.yoLoaded === false) {
       return <div className='isLoading'>Loading...</div>
     }
-
+    console.log(`allProps: ${JSON.stringify(this.state.allPropsObj)}`)
     return (
       <div className='relatedProducts'>
         <RelatedProductsList

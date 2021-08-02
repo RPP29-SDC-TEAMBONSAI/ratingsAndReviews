@@ -4,7 +4,7 @@ import YourOutfitCard from './YourOutfitCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const YourOutfitList = (props) => {
-  console.log(`outfititms ${JSON.stringify(props.outfitItems)}`)
+  //console.log(`outfititms ${JSON.stringify(props.outfitItems)}`)
   return (
     <div className='yourOutfitListContainer'>
       <h2>Your Outfit: </h2>
