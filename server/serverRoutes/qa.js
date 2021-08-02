@@ -11,7 +11,7 @@ module.exports = {
   questions: (req, res) => {
 
     let url = req.url.split('=')
-    let request = api + `qa/questions?product_id=${Number(url[1])}&page=1&count=200`
+    let request = api + `qa/questions?product_id=${Number(url[1])}&page=1&count=25`
 
     axios.get(request, {
       headers: {

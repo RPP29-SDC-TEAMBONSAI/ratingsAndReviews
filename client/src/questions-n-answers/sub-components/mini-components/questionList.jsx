@@ -7,20 +7,18 @@ const QuestionList = (props) => {
 
   let scrollClass = props.addAnswerScroll(props.answerCount)
 
-
-
   return (
     <div>
       <h4 className={''}>Q: {props.question.question_body}</h4>
       <div className={scrollClass ? scrollClass : 'list container'}>
 
-
-
       {props.answers.map((answer, index) => {
+
 
         let _class= props.answerHide(props.classname, index, props.questionClickCount)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
         let showClass;
+        console.log(_class)
 
         if (showOrHideClass === 'answerListTable') {
 
@@ -54,7 +52,7 @@ const QuestionList = (props) => {
 
       })}
       </div>
-    </div>
+      </div>
   )
 }
 

@@ -58,6 +58,7 @@ class QuestionsNAnswers extends React.Component {
     this.addAnswer = this.addAnswer.bind(this)
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
     this.addToReported = this.addToReported.bind(this)
+    this.answerHide2 = this.answerHide2.bind(this)
 
   }
   componentDidMount() {
@@ -113,7 +114,7 @@ class QuestionsNAnswers extends React.Component {
            }
 
          })
-         console.log(showButton)
+        //  console.log(showButton)
 
         this.setState({
           questions: sortedData[0],
@@ -351,7 +352,15 @@ class QuestionsNAnswers extends React.Component {
     let newClass = helper.answerHideClass(classname, index);
     return newClass
   }
+  answerHide2 (bool) {
+    // console.log(bool)
+    let className='questionText Hide';
+    if (bool) {
+      className = 'questionText'
+    }
+    return className
 
+  }
   answerTableHide(currentCount, i) {
     let newClass = helper.answerTableHideClass(currentCount, i)
     return newClass
@@ -540,8 +549,21 @@ class QuestionsNAnswers extends React.Component {
         <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
           <div className={`List container`}>
             {this.state.questions.map((question, index) => {
+            let currentClass;
+            let show = false;
+            if (this.state.questionClickCount === 1 && index <= this.state.questionClickCount) {
+              show = true
+            }
+            if (this.state.questionClickCount >= 3 && index <= this.state.questionClickCount) {
+              show = true
+            }
 
-              let currentClass;
+           let answerClass =  this.answerHide2(show)
+          //  console.log(answerClass)
+
+
+
+
               if (index <= 1) {
                 currentClass = 'questionText'
 
@@ -558,7 +580,8 @@ class QuestionsNAnswers extends React.Component {
                       addAnswerScroll={this.addAnswerScroll}
                       answerTableHide={this.answerTableHide}
                       answerHide={this.answerHide}
-                      // showButton={this.showButton}
+                      answerHide2={this.answerHide2}
+                      answerClass={answerClass}
                       lastI={this.state.lastIndex}
                       answerScroll={this.state.answerScroll}
                       questionClickCount={this.state.questionClickCount}
@@ -568,6 +591,7 @@ class QuestionsNAnswers extends React.Component {
                       question={question}
                       addAnswerOnClick={this.addAnswerOnClick}
                       question_id={question.question_id}
+                      show={show}
                     />
             })}
           </div>
