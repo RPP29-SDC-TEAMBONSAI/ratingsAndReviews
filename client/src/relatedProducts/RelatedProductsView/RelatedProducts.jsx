@@ -31,20 +31,103 @@ export default class RelatedProducts extends React.Component {
     this.getOutfitData = this.getOutfitData.bind(this);
   }
 
-  componentDidMount () {
-    this.getRelatedStateData();
-    this.getOutfitData();
-    let values = [],
-      keys = Object.keys(localStorage),
-      i = keys.length;
+  // componentDidMount () {
+  //   this.getRelatedStateData();
+  //   this.getOutfitData();
+  //   let values = [],
+  //     keys = Object.keys(localStorage),
+  //     i = keys.length;
 
-      while (i-- ) {
-        values.push( JSON.parse(localStorage.getItem(keys[i])) );
-      }
-      this.setState({
-        yourOutfitItems: values
+  //     while (i-- ) {
+  //       values.push( JSON.parse(localStorage.getItem(keys[i])) );
+  //     }
+  //     this.setState({
+  //       yourOutfitItems: values
+  //     })
+  // }
+
+  componentDidMount () {
+    let getProduct = new Promise((resolve, reject) => {
+      let result=[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsWithId(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
+
+              resolve(result)
+            }
+          })
       })
+    })
+
+    let getStyle = new Promise((resolve, reject) => {
+      let result =[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsStyle(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
+              resolve(result)
+            }
+          })
+      })
+    })
+    let outFitData = new Promise((resolve, reject) => {
+      axios.get(api + `products/${this.props.state.product_id}/styles`, {
+        headers: {
+          'Authorization': TOKEN
+        }
+      })
+      .then((styleData)=> {
+        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+        resolve(outfitPropsObj);
+      })
+    })
+
+    getProduct.then(data => {
+      getStyle.then(styleData => {
+        outFitData.then(fitData => {
+
+
+
+        let resultStyleWithId=[];
+        data.forEach((product, pi) => {
+          styleData.forEach((style, si) => {
+              if (pi === si) {
+              resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
+              }
+
+          })
+        })
+
+       let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
+
+
+       this.setState({
+        relatedProducts: data,
+        relatedProductsStyles: resultStyleWithId,
+        allPropsObj:allPropsObj,
+        rpLoaded: true,
+        outfitPropsObj: fitData,
+        yoLoaded: true
+       })
+       let values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+        while ( i-- ) {
+            values.push( JSON.parse(localStorage.getItem(keys[i])) );
+        }
+        this.setState({
+          yourOutfitItems: values
+        })
+
+      })
+    })
+  })
   }
+
 
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.state.product_id !== this.props.state.product_id) {
