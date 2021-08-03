@@ -27,12 +27,82 @@ export default class RelatedProducts extends React.Component {
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
     this.getOutfitData = this.getOutfitData.bind(this);
+
   }
 
   componentDidMount () {
+    //for first request
+    let getProduct = new Promise((resolve, reject) => {
+      let result=[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsWithId(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
 
-    this.getRelatedStateData(),
-    this.getOutfitData()
+              resolve(result)
+            }
+          })
+      })
+    })
+
+    let getStyle = new Promise((resolve, reject) => {
+      let result =[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsStyle(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
+              resolve(result)
+            }
+          })
+      })
+    })
+    let outFitData = new Promise((resolve, reject) => {
+      axios.get(api + `products/${this.props.state.product_id}/styles`, {
+        headers: {
+          'Authorization': TOKEN
+        }
+      })
+      .then((styleData)=> {
+        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+        resolve(outfitPropsObj);
+      })
+    })
+
+    getProduct.then(data => {
+      getStyle.then(styleData => {
+        outFitData.then(fitData => {
+
+
+
+        let resultStyleWithId=[];
+        data.forEach((product, pi) => {
+          styleData.forEach((style, si) => {
+              if (pi === si) {
+              resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
+              }
+
+          })
+        })
+
+       let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
+       console.log(fitData)
+
+       this.setState({
+        relatedProducts: data,
+        relatedProductsStyles: resultStyleWithId,
+        allPropsObj:allPropsObj,
+        rpLoaded: true,
+        outfitPropsObj: fitData,
+        yoLoaded: true
+       })
+
+
+      })
+    })
+  })
+
 
   }
 
@@ -44,89 +114,93 @@ export default class RelatedProducts extends React.Component {
     }
   }
 
+
+
   getRelatedStateData() {
 
-    this.setState({
-      rpLoaded: false
-    });
-    // console.log(this)
 
-    this.props.state.relatedProducts.forEach((productId) => {
+    // this.setState({
+    //   rpLoaded: false
+    // });
+    // // console.log(this)
 
-
-      Promise.all([
-
-        productsWithId(productId),
-        productsStyle(productId)
-      ])
-      .then((results) => {
+    // this.props.state.relatedProducts.forEach((productId) => {
 
 
-        // console.log(JSON.stringify(results[1].data));
-        let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
-        console.log(resultStyleWithId)
-        this.setState({
-          relatedProducts: [...this.state.relatedProducts, results[0].data],
-          relatedProductsStyles: [...this.state.relatedProductsStyles, resultStyleWithId]
-        })
-        // console.log(this.state)
-      })
-      .then(() => {
-        let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
+    //   Promise.all([
 
-        this.setState({
-          allPropsObj: allPropsObj,
-        })
-      })
-      .then(() => {
-        this.setState({
-          rpLoaded: true,
-        })
+    //     productsWithId(productId),
+    //     productsStyle(productId)
+    //   ])
+    //   .then((results) => {
+    //     // console.log(results)
 
 
-      })
-      .catch((err) => {
-        // console.log('this is the err 🥲 ', err)
-      });
-    });
+    //     // console.log(JSON.stringify(results[1].data));
+    //     let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
+    //     // console.log(resultStyleWithId)
+    //     this.setState({
+    //       relatedProducts: [...this.state.relatedProducts, results[0].data],
+    //       relatedProductsStyles: [...this.state.relatedProductsStyles, resultStyleWithId]
+    //     })
+    //     // console.log(this.state)
+    //   })
+    //   .then(() => {
+    //     let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
+
+    //     this.setState({
+    //       allPropsObj: allPropsObj,
+    //     })
+    //   })
+    //   .then(() => {
+    //     this.setState({
+    //       rpLoaded: true,
+    //     })
+
+
+    //   })
+    //   .catch((err) => {
+    //     // console.log('this is the err 🥲 ', err)
+    //   });
+    // });
     }
 
     getOutfitData () {
-    this.setState({
-      yoLoaded: false
-    });
+    // this.setState({
+    //   yoLoaded: false
+    // });
 
-    axios.get(api + `products/${this.props.state.product_id}/styles`, {
-      headers: {
-        'Authorization': TOKEN
-      }
-    })
-    .then((styleData)=> {
-      let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-      return outfitPropsObj;
-    })
-    .then(outfitPropsObj => {
-      this.setState({
-        outfitPropsObj: outfitPropsObj,
-        yoLoaded: true
-      })
-    })
-    .catch((err) => {
-      // console.log('err errrr', err)
-      res.status(500).end()
-    })
+    // axios.get(api + `products/${this.props.state.product_id}/styles`, {
+    //   headers: {
+    //     'Authorization': TOKEN
+    //   }
+    // })
+    // .then((styleData)=> {
+    //   let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+    //   return outfitPropsObj;
+    // })
+    // .then(outfitPropsObj => {
+    //   this.setState({
+    //     outfitPropsObj: outfitPropsObj,
+    //     yoLoaded: true
+    //   })
+    // })
+    // .catch((err) => {
+    //   // console.log('err errrr', err)
+    //   res.status(500).end()
+    // })
 
     }
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-      console.log(`❤️ handler received ${JSON.stringify(outfitItem)}`);
-      console.log(`💙 yourOutfitItemsbefore: ${JSON.stringify(this.state.yourOutfitItems)}`)
+      // console.log(`❤️ handler received ${JSON.stringify(outfitItem)}`);
+      // console.log(`💙 yourOutfitItemsbefore: ${JSON.stringify(this.state.yourOutfitItems)}`)
       localStorage.setItem('outfitItem', outfitItem);
       this.setState({
         yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
       })
-      console.log(`🧡 yourOutfitItemsafter: ${JSON.stringify(this.state.yourOutfitItems)}`)
+      // console.log(`🧡 yourOutfitItemsafter: ${JSON.stringify(this.state.yourOutfitItems)}`)
     }
 
 

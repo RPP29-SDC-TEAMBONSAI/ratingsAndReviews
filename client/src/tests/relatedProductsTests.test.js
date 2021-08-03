@@ -37,24 +37,20 @@ describe('RelatedProducts', () => {
       const instance = wrapper.instance()
       //set up spys
       jest.spyOn(instance, 'componentDidMount')
-      jest.spyOn(instance, 'getRelatedStateData')
-      jest.spyOn(instance, 'getOutfitData')
 
       //mount the instance
       instance.componentDidMount()
       console.log(instance)
       //test the instance
       expect(instance.componentDidMount).toBeCalledTimes(1)
-      expect(instance.getRelatedStateData).toBeCalledTimes(1)
-      expect(instance.getOutfitData).toBeCalledTimes(1)
 
     })
     //unfinished new test for componentDidMount here - this one is for rendering
     test('on mount, component displays correct styles for current related product', () => {
       const component = renderer.create(<RelatedProducts state={props.state}/>)
       const instance = component.getInstance()
-      console.log(instance)
-      console.log(component.toJSON())
+      // console.log(instance)
+      // console.log(component.toJSON())
       //for whatever reason you the instance log above does not show the state.
       //however if you run this test - and console.log(this.state) in your component
       //after the state has been set - it shows up.  This is super weird because in my tests
