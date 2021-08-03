@@ -240,6 +240,7 @@ describe('QuestionsNAnswers', () => {
       test('before click, question scroll container should not appear', () => {
         const component = renderer.create(<QuestionsNAnswers {...props}/>);
         const instance = component.getInstance()
+
         instance.componentDidMount()
 
         return instance.getReportedAns().then(data => {
@@ -265,7 +266,9 @@ describe('QuestionsNAnswers', () => {
         const instance = component.getInstance()
         instance.componentDidMount()
 
+
         return instance.getReportedAns().then(data => {
+          console.log(instance)
           jest.spyOn(instance, 'loadQuestionClick')
           let currentQuestions = component.toJSON().children[3].children[0].children;
           let currentShowClassDivs = currentQuestions.filter((question) => {

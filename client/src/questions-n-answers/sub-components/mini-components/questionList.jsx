@@ -18,7 +18,7 @@ const QuestionList = (props) => {
         let _class= props.answerHide(props.classname, index, props.questionClickCount)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
         let showClass;
-        console.log(_class)
+        // console.log(_class)
 
         if (showOrHideClass === 'answerListTable') {
 

@@ -30,8 +30,10 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-    this.getRelatedStateData();
-    this.getOutfitData();
+
+    this.getRelatedStateData(),
+    this.getOutfitData()
+
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -43,22 +45,31 @@ export default class RelatedProducts extends React.Component {
   }
 
   getRelatedStateData() {
-    console.log('hi')
+
     this.setState({
       rpLoaded: false
     });
+    // console.log(this)
+
     this.props.state.relatedProducts.forEach((productId) => {
+
+
       Promise.all([
+
         productsWithId(productId),
         productsStyle(productId)
       ])
       .then((results) => {
-        console.log(JSON.stringify(results[1].data));
+
+
+        // console.log(JSON.stringify(results[1].data));
         let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
+        console.log(resultStyleWithId)
         this.setState({
           relatedProducts: [...this.state.relatedProducts, results[0].data],
           relatedProductsStyles: [...this.state.relatedProductsStyles, resultStyleWithId]
         })
+        // console.log(this.state)
       })
       .then(() => {
         let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
@@ -71,9 +82,11 @@ export default class RelatedProducts extends React.Component {
         this.setState({
           rpLoaded: true,
         })
+
+
       })
       .catch((err) => {
-        console.log('this is the err 🥲 ', err)
+        // console.log('this is the err 🥲 ', err)
       });
     });
     }
@@ -99,7 +112,7 @@ export default class RelatedProducts extends React.Component {
       })
     })
     .catch((err) => {
-      console.log('err errrr', err)
+      // console.log('err errrr', err)
       res.status(500).end()
     })
 
