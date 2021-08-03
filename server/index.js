@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 // SERVER ROUTES
-const { reviews, reviewsMeta } = require("./serverRoutes/reviews.js");
+const { reviews, reviewsMeta, reviewsHelpful, reviewsReport } = require("./serverRoutes/reviews.js");
 const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
 const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported} = require("./serverRoutes/qa.js");
 const { cart } = require("./serverRoutes/cart.js");
@@ -27,22 +27,19 @@ app.get('/products', products)
   .get('/qa/questions/:product_id?', questions)
   .get('/qa/questions/:question_id/answers', answers)
   .get('/cart', cart)
-
-//put request for helpfulness Question
-app.put('/qa/questions/:question_id?', updateHelpfulness)
-//put request for helpfulness Answer
-app.put('/qa/answers/:answer_id?', updateAnswerHelpfulness)
-//post request for new question
-app.post('/qa/questions', postQuestion)
-//post request for new answer
-app.post('/qa/questions/:question_id?/answers', postAnswer)
-app.post('/qa/questions/get/photo-url', getUrl)
-app.post('/qa/questions/store-reported-answer', addToReported)
-app.get('/reported/answers', getReported)
-
-
-
-
+  //put request for helpfulness Question
+  .put('/qa/questions/:question_id?', updateHelpfulness)
+  //put request for helpfulness Answer
+  .put('/qa/answers/:answer_id?', updateAnswerHelpfulness)
+  //post request for new question
+  .post('/qa/questions', postQuestion)
+  //post request for new answer
+  .post('/qa/questions/:question_id?/answers', postAnswer)
+  .post('/qa/questions/get/photo-url', getUrl)
+  .post('/qa/questions/store-reported-answer', addToReported)
+  .get('/reported/answers', getReported)
+  .put('/reviews/:review_id/helpful', reviewsHelpful)
+  .put('/reviews/:review_id/report', reviewsReport)
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
