@@ -3,45 +3,87 @@ import PropTypes from 'prop-types';
 import Stars from '../../stars/stars.jsx'
 import helper from '../../helper-functions/rnRHelper.js';
 const { formatDate, truncateSummary, createRecommendDiv, createResponseDiv } = helper;
+import { reviewHelpful, reviewReport } from '../../clientRoutes/reviews.js';
 
-const IndividualReviewTile = (props) => {
-  return (
-    <div className="irt">
-      <div className="irt-header">
-        <div className="irt-star-rating">{Stars(props.review.rating)}</div>
-        <div className="irt-username-and-date">✓ {props.review.reviewer_name}, {formatDate(props.review.date)}</div>
-      </div>
-      <div className="irt-review-summary">
-        <div className="irt-summary-trunc">{truncateSummary(props.review.summary)[0]}</div>
-        <div className="irt-summary-overage">{truncateSummary(props.review.summary)[1]}</div>
-      </div>
-      <div className="irt-review-body">
-        <div className="irt-body-text">{props.review.body}</div>
-        <div className="irt-body-show"></div>
-        <div className="irt-photos">
-          {props.review.photos.map((photo, index) => {
-            return (
-              <img
-                className="irt-photo"
-                key={index} src={photo.url}
-                alt="image"
-                onClick={props.viewPhoto}/>
-            )
-          })}
+class IndividualReviewTile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      helpfulClicked: false,
+      reportClicked: false,
+      helpful: 0
+    }
+
+    this.handleReport = this.handleReport.bind(this);
+    this.handleHelpful = this.handleHelpful.bind(this);
+  }
+
+  handleHelpful() {
+    if (this.state.helpfulClicked) {
+      return
+    }
+
+    reviewHelpful(this.props.review.review_id);
+    this.setState({
+      helpfulClicked: true,
+      helpful: 1
+    });
+  }
+
+  handleReport() {
+    if (this.state.reportClicked) {
+      return
+    }
+
+    reviewReport(this.props.review.review_id);
+    this.setState({
+      reportClicked: true
+    });
+  }
+
+  render() {
+    if (this.state.reportClicked) {
+      return <div></div>
+    } else {
+      return (
+        <div className="irt">
+          <div className="irt-header">
+            <div className="irt-star-rating">{Stars(this.props.review.rating)}</div>
+            <div className="irt-username-and-date">✓ {this.props.review.reviewer_name}, {formatDate(this.props.review.date)}</div>
+          </div>
+          <div className="irt-review-summary">
+            <div className="irt-summary-trunc">{truncateSummary(this.props.review.summary)[0]}</div>
+            <div className="irt-summary-overage">{truncateSummary(this.props.review.summary)[1]}</div>
+          </div>
+          <div className="irt-review-body">
+            <div className="irt-body-text">{this.props.review.body}</div>
+            <div className="irt-body-show"></div>
+            <div className="irt-photos">
+              {this.props.review.photos.map((photo, index) => {
+                return (
+                  <img
+                    className="irt-photo"
+                    key={index} src={photo.url}
+                    alt="image"
+                    onClick={this.props.viewPhoto}/>
+                )
+              })}
+            </div>
+          </div>
+          <div className="irt-additional-info">
+            {createRecommendDiv(this.props.review.recommend)}
+            {createResponseDiv(this.props.review.response)}
+            <div className="irt-helpfulness-info">
+              <div className="irt-helpful-text">Helpful?</div>
+              <div className="irt-yes-clickable" onClick={this.handleHelpful}>Yes</div>
+              <div className="irt-rating-helpfulness">({this.props.review.helpfulness + this.state.helpful})</div>
+              <div className="irt-report-clickable" onClick={this.handleReport}>Report</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="irt-additional-info">
-        {createRecommendDiv(props.review.recommend)}
-        {createResponseDiv(props.review.response)}
-        <div className="irt-helpfulness-info">
-          <div className="irt-helpful-text">Helpful?</div>
-          <div className="irt-yes-clickable">Yes</div>
-          <div className="irt-rating-helpfulness">({props.review.helpfulness})</div>
-          <div className="irt-report-clickable">Report</div>
-        </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  }
 };
 
 IndividualReviewTile.propTypes = {
