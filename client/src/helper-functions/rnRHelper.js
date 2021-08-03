@@ -1,4 +1,5 @@
 import React from 'react';
+import differenceInMonths from 'date-fns/differenceInMonths';
 
 const factorDetail = {
   Size: ['A size too small', 'Perfect', 'A size too wide'],
@@ -93,8 +94,27 @@ const helper = {
     return props;
   },
   sortByRelevance: (reviews) => {
-    return reviews;
-  }
+    const today = new Date();
+    // add a position prop to sort by on reviews
+    for (let i = 0; i < reviews.length; i++) {
+      // subtract how many months ago this review was written from the rating
+      let months = differenceInMonths(today, (new Date(reviews[i].date)));
+      reviews[i].position = reviews[i].helpfulness - months;
+    }
+    // sort by highest "position" scored
+    return reviews.sort(function (a, b) {
+      return b.position - a.position;
+    });
+  },
+  filterReviewsByStars: (reviews, starFilters) => {
+    if (starFilters.length === 0) {
+      return reviews
+    }
+    return reviews.filter((review) => {
+      return starFilters.includes(review.rating);
+    })
+  },
+
 }
 
 export default helper;

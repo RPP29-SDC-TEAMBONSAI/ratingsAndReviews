@@ -11,4 +11,14 @@ module.exports = {
       `/reviews/meta?product_id=${product_id || 28212}`
     );
   },
+  reviewHelpful: (review_id) => {
+    return axios.put(
+      `/reviews/${review_id}/helpful`
+    );
+  },
+  reviewReport: (review_id) => {
+    return axios.put(
+      `/reviews/${review_id}/report`
+    );
+  }
 }
