@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BreakdownClickable = (props) => {
-  console.log(typeof props.stars);
   return (
     <div className="breakdown-clickable">
       <div className="bar-label">{props.stars} stars</div>

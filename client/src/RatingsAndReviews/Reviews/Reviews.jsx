@@ -5,7 +5,7 @@ import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
-const { sortByRelevance, filterReviews } = helper;
+const { sortByRelevance, filterReviewsByStars } = helper;
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Reviews extends React.Component {
       reviews: [],
       numReviews: 0,
       loaded: 1,
-      sortBy: 'relevance',
+      sortBy: 'relevant',
       photo: null,
       photoOpen: false,
       addReviewOpen: false
@@ -40,9 +40,15 @@ class Reviews extends React.Component {
   getStateData(loaded, sortBy) {
     reviews(1, 1000, sortBy, this.props.product_id)
       .then(({ data }) => {
+        // save the num of reviews in total
         let numReviews = data.length;
-        let reviews = filterReviews(data, this.props.starFilters);
-        // sortByRelevance(data);
+        // if sort selected is relevance sort the data
+        let reviews = sortBy === 'relevant'
+          ? sortByRelevance(data)
+          : data;
+        // filter the data by star filters selected
+        reviews = filterReviewsByStars(data, this.props.starFilters);
+        // set the state
         this.setState({
           reviews: reviews,
           numReviews: numReviews,
