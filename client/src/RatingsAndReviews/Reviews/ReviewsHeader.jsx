@@ -7,9 +7,9 @@ const ReviewsHeader = (props) => {
       <div className="sort-title-wrapper">
         <div className="sort-title">{props.numReviews} reviews, sorted by
           <select className="sort-options" value={props.sortBy} onChange={props.handleSortChange}>
+            <option value="relevent">relevance</option>
             <option value="helpful">helpfulness</option>
             <option value="newest">newest</option>
-            <option value="relevent">relevance</option>
           </select>
         </div>
       </div>
@@ -21,7 +21,7 @@ const ReviewsHeader = (props) => {
               className="sort-option"
               key={index}>
                 <div className="remove-star-filter" star={sfilter} onClick={props.starFilterClick}>✕</div>
-                <div className="sort-option-text">{sfilter} </div>
+                <div className="sort-option-text">{sfilter} stars</div>
             </div>
           );
         })}

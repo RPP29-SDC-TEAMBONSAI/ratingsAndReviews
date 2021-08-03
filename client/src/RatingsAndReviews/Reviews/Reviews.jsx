@@ -5,15 +5,16 @@ import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
-const { sortByRelevance } = helper;
+const { sortByRelevance, filterReviews } = helper;
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
+      numReviews: 0,
       loaded: 1,
-      sortBy: 'newest',
+      sortBy: 'relevance',
       photo: null,
       photoOpen: false,
       addReviewOpen: false
@@ -31,7 +32,7 @@ class Reviews extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.product_id !== prevProps.product_id) {
+    if (this.props.product_id !== prevProps.product_id || this.props.starFilters !== prevProps.starFilters) {
       this.getStateData(this.state.loaded, this.state.sortBy);
     }
   }
@@ -39,9 +40,12 @@ class Reviews extends React.Component {
   getStateData(loaded, sortBy) {
     reviews(1, 1000, sortBy, this.props.product_id)
       .then(({ data }) => {
+        let numReviews = data.length;
+        let reviews = filterReviews(data, this.props.starFilters);
         // sortByRelevance(data);
         this.setState({
-          reviews: data,
+          reviews: reviews,
+          numReviews: numReviews,
           loaded: loaded,
           sortBy: sortBy
         });
@@ -91,7 +95,7 @@ class Reviews extends React.Component {
           <ReviewsHeader
             starFilters={this.props.starFilters}
             starFilterClick={this.props.starFilterClick}
-            numReviews={this.state.reviews.length}
+            numReviews={this.state.numReviews}
             handleSortChange={this.handleSortChange}
             sortBy={this.state.sortBy}/>
           <ReviewsList

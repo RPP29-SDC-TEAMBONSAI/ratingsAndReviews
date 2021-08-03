@@ -94,6 +94,16 @@ const helper = {
   },
   sortByRelevance: (reviews) => {
     return reviews;
+  },
+  filterReviews: (reviews, starFilters) => {
+    console.log(starFilters)
+    if (starFilters.length === 0) {
+      return reviews
+    }
+    return reviews.filter((review) => {
+      console.log(starFilters.includes(review.rating));
+      return starFilters.includes(review.rating);
+    })
   }
 }
 
