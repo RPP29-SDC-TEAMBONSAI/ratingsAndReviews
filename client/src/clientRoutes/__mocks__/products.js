@@ -9,7 +9,7 @@ let products= (id) => {
 }
 
 module.exports = {
-  productsWithId: jest.fn((id) => Promise.resolve({data:{id:products(id)}})),
+  productsWithId: jest.fn((id) => Promise.resolve({data:products(id)})),
   productsStyle: jest.fn((id) => Promise.resolve(get(`${id}`)))
 }
 

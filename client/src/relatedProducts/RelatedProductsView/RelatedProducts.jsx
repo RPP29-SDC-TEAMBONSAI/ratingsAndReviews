@@ -27,55 +27,37 @@ export default class RelatedProducts extends React.Component {
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.getRelatedStateData = this.getRelatedStateData.bind(this);
     this.getOutfitData = this.getOutfitData.bind(this);
-
+    this.product = this.product.bind(this)
+    this.style = this.style.bind(this)
+    this.outFit = this.outFit.bind(this)
   }
 
   componentDidMount () {
     //(products request)
-    let getProduct = new Promise((resolve, reject) => {
-      let result=[]
-      this.props.state.relatedProducts.forEach((productId) => {
-        return productsWithId(productId)
-          .then(data => {
-            result.push(data.data)
-            if (result.length === this.props.state.relatedProducts.length) {
+    let product = this.product()
 
-              resolve(result)
-            }
-          })
-      })
-    })
     //(styles request)
-    let getStyle = new Promise((resolve, reject) => {
-      let result =[]
-      this.props.state.relatedProducts.forEach((productId) => {
-        return productsStyle(productId)
-          .then(data => {
-            result.push(data.data)
-            if (result.length === this.props.state.relatedProducts.length) {
-              resolve(result)
-            }
-          })
-      })
-    })
+    let getStyle = this.style()
 
     //(outfit request)
-    let outFitData = new Promise((resolve, reject) => {
-      axios.get(api + `products/${this.props.state.product_id}/styles`, {
-        headers: {
-          'Authorization': TOKEN
-        }
-      })
-      .then((styleData)=> {
-        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-        resolve(outfitPropsObj);
-      })
-    })
+    let outFitData = this.outFit()
+    // let outFitData = new Promise((resolve, reject) => {
+    //   axios.get(api + `products/${this.props.state.product_id}/styles`, {
+    //     headers: {
+    //       'Authorization': TOKEN
+    //     }
+    //   })
+    //   .then((styleData)=> {
+    //     let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+    //     resolve(outfitPropsObj);
+    //   })
+    // })
     //gather the promises for everything in a single then
-    getProduct.then(data => {
+    product.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-          //use your helper to get correct style data
+          // //use your helper to get correct style data
+
           let resultStyleWithId=[];
           data.forEach((product, pi) => {
             styleData.forEach((style, si) => {
@@ -84,8 +66,13 @@ export default class RelatedProducts extends React.Component {
               }
             })
           })
+          // console.log(JSON.stringify(resultStyleWithId))
           //use your helper to create allProps obj
+          // console.log(resultStyleWithId)
+          // console.log(resultStyleWithId, "🔥")
+
           let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
+          // console.log(allPropsObj)
           //set state all at once 🤙
           this.setState({
             relatedProducts: data,
@@ -106,6 +93,55 @@ export default class RelatedProducts extends React.Component {
       this.getRelatedStateData();
       this.getOutfitData();
     }
+  }
+  outFit() {
+    return new Promise((resolve, reject) => {
+      axios.get(api + `products/${this.props.state.product_id}/styles`, {
+        headers: {
+          'Authorization': TOKEN
+        }
+      })
+      .then((styleData)=> {
+
+
+        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+        resolve(outfitPropsObj);
+
+      })
+      .catch(err=> {
+        // console.log(err)
+      })
+    })
+  }
+  style() {
+    return new Promise((resolve, reject) => {
+      let result =[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsStyle(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
+              // console.log(result)
+              resolve(result)
+            }
+          })
+      })
+    })
+  }
+  product () {
+   return new Promise((resolve, reject) => {
+      let result=[]
+      this.props.state.relatedProducts.forEach((productId) => {
+        return productsWithId(productId)
+          .then(data => {
+            result.push(data.data)
+            if (result.length === this.props.state.relatedProducts.length) {
+
+              resolve(result)
+            }
+          })
+      })
+    })
   }
 
 

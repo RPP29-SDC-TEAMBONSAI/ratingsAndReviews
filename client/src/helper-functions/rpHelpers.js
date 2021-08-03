@@ -1,8 +1,10 @@
 const helper = {
   compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles) => {
+    // console.log(relatedProducts, relatedProductsStyles)
     let allPropsObj = {};
     let relatedProductsCopy = Object.assign(relatedProducts);
     let relatedProductsStylesCopy= Object.assign(relatedProductsStyles);
+
 
     relatedProductsCopy.forEach(item => {
       let itemDetail = {};
@@ -11,7 +13,9 @@ const helper = {
       itemDetail['itemCategory'] = item['category'];
 
       allPropsObj[item['id']] = itemDetail;
+
     })
+
 
     relatedProductsStylesCopy.forEach(item => {
       let itemDetail = {};
@@ -23,6 +27,7 @@ const helper = {
       itemDetail['salePrice'] = firstResult['sale_price'];
       itemDetail['photoUrl'] =firstResult['photos'][0];
 
+
       allPropsObj[item.product_id] = {
         ...allPropsObj[item.product_id],
         'originalPrice': firstResult['original_price'],
@@ -30,27 +35,41 @@ const helper = {
         'photoUrl': firstResult['photos'][0],
       };
     })
+    // console.log(Object.values(allPropsObj, '✅'))
+
+
     //console.log(`allPropsObj: ${JSON.stringify(Object.values(allPropsObj))}`)
     return Object.values(allPropsObj);
   },
 
   compileYourOutfitDataToProps: (currentProductInfo, currentProductStyles) => {
+
      //console.log(`currentProductInfo: ${JSON.stringify(currentProductInfo)}`)
      //console.log(`currentProductStyles: ${JSON.stringify(currentProductStyles)}`)
+    //  console.log(currentProductStyles)
+// console.log(currentProductInfo)
     let outfitPropsObj = {};
     let currentProductInfoCopy = Object.assign(currentProductInfo);
+    // console.log('hi')
 
     outfitPropsObj['product_id'] = currentProductInfoCopy.id;
     outfitPropsObj['name'] = currentProductInfoCopy.name;
     outfitPropsObj['category'] = currentProductInfoCopy.category;
     //console.log(`🤠  beforedefaultResult: ${JSON.stringify(outfitPropsObj)}`)
-    const defaultResult = currentProductStyles.results.filter(result => result['default?'] === true)[0] ?? currentProductStyles.results[0];
+    // console.log(currentProductInfo, currentProductStyles)
+    const defaultResult = currentProductStyles.results.filter(result =>
+
+    result['default?'] === true)[0] ?? currentProductStyles.results[0];
+
     //console.log(`defaultResult: ${JSON.stringify(defaultResult)}`);
     outfitPropsObj['originalPrice'] = defaultResult.original_price;
     outfitPropsObj['salePrice'] = defaultResult.sale_price;
     outfitPropsObj['photoUrl'] = defaultResult['photos'][0];
+
+
     //console.log(`🐮 afterdefaultResult: ${JSON.stringify(outfitPropsObj)}`);
     //console.log(`🤠 outfitPropsObj: ${JSON.stringify(outfitPropsObj)}`)
+
     return outfitPropsObj;
 
   },
