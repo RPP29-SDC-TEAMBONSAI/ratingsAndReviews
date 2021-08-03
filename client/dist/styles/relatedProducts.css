@@ -46,6 +46,14 @@
   order: 5;
 }
 
+.originalProductPriceWithSale {
+  text-decoration: line-through;
+}
+
+.saleProductPrice {
+  color: red;
+}
+
 img {
   width: 250px;
   height: 300px;

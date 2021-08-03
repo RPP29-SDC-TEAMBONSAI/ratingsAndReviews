@@ -1,5 +1,6 @@
 const helper = {
-  compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles) => {
+  compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles, starRating) => {
+
     let allPropsObj = {};
     let relatedProductsCopy = Object.assign(relatedProducts);
     let relatedProductsStylesCopy= Object.assign(relatedProductsStyles);
@@ -9,6 +10,7 @@ const helper = {
       itemDetail['itemId'] = item['id'];
       itemDetail['itemName'] = item['name'];
       itemDetail['itemCategory'] = item['category'];
+      itemDetail['starRating'] = starRating
 
       allPropsObj[item['id']] = itemDetail;
     })
