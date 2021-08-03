@@ -31,7 +31,7 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-    //for first request
+    //(products request)
     let getProduct = new Promise((resolve, reject) => {
       let result=[]
       this.props.state.relatedProducts.forEach((productId) => {
@@ -45,7 +45,7 @@ export default class RelatedProducts extends React.Component {
           })
       })
     })
-
+    //(styles request)
     let getStyle = new Promise((resolve, reject) => {
       let result =[]
       this.props.state.relatedProducts.forEach((productId) => {
@@ -58,6 +58,8 @@ export default class RelatedProducts extends React.Component {
           })
       })
     })
+
+    //(outfit request)
     let outFitData = new Promise((resolve, reject) => {
       axios.get(api + `products/${this.props.state.product_id}/styles`, {
         headers: {
@@ -69,41 +71,33 @@ export default class RelatedProducts extends React.Component {
         resolve(outfitPropsObj);
       })
     })
-
+    //gather the promises for everything in a single then
     getProduct.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-
-
-
-        let resultStyleWithId=[];
-        data.forEach((product, pi) => {
-          styleData.forEach((style, si) => {
+          //use your helper to get correct style data
+          let resultStyleWithId=[];
+          data.forEach((product, pi) => {
+            styleData.forEach((style, si) => {
               if (pi === si) {
               resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
               }
-
+            })
+          })
+          //use your helper to create allProps obj
+          let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
+          //set state all at once 🤙
+          this.setState({
+            relatedProducts: data,
+            relatedProductsStyles: resultStyleWithId,
+            allPropsObj:allPropsObj,
+            rpLoaded: true,
+            outfitPropsObj: fitData,
+            yoLoaded: true
           })
         })
-
-       let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
-       console.log(fitData)
-
-       this.setState({
-        relatedProducts: data,
-        relatedProductsStyles: resultStyleWithId,
-        allPropsObj:allPropsObj,
-        rpLoaded: true,
-        outfitPropsObj: fitData,
-        yoLoaded: true
-       })
-
-
       })
     })
-  })
-
-
   }
 
   componentDidUpdate (prevProps, prevState) {
