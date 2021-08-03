@@ -6,6 +6,7 @@ import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
 import axios from 'axios';
 
+
 const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
 
@@ -50,6 +51,7 @@ export default class RelatedProducts extends React.Component {
       this.props.state.relatedProducts.forEach((productId) => {
         return productsStyle(productId)
           .then(data => {
+            console.log(data.data)
             result.push(data.data)
             if (result.length === this.props.state.relatedProducts.length) {
               resolve(result)
@@ -65,6 +67,7 @@ export default class RelatedProducts extends React.Component {
       })
       .then((styleData)=> {
         let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+
         resolve(outfitPropsObj);
       })
     })
@@ -72,8 +75,8 @@ export default class RelatedProducts extends React.Component {
     getProduct.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-
         let resultStyleWithId=[];
+
         data.forEach((product, pi) => {
           styleData.forEach((style, si) => {
               if (pi === si) {
