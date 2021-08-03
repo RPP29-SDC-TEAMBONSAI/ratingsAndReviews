@@ -31,21 +31,6 @@ export default class RelatedProducts extends React.Component {
     this.getOutfitData = this.getOutfitData.bind(this);
   }
 
-  // componentDidMount () {
-  //   this.getRelatedStateData();
-  //   this.getOutfitData();
-  //   let values = [],
-  //     keys = Object.keys(localStorage),
-  //     i = keys.length;
-
-  //     while (i-- ) {
-  //       values.push( JSON.parse(localStorage.getItem(keys[i])) );
-  //     }
-  //     this.setState({
-  //       yourOutfitItems: values
-  //     })
-  // }
-
   componentDidMount () {
     let getProduct = new Promise((resolve, reject) => {
       let result=[]
@@ -54,7 +39,6 @@ export default class RelatedProducts extends React.Component {
           .then(data => {
             result.push(data.data)
             if (result.length === this.props.state.relatedProducts.length) {
-
               resolve(result)
             }
           })
@@ -88,8 +72,6 @@ export default class RelatedProducts extends React.Component {
     getProduct.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-
-
 
         let resultStyleWithId=[];
         data.forEach((product, pi) => {
