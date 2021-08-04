@@ -1,5 +1,5 @@
 import React from 'react';
-import differenceInMonths from 'date-fns/differenceInMonths';
+// import differenceInMonths from 'date-fns/differenceInMonths';
 
 const factorDetail = {
   Size: ['A size too small', 'Perfect', 'A size too wide'],

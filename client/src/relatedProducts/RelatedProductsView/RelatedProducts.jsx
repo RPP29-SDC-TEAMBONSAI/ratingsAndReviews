@@ -31,25 +31,10 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-<<<<<<< HEAD
 
     this.getRelatedStateData(),
     this.getOutfitData()
 
-=======
-    this.getRelatedStateData();
-    this.getOutfitData();
-    let values = [],
-      keys = Object.keys(localStorage),
-      i = keys.length;
-
-      while (i-- ) {
-        values.push( JSON.parse(localStorage.getItem(keys[i])) );
-      }
-      this.setState({
-        yourOutfitItems: values
-      })
->>>>>>> ad01cd3bab4ae4107e90cadd957e39ae7194b577
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -85,12 +70,9 @@ export default class RelatedProducts extends React.Component {
         productsStyle(productId)
       ])
       .then((results) => {
-<<<<<<< HEAD
 
 
         // console.log(JSON.stringify(results[1].data));
-=======
->>>>>>> ad01cd3bab4ae4107e90cadd957e39ae7194b577
         let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
         console.log(resultStyleWithId)
         this.setState({

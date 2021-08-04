@@ -4,10 +4,7 @@ import YourOutfitCard from './YourOutfitCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const YourOutfitList = (props) => {
-<<<<<<< HEAD
   // console.log(`outfititms ${JSON.stringify(props.outfitItems)}`)
-=======
->>>>>>> ad01cd3bab4ae4107e90cadd957e39ae7194b577
   return (
     <div className='yourOutfitListContainer'>
       <h2>Your Outfit: </h2>
