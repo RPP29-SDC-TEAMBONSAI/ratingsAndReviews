@@ -1,10 +1,12 @@
-
+/*----------------------
+REALTED PRODUCTS STYLING
+-----------------------*/
 
 .relatedProductsList {
   display: flex;
 }
-.relatedProductsCardList {
 
+.relatedProductsCardList {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -15,12 +17,15 @@
   flex-shrink: 1;
   border: solid;
   margin: 1rem .25em;
-
 }
 
+/*-----------------
+YOUR OUTFIT STYLING
+-----------------*/
+
 .yourOutfitList {
-  border: solid;
   display: flex;
+  border: solid;
 }
 .yourOutfitCardList {
   flex-direction: row;
@@ -41,10 +46,21 @@
   align-self: center;
 }
 
-.actionStar {
-  justify-self: flex-end;
-  order: 5;
+/*--------------
+RP MODAL STLYING
+---------------*/
+.relatedProductsModal {
+  display: flex;
+  z-index: 1;
 }
+
+.relatedProductsModalHidden {
+  display: none;
+}
+
+/*----------
+TEXT STLYING
+-----------*/
 
 .originalProductPriceWithSale {
   text-decoration: line-through;
@@ -53,6 +69,10 @@
 .saleProductPrice {
   color: red;
 }
+
+/*----------
+IMAGE STLYING
+-----------*/
 
 img {
   width: 250px;

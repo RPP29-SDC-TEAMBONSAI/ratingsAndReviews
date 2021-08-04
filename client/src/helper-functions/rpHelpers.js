@@ -47,7 +47,7 @@ const helper = {
     outfitPropsObj['category'] = currentProductInfoCopy.category;
     //console.log(`🤠  beforedefaultResult: ${JSON.stringify(outfitPropsObj)}`)
     const defaultResult = currentProductStyles.results.filter(result => result['default?'] === true)[0] ?? currentProductStyles.results[0];
-    console.log(`defaultResult: ${defaultResult}`);
+    //console.log(`defaultResult: ${defaultResult}`);
     //console.log(`defaultResult: ${JSON.stringify(defaultResult)}`);
     outfitPropsObj['originalPrice'] = defaultResult.original_price;
     outfitPropsObj['salePrice'] = defaultResult.sale_price;

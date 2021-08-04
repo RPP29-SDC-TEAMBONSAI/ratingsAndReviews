@@ -13,9 +13,7 @@ const getStars = function (starsObject) {
   }
 
   let average = total / numberOfRatings;
-
   let htmlElements = Stars(average);
-
   return htmlElements;
 };
 
