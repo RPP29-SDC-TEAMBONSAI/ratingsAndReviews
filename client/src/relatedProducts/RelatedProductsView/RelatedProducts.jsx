@@ -170,7 +170,9 @@ export default class RelatedProducts extends React.Component {
       e.stopPropagation();
 
       this.state.modalShow ? this.setState({modalShow: false}) : this.setState({modalShow: true});
-      console.log(`id: ${JSON.stringify(item)}`);
+      console.log(`shown?: ${this.state.modalShow}`);
+      // I need to pass props to my modal
+      // it needs style data for current item on page, and for the clicked upon product
 
     }
 
@@ -189,6 +191,7 @@ export default class RelatedProducts extends React.Component {
         state={this.props.state} />
         <RelatedProductsModal
         modalShow={this.state.modalShow}
+        handleCompareItems={this.handleCompareItems}
          />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
