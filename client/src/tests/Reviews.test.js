@@ -45,7 +45,8 @@ describe('Review component', ()=> {
       return reviewRoutes.reviews().then(({data}) => {
 
         // console.log(component.toJSON().children[2].children[1].children[0].children[2].children[0])
-        let body1 = component.toJSON().children[2].children[1].children[0].children[2].children[0];
+        let body1 = component.toJSON().children[2].children[1].children[0].children[2].children[0].children;
+        console.log(body1)
         expect(Boolean(body1.length)).toBe(true)
       });
     })

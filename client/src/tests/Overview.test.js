@@ -15,33 +15,33 @@ import Overview from '../Overview/index.jsx'
 //   6. does quantity show integers from 1 to stock or 15 max?
 //   7. does add to cart do what its supposed to?
 
-describe('Overview', () => {
-  test('should render', () => {
-    const wrapper = shallow(
-      <Overview />
-    )
-    expect(wrapper.exists()).toBeTruthy()
-  })
-})
+// describe('Overview', () => {
+//   test('should render', () => {
+//     const wrapper = shallow(
+//       <Overview />
+//     )
+//     expect(wrapper.exists()).toBeTruthy()
+//   })
+// })
 
 
-describe('props', () => {
-    test('props should have', () => {
-      const wrapper = shallow(
-        <Overview state = {mockProps}/>
+// describe('props', () => {
+//     test('props should have', () => {
+//       const wrapper = shallow(
+//         <Overview state = {mockProps}/>
 
-      )
-      const instance = wrapper.instance();
-      instance.changeSelectedQuantity({target: {value: 2}});
-      expect(instance.state.quantitySelected).toBe(2);
-    })
-  })
+//       )
+//       const instance = wrapper.instance();
+//       instance.changeSelectedQuantity({target: {value: 2}});
+//       expect(instance.state.quantitySelected).toBe(2);
+//     })
+//   })
 
-  describe('snapshot', ()=> {
-    test('should be snap shotty', () => {
-      const component = renderer.create(<Overview state = {mockProps}/>);
-      const instance = component.getInstance();
-      console.log('yurrrp', component.toJSON())
+//   describe('snapshot', ()=> {
+//     test('should be snap shotty', () => {
+//       const component = renderer.create(<Overview state = {mockProps}/>);
+//       const instance = component.getInstance();
+//       console.log('yurrrp', component.toJSON())
 
-    })
-  })
+//     })
+//   })

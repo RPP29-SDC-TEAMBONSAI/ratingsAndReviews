@@ -67,7 +67,9 @@ class App extends React.Component {
 
     ])
       .then((results) => {
+        console.log(results[2].data)
         this.setState({
+
           productInformation: results[1].data,
           styles: results[2].data,
           relatedProducts: results[3].data,
