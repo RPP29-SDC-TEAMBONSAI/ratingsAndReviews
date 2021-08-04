@@ -93,17 +93,57 @@ export default class RelatedProducts extends React.Component {
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.state.product_id !== this.props.state.product_id) {
       // this.getRelatedStateData();
-      // this.getOutfitData();
-      let values = [],
-      keys = Object.keys(localStorage),
-      i = keys.length;
+      let product = this.product()
+      let getStyle = this.style()
+      let outFitData = this.outFit()
+      product.then(data => {
+        getStyle.then(styleData => {
+          outFitData.then(fitData => {
+            // //use your helper to get correct style data
 
-      while ( i-- ) {
-          values.push( JSON.parse(localStorage.getItem(keys[i])) );
-      }
-      this.setState({
-        yourOutfitItems: values
+            let resultStyleWithId=[];
+            data.forEach((product, pi) => {
+              styleData.forEach((style, si) => {
+                if (pi === si) {
+                resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
+                }
+              })
+            })
+            // console.log(JSON.stringify(resultStyleWithId))
+            //use your helper to create allProps obj
+            // console.log(resultStyleWithId)
+            // console.log(resultStyleWithId, "🔥")
+            console.log(data)
+
+            let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
+            // console.log(allPropsObj)
+            //set state all at once 🤙
+            let values = [],
+            keys = Object.keys(localStorage),
+            i = keys.length;
+
+            this.outFit()
+
+            while ( i-- ) {
+                values.push( JSON.parse(localStorage.getItem(keys[i])) );
+            }
+            // this.setState({
+            //   yourOutfitItems: values
+            // })
+            this.setState({
+              relatedProducts: data,
+              relatedProductsStyles: resultStyleWithId,
+              allPropsObj:allPropsObj,
+              // rpLoaded: true,
+              outfitPropsObj: fitData,
+              yourOutfitItems: values
+              // yoLoaded: true
+            })
+          })
+        })
       })
+      // this.getOutfitData();
+
     }
   }
   outFit() {
