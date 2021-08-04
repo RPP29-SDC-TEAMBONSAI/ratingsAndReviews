@@ -16,6 +16,8 @@ class Overview extends React.Component {
       sizeSelected: "",
       bag: [],
       mainPhoto: 0,
+      firstPhotoInPhotoSelectorIndex: 0,
+      expandedView: false
     };
     this.changeAvailableQuantity = this.changeAvailableQuantity.bind(this);
     this.addToBag = this.addToBag.bind(this);
@@ -26,6 +28,7 @@ class Overview extends React.Component {
     this.mainImageRightArrow = this.mainImageRightArrow.bind(this);
     this.upArrow = this.upArrow.bind(this);
     this.downArrow = this.downArrow.bind(this);
+    this.expandedView = this.expandedView.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +61,7 @@ class Overview extends React.Component {
       sizeSelected: "",
       quantitySelected: 0,
       mainPhoto: 0,
+      firstPhotoInPhotoSelectorIndex: 0
     });
 
     //document.getElementsByClassName('selectSize')[0].options[0].click()
@@ -123,30 +127,56 @@ class Overview extends React.Component {
   }
 
   mainImageLeftArrow () {
-    console.log('left')
+
+    let newMainPhoto = Number(this.state.mainPhoto) - 1;
     this.setState({
-      mainPhoto: this.state.mainPhoto - 1
+      mainPhoto: newMainPhoto
     })
 
   }
 
   mainImageRightArrow() {
-    console.log('right')
+
+    let newMainPhoto = Number(this.state.mainPhoto) + 1;
     this.setState({
-      mainPhoto: this.state.mainPhoto + 1
+      mainPhoto: newMainPhoto
     })
 
 }
 
 upArrow() {
+  console.log('up', this.state.firstPhotoInPhotoSelectorIndex)
+    let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) - 1;
+    this.setState({
+      firstPhotoInPhotoSelectorIndex: newFirstPhoto
+    })
 
 }
 
 downArrow() {
+  console.log('down', this.state.firstPhotoInPhotoSelectorIndex)
+    let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) + 1;
+    this.setState({
+      firstPhotoInPhotoSelectorIndex: newFirstPhoto
+    })
+
+}
+
+expandedView() {
+  if (this.state.expandedView) {
+    this.setState({
+      expandedView: false
+    })
+  } else {
+    this.setState({
+      expandedView: true
+    })
+  }
 
 }
 
   render() {
+
     return (
       <div className="overview">
         <div className="column-one">
@@ -156,6 +186,9 @@ downArrow() {
             changeMainPhoto={this.changeMainPhoto}
             mainImageLeftArrow = {this.mainImageLeftArrow}
             mainImageRightArrow = {this.mainImageRightArrow}
+            upArrow = {this.upArrow}
+            downArrow = {this.downArrow}
+            expandedView = {this.expandedView}
           />
         </div>
         <div className="column-two">
@@ -176,6 +209,7 @@ downArrow() {
       </div>
     );
   }
+
 }
 
 export default Overview;
