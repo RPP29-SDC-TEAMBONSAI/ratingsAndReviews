@@ -88,8 +88,8 @@ class UserAnswer extends React.Component {
 
   userPhotoUpload(e) {
     let reader = new FileReader()
-    let newForm = new FormData()
-    newForm.append('image', this.state.tempPhoto)
+    // let newForm = new FormData()
+    // newForm.append('image', this.state.tempPhoto)
 
     reader.readAsDataURL(this.state.tempPhoto, 'base64')
 
