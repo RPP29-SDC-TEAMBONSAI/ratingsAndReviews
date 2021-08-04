@@ -32,12 +32,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getStateData();
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const product = params.product_id || this.state.product_id;
+    this.getStateData(product);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.product_id !== this.state.product_id) {
-      this.getStateData()
+      this.getStateData(this.state.product_id)
 
     }
   }
@@ -48,17 +51,17 @@ class App extends React.Component {
     })
   }
 
-  getStateData() {
+  getStateData(product_id) {
     this.setState({
       loaded: false
     })
     Promise.all([
       products(),
-      productsWithId(this.state.product_id),
-      productsStyle(this.state.product_id),
-      productsRelated(this.state.product_id),
-      questions(this.state.product_id),
-      reviewsMeta(this.state.product_id),
+      productsWithId(product_id),
+      productsStyle(product_id),
+      productsRelated(product_id),
+      questions(product_id),
+      reviewsMeta(product_id),
       cart()
 
     ])

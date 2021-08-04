@@ -9,8 +9,13 @@ const RelatedProductsList = (props) => {
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
     <div className='relatedProductsList'>
+<<<<<<< HEAD
     {props.allProps.map((product, index) => {
       return <div key={index}>
+=======
+    {props.allProps.map((product, i) => {
+      return <div key={i}>
+>>>>>>> ad01cd3bab4ae4107e90cadd957e39ae7194b577
         <RelatedProductsCard
                key={product.itemId}
                name={product.itemName}
@@ -20,7 +25,7 @@ const RelatedProductsList = (props) => {
                photo={product.photoUrl.thumbnail_url}
                id={product.itemId}
                handleProductChange={props.handleProductChange}
-               starRating={props.state.ratings}
+               starRating={product.starRating}
        />
 
        </div>
@@ -34,7 +39,6 @@ const RelatedProductsList = (props) => {
 RelatedProductsList.propTypes = {
   allProps: propTypes.any,
   handleProductChange: propTypes.any,
-  state: propTypes.object
   };
 
 export default RelatedProductsList;

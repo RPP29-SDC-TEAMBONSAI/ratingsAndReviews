@@ -63,7 +63,7 @@ const ImageGallery = (props) => {
                   return (
                     <div className = "main-image">
                       {function() {
-                        console.log('left', props.OverviewState.mainPhoto)
+                        //console.log('left', props.OverviewState.mainPhoto)
                         if (props.OverviewState.mainPhoto > 0) {
                           return (
                             <button className = "main-image-left-arrow" onClick = {props.mainImageLeftArrow}>{function() {
