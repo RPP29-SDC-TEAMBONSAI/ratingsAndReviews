@@ -19,6 +19,7 @@ const RelatedProductsList = (props) => {
                salePrice={product.salePrice}
                photo={product.photoUrl.thumbnail_url}
                id={product.itemId}
+               features={product.features}
                handleProductChange={props.handleProductChange}
                handleCompareItems={props.handleCompareItems}
                starRating={product.starRating}

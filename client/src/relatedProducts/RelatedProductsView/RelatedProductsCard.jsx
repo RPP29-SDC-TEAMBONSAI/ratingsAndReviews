@@ -22,7 +22,7 @@ const RelatedProductsCard = (props) => {
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
-        <button className='yourOutfitActionButton' onClick={(e) => {props.handleCompareItems(props.name, e)}}>X</button>
+        <button className='yourOutfitActionButton' onClick={(e) => {props.handleCompareItems(props, e)}}>X</button>
         <h3 className='productCategory'>{props.category}</h3>
         {(function() {
           if (props.salePrice === null) {
@@ -39,7 +39,7 @@ const RelatedProductsCard = (props) => {
           }
         })()}
         <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}></img>
-        <div className="reviewStars">{getStars(props.starRating)}</div>
+        <span className="reviewStars">{getStars(props.starRating)}</span>
     </div>
   )
 

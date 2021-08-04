@@ -23,6 +23,7 @@ export default class RelatedProducts extends React.Component {
       allPropsObj: [],
       outfitPropsObj: [],
       modalShow: false,
+      clickedProductInfo: {}
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
@@ -134,6 +135,7 @@ export default class RelatedProducts extends React.Component {
          this.props.state.relatedProducts.forEach((productId) => {
            return productsWithId(productId)
              .then(data => {
+               //console.log(data)
                result.push(data.data)
                if (result.length === this.props.state.relatedProducts.length) {
                  result.sort((a, b) => a['id'] - b['id']);
@@ -168,12 +170,8 @@ export default class RelatedProducts extends React.Component {
     handleCompareItems(item, e) {
       e.preventDefault();
       e.stopPropagation();
-
+      this.setState({clickedProductInfo: item});
       this.state.modalShow ? this.setState({modalShow: false}) : this.setState({modalShow: true});
-      console.log(`shown?: ${this.state.modalShow}`);
-      // I need to pass props to my modal
-      // it needs style data for current item on page, and for the clicked upon product
-
     }
 
 
@@ -192,6 +190,9 @@ export default class RelatedProducts extends React.Component {
         <RelatedProductsModal
         modalShow={this.state.modalShow}
         handleCompareItems={this.handleCompareItems}
+        allProps={this.state.allPropsObj}
+        currentProdInfo={this.props.state.productInformation}
+        clickedProductInfo={this.state.clickedProductInfo}
          />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
