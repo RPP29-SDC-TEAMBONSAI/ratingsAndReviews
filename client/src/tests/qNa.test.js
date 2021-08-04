@@ -31,11 +31,14 @@ describe('QuestionsNAnswers', () => {
 
     const instance = wrapper.instance()
 
+
     jest.spyOn(instance, 'componentDidMount')
     instance.componentDidMount()
+    // console.log(instance)
 
     jest.spyOn(instance, 'getReportedAns')
       return instance.getReportedAns().then(data => {
+        console.log(instance)
         let answerIds = data.data
 
         jest.spyOn(instance, 'filterAnswersNQuestions')
@@ -268,7 +271,7 @@ describe('QuestionsNAnswers', () => {
 
 
         return instance.getReportedAns().then(data => {
-          console.log(instance)
+          // console.log(instance)
           jest.spyOn(instance, 'loadQuestionClick')
           let currentQuestions = component.toJSON().children[3].children[0].children;
           let currentShowClassDivs = currentQuestions.filter((question) => {
