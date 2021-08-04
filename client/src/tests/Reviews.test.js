@@ -3,53 +3,52 @@ import { shallow, mount } from 'enzyme';
 import helper from '../helper-functions/rpHelpers.js';
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
 import Reviews from '../RatingsAndReviews/Reviews/Reviews.jsx';
-import { renderer } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 import reviewRoutes from '../clientRoutes/reviews.js';
-jest.mock('../clientRoutes/reviews.js');
 
-console.log(reviewRoutes);
-
-let props = {
-  product_id: 28212,
-  starFilters: [],
-  starFilterClick: (event) => {
-    let stars = event.target.getAttribute('star');
-    let filters = props.starFilters.slice();
-    let index = filters.indexOf(stars);
-
-    if (index !== -1) {
-      filters.splice(index, 1);
-    } else {
-      filters.push(stars);
-    }
-
-    props.starFilters = filters.sort().reverse();
-  }
+// console.log(reviewRoutes);
+const props = {
+  product_id: 28213,
+  starFilters:[]
 }
-
+jest.mock('../clientRoutes/reviews.js');
 let wrapper;
+describe('Review component', ()=> {
+  describe('componentDidMount', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Reviews {...props}/>)
+    })
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+    test('on mount, it makes requet and sets state with getStateData', () => {
 
-describe('Reviews', () => {
-  beforeEach(() => {
-    wrapper = shallow(<Reviews{...props}/>)
-  });
+      const instance = wrapper.instance();
+      jest.spyOn(instance, 'componentDidMount')
+      jest.spyOn(instance, 'getStateData')
+      instance.componentDidMount()
+      instance.getStateData()
+      // console.log(instance.state)
+      expect(instance.componentDidMount).toBeCalledTimes(1)
+      expect(instance.componentDidMount).toBeCalledTimes(1)
+      expect(Boolean(instance.state.reviews.length)).toBe(true)
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+    })
+    //for testing to make sure stuff is rendering correctly
+    test('on mount, component should render correctData', () => {
+      const component = renderer.create(<Reviews {...props}/>)
+      const instance = component.getInstance()
 
-  test('should render component with props', () => {
-    const instance = wrapper.instance();
 
-    jest.spyOn(instance, 'componentDidMount');
-    instance.componentDidMount();
+      instance.componentDidMount()
 
-    return reviewRoutes.reviews()
-      .then((data) => {
-        console.log(instance);
-      })
+      return reviewRoutes.reviews().then(({data}) => {
 
-    expect(instance.componentDidMount).toBeCalledTimes(1);
-    // console.log(instance);
+        // console.log(component.toJSON().children[2].children[1].children[0].children[2].children[0])
+        let body1 = component.toJSON().children[2].children[1].children[0].children[2].children[0];
+        expect(Boolean(body1.length)).toBe(true)
+      });
+    })
   })
-});
+
+})

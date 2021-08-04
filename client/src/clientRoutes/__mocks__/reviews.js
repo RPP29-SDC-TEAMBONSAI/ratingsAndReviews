@@ -1,14 +1,8 @@
 import { reviewsTD, reviewsMetaTD } from '../../../src/RatingsAndReviews/TestData/data.js';
+import newData from '../../RatingsAndReviews/TestData/newData.js'
 
 module.exports = {
-  reviews: jest.fn(() => {
-    Promise.resolve({
-      data: reviewsTD[28212]
-    });
-  }),
-  reviewsMeta: jest.fn(() => {
-    Promise.resolve({
-      data: reviewsMetaTD[28212]
-    });
-  })
+  //parameters wont be used for didMountTests as mock data is going to be returned
+  reviews: jest.fn((page, count, sort, productId) =>Promise.resolve({data: newData.reviews}))
+
 }

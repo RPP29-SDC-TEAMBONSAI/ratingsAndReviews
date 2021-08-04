@@ -307,9 +307,9 @@ describe('QuestionsNAnswers', () => {
 
         })
       })
-      xtest('', () => {
-        const wrapper = shallow(<QuestionsNAnswers {...props}/>);
+      // xtest('', () => {
+      //   const wrapper = shallow(<QuestionsNAnswers {...props}/>);
 
-      })
+      // })
     })
 })
