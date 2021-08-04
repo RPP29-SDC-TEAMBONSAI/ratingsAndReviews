@@ -3,23 +3,27 @@ import PropTypes from 'prop-types';
 import Stars from '../../stars/stars.jsx';
 import helper from '../../helper-functions/rnRHelper.js';
 const { getFactorDetailArray } = helper;
+import { getUrl } from '../../clientRoutes/qa';
+import { reviewsInteraction } from '../../clientRoutes/reviews.js';
 
 class AddReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       recommendThis: '',
-      overallRating: 0
+      overallRating: 0,
+      photos: [],
+      allowUpload: true
     }
     this.createRadioOptions = this.createRadioOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOverallRatingChange = this.handleOverallRatingChange.bind(this);
+    this.onFileUpload = this.onFileUpload.bind(this);
   }
 
   handleChange(event) {
     const stateVal = event.target.getAttribute('stateVal');
     const value = event.target.value || event.target.getAttribute('value');
-    console.log(value);
     this.setState({
       [stateVal]: value
     });
@@ -47,11 +51,43 @@ class AddReview extends React.Component {
     });
   }
 
+  onFileUpload(event) {
+    // convert file to base64 data
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(event.target.files[0], 'base64');
+    // once the fileReader is loaded
+    fileReader.onload = () => {
+      // get the result as url
+      let url = fileReader.result.substring(0);
+      // make a request to imgbb
+      getUrl(url)
+      .then((newUrl) => {
+        // add the new url to the photos on state
+        let photos = this.state.photos.slice();
+        photos.push(newUrl);
+        // if 5 photos are uploaded disallow uploads
+        let bool = photos.length < 5;
+        this.setState({
+          photos: photos,
+          allowUpload: bool
+        });
+      });
+    }
+  };
+
   render() {
     return (
       <div className="add-review-form">
         <div className="add-review-top">
-          <div className="x" onClick={this.props.close}>✕</div>
+          <div
+            interaction="closed review form"
+            className="x"
+            onClick={(e) => {
+              this.props.close(e);
+              reviewsInteraction(e);
+            }}>
+              ✕
+            </div>
           <div className="review-title">Write Your Review</div>
           <div className="review-subtitle">About the {this.props.productName}</div>
           {/* OVERALL RATING INPUT */}
@@ -99,7 +135,37 @@ class AddReview extends React.Component {
           onChange={this.handleChange}/>
         </div>
         {/* UPLOAD YOUR PHOTOS */}
-
+        <div className="r-photo-wrapper">
+          <a className="r-photo-title">Upload up to 5 Photos</a>
+          <input
+            onChange={this.onFileUpload}
+            name="file"
+            className="r-photo-upload"
+            id="r-photo-add"
+            type="file"
+            style={{display: "none"}}
+            accept="image/png, image/jpeg">
+          </input>
+          <button
+            className="r-photo-button"
+            style={{display: this.state.allowUpload ? "inline-block" : "none"}}
+            onClick={() => {
+              document.getElementById('r-photo-add').click();
+            }}>
+            Add A Photo
+          </button>
+          <div className="r-photos">
+          {this.state.photos.map((photo, index) => {
+            return (
+              <img
+                className="irt-photo"
+                key={index}
+                src={photo}
+                alt="image"/>
+            )
+          })}
+          </div>
+        </div>
         <div className="r-name-email-submit">
           <div className="r-name-email">
           {/* WHAT IS YOUR NAME */}
@@ -122,7 +188,14 @@ class AddReview extends React.Component {
             </div>
           </div>
           {/* SUBMIT BUTTON */}
-          <button className="r-submit">Sumbit Review</button>
+          <button
+            interaction="submitted review form"
+            className="r-submit"
+            onClick={(e) => {
+              reviewsInteraction(e);
+            }}>
+              Sumbit Review
+            </button>
         </div>
 
       </div>

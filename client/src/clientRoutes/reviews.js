@@ -20,5 +20,15 @@ module.exports = {
     return axios.put(
       `/reviews/${review_id}/report`
     );
+  },
+  reviewsInteraction: (event) => {
+    let interaction = event.target.getAttribute('interaction');
+    axios.post(
+      `/reviews/interaction`, {
+        element: interaction,
+        widget: 'Ratings And Reviews - Team Cotija',
+        time: new Date()
+      }
+    );
   }
 }
