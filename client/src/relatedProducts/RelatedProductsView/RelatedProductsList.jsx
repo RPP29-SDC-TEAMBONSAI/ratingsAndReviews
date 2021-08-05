@@ -9,8 +9,8 @@ const RelatedProductsList = (props) => {
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
     <div className='relatedProductsList'>
-    {props.allProps.map((product, i) => {
-      return <div key={i}>
+    {props.allProps.map((product, index) => {
+      return <div key={index}>
         <RelatedProductsCard
                key={product.itemId}
                name={product.itemName}

@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer'
 import mockProps from './mockProps.js'
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
 import Overview from '../Overview/index.jsx'
+import testData from '../Overview/testData.js'
 
 //OVERVIEW TESTS
 //  unit tests:
@@ -15,14 +16,14 @@ import Overview from '../Overview/index.jsx'
 //   6. does quantity show integers from 1 to stock or 15 max?
 //   7. does add to cart do what its supposed to?
 
-describe('Overview', () => {
-  test('should render', () => {
-    const wrapper = shallow(
-      <Overview />
-    )
-    expect(wrapper.exists()).toBeTruthy()
-  })
-})
+// describe('Overview', () => {
+//   test('should render', () => {
+//     const wrapper = shallow(
+//       <Overview />
+//     )
+//     expect(wrapper.exists()).toBeTruthy()
+//   })
+// })
 
 
 describe('props', () => {

@@ -1,16 +1,11 @@
 import React from 'react'
 import { shallow, mount} from 'enzyme'
 import helper from '../helpers/qnAHelper.js'
-// import axios from 'axios'
-// import { getReportedAns } from '../clientRoutes/qa.js'
 import testData from './QnA-testData'
 import renderer from 'react-test-renderer'
-
-
-// import axios from 'axios'
 import QuestionsNAnswers from '../questions-n-answers/qNa'
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals'
-
+// console.log(testData.test)
 
 const props = {
   product_id: testData.product_id,
@@ -19,17 +14,11 @@ const props = {
   currentItemName: testData.currentItemName,
   question_id: testData.question_id
 }
-jest.mock('../clientRoutes/qa.js')
 
-// jest.mock('mockAxios')
+jest.mock('../clientRoutes/qa.js')
 let wrapper;
 
-
 describe('QuestionsNAnswers', () => {
-
-  // test('')
-
-
   describe('ComponentDidMount', () => {
     beforeEach(() => {
       wrapper = shallow(<QuestionsNAnswers {...props}/>)
@@ -39,14 +28,17 @@ describe('QuestionsNAnswers', () => {
     })
     test('on mount, it executes componentDidMount, filterAnswerNQUestions, showMoreAnsweredQuestions, ShowReportedClass all only once', () => {
 
-    let wrapper = shallow(<QuestionsNAnswers {...props} />)
+
     const instance = wrapper.instance()
+
 
     jest.spyOn(instance, 'componentDidMount')
     instance.componentDidMount()
+    // console.log(instance)
 
     jest.spyOn(instance, 'getReportedAns')
       return instance.getReportedAns().then(data => {
+        console.log(instance)
         let answerIds = data.data
 
         jest.spyOn(instance, 'filterAnswersNQuestions')
@@ -114,7 +106,6 @@ describe('QuestionsNAnswers', () => {
                 if (index === 0) {
                   sellerIndex = 0
                 }
-
                 if(answerArr[i + 1]) {
                   if (answer.helpfulness > answerArr[i + 1].helpfulness) {
                     sellerResult = true
@@ -145,15 +136,38 @@ describe('QuestionsNAnswers', () => {
       const instance = wrapper.instance()
 
       return instance.getReportedAns().then(data => {
-        let index = 0
-        let index1 = 1
-        let matcher0 = '2171422'
-        let matcher1 = '2171483'
-        let resultAtIndex0 = instance.state.questions[index].answers[matcher0].id === instance.state.answers[index][index].id
-        let resultAtIndex1 = instance.state.questions[index1].answers[matcher1].id === instance.state.answers[index1][index].id
 
-        expect(resultAtIndex0).toEqual(true)
-        expect(resultAtIndex1).toEqual(true)
+        let answerResultAtAnswerArray0_index0 = instance.state.answers[0][0].id
+        let correctAnswerAtQuestinIndex0_answers0 = testData.sortedData1[0].answers[0].id
+        expect(answerResultAtAnswerArray0_index0 === correctAnswerAtQuestinIndex0_answers0).toEqual(true)
+
+        let answerResultAtAnswerArray0_index1 = instance.state.answers[0][1].id
+        let correctAnswerAtQuestinIndex0_answers1 = testData.sortedData1[0].answers[1].id
+        expect(answerResultAtAnswerArray0_index1 === correctAnswerAtQuestinIndex0_answers1).toEqual(true)
+
+        let answerResultAtAnswerArray0_index2 = instance.state.answers[0][2].id
+        let correctAnswerAtQuestinIndex0_answers2 = testData.sortedData1[0].answers[2].id
+        expect(answerResultAtAnswerArray0_index2 === correctAnswerAtQuestinIndex0_answers2).toEqual(true)
+        // expect(resultAtIndex1).toEqual(true)
+        let answerResultAtAnswerArray1_index0 = instance.state.answers[1][0].id
+        let correctAnswerAtQuestinIndex1_answers0 = testData.sortedData1[1].answers[0].id
+        expect(answerResultAtAnswerArray1_index0 === correctAnswerAtQuestinIndex1_answers0).toEqual(true)
+
+        let answerResultAtAnswerArray1_index1 = instance.state.answers[1][1].id
+        let correctAnswerAtQuestinIndex1_answers1 = testData.sortedData1[1].answers[1].id
+        expect(answerResultAtAnswerArray1_index1 === correctAnswerAtQuestinIndex1_answers1).toEqual(true)
+
+        let answerResultAtAnswerArray1_index2 = instance.state.answers[1][2].id
+        let correctAnswerAtQuestinIndex1_answers2 = testData.sortedData1[1].answers[2].id
+        expect(answerResultAtAnswerArray1_index2 === correctAnswerAtQuestinIndex1_answers2).toEqual(true)
+
+        let answerResultAtAnswerArray1_index3 = instance.state.answers[1][3].id
+        let correctAnswerAtQuestinIndex1_answers3 = testData.sortedData1[1].answers[3].id
+        expect(answerResultAtAnswerArray1_index3 === correctAnswerAtQuestinIndex1_answers3).toEqual(true)
+
+        let answerResultAtAnswerArray1_index4 = instance.state.answers[1][4].id
+        let correctAnswerAtQuestinIndex1_answers4 = testData.sortedData1[1].answers[4].id
+        expect(answerResultAtAnswerArray1_index4 === correctAnswerAtQuestinIndex1_answers4).toEqual(true)
       })
     })
 
@@ -217,11 +231,85 @@ describe('QuestionsNAnswers', () => {
         let result = false;
 
         classes.forEach((obj) => {
-          if(obj.children[0].props.className=== 'question Container' && obj.children[1].props.className === 'question Container') {
+          if(obj.children[0].props.className=== 'question container' && obj.children[1].props.className === 'question container') {
             result =true;
           }
         })
         expect(result).toEqual(true)
       })
+    })
+
+    describe('More Answered Questions', () => {
+      test('before click, question scroll container should not appear', () => {
+        const component = renderer.create(<QuestionsNAnswers {...props}/>);
+        const instance = component.getInstance()
+
+        instance.componentDidMount()
+
+        return instance.getReportedAns().then(data => {
+          let buttonClass = component.toJSON().children[3].props.className;
+          expect(buttonClass).toEqual('questionList container')
+        })
+      })
+      test('on click, question list should change to a scroll container', () => {
+        const component = renderer.create(<QuestionsNAnswers {...props}/>);
+        const instance = component.getInstance()
+        instance.componentDidMount()
+
+        return instance.getReportedAns().then(data => {
+          jest.spyOn(instance, 'loadQuestionClick')
+          instance.loadQuestionClick()
+          let buttonClass = component.toJSON().children[3].props.className
+          expect(instance.loadQuestionClick).toBeCalledTimes(1);
+          expect(buttonClass).toEqual('questionList scroll container')
+        })
+      })
+      test('on each click, two more questions/answers should appear', () => {
+        const component = renderer.create(<QuestionsNAnswers {...props}/>);
+        const instance = component.getInstance()
+        instance.componentDidMount()
+
+
+        return instance.getReportedAns().then(data => {
+          // console.log(instance)
+          jest.spyOn(instance, 'loadQuestionClick')
+          let currentQuestions = component.toJSON().children[3].children[0].children;
+          let currentShowClassDivs = currentQuestions.filter((question) => {
+            if (question.props.className === 'question container') {
+              return question;
+            }
+          })
+
+          // console.log(showClassesB4Click)
+          expect(instance.loadQuestionClick).toBeCalledTimes(0)
+          expect(currentShowClassDivs.length).toEqual(2)
+
+          instance.loadQuestionClick()
+          let firstClickQuestions = component.toJSON().children[3].children[0].children
+          let firstClickShowClassDivs = firstClickQuestions.filter((question) => {
+            if (question.props.className === 'question container') {
+              return question;
+            }
+          })
+          expect(instance.loadQuestionClick).toBeCalledTimes(1)
+          expect(firstClickShowClassDivs.length).toEqual(4)
+
+          instance.loadQuestionClick()
+          let secondClickQuestions = component.toJSON().children[3].children[0].children
+          // console.log(component.toJSON().children[3].children[0])
+          let secondClickShowClassDivs = secondClickQuestions.filter((question) => {
+            if (question.props.className === 'question container') {
+              return question;
+            }
+          })
+          expect(instance.loadQuestionClick).toBeCalledTimes(2)
+          expect(secondClickShowClassDivs.length).toEqual(6)
+
+        })
+      })
+      // xtest('', () => {
+      //   const wrapper = shallow(<QuestionsNAnswers {...props}/>);
+
+      // })
     })
 })

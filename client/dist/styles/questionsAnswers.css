@@ -119,13 +119,13 @@ h3.loadMoreAnswersButton:hover {
 
 }
 
-.question.Container {
+.question.container {
   margin-bottom: 5vh;
   display: flex;
 
   flex-direction: row;
 }
-.questionHide.Container{
+.questionHide.container{
   display:none
 
 }
@@ -250,4 +250,8 @@ h3.loadMoreAnswersButton:hover {
 
 .answererDetails{
   margin-bottom: 5vh;
+}
+
+.answerListTable.Hide {
+  display: none;
 }
