@@ -107,6 +107,7 @@ const helper = {
     });
   },
   filterReviewsByStars: (reviews, starFilters) => {
+
     if (starFilters.length === 0) {
       return reviews
     }
