@@ -67,7 +67,7 @@ class IndividualReviewTile extends React.Component {
                     key={index} src={photo.url}
                     alt="image"
                     onClick={(e) => {
-                      this.props.viewPhoto();
+                      this.props.viewPhoto(e);
                       reviewsInteraction(e);
                     }}/>
                 )

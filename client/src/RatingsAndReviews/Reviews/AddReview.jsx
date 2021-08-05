@@ -10,8 +10,12 @@ class AddReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recommendThis: '',
-      overallRating: 0,
+      rating: 0,
+      summary: '',
+      body: '',
+      recommend: '',
+      name: '',
+      email: '',
       photos: [],
       allowUpload: true
     }
@@ -31,7 +35,7 @@ class AddReview extends React.Component {
 
   handleOverallRatingChange(event) {
     this.setState({
-      overallRating: event.target.getAttribute('starNum')
+      rating: event.target.getAttribute('starNum')
     });
   }
 
@@ -93,14 +97,14 @@ class AddReview extends React.Component {
           {/* OVERALL RATING INPUT */}
           <div className="review-input">
             <div className="ri-title">How would you rate this overall?</div>
-            {Stars(this.state.overallRating, this.handleOverallRatingChange)}
+            {Stars(this.state.rating, this.handleOverallRatingChange)}
           </div>
         </div>
         {/* RECOMMEND RADIO GROUP */}
         <div className="radio-options-wrapper-column">
           <div className="radio-factor-title">Do you recommend this product?</div>
           <div className="radio-options rcolumn">
-            {this.createRadioOptions(['Yes', 'No'], 'radio-option', 'recommendThis')}
+            {this.createRadioOptions(['Yes', 'No'], 'radio-option', 'recommend')}
           </div>
         </div>
         {/* FACTOR INPUTS */}
@@ -130,8 +134,8 @@ class AddReview extends React.Component {
           <label className="r-title">Write your full review</label>
           <textarea className="r-full-input"
           placeholder="Enter Review..."
-          stateVal="full"
-          value={this.state.full}
+          stateVal="body"
+          value={this.state.body}
           onChange={this.handleChange}/>
         </div>
         {/* UPLOAD YOUR PHOTOS */}

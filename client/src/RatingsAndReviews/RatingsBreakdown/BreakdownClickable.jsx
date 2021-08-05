@@ -11,8 +11,6 @@ const BreakdownClickable = (props) => {
         star={props.stars}
         onClick={(e) => {
           props.starFilterClick(e);
-          console.log(e);
-          console.log(e.target);
           reviewsInteraction(e);
         }}>
         <div
