@@ -3,24 +3,48 @@ import propTypes from 'prop-types';
 
 
 const RelatedProductsModal = (props) => {
-  console.log(props.features)
+
   return (
     <div className='relatedProductsModal'
          style={{'display': props.modalShow ? 'flex' : 'none'}} >
       <div className='modalOpen'>
         <div className='modalTable'>
           <h1>Comparing</h1>
-
-           {/* {console.log(props.features)} */}
+          <table>
+            <tbody>
+              <tr>
+                <th>{props.modifiedCurrent.name}</th>
+                <th>Feature</th>
+                <th>{props.clickedProductInfo.name}</th>
+                </tr>
            {props.features.length > 0 ?
-        props.features.map((feature, i) => {
-          console.log(feature)
-                return (
-                  <div key={`feature-${i}`}>
-                    Rendered
-                  </div>
-                )
-              }) : <div>Loading</div>}
+            props.features.map((feature, i) => {
+
+            return (
+              <React.Fragment key={i++} >
+                <tr>
+                  <td>
+                    {
+                    props.modifiedCurrent.features[feature] !== undefined ?
+                      props.modifiedCurrent.features[feature] :
+                      'n/a'
+                    }
+                  </td>
+                  <td>{feature}</td>
+                  <td>
+                  {
+                    props.clickedProductInfo.features[feature] !== undefined ?
+                      props.clickedProductInfo.features[feature] :
+                      'n/a'
+                    }
+                  </td>
+                </tr>
+
+              </React.Fragment>
+            )
+            }) : <div>Loading</div>}
+              </tbody>
+            </table>
           <button className='closeModal' onClick={(e) => {props.closeModal(e)}}>close</button>
         </div>
       </div>
@@ -32,22 +56,11 @@ const RelatedProductsModal = (props) => {
 RelatedProductsModal.propTypes = {
   modalShow: propTypes.any,
   handleCompareItems: propTypes.func,
-  allProps: propTypes.object,
-  currentProductInfo: propTypes.object,
   clickedProductInfo: propTypes.object,
   features: propTypes.array,
-  closeModal: propTypes.func
+  closeModal: propTypes.func,
+  modifiedCurrent: propTypes.object
 };
 
   export default RelatedProductsModal;
 
-{/* {console.log('incode features', props.features)}
-        {props.features.length > 0 ?
-        props.features.map((feature, i) => {
-          console.log(feature)
-                return (
-                  <div key={`feature-${i}`}>
-                    Rendered
-                  </div>
-                )
-              }) : <div>Loading</div>} */}

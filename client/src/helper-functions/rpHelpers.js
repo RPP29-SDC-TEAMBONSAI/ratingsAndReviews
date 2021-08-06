@@ -64,35 +64,59 @@ const helper = {
   },
 
   formatFeatures: (currentProd, clickedProd) => {
-    let combinedFeatures = [];
-    if (clickedProd.features) {
-      clickedProd.features.forEach(feature => {
-        let obj = {}
-        let vals = Object.values(feature);
-        obj[vals[0]] = [vals[1], clickedProd.id]
-        combinedFeatures.push(obj)
-      })
-    }
-    currentProd.features.forEach(feature => {
-      let obj = {}
-      let vals = Object.values(feature);
-      obj[vals[0]] = [vals[1], currentProd.id]
-      combinedFeatures.push(obj)
-    })
+    //console.log(currentProd)
+    //console.log(clickedProd)
+    // let combinedFeatures = [];
+    // if (clickedProd.features) {
+    //   clickedProd.features.forEach(feature => {
+    //     let obj = {}
+    //     let vals = Object.values(feature);
+    //     obj[vals[0]] = [vals[1], clickedProd.id]
+    //     combinedFeatures.push(obj)
+    //   })
+    // }
+    // currentProd.features.forEach(feature => {
+    //   let obj = {}
+    //   let vals = Object.values(feature);
+    //   obj[vals[0]] = [vals[1], currentProd.id]
+    //   combinedFeatures.push(obj)
+    // })
 
-    let formattedFeatures = combinedFeatures.reduce((allFeatures, feature) => {
-      if (Object.keys(feature) in allFeatures) {
-        allFeatures = [allFeatures[Object.keys(feature)]].concat(feature);
+    // let formattedFeatures = combinedFeatures.reduce((allFeatures, feature) => {
+    //   if (Object.keys(feature) in allFeatures) {
+    //     allFeatures = [allFeatures[Object.keys(feature)]].concat(feature);
+    //   } else {
+    //     allFeatures.push(feature);
+    //   }
+    //   return allFeatures;
+    // }, [])
+
+    const allFeatureKeys = [
+      ...currentProd.features,
+      ...clickedProd.features
+    ]
+    const uniqueFeatureKeys = allFeatureKeys.reduce((acc, curFeature) => {
+      if (acc.indexOf(curFeature.feature) > -1 ) {
+        return acc;
       } else {
-        allFeatures.push(feature);
+        return [...acc, curFeature.feature]
       }
-      console.log(JSON.stringify(allFeatures))
-      return allFeatures;
-    }, [])
+     },[])
 
-    // console.log(JSON.stringify(formattedFeatures))
-    // console.log(formattedFeatures[0])
-    return formattedFeatures;
+     const modifiedCurrentProd = {
+      ...currentProd,
+      features: currentProd.features.reduce((acc, curFeature) => {
+        return {...acc, [curFeature.feature]: curFeature.value}
+      }, {})
+    }
+    const modifiedClickedProd = {
+      ...clickedProd,
+      features: clickedProd.features.reduce((acc, curFeature) => {
+        return {...acc, [curFeature.feature]: curFeature.value}
+      }, {})
+    }
+
+    return [uniqueFeatureKeys, modifiedCurrentProd, modifiedClickedProd];
   }
 
 }

@@ -24,7 +24,8 @@ export default class RelatedProducts extends React.Component {
       outfitPropsObj: [],
       modalShow: false,
       clickedProductInfo: {},
-      features: [1, 2, 3]
+      modifiedCurrent: {},
+      features: []
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
@@ -176,11 +177,14 @@ export default class RelatedProducts extends React.Component {
       e.stopPropagation();
 
       const formattedFeatures = helper.formatFeatures(this.props.state.productInformation, item);
-      console.log(formattedFeatures)
-      console.log(formattedFeatures[0])
+      const uniqueFeatArray = formattedFeatures[0];
+      const modifiedClicked = formattedFeatures[2];
+      const modifiedCurrent = formattedFeatures[1];
+
       this.setState({
-        clickedProductInfo: item,
-        features: formattedFeatures,
+        clickedProductInfo: modifiedClicked,
+        modifiedCurrent: modifiedCurrent,
+        features: uniqueFeatArray,
       }, () => {this.setState({
         modalShow: !this.state.modalShow
         })
@@ -190,7 +194,6 @@ export default class RelatedProducts extends React.Component {
 
     closeModal(e) {
       e.preventDefault();
-
       this.setState({
         modalShow: !this.state.modalShow
       });
@@ -212,11 +215,9 @@ export default class RelatedProducts extends React.Component {
         <RelatedProductsModal
         modalShow={this.state.modalShow}
         closeModal={this.closeModal}
-        handleCompareItems={this.handleCompareItems}
-        currentProductInfo={this.props.state.productInformation}
         clickedProductInfo={this.state.clickedProductInfo}
+        modifiedCurrent={this.state.modifiedCurrent}
         features={this.state.features}
-        allProp={this.state.allPropsObj}
          />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
