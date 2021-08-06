@@ -54,7 +54,8 @@ RelatedProductsCard.propTypes = {
   handleProductChange: propTypes.func,
   handleCompareItems: propTypes.func,
   id: propTypes.any,
-  starRating: propTypes.object
+  starRating: propTypes.object,
+
   };
 
   export default RelatedProductsCard;

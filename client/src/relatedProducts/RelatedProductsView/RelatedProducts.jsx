@@ -23,11 +23,13 @@ export default class RelatedProducts extends React.Component {
       allPropsObj: [],
       outfitPropsObj: [],
       modalShow: false,
-      clickedProductInfo: {}
+      clickedProductInfo: {},
+      features: [1, 2, 3]
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
     this.handleCompareItems = this.handleCompareItems.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.product = this.product.bind(this)
     this.style = this.style.bind(this)
     this.outFit = this.outFit.bind(this)
@@ -42,6 +44,7 @@ export default class RelatedProducts extends React.Component {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
           let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
+
           let values = [];
           let keys = Object.keys(localStorage);
           let i = keys.length;
@@ -91,6 +94,7 @@ export default class RelatedProducts extends React.Component {
         })
       })
     }
+
   }
 
     outFit() {
@@ -116,6 +120,7 @@ export default class RelatedProducts extends React.Component {
         this.props.state.relatedProducts.forEach((productId) => {
           return productsStyle(productId)
             .then(data => {
+
               let splitted = data.config.url.split('?')
               let curId = Number(splitted[1])
               result.push(helper.addIdToStylesData(data.data, curId))
@@ -135,7 +140,6 @@ export default class RelatedProducts extends React.Component {
          this.props.state.relatedProducts.forEach((productId) => {
            return productsWithId(productId)
              .then(data => {
-               //console.log(data)
                result.push(data.data)
                if (result.length === this.props.state.relatedProducts.length) {
                  result.sort((a, b) => a['id'] - b['id']);
@@ -170,8 +174,26 @@ export default class RelatedProducts extends React.Component {
     handleCompareItems(item, e) {
       e.preventDefault();
       e.stopPropagation();
-      this.setState({clickedProductInfo: item});
-      this.state.modalShow ? this.setState({modalShow: false}) : this.setState({modalShow: true});
+
+      const formattedFeatures = helper.formatFeatures(this.props.state.productInformation, item);
+      console.log(formattedFeatures)
+      console.log(formattedFeatures[0])
+      this.setState({
+        clickedProductInfo: item,
+        features: formattedFeatures,
+      }, () => {this.setState({
+        modalShow: !this.state.modalShow
+        })
+      })
+    }
+
+
+    closeModal(e) {
+      e.preventDefault();
+
+      this.setState({
+        modalShow: !this.state.modalShow
+      });
     }
 
 
@@ -189,10 +211,12 @@ export default class RelatedProducts extends React.Component {
         state={this.props.state} />
         <RelatedProductsModal
         modalShow={this.state.modalShow}
+        closeModal={this.closeModal}
         handleCompareItems={this.handleCompareItems}
-        allProps={this.state.allPropsObj}
-        currentProdInfo={this.props.state.productInformation}
+        currentProductInfo={this.props.state.productInformation}
         clickedProductInfo={this.state.clickedProductInfo}
+        features={this.state.features}
+        allProp={this.state.allPropsObj}
          />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}

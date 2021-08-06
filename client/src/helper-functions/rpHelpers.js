@@ -61,6 +61,38 @@ const helper = {
     productStylesWithId['product_id'] = productId;
     productStylesWithId['results'] = stateStylesCopy;
     return productStylesWithId;
+  },
+
+  formatFeatures: (currentProd, clickedProd) => {
+    let combinedFeatures = [];
+    if (clickedProd.features) {
+      clickedProd.features.forEach(feature => {
+        let obj = {}
+        let vals = Object.values(feature);
+        obj[vals[0]] = [vals[1], clickedProd.id]
+        combinedFeatures.push(obj)
+      })
+    }
+    currentProd.features.forEach(feature => {
+      let obj = {}
+      let vals = Object.values(feature);
+      obj[vals[0]] = [vals[1], currentProd.id]
+      combinedFeatures.push(obj)
+    })
+
+    let formattedFeatures = combinedFeatures.reduce((allFeatures, feature) => {
+      if (Object.keys(feature) in allFeatures) {
+        allFeatures = [allFeatures[Object.keys(feature)]].concat(feature);
+      } else {
+        allFeatures.push(feature);
+      }
+      console.log(JSON.stringify(allFeatures))
+      return allFeatures;
+    }, [])
+
+    // console.log(JSON.stringify(formattedFeatures))
+    // console.log(formattedFeatures[0])
+    return formattedFeatures;
   }
 
 }
