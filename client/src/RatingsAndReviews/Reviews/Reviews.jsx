@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReviewsHeader from './ReviewsHeader.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
+import { reviews, reviewsMeta, reviewsInteraction } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
 const { sortByRelevance, filterReviewsByStars } = helper;
 
@@ -94,7 +94,10 @@ class Reviews extends React.Component {
         <div
           className="add-review-open"
           style={{display: this.state.addReviewOpen ? "block" : "none"}}>
-            <AddReview close={this.openAddReview}/>
+            <AddReview
+              close={this.openAddReview}
+              characteristics={this.props.characteristics}
+              product_id={this.props.product_id}/>
         </div>
         {/* MAIN REVIEWS COMPONENT */}
         <div className="reviews">
@@ -110,14 +113,22 @@ class Reviews extends React.Component {
             viewPhoto={this.viewPhoto}/>
           <div className="review-buttons">
             <button
+              interaction="loaded more reviews"
               className="review-button"
-              onClick={this.loadTwoMore}
+              onClick={(e) => {
+                this.loadTwoMore(e);
+                reviewsInteraction(e);
+              }}
               style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
                 MORE REVIEWS
             </button>
             <button
+              interaction="opened review form"
               className="review-button"
-              onClick={this.openAddReview}>
+              onClick={(e) => {
+                this.openAddReview();
+                reviewsInteraction(e);
+              }}>
                 ADD A REVIEW +
             </button>
           </div>
@@ -130,7 +141,8 @@ class Reviews extends React.Component {
 Reviews.propTypes = {
   product_id: PropTypes.number,
   starFilters: PropTypes.array,
-  starFilterClick: PropTypes.func
+  starFilterClick: PropTypes.func,
+  characteristics: PropTypes.object
 }
 
 export default Reviews;

@@ -107,7 +107,6 @@ const helper = {
     });
   },
   filterReviewsByStars: (reviews, starFilters) => {
-
     if (starFilters.length === 0) {
       return reviews
     }
@@ -115,7 +114,9 @@ const helper = {
       return starFilters.includes(review.rating);
     })
   },
-
+  auditReviews: (review) => {
+    return true;
+  }
 }
 
 export default helper;
