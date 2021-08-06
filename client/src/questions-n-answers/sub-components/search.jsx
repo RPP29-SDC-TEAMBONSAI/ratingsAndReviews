@@ -7,6 +7,7 @@ const Search = (props) => {
       <input className='searchBtn' type="submit" value='Search'></input>
       <div className='inputBox'>
         <input
+          onClick={(e) => props.recordClick(e)}
           className='search'
           type='text'
           value={props.currentInput}

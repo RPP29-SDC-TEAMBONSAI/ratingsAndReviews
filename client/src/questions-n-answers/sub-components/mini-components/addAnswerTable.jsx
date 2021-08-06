@@ -8,9 +8,9 @@ const AddAnswer = (props) => {
       <tbody>
         <tr >
           <td className='aHelpful'>Helpful?</td>
-          <td id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => props.helpfulQuestionClick(e, props.question_id)}>Yes</td>
+          <td id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => {props.helpfulQuestionClick(e, props.question_id), props.recordClick(e)}}>Yes</td>
           <td className='helpfulCount'>({props.data ? props.data : 0})</td>
-          <td className='addAnswerText' onClick={(e) => props.addAnswerOnClick(e, [props.questionName, props.question_id])}>Add Answer</td>
+          <td className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(e, [props.questionName, props.question_id], props.recordClick(e))}}>Add Answer</td>
         </tr>
       </tbody>
     </table>

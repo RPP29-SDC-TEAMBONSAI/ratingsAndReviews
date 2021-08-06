@@ -60,16 +60,16 @@ class UserQuestion extends React.Component {
          <h3 > {`About the [${this.props.currentItemName}]`} </h3>
         </div>
         <div className='askQuestionForm'>
-          <textarea className='userQuestion' maxLength='1000' type='text' value={this.state.yourQuestion} onChange={this.questionFormChange} name='yourQuestion'></textarea>
+          <textarea className='userQuestion' maxLength='1000' type='text' onClick={(e) => this.props.recordClick(e)} value={this.state.yourQuestion} onChange={this.questionFormChange} name='yourQuestion'></textarea>
         </div>
         <div className='askQuestionForm'>
-          <input className='userNickName' type='text' value={this.state.nickName} onChange={this.questionFormChange} name='nickName'></input>
+          <input className='userNickName' type='text' onClick={(e) => this.props.recordClick(e)} value={this.state.nickName} onChange={this.questionFormChange} name='nickName'></input>
         </div >
         <div className='askQuestionForm'>
-          <input className='userEmail' type='text' value={this.state.email} onChange={this.questionFormChange} name='email'></input>
+          <input className='userEmail' type='text' onClick={(e) => this.props.recordClick(e)} value={this.state.email} onChange={this.questionFormChange} name='email'></input>
         </div>
         <div className='askQuestionForm'>
-          <button className='userQSubmit' type='submit'>Submit Your Question</button>
+          <button className='userQSubmit'onClick={(e) => this.props.recordClick(e)} type='submit'>Submit Your Question</button>
         </div>
       </form>
 

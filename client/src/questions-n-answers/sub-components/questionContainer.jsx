@@ -20,6 +20,7 @@ const QuestionsContainer = (props) => {
     <div className={props.show ? `question container`: `questionHide container`}>
       <div className='questionAndAnswer'>
         <QuestionList
+          recordClick={props.recordClick}
           answerClass={props.answerClass}
           addToReported={props.addToReported}
           helpfulAnswerClick= {props.helpfulAnswerClick}
@@ -39,6 +40,7 @@ const QuestionsContainer = (props) => {
       </div>
       <div className='qna table'>
         <AddAnswer
+          recordClick={props.recordClick}
           addAnswerOnClick={props.addAnswerOnClick}
           currentI={props.currentI}
           helpfulQuestionClick={props.helpfulQuestionClick}
