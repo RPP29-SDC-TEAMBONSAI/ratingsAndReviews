@@ -12,5 +12,5 @@ module.exports = {
   },
   productsRelated: (id) => {
     return axios.get(`/products/:product_id/related?${id}`);
-  }
+  },
 }

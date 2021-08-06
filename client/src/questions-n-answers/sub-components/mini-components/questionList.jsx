@@ -14,14 +14,17 @@ const QuestionList = (props) => {
 
       {props.answers.map((answer, index) => {
 
-        let _class= props.answerHide(props.classname, index)
+
+        let _class= props.answerHide(props.classname, index, props.questionClickCount)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
         let showClass;
+        // console.log(_class)
 
         if (showOrHideClass === 'answerListTable') {
 
           showClass = 'answerListTable'
         }
+
 
         return (
           <div className={showClass ? showClass: _class} key={index}>
@@ -49,7 +52,7 @@ const QuestionList = (props) => {
 
       })}
       </div>
-    </div>
+      </div>
   )
 }
 

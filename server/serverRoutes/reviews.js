@@ -26,5 +26,19 @@ module.exports = {
         res.status(200).send(data.data);
       })
       .catch(err => console.log('resultErr', err));
+  },
+  reviewsHelpful: (req, res) => {
+    axios(requestConfig('put', api + req.originalUrl.substring(1)))
+      .then((data)=> {
+        res.status(200).send(data.data);
+      })
+      .catch(err => console.log('resultErr', err));
+  },
+  reviewsReport: (req, res) => {
+    axios(requestConfig('put', api + req.originalUrl.substring(1)))
+      .then((data)=> {
+        res.status(200).send(data.data);
+      })
+      .catch(err => console.log('resultErr', err));
   }
 }

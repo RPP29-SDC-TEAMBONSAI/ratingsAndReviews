@@ -1,38 +1,22 @@
 import React from 'react';
+import differenceInMonths from 'date-fns/differenceInMonths';
 
 const factorDetail = {
-  Size: [
-    'A size too small',
-    'Perfect',
-    'A size too wide'
-  ],
-  Width: [
-    'Too narrow',
-    'Perfect',
-    'Too wide'
-  ],
-  Comfort: [
-    'Uncomfortable',
-    '',
-    '',
-    'Perfect'
-  ],
-  Quality: [
-    'Poor',
-    '',
-    '',
-    'Perfect',
-  ],
-  Length: [
-    'Runs Short',
-    'Perfect',
-    'Runs long'
-  ],
-  Fit: [
-    'Runs tight',
-    'Perfect',
-    'Runs long'
-  ]
+  Size: ['A size too small', 'Perfect', 'A size too wide'],
+  Width: ['Too narrow', 'Perfect', 'Too wide'],
+  Comfort: ['Uncomfortable', '', '', 'Perfect'],
+  Quality: ['Poor', '', '', 'Perfect'],
+  Length: ['Runs Short', 'Perfect', 'Runs long'],
+  Fit: ['Runs tight', 'Perfect', 'Runs long']
+};
+
+const factorDetailFull = {
+  Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+  Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+  Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+  Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+  Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+  Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
 };
 
 const helper = {
@@ -91,7 +75,10 @@ const helper = {
       )
     }
   },
-  getFactorDetailArray: (factor) => {
+  getFactorDetailArray: (factor, full) => {
+    if (full) {
+      return factorDetailFull[factor];
+    }
     return factorDetail[factor];
   },
   mapCharacteristicsToProps: (characteristics) => {
@@ -107,8 +94,28 @@ const helper = {
     return props;
   },
   sortByRelevance: (reviews) => {
-    return reviews;
-  }
+    const today = new Date();
+    // add a position prop to sort by on reviews
+    for (let i = 0; i < reviews.length; i++) {
+      // subtract how many months ago this review was written from the rating
+      let months = differenceInMonths(today, (new Date(reviews[i].date)));
+      reviews[i].position = reviews[i].helpfulness - months;
+    }
+    // sort by highest "position" scored
+    return reviews.sort(function (a, b) {
+      return b.position - a.position;
+    });
+  },
+  filterReviewsByStars: (reviews, starFilters) => {
+
+    if (starFilters.length === 0) {
+      return reviews
+    }
+    return reviews.filter((review) => {
+      return starFilters.includes(review.rating);
+    })
+  },
+
 }
 
 export default helper;

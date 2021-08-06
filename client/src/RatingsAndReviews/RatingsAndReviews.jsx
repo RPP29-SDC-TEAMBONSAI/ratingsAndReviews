@@ -15,7 +15,7 @@ class RatingsAndReviews extends React.Component {
   };
 
   setStarFilter(event) {
-    let stars = event.target.getAttribute('star');
+    let stars = parseInt(event.target.getAttribute('star'));
     let filters = this.state.starFilters.slice();
     let index = filters.indexOf(stars);
 

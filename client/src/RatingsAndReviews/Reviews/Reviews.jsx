@@ -5,15 +5,16 @@ import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
 import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
-const { sortByRelevance } = helper;
+const { sortByRelevance, filterReviewsByStars } = helper;
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      loaded: 0,
-      sortBy: 'newest',
+      numReviews: 0,
+      loaded: 1,
+      sortBy: 'relevant',
       photo: null,
       photoOpen: false,
       addReviewOpen: false
@@ -27,31 +28,39 @@ class Reviews extends React.Component {
   };
 
   componentDidMount() {
-    this.getStateData();
+    this.getStateData(this.state.loaded, this.state.sortBy);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.product_id !== prevProps.product_id) {
-      this.getStateData();
+    if (this.props.product_id !== prevProps.product_id || this.props.starFilters !== prevProps.starFilters) {
+      this.getStateData(this.state.loaded, this.state.sortBy);
     }
   }
 
-  getStateData() {
-    reviews(1, 1000, 'newest', this.props.product_id)
+  getStateData(loaded, sortBy) {
+    reviews(1, 1000, sortBy, this.props.product_id)
       .then(({ data }) => {
-        // sortByRelevance(data);
+        // save the num of reviews in total
+        let numReviews = data.length;
+        // if sort selected is relevance sort the data
+        let reviews = sortBy === 'relevant'
+          ? sortByRelevance(data)
+          : data;
+        // filter the data by star filters selected
+        reviews = filterReviewsByStars(data, this.props.starFilters);
+        // set the state
         this.setState({
-          reviews: data,
-          loaded: 1
+          reviews: reviews,
+          numReviews: numReviews,
+          loaded: loaded,
+          sortBy: sortBy
         });
       })
       .catch(err => console.log("REVIEWS MOUNT ERR", err));
   }
 
   handleSortChange(event) {
-    this.setState({
-      sortBy: event.target.value
-    });
+    this.getStateData(this.state.loaded, event.target.value);
   }
 
   viewPhoto(event) {
@@ -84,16 +93,15 @@ class Reviews extends React.Component {
         {/* FORM MODAL */}
         <div
           className="add-review-open"
-          style={{display: this.state.addReviewOpen ? "block" : "none"}}
-          onClick={this.openAddReview}>
-            <AddReview/>
+          style={{display: this.state.addReviewOpen ? "block" : "none"}}>
+            <AddReview close={this.openAddReview}/>
         </div>
         {/* MAIN REVIEWS COMPONENT */}
         <div className="reviews">
           <ReviewsHeader
             starFilters={this.props.starFilters}
             starFilterClick={this.props.starFilterClick}
-            numReviews={this.state.reviews.length}
+            numReviews={this.state.numReviews}
             handleSortChange={this.handleSortChange}
             sortBy={this.state.sortBy}/>
           <ReviewsList
