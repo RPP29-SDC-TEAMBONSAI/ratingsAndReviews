@@ -6,7 +6,7 @@ const ImageGallery = (props) => {
     let keyTwo = -1;
 
     return (
-      <div className="image-gallery">
+      <div className="image-gallery" >
         <div className="image-sidebar">
           {function () {
             console.log('number of photos', props.state.styles[props.OverviewState.styleIndex].photos.length)
@@ -57,7 +57,7 @@ const ImageGallery = (props) => {
 
         </div>
 
-        <div key = "div">
+        <div >
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
               (photo) => {
                 keyTwo += 1;
@@ -80,16 +80,6 @@ const ImageGallery = (props) => {
                       value={keyTwo}
                       src={photo.url}
                       onClick = {props.expandedView}
-                      style={{display: props.OverviewState.expandedView ? "flex" : "none"}}
-                    ></img>
-                     <img
-                      className="expanded-view-main-photo"
-                      key={keyTwo}
-                      value={keyTwo}
-                      src={photo.url}
-                      onClick = {props.expandedView}
-                      style={{display: props.OverviewState.expandedView ? "none" : "flex"}}
-
                     ></img>
 
                     {function() {

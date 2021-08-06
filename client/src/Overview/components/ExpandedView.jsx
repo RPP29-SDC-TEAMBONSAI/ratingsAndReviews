@@ -1,6 +1,6 @@
 import React from "react";
 
-const expandedView = (props) => {
+const ExpandedView = (props) => {
   let keyTwo = -1;
   return (
     <div className = "expanded-view-div" >
@@ -47,4 +47,4 @@ const expandedView = (props) => {
 
 }
 
-export default ImageGallery;
+export default ExpandedView;

@@ -4,6 +4,7 @@ import ProductInfo from "./components/ProductInfo.jsx";
 import AddToCart from "./components/AddToCart.jsx";
 import StyleSelector from "./components/StyleSelector.jsx";
 import ImageGallery from "./components/ImageGallery.jsx";
+import ExpandedView from "./components/ExpandedView.jsx"
 
 class Overview extends React.Component {
   constructor(props) {
@@ -178,7 +179,8 @@ expandedView() {
   render() {
 
     return (
-      <div className="overview">
+      <div>
+      <div className="overview" style={{display: this.state.expandedView ? "none" : "flex"}}>
         <div className="column-one">
           <ImageGallery
             state={this.props.state}
@@ -206,6 +208,18 @@ expandedView() {
             changeSelectedQuantity={this.changeSelectedQuantity}
           />
         </div>
+      </div>
+      <div className = "expanded-view-div" style={{display: this.state.expandedView ? "flex" : "none"}}>
+      <ExpandedView state={this.props.state}
+        OverviewState={this.state}
+        changeMainPhoto={this.changeMainPhoto}
+        mainImageLeftArrow = {this.mainImageLeftArrow}
+        mainImageRightArrow = {this.mainImageRightArrow}
+        upArrow = {this.upArrow}
+        downArrow = {this.downArrow}
+        expandedView = {this.expandedView}/>
+
+      </div>
       </div>
     );
   }
