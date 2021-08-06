@@ -113,15 +113,13 @@ class UserAnswer extends React.Component {
   photoConfirm(e) {
     let url = this.state.data.substring(0)
     let photos = this.state.photos.slice()
-    let uploadClass;
+
     // console.log(this.state.tempPhoto.size)
 
 
     photos.push(url.toString())
 
-    if (this.state.photos.length === 4) {
-      uploadClass = 'uploadButtonHide'
-    }
+
 
     getUrl(url)
       .then(newUrl => {
@@ -145,44 +143,48 @@ class UserAnswer extends React.Component {
   }
 
   render() {
+    let uploadClass;
+    if (this.state.photos.length === 5) {
+      uploadClass = 'uploadButtonHide'
+    }
     return (
       <form  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
 
         <div  className=''>
-          <h3 > {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
+          <h3 className=''> {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
         </div>
 
         <div className=''>
           <h3>Your Answer</h3>
-          <textarea className='' maxLength='1000' type='text' value={this.state.yourAnswer} onChange={this.answerFormChange} name='yourAnswer'></textarea>
+          <textarea className='addAnswerFormText' onClick={(e)=> this.props.recordClick(e)} maxLength='1000' type='text' value={this.state.yourAnswer} onChange={this.answerFormChange} name='yourAnswer'></textarea>
         </div>
 
         <div className=''>
           <h3>What is your nickname</h3>
-          <input className='' type='text' maxLength='60' value={this.state.nickName} onChange={this.answerFormChange} name='nickName'></input>
+          <input className='addAnswerFormNickName' onClick={(e)=> this.props.recordClick(e)} type='text' maxLength='60' value={this.state.nickName} onChange={this.answerFormChange} name='nickName'></input>
         </div >
 
         <div className=''>
           <h3>What is your email?</h3>
-          <input className='' type='text' value={this.state.email} onChange={this.answerFormChange} name='email'></input>
+          <input className='addAnswerFormEmail' onClick={(e)=> this.props.recordClick(e)} type='text' value={this.state.email} onChange={this.answerFormChange} name='email'></input>
         </div>
 
         <div>
           <h3>Upload Your Photos</h3>
-          <input onChange={this.userFileChange} name='file' className='photos' type='file' accept='image/png, image/jpeg'></input>
-          <button className={this.state.hideButton} type='button' onClick={this.userPhotoUpload}>Upload</button>
+            <input onChange={this.userFileChange} onClick={(e)=> this.props.recordClick(e)} name='file' className='photos' type='file' accept='image/png, image/jpeg'></input>
+          <button className={uploadClass? uploadClass: 'uploadButton'} type='button' onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload()}}>Upload</button>
         </div>
 
         <div className=''>
-          <input type='submit' value='Submit Your Answer' ></input>
+          <input type='submit' className='addAnswersubmit' onClick={(e)=> this.props.recordClick(e)} value='Submit Your Answer' ></input>
         </div>
 
        <div className={this.state.confirmationState}>
          <h4>Confirm Your Photo Selection</h4>
-         <input id='checkbox1' type='checkbox'  checked={this.state.checked} onChange={this.checkbox}/>
+         <input id='checkbox1' className='checkbox1' type='checkbox'  checked={this.state.checked}  onClick={(e)=> this.props.recordClick(e)} onChange={this.checkbox}/>
          <label htmlFor='checkbox1'><img src={this.state.data}></img></label>
          <div>
-           <button type='button' onClick={this.photoConfirm}>Confirm</button>
+           <button className='photoConfirmButton' type='button' onClick={(e)=> {this.props.recordClick(e), this.photoConfirm()}}>Confirm</button>
          </div>
        </div>
 

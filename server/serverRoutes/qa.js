@@ -151,6 +151,43 @@ module.exports = {
        res.send(answerIds)
 
      })
+  },
+  interactions: (req, res) => {
+    console.log(req.body)
+
+    postAll = () => {
+
+      return new Promise((resolve, reject) => {
+
+        let result = [];
+        console.log(req.body.interactions)
+        req.body.interactions.forEach(interaction => {
+          return axios.post(api + 'interactions', interaction, {
+            headers: {
+              'Authorization': TOKEN
+            }
+          })
+            .then(data => {
+              console.log()
+              // result.push(data.response)
+              result.push(data.status)
+              if (result.length >=5) {
+
+                resolve(result)
+
+              }
+            })
+        })
+
+      })
+
+    }
+    postAll().then(data => {
+      console.log(data, "🤙")
+      //once data is received we know request is complete, send 200 to client
+      res.send(200)
+    })
+
   }
 
 

@@ -39,9 +39,9 @@ const QuestionList = (props) => {
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
-                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
+                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => {props.helpfulAnswerClick(e, answer.id), props.recordClick(e)}} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn' onClick={(e) => props.addToReported(e, answer.id)}>{answer.report}</td>
+                    <td className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</td>
                   </tr>
               </tbody>
             </table>
