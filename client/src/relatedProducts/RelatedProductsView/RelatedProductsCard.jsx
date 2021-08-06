@@ -46,15 +46,15 @@ const RelatedProductsCard = (props) => {
 }
 
 RelatedProductsCard.propTypes = {
-  photo: propTypes.any,
+  photo: propTypes.string,
   salePrice: propTypes.any,
   originalPrice: propTypes.any,
-  category: propTypes.any,
-  name: propTypes.any,
+  category: propTypes.string,
+  name: propTypes.string,
   handleProductChange: propTypes.func,
   handleCompareItems: propTypes.func,
-  id: propTypes.any,
-  starRating: propTypes.object,
+  id: propTypes.number,
+  starRating: propTypes.any,
 
   };
 

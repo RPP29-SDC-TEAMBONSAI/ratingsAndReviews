@@ -14,14 +14,17 @@ const QuestionList = (props) => {
 
       {props.answers.map((answer, index) => {
 
-        let _class= props.answerHide(props.classname, index)
+
+        let _class= props.answerHide(props.classname, index, props.questionClickCount)
         let showOrHideClass = props.answerTableHide(props.answerCount, index)
         let showClass;
+        // console.log(_class)
 
         if (showOrHideClass === 'answerListTable') {
 
           showClass = 'answerListTable'
         }
+
 
         return (
           <div className={showClass ? showClass: _class} key={index}>
@@ -36,9 +39,9 @@ const QuestionList = (props) => {
                   <tr>
                     <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
                     <td>helpful?</td>
-                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => props.helpfulAnswerClick(e, answer.id)} >Yes</td>
+                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => {props.helpfulAnswerClick(e, answer.id), props.recordClick(e)}} >Yes</td>
                     <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn' onClick={(e) => props.addToReported(e, answer.id)}>{answer.report}</td>
+                    <td className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</td>
                   </tr>
               </tbody>
             </table>
@@ -49,7 +52,7 @@ const QuestionList = (props) => {
 
       })}
       </div>
-    </div>
+      </div>
   )
 }
 

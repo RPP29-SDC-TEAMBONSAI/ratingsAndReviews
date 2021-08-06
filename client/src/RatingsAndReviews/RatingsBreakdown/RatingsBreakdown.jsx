@@ -42,6 +42,8 @@ class RatingsBreakdown extends React.Component {
         const recommendPercentage = recommendedToPercentage(data.recommended);
         const characteristics = mapCharacteristicsToProps(data.characteristics);
 
+        this.props.setCharacteristics(data.characteristics);
+
         this.setState(
           {
             totalRatings: count,
@@ -79,7 +81,8 @@ class RatingsBreakdown extends React.Component {
 RatingsBreakdown.propTypes = {
   product_id: PropTypes.number,
   starFilterClick: PropTypes.func,
-  hideIfNoReviews: PropTypes.func
+  hideIfNoReviews: PropTypes.func,
+  setCharacteristics: PropTypes.func
 }
 
 export default RatingsBreakdown;

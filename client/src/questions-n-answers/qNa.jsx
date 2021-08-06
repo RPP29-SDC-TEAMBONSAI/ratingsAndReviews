@@ -6,7 +6,7 @@ import UserQuestion from './sub-components/mini-components/userQuestion.jsx';
 import propTypes from 'prop-types';
 import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
 import {updateHelpfulness, questions, updateAnswerHelpfulness, addToReported, getReportedAns} from '../clientRoutes/qa';
-
+import ClickTracker from './tracker.jsx'
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
     super(props)
@@ -58,6 +58,7 @@ class QuestionsNAnswers extends React.Component {
     this.addAnswer = this.addAnswer.bind(this)
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
     this.addToReported = this.addToReported.bind(this)
+    this.answerHide2 = this.answerHide2.bind(this)
 
   }
   componentDidMount() {
@@ -67,15 +68,21 @@ class QuestionsNAnswers extends React.Component {
        let answerIds = data.data
        let copy = this.props.data.slice()
        let sortedData= this.filterAnswersNQuestions(copy)
+      //  console.log(sortedData, '🤙')
        let showButton = helper.showMoreAnsweredQuestions(sortedData)
-      //  console.log(showButton)
+      //  console.log(sortedData)
+      // console.log(copy)
        let answers = helper.showReportedClass(sortedData[1], answerIds)
+
+
+
          this.setState({
           questions: sortedData[0],
           answers: answers,
           showQuestionButton: showButton,
           reported: answerIds
         })
+
        })
   }
 
@@ -107,7 +114,7 @@ class QuestionsNAnswers extends React.Component {
            }
 
          })
-         console.log(showButton)
+        //  console.log(showButton)
 
         this.setState({
           questions: sortedData[0],
@@ -286,6 +293,7 @@ class QuestionsNAnswers extends React.Component {
 
   filterAnswersNQuestions(currentQuestions) {
     let filtered = helper.filterAll(currentQuestions)
+
     return filtered
   }
 
@@ -344,7 +352,15 @@ class QuestionsNAnswers extends React.Component {
     let newClass = helper.answerHideClass(classname, index);
     return newClass
   }
+  answerHide2 (bool) {
+    // console.log(bool)
+    let className='questionText Hide';
+    if (bool) {
+      className = 'questionText'
+    }
+    return className
 
+  }
   answerTableHide(currentCount, i) {
     let newClass = helper.answerTableHideClass(currentCount, i)
     return newClass
@@ -499,83 +515,105 @@ class QuestionsNAnswers extends React.Component {
     let scrollContainerClass = this.showScrollContainer()
 
     return (
-
-      <div className={`questionList container`}>
-        <div className="questionListTitle container">
-          <h3 className='qnaTitle'>Questions & answers</h3>
-          <Search
-            currentInput={this.state.questionSearchVal}
-            questionSearchChange={this.questionSearchChange}
-          />
-        </div>
-
-        <div className={this.state.qFormShowOrHide}>
-
-          <UserQuestion
-            currentItemName={this.props.currentItemName}
-            updateQuestions={this.updateQuestions}
-            qFormShowOrHide={this.state.qFormShowOrHide}
-            addQuestion={this.addQuestion}
-            product_id={this.props.product_id}
-          />
-
-        </div>
-        <div className={this.state.aFormShowOrHide}>
-          <UserAnswer
-            currentItemName={this.props.currentItemName}
-            question_id={this.state.question_id}
-            updateAnswers={this.updateAnswers}
-            addAnswer={this.addAnswer}
-            currentQuestion={this.state.currentQuestion}
-          />
-
-        </div>
-        <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
-          <div className={`List container`}>
-            {this.state.questions.map((question, index) => {
-
-              let currentClass;
-              if (index <= 1) {
-                currentClass = 'questionText'
-
-              } else {
-                currentClass = this.state.questionHide
-              }
-              return <QuestionsContainer
-                      key={index}
-                      addToReported={this.addToReported}
-                      helpfulAnswerClick={this.helpfulAnswerClick}
-                      helpfulQuestionClick={this.helpfulQuestionClick}
-                      currentI={index}
-                      showQuestions={this.showQuestions}
-                      addAnswerScroll={this.addAnswerScroll}
-                      answerTableHide={this.answerTableHide}
-                      answerHide={this.answerHide}
-                      // showButton={this.showButton}
-                      lastI={this.state.lastIndex}
-                      answerScroll={this.state.answerScroll}
-                      questionClickCount={this.state.questionClickCount}
-                      answerCount={this.state.answerClickCount}
-                      classname={currentClass}
-                      answers={this.state.answers[index]}
-                      question={question}
-                      addAnswerOnClick={this.addAnswerOnClick}
-                      question_id={question.question_id}
-                    />
-            })}
+      <ClickTracker>
+      {trackerProps => (
+        <div className={`questionList container`}>
+          <div className="questionListTitle container">
+            <h3 className='qnaTitle'>Questions & answers</h3>
+            <Search
+              recordClick={trackerProps.recordClick}
+              currentInput={this.state.questionSearchVal}
+              questionSearchChange={this.questionSearchChange}
+            />
           </div>
-        </div>
-        <div className='questionListButton container'>
-          <h3 className={'loadMoreAnswersButton'}
-              onClick={this.loadAnswerClick}>{this.state.loadButtonText}
-          </h3>
-          <button className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
-                  onClick={this.loadQuestionClick}>MORE ANSWERED QUESTIONS
-          </button>
-          <button className='moreAnsweredBtn' onClick={this.addQuestion}>ADD A QUESTION +</button>
-        </div>
 
-      </div>
+          <div className={this.state.qFormShowOrHide}>
+
+            <UserQuestion
+              recordClick={trackerProps.recordClick}
+              currentItemName={this.props.currentItemName}
+              updateQuestions={this.updateQuestions}
+              qFormShowOrHide={this.state.qFormShowOrHide}
+              addQuestion={this.addQuestion}
+              product_id={this.props.product_id}
+            />
+
+          </div>
+          <div className={this.state.aFormShowOrHide}>
+            <UserAnswer
+              recordClick={trackerProps.recordClick}
+              currentItemName={this.props.currentItemName}
+              question_id={this.state.question_id}
+              updateAnswers={this.updateAnswers}
+              addAnswer={this.addAnswer}
+              currentQuestion={this.state.currentQuestion}
+            />
+
+          </div>
+          <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
+            <div className={`List container`}>
+              {this.state.questions.map((question, index) => {
+              let currentClass;
+              let show = false;
+              if (this.state.questionClickCount === 1 && index <= this.state.questionClickCount) {
+                show = true
+              }
+              if (this.state.questionClickCount >= 3 && index <= this.state.questionClickCount) {
+                show = true
+              }
+
+            let answerClass =  this.answerHide2(show)
+            //  console.log(answerClass)
+
+
+
+
+                if (index <= 1) {
+                  currentClass = 'questionText'
+
+                } else {
+                  currentClass = this.state.questionHide
+                }
+                return <QuestionsContainer
+                        recordClick={trackerProps.recordClick}
+                        key={index}
+                        addToReported={this.addToReported}
+                        helpfulAnswerClick={this.helpfulAnswerClick}
+                        helpfulQuestionClick={this.helpfulQuestionClick}
+                        currentI={index}
+                        showQuestions={this.showQuestions}
+                        addAnswerScroll={this.addAnswerScroll}
+                        answerTableHide={this.answerTableHide}
+                        answerHide={this.answerHide}
+                        answerHide2={this.answerHide2}
+                        answerClass={answerClass}
+                        lastI={this.state.lastIndex}
+                        answerScroll={this.state.answerScroll}
+                        questionClickCount={this.state.questionClickCount}
+                        answerCount={this.state.answerClickCount}
+                        classname={currentClass}
+                        answers={this.state.answers[index]}
+                        question={question}
+                        addAnswerOnClick={this.addAnswerOnClick}
+                        question_id={question.question_id}
+                        show={show}
+                      />
+              })}
+            </div>
+          </div>
+          <div className='questionListButton container'>
+            <h3 className={'loadMoreAnswersButton'}
+                onClick={(e) => {trackerProps.recordClick(e), this.loadAnswerClick()}}>{this.state.loadButtonText}
+            </h3>
+            <button className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
+                    onClick={(e) => {this.loadQuestionClick(), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
+            </button>
+            <button className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</button>
+          </div>
+
+        </div>
+        )}
+      </ClickTracker>
     )
   }
 }

@@ -114,7 +114,9 @@ const helper = {
       return starFilters.includes(review.rating);
     })
   },
-
+  auditReviews: (review) => {
+    return true;
+  }
 }
 
 export default helper;

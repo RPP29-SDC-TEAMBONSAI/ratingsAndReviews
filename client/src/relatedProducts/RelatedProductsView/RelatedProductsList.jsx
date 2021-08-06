@@ -4,13 +4,12 @@ import RelatedProductsCard from './RelatedProductsCard.jsx';
 
 
 const RelatedProductsList = (props) => {
-
   return (
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
     <div className='relatedProductsList'>
-    {props.allProps.map((product, i) => {
-      return <div key={i}>
+    {props.allProps.map((product, index) => {
+      return <div key={index}>
         <RelatedProductsCard
           key={product.itemId}
           name={product.itemName}
@@ -33,7 +32,7 @@ const RelatedProductsList = (props) => {
 }
 
 RelatedProductsList.propTypes = {
-  allProps: propTypes.any,
+  allProps: propTypes.array,
   handleProductChange: propTypes.func,
   handleCompareItems: propTypes.func
   };

@@ -6,11 +6,8 @@ import RelatedProductsModal from './RelatedProductsModal.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
 import axios from 'axios';
-
-
 const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
-
 
 
 export default class RelatedProducts extends React.Component {
@@ -21,7 +18,7 @@ export default class RelatedProducts extends React.Component {
       relatedProductsStyles: [],
       yourOutfitItems:[],
       allPropsObj: [],
-      outfitPropsObj: [],
+      outfitPropsObj: {},
       modalShow: false,
       clickedProductInfo: {},
       modifiedCurrent: {},
@@ -95,7 +92,6 @@ export default class RelatedProducts extends React.Component {
         })
       })
     }
-
   }
 
     outFit() {
@@ -157,6 +153,7 @@ export default class RelatedProducts extends React.Component {
       this.setState({
         yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
       })
+
     }
 
     handleRemoveFromOutfit(outfitItem, e) {
@@ -234,4 +231,4 @@ RelatedProducts.propTypes = {
   handleProductChange: propTypes.func,
   state: propTypes.object
 }
-//for local storage
+

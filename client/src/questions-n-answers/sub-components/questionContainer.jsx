@@ -6,22 +6,26 @@ import QuestionList from './mini-components/questionList.jsx';
 const QuestionsContainer = (props) => {
 
   let showQuestionClass = props.showQuestions(props.questionClickCount, props.currentI)
-  let show = false;
-  if (props.questionClickCount === 1 && props.currentI <= props.questionClickCount) {
-    show = true
-  }
-  if (props.questionClickCount >= 3 && props.currentI<= props.questionClickCount) {
-    show = true
-  }
+  // let show = false;
+  // if (props.questionClickCount === 1 && props.currentI <= props.questionClickCount) {
+  //   show = true
+  // }
+  // if (props.questionClickCount >= 3 && props.currentI<= props.questionClickCount) {
+  //   show = true
+  // }
+
 
 
   return (
-    <div className={show ? `question Container`: `questionHide Container`}>
+    <div className={props.show ? `question container`: `questionHide container`}>
       <div className='questionAndAnswer'>
         <QuestionList
+          recordClick={props.recordClick}
+          answerClass={props.answerClass}
           addToReported={props.addToReported}
           helpfulAnswerClick= {props.helpfulAnswerClick}
           answerHide={props.answerHide}
+          answerHide2={props.answerHide2}
           addAnswerScroll={props.addAnswerScroll}
           answerTableHide={props.answerTableHide}
           question={props.question}
@@ -30,10 +34,13 @@ const QuestionsContainer = (props) => {
           questionCount={props.questionClickCount}
           answerCount={props.answerCount}
           classname={showQuestionClass ? showQuestionClass : props.classname}
+          show={props.show}
+          questionClickCount={props.questionClickCount}
         />
       </div>
       <div className='qna table'>
         <AddAnswer
+          recordClick={props.recordClick}
           addAnswerOnClick={props.addAnswerOnClick}
           currentI={props.currentI}
           helpfulQuestionClick={props.helpfulQuestionClick}
