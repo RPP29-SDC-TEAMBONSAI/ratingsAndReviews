@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from '../../stars/stars.jsx';
 import helper from '../../helper-functions/rnRHelper.js';
-const { getFactorDetailArray } = helper;
+const { getFactorDetailArray, auditReviews } = helper;
 import { getUrl } from '../../clientRoutes/qa';
-import { reviewsInteraction } from '../../clientRoutes/reviews.js';
+import { reviewsInteraction, reviewAdd } from '../../clientRoutes/reviews.js';
 
 class AddReview extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class AddReview extends React.Component {
       name: '',
       email: '',
       photos: [],
+      characteristics: {},
       allowUpload: true
     }
     this.createRadioOptions = this.createRadioOptions.bind(this);
@@ -28,9 +29,21 @@ class AddReview extends React.Component {
   handleChange(event) {
     const stateVal = event.target.getAttribute('stateVal');
     const value = event.target.value || event.target.getAttribute('value');
-    this.setState({
-      [stateVal]: value
-    });
+    const index = event.target.getAttribute('indexSelected');
+    const char = this.props.characteristics[stateVal];
+    if (char) {
+      let temp = Object.assign(this.state.characteristics);
+      temp[char.id] = index;
+      this.setState({
+        characteristics: temp,
+        [stateVal]: value
+      });
+    }
+    else {
+      this.setState({
+        [stateVal]: value
+      });
+    }
   }
 
   handleOverallRatingChange(event) {
@@ -44,6 +57,7 @@ class AddReview extends React.Component {
       return (
         <div
           key={index}
+          indexSelected={index}
           className={`radio-label is-${this.state[stateVal] === val}`}
           name={stateVal}
           stateVal={stateVal}
@@ -96,25 +110,25 @@ class AddReview extends React.Component {
           <div className="review-subtitle">About the {this.props.productName}</div>
           {/* OVERALL RATING INPUT */}
           <div className="review-input">
-            <div className="ri-title">How would you rate this overall?</div>
+            <div className="ri-title">How would you rate this overall? <a className='r-required'>*</a></div>
             {Stars(this.state.rating, this.handleOverallRatingChange)}
           </div>
         </div>
         {/* RECOMMEND RADIO GROUP */}
         <div className="radio-options-wrapper-column">
-          <div className="radio-factor-title">Do you recommend this product?</div>
+          <div className="radio-factor-title">Do you recommend this product? <a className='r-required'>*</a></div>
           <div className="radio-options rcolumn">
             {this.createRadioOptions(['Yes', 'No'], 'radio-option', 'recommend')}
           </div>
         </div>
         {/* FACTOR INPUTS */}
-        <div className="radio-factor-title">Rank the following factors for this product</div>
-        {['Size','Width','Comfort','Quality','Length','Fit'].map((factor, index) => {
+        <div className="radio-factor-title">Rank the following factors for this product <a className='r-required'>*</a></div>
+        {Object.keys(this.props.characteristics).map((factor, index) => {
           return (
             <div className="radio-options-wrapper" key={index}>
               <div className="radio-options-title">{factor}</div>
               <div className="radio-options">
-                {this.createRadioOptions(getFactorDetailArray(factor, true), "radio-option", `${factor}Selected`)}
+                {this.createRadioOptions(getFactorDetailArray(factor, true), "radio-option", factor)}
               </div>
             </div>
           );
@@ -131,7 +145,7 @@ class AddReview extends React.Component {
         </div>
         {/* REVIEW BODY */}
         <div className="r-full">
-          <label className="r-title">Write your full review</label>
+          <label className="r-title">Write your full review <a className='r-required'>*</a></label>
           <textarea className="r-full-input"
           placeholder="Enter Review..."
           stateVal="body"
@@ -174,7 +188,7 @@ class AddReview extends React.Component {
           <div className="r-name-email">
           {/* WHAT IS YOUR NAME */}
             <div className="r-name">
-              <label className="r-title">Enter Your Name</label>
+              <label className="r-title">Enter Your Nickname <a className='r-required'>*</a></label>
               <input className="r-input-small"
               placeholder="John Doe..."
               stateVal="name"
@@ -183,7 +197,7 @@ class AddReview extends React.Component {
             </div>
             {/* YOUR EMAIL */}
             <div className="r-email">
-              <label className="r-title">Enter a valid email</label>
+              <label className="r-title">Enter a valid email <a className='r-required'>*</a></label>
               <input className="r-input-small"
               placeholder="johndoe@missing.com..."
               stateVal="email"
@@ -196,20 +210,24 @@ class AddReview extends React.Component {
             interaction="submitted review form"
             className="r-submit"
             onClick={(e) => {
-              reviewsInteraction(e);
+              if (auditReviews(this.state, this.props.characteristics)) {
+                reviewAdd(this.state, this.props.product_id)
+                reviewsInteraction(e);
+              }
             }}>
               Sumbit Review
             </button>
         </div>
-
       </div>
     );
   }
 }
 
 AddReview.propTypes = {
+  product_id: PropTypes.number,
   productName: PropTypes.string,
-  close: PropTypes.func
+  close: PropTypes.func,
+  characteristics: PropTypes.object
 }
 
 export default AddReview;

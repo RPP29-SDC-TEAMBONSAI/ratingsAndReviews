@@ -42,8 +42,15 @@ module.exports = {
       })
       .catch(err => console.log('resultErr', err));
   },
+  reviewsAdd: (req, res) => {
+    axios(requestConfig('post', api + 'reviews', req.body))
+      .then((data)=> {
+        res.status(200).send(data.data);
+      })
+      .catch(err => console.log('resultErr', err));
+  },
   reviewsInteraction: (req, res) => {
-    axios(requestConfig('post', api + 'interactions', req.body, req.body))
+    axios(requestConfig('post', api + 'interactions', req.body))
       .then((data)=> {
         res.status(200).send(data.data);
       })

@@ -94,7 +94,10 @@ class Reviews extends React.Component {
         <div
           className="add-review-open"
           style={{display: this.state.addReviewOpen ? "block" : "none"}}>
-            <AddReview close={this.openAddReview}/>
+            <AddReview
+              close={this.openAddReview}
+              characteristics={this.props.characteristics}
+              product_id={this.props.product_id}/>
         </div>
         {/* MAIN REVIEWS COMPONENT */}
         <div className="reviews">
@@ -138,7 +141,8 @@ class Reviews extends React.Component {
 Reviews.propTypes = {
   product_id: PropTypes.number,
   starFilters: PropTypes.array,
-  starFilterClick: PropTypes.func
+  starFilterClick: PropTypes.func,
+  characteristics: PropTypes.object
 }
 
 export default Reviews;

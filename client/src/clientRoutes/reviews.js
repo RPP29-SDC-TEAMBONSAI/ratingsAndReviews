@@ -21,6 +21,29 @@ module.exports = {
       `/reviews/${review_id}/report`
     );
   },
+  reviewAdd: (reviewData, product_id) => {
+    let newChars = {};
+    let oldChars = Object.assign(reviewData.characteristics);
+
+    for (let char in oldChars) {
+      newChars[char]= parseInt(oldChars[char]);
+    }
+
+    let review = {
+      product_id: product_id,
+      rating: parseInt(reviewData.rating),
+      summary: reviewData.summary,
+      body: reviewData.body,
+      recommend: reviewData.recommend === 'No' ? false : true,
+      name: reviewData.name,
+      email: reviewData.email,
+      photos: reviewData.photos,
+      characteristics: newChars
+    }
+
+    console.log(review);
+    return axios.post(`/reviews/add`, review)
+  },
   reviewsInteraction: (event) => {
     let interaction = event.target.getAttribute('interaction');
     axios.post(
