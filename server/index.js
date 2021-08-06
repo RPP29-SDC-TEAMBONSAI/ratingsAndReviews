@@ -5,7 +5,7 @@ const PORT = 3000;
 // SERVER ROUTES
 const { reviews, reviewsMeta, reviewsHelpful, reviewsReport, reviewsAdd, reviewsInteraction } = require("./serverRoutes/reviews.js");
 const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
-const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported} = require("./serverRoutes/qa.js");
+const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported, interactions} = require("./serverRoutes/qa.js");
 const { cart } = require("./serverRoutes/cart.js");
 
 const multer = require('multer')
@@ -40,6 +40,7 @@ app.get('/products', products)
   .get('/reported/answers', getReported)
   .put('/reviews/:review_id/helpful', reviewsHelpful)
   .put('/reviews/:review_id/report', reviewsReport)
+  .post('/qa/interactions', interactions)
   .post('/reviews/add', reviewsAdd)
   .post('/reviews/interaction', reviewsInteraction)
 

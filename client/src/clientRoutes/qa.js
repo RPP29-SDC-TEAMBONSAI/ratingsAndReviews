@@ -85,6 +85,15 @@ module.exports = {
       // })
       // .catch(err => console.log(err))
   },
+  interactions:(currentInteractions) => {
+    let obj = {
+      interactions: currentInteractions
+    }
+    return axios.post('/qa/interactions', obj)
+      .then(data => {
+        return data.status
+      })
+  }
 
 
 }

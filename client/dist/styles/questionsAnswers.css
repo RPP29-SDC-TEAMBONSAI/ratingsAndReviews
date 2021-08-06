@@ -67,10 +67,12 @@ h4 {
 }
 
 
-.moreAnsweredBtn, .addAQuestion {
+.moreAnsweredBtn, .addQuestionBtn {
   height: 50px;
   width: 225px;
 }
+
+
 
 .userIdText.container{
   margin-bottom: 15px;
@@ -143,6 +145,11 @@ h3.loadMoreAnswersButton:hover {
   display:  none;
 }
 .qForm {
+  display: flex;
+/*
+  flex-direction: column; */
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -152,11 +159,16 @@ h3.loadMoreAnswersButton:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .qFormData {
-  width: 50%;
-  height: 50%;
+
   position: fixed;
-  top: 20%;
-  left: 22%;
+
+
+  flex-direction: column;
+   /* flex-direction:column; */
+  justify-content:center;
+
+
+  /* left: 10%; */
   background-color: #B2D2A4;
   border-radius: 25px;
   text-align: center;
@@ -171,6 +183,7 @@ h3.loadMoreAnswersButton:hover {
 
 }
 .askQuestionForm {
+
   margin-bottom: 1vh;
 }
 .userNickName, .userEmail {
@@ -182,6 +195,9 @@ h3.loadMoreAnswersButton:hover {
 }
 
 .aForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -192,11 +208,16 @@ h3.loadMoreAnswersButton:hover {
 }
 
 .aFormData {
-  width: 75%;
-  height: 90%;
   position: fixed;
+  display: flex;
 
-  left: 10%;
+
+  flex-direction: column;
+   /* flex-direction:column; */
+  justify-content:center;
+
+
+  /* left: 10%; */
   background-color: #B2D2A4;
   border-radius: 25px;
   text-align: center;
