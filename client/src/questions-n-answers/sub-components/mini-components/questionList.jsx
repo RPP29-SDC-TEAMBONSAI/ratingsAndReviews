@@ -8,6 +8,7 @@ const QuestionList = (props) => {
 
   return (
     <div className='list container'>
+      <div className='test'>
       <div className={''}>
         <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
       </div>
@@ -34,6 +35,7 @@ const QuestionList = (props) => {
         )
 
       })}
+      </div>
       </div>
     </div>
   )

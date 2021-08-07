@@ -443,6 +443,7 @@ class QuestionsNAnswers extends React.Component {
         <AllClicks>
           {allClicksProps => (
             <div className={`main container`}>
+              <div className='test2'>
               <div className='title container row'>
 
                 <h3 className='componentTitle'>Questions & Answers</h3>
@@ -510,17 +511,19 @@ class QuestionsNAnswers extends React.Component {
                 </div>
               </div>
               <div className='questionListButton container'>
-                <h3 className={'loadMoreAnswersButton'}
-                    onClick={(e) => {trackerProps.recordClick(e), allClicksProps.loadMoreAnsOrQ(e)}}>{allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
-                </h3>
-                  <div className='bottomButtons'>
-
+                <div className='lButton'>
+                  <h3 className={'loadMoreAnswersButton'}
+                      onClick={(e) => {trackerProps.recordClick(e), allClicksProps.loadMoreAnsOrQ(e)}}>{allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
+                  </h3>
+                </div>
+                <div className='bottomButtons'>
                   <h3 className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
                           onClick={(e) => {this.loadQuestionClick(), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
 
                   <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</h3>
-                  </div>
+                </div>
+              </div>
               </div>
             </div>
           )}
