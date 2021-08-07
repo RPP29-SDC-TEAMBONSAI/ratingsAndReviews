@@ -7,6 +7,7 @@ import propTypes from 'prop-types';
 import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
 import {updateHelpfulness, questions, updateAnswerHelpfulness, addToReported, getReportedAns} from '../clientRoutes/qa';
 import ClickTracker from './tracker.jsx'
+import AllClicks from './allClicks.jsx';
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
     super(props)
@@ -16,13 +17,8 @@ class QuestionsNAnswers extends React.Component {
       answers: [],
       answerClickCount: 0,
       questionClickCount: 1,
-      currentQuestionIndex: null,
-      questionHide: 'Hide',
-      answerScroll: 'list scroll container',
-      loadButtonText: 'Load More Answers',
       showQuestionButton: false,
       lastIndex : null,
-      answerHiddenClass: '',
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
       helpfulQuestionCount: 0,
@@ -33,20 +29,14 @@ class QuestionsNAnswers extends React.Component {
       qFormShowOrHide: 'qFormHide',
       aFormShowOrHide: 'aFormHide',
       currentQuestion:'',
-      current_id: 0,
       reported: []
-
-
     };
-
-    this.loadAnswerClick = this.loadAnswerClick.bind(this)
+    //factor all clicks out into their own renderProps onclick??
     this.loadQuestionClick = this.loadQuestionClick.bind(this)
     this.showScrollContainer = this.showScrollContainer.bind(this)
     this.searchFilter = this.searchFilter.bind(this)
     this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
-    this.answerHide = this.answerHide.bind(this)
-    this.answerTableHide = this.answerTableHide.bind(this)
-    this.addAnswerScroll = this.addAnswerScroll.bind(this)
+
     this.showQuestions = this.showQuestions.bind(this)
     this.getReportedAns = getReportedAns.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
@@ -55,39 +45,32 @@ class QuestionsNAnswers extends React.Component {
     this.updateQuestions = this.updateQuestions.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
     this.updateAnswers = this.updateAnswers.bind(this)
-    this.addAnswer = this.addAnswer.bind(this)
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
     this.addToReported = this.addToReported.bind(this)
-    this.answerHide2 = this.answerHide2.bind(this)
+
 
   }
   componentDidMount() {
     getReportedAns()
-     .then(data => {
+      .then(data => {
 
-       let answerIds = data.data
-       let copy = this.props.data.slice()
-       let sortedData= this.filterAnswersNQuestions(copy)
-      //  console.log(sortedData, '🤙')
-       let showButton = helper.showMoreAnsweredQuestions(sortedData)
-      //  console.log(sortedData)
-      // console.log(copy)
-       let answers = helper.showReportedClass(sortedData[1], answerIds)
+        let answerIds = data.data
+        let copy = this.props.data.slice()
+        let sortedData= this.filterAnswersNQuestions(copy)
+        let showButton = helper.showMoreAnsweredQuestions(sortedData)
+        let answers = helper.showReportedClass(sortedData[1], answerIds)
 
-
-
-         this.setState({
-          questions: sortedData[0],
-          answers: answers,
-          showQuestionButton: showButton,
-          reported: answerIds
-        })
-
-       })
+          this.setState({
+            questions: sortedData[0],
+            answers: answers,
+            showQuestionButton: showButton,
+            reported: answerIds
+          })
+      })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(this.state, prevState)
+
     let copy = this.props.data.slice()
     if (prevProps.product_id !== this.props.product_id) {
       this.setState({
@@ -102,19 +85,16 @@ class QuestionsNAnswers extends React.Component {
 
       let answerIds = this.state.reported
 
-
        sortedData[1].forEach((answer) => {
          answer.forEach(obj => {
-          //  console.log(obj.id)
+
            if (answerIds.includes(obj.id)) {
-            //  console.log(obj)
              obj.report = 'reported'
            } else {
              obj.report = 'report'
            }
 
          })
-        //  console.log(showButton)
 
         this.setState({
           questions: sortedData[0],
@@ -140,31 +120,28 @@ class QuestionsNAnswers extends React.Component {
 
     if(prevState.helpfulQuestionCount !== this.state.helpfulQuestionCount) {
 
-
       if (this.state.helpfulQuestionCount === 1) {
 
-        console.log('hiii')
         updateHelpfulness(this.state.question_id)
           .then(data=>
             questions(this.props.product_id)
               .then(newData => {
-                let sortedData = this.filterAnswersNQuestions(newData.data)
 
+                let sortedData = this.filterAnswersNQuestions(newData.data)
                 let showButton = helper.showMoreAnsweredQuestions(sortedData)
                 let answerIds = this.state.reported
 
+                sortedData[1].forEach((answer) => {
+                  answer.forEach(obj => {
 
+                    if (answerIds.includes(obj.id)) {
 
-              sortedData[1].forEach((answer) => {
-                answer.forEach(obj => {
+                      obj.report = 'reported'
+                    } else {
+                      obj.report = 'report'
+                    }
+                  })
 
-                  if (answerIds.includes(obj.id)) {
-
-                    obj.report = 'reported'
-                  } else {
-                    obj.report = 'report'
-                  }
-                })
                 this.setState({
                   questions: sortedData[0],
                   answers: sortedData[1],
@@ -175,7 +152,6 @@ class QuestionsNAnswers extends React.Component {
                 })
               })
             })
-
           )
       }
 
@@ -185,25 +161,23 @@ class QuestionsNAnswers extends React.Component {
         let showButton = helper.showMoreAnsweredQuestions(sortedData)
         let answerIds = this.state.reported
         sortedData[1].forEach((answer) => {
+
           answer.forEach(obj => {
-          //  console.log(obj.id)
+
             if (answerIds.includes(obj.id)) {
-              // console.log(obj)
               obj.report = 'reported'
             } else {
               obj.report = 'report'
             }
           })
 
-        // console.log(sortedData)
-        this.setState({
-          questions: sortedData[0],
-          answers: sortedData[1],
-          showQuestionButton: showButton,
-          reported: answerIds
+          this.setState({
+            questions: sortedData[0],
+            answers: sortedData[1],
+            showQuestionButton: showButton,
+            reported: answerIds
+          })
         })
-      })
-
       }
     }
 
@@ -223,10 +197,10 @@ class QuestionsNAnswers extends React.Component {
                 let answerIds = this.state.reported.slice()
 
                 sortedData[1].forEach((answer) => {
+
                   answer.forEach(obj => {
-                  //  console.log(obj.id)
+
                     if (answerIds.includes(obj.id)) {
-                      // console.log(obj)
                       obj.report = 'reported'
                     } else {
                       obj.report = 'report'
@@ -242,21 +216,23 @@ class QuestionsNAnswers extends React.Component {
           })
       }
     }
+
     if(prevState.answers.length !== this.state.answers.length) {
-      // console.log(prevState.answers, this.state.answers)
       let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
       let showButton = helper.showMoreAnsweredQuestions(sortedData)
       let answerIds = this.state.answers.slice()
+
       sortedData[1].forEach((answer) => {
+
         answer.forEach(obj => {
-        //  console.log(obj.id)
+
           if (answerIds.includes(obj.id)) {
-            // console.log(obj)
             obj.report = 'reported'
           } else {
             obj.report = 'report'
           }
         })
+
         this.setState({
           showQuestionButton: showButton,
           answers: sortedData[1],
@@ -265,18 +241,22 @@ class QuestionsNAnswers extends React.Component {
         })
       })
     }
+
     if (prevState.reported.length !== this.state.reported.length) {
-      // console.log(this.state.reported)
-      // console.log(prevState.reported)
+
       let answerIds = this.state.reported.slice()
       let answers = this.state.answers.slice()
+
       answers.forEach((answer) => {
+
         answer.forEach(obj => {
+
           if (answerIds.includes(obj.id)) {
             obj.report = 'reported'
           }
         })
       })
+
       this.setState({
         reported: this.state.reported,
         answers: answers
@@ -293,24 +273,12 @@ class QuestionsNAnswers extends React.Component {
 
   filterAnswersNQuestions(currentQuestions) {
     let filtered = helper.filterAll(currentQuestions)
-
     return filtered
-  }
-
-  loadAnswerClick(e) {
-    let count = this.state.answerClickCount + 1;
-    let text = helper.loadAnswerButtonText(count)
-    this.setState({
-      answerClickCount: count,
-      loadButtonText: text
-    })
   }
 
   loadQuestionClick(e) {
     let count = this.state.questionClickCount + 2
     let lastI = this.state.questions.length - 1
-    // let newClass =
-    //run function that pulls index
     this.setState({
       questionClickCount: count,
       lastIndex: lastI
@@ -318,15 +286,14 @@ class QuestionsNAnswers extends React.Component {
   }
 
   showScrollContainer() {
-    let newClass = helper.qListScrollClass(this.state.questionClickCount);
-    return newClass
+    let show = helper.qListScrollClass(this.state.questionClickCount);
+    return show
   }
 
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
     let original = this.props.QuestionSavedData
     let newQuestions = helper.filterAll(original)
-
 
     if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
 
@@ -348,36 +315,11 @@ class QuestionsNAnswers extends React.Component {
       }
   }
 
-  answerHide (classname, index) {
-    let newClass = helper.answerHideClass(classname, index);
-    return newClass
-  }
-  answerHide2 (bool) {
-    // console.log(bool)
-    let className='questionText Hide';
-    if (bool) {
-      className = 'questionText'
-    }
-    return className
 
-  }
-  answerTableHide(currentCount, i) {
-    let newClass = helper.answerTableHideClass(currentCount, i)
-    return newClass
-  }
-
-  addAnswerScroll(currentCount) {
-    let  newClass = helper.answerScrollClass(currentCount);
-    return newClass
-  }
 
   showQuestions(currentCount, index) {
-    let newClass = helper.showQuestionsClass(currentCount, index);
-    let currentQuestionIndex = index
-    // this.setState({
-    //   currentQuestionIndex: currentQuestionIndex
-    // })
-    return newClass
+    let show = helper.showQuestionsClass(currentCount, index);
+    return show
 
   }
 
@@ -391,16 +333,6 @@ class QuestionsNAnswers extends React.Component {
   }
 
   helpfulQuestionClick(e, questionId) {
-
-    // let currentQuestion = Object.assign({}, this.state.questions[e.target.id])
-    // let question_id = currentQuestion.question_id
-    // if (this.state.question_id !== question_id) {
-    //   this.setState({
-    //     helpfulQuestionCount: 1,
-    //     question_id:question_id
-    //   })
-    // }
-
 
     if (this.state.question_id !== questionId) {
       this.setState({
@@ -426,7 +358,6 @@ class QuestionsNAnswers extends React.Component {
     return questions(this.props.product_id)
       .then(data => {
         let questions = data.data
-        // console.log(questions)
         let filtered = helper.filterAll(questions);
         let showButton = helper.showMoreAnsweredQuestions(filtered)
 
@@ -457,21 +388,21 @@ class QuestionsNAnswers extends React.Component {
   updateAnswers() {
     questions(this.props.product_id)
       .then(currentQuestions => {
-        // console.log(currentQuestions)
+
         let sortedData= helper.filterAll(currentQuestions.data)
         let answerIds = this.state.reported
 
         sortedData[1].forEach((answer) => {
+
           answer.forEach(obj => {
-           //  console.log(obj.id)
+
             if (answerIds.includes(obj.id)) {
-              // console.log(obj)
               obj.report = 'reported'
             } else {
               obj.report = 'report'
             }
-
           })
+
           this.setState({
             questions: sortedData[0],
             answers: sortedData[1],
@@ -480,12 +411,9 @@ class QuestionsNAnswers extends React.Component {
           })
         })
       })
-
   }
 
- addAnswer() {
 
- }
  addAnswerOnClick(e, arr) {
 
    this.setState({
@@ -494,124 +422,109 @@ class QuestionsNAnswers extends React.Component {
     question_id: arr[1]
 
    })
-
  }
 
  addToReported(e, ansId) {
-  //  console.log(ansId)
-
-
    addToReported(ansId)
      .then(data => {
        this.setState({
          reported: data
        })
      })
-
  }
 
   render () {
-    // let showButtonClass = this.showButton()
+
     let scrollContainerClass = this.showScrollContainer()
 
     return (
       <ClickTracker>
-      {trackerProps => (
-        <div className={`questionList container`}>
-          <div className="questionListTitle container">
-            <h3 className='qnaTitle'>Questions & answers</h3>
-            <Search
-              recordClick={trackerProps.recordClick}
-              currentInput={this.state.questionSearchVal}
-              questionSearchChange={this.questionSearchChange}
-            />
-          </div>
+        {trackerProps => (
+        <AllClicks>
+          {allClicksProps => (
+            <div className={`main container`}>
+              <div className='title container row'>
 
-          <div className={this.state.qFormShowOrHide}>
+                <h3 className='componentTitle'>Questions & Answers</h3>
 
-            <UserQuestion
-              recordClick={trackerProps.recordClick}
-              currentItemName={this.props.currentItemName}
-              updateQuestions={this.updateQuestions}
-              qFormShowOrHide={this.state.qFormShowOrHide}
-              addQuestion={this.addQuestion}
-              product_id={this.props.product_id}
-            />
+                <Search
+                  recordClick={trackerProps.recordClick}
+                  currentInput={this.state.questionSearchVal}
+                  questionSearchChange={this.questionSearchChange}
+                />
+              </div>
 
-          </div>
-          <div className={this.state.aFormShowOrHide}>
-            <UserAnswer
-              recordClick={trackerProps.recordClick}
-              currentItemName={this.props.currentItemName}
-              question_id={this.state.question_id}
-              updateAnswers={this.updateAnswers}
-              addAnswer={this.addAnswer}
-              currentQuestion={this.state.currentQuestion}
-            />
+              <div className={this.state.qFormShowOrHide}>
 
-          </div>
-          <div className={scrollContainerClass? scrollContainerClass : 'questionList container'}>
-            <div className={`List container`}>
-              {this.state.questions.map((question, index) => {
-              let currentClass;
-              let show = false;
-              if (this.state.questionClickCount === 1 && index <= this.state.questionClickCount) {
-                show = true
-              }
-              if (this.state.questionClickCount >= 3 && index <= this.state.questionClickCount) {
-                show = true
-              }
+                <UserQuestion
+                  recordClick={trackerProps.recordClick}
+                  currentItemName={this.props.currentItemName}
+                  updateQuestions={this.updateQuestions}
+                  qFormShowOrHide={this.state.qFormShowOrHide}
+                  addQuestion={this.addQuestion}
+                  product_id={this.props.product_id}
+                />
 
-            let answerClass =  this.answerHide2(show)
-            //  console.log(answerClass)
+              </div>
+              <div className={this.state.aFormShowOrHide}>
+                <UserAnswer
+                  recordClick={trackerProps.recordClick}
+                  currentItemName={this.props.currentItemName}
+                  question_id={this.state.question_id}
+                  updateAnswers={this.updateAnswers}
 
+                  currentQuestion={this.state.currentQuestion}
+                />
 
+              </div>
+              <div className={scrollContainerClass? 'questionList scroll container': 'questionList container'}>
+                <div className={''}>
+                  {this.state.questions.map((question, index) => {
+                  let currentClass;
+                  let show = false;
+                  if (this.state.questionClickCount === 1 && index <= this.state.questionClickCount) {
+                    show = true
+                  }
+                  if (this.state.questionClickCount >= 3 && index <= this.state.questionClickCount) {
+                    show = true
+                  }
+                  return <QuestionsContainer
+                          answerState={allClicksProps.loadAnswerState}
+                          loadAnswerState={allClicksProps.loadAnswerState}
+                          recordClick={trackerProps.recordClick}
+                          key={index}
+                          addToReported={this.addToReported}
+                          helpfulAnswerClick={this.helpfulAnswerClick}
+                          helpfulQuestionClick={this.helpfulQuestionClick}
+                          currentI={index}
+                          showQuestions={this.showQuestions}
 
+                          questionClickCount={this.state.questionClickCount}
+                          answers={this.state.answers[index]}
+                          question={question}
+                          addAnswerOnClick={this.addAnswerOnClick}
+                          question_id={question.question_id}
+                          show={show}
+                        />
+                  })}
+                </div>
+              </div>
+              <div className='questionListButton container'>
+                <h3 className={'loadMoreAnswersButton'}
+                    onClick={(e) => {trackerProps.recordClick(e), allClicksProps.loadMoreAnsOrQ(e)}}>{allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
+                </h3>
+                  <div className='bottomButtons'>
 
-                if (index <= 1) {
-                  currentClass = 'questionText'
+                  <h3 className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
+                          onClick={(e) => {this.loadQuestionClick(), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
+                  </h3>
 
-                } else {
-                  currentClass = this.state.questionHide
-                }
-                return <QuestionsContainer
-                        recordClick={trackerProps.recordClick}
-                        key={index}
-                        addToReported={this.addToReported}
-                        helpfulAnswerClick={this.helpfulAnswerClick}
-                        helpfulQuestionClick={this.helpfulQuestionClick}
-                        currentI={index}
-                        showQuestions={this.showQuestions}
-                        addAnswerScroll={this.addAnswerScroll}
-                        answerTableHide={this.answerTableHide}
-                        answerHide={this.answerHide}
-                        answerHide2={this.answerHide2}
-                        answerClass={answerClass}
-                        lastI={this.state.lastIndex}
-                        answerScroll={this.state.answerScroll}
-                        questionClickCount={this.state.questionClickCount}
-                        answerCount={this.state.answerClickCount}
-                        classname={currentClass}
-                        answers={this.state.answers[index]}
-                        question={question}
-                        addAnswerOnClick={this.addAnswerOnClick}
-                        question_id={question.question_id}
-                        show={show}
-                      />
-              })}
+                  <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</h3>
+                  </div>
+              </div>
             </div>
-          </div>
-          <div className='questionListButton container'>
-            <h3 className={'loadMoreAnswersButton'}
-                onClick={(e) => {trackerProps.recordClick(e), this.loadAnswerClick()}}>{this.state.loadButtonText}
-            </h3>
-            <button className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
-                    onClick={(e) => {this.loadQuestionClick(), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
-            </button>
-            <button className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</button>
-          </div>
-
-        </div>
+          )}
+        </AllClicks>
         )}
       </ClickTracker>
     )

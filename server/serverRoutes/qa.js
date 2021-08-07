@@ -142,12 +142,13 @@ module.exports = {
     return fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
 
        let answerIds = [];
+       if (files.length > 0) {
+         files.forEach((file) => {
+           let newFile = Number(file.split('.')[0])
+           answerIds.push(newFile)
 
-       files.forEach((file) => {
-         let newFile = Number(file.split('.')[0])
-         answerIds.push(newFile)
-
-       })
+          })
+        }
        res.send(answerIds)
 
      })
