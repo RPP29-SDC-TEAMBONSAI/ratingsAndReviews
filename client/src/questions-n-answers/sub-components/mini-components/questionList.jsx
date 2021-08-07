@@ -7,8 +7,8 @@ import AnswerImages from './answerImages.jsx';
 const QuestionList = (props) => {
 
   return (
-    <div>
-      <div className={'questionText container'}>
+    <div className='list container'>
+      <div className={''}>
         <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
       </div>
       <div className={props.answerState? 'answerListScroll': ''}>
@@ -23,19 +23,13 @@ const QuestionList = (props) => {
                 return <AnswerImages key={index} photo={photo}/>
               })}
             </div>
-            <table className='answererDetails'>
-              <tbody >
-                  <tr>
-                    <td className='userIdText'>by {answer.answerer_name}, {answer.date}</td>
-                    <td>helpful?</td>
-                    <td className={`userHelpfulBtn ${props.currentI.toString()}`}  onClick={(e) => {props.helpfulAnswerClick(e, answer.id), props.recordClick(e)}} >Yes</td>
-                    <td className='userHelpIndicator'>({answer.helpfulness})</td>
-                    <td className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</td>
-                  </tr>
-              </tbody>
-            </table>
-
-
+            <div className='answererDetails'>
+              <p className='userIdText'>by {answer.answerer_name}, {answer.date}</p>
+              <p className='answerHelpfulText'>helpful?</p>
+              <p className={`userHelpfulBtn ${props.currentI.toString()}`}>Yes</p>
+              <p className='userHelpIndicator'>({answer.helpfulness})</p>
+              <p className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</p>
+            </div>
           </div>
         )
 

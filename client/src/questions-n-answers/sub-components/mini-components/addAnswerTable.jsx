@@ -4,17 +4,13 @@ import propTypes from 'prop-types';
 const AddAnswer = (props) => {
 
   return (
-    <div >
-    <table >
-      <tbody>
-        <tr >
-          <td className='aHelpful'>Helpful?</td>
-          <td id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => {props.helpfulQuestionClick(e, props.question_id), props.recordClick(e)}}>Yes</td>
-          <td className='helpfulCount'>({props.data ? props.data : 0})</td>
-          <td className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(e, [props.questionName, props.question_id], props.recordClick(e))}}>Add Answer</td>
-        </tr>
-      </tbody>
-    </table>
+    <div className='helpfulQuestion container'>
+      <div className='helpulQuestion display'>
+        <p className='aHelpful'>Helpful?</p>
+        <p id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => {props.helpfulQuestionClick(e, props.question_id), props.recordClick(e)}}>Yes</p>
+        <p className='helpfulCount'>({props.data ? props.data : 0})</p>
+        <p className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(e, [props.questionName, props.question_id], props.recordClick(e))}}>Add Answer</p>
+      </div>
     </div>
   )
 }

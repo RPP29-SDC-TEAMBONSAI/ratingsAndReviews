@@ -7,11 +7,33 @@
   text-decoration: underline;
 
 }
-.aHelpful, .helpfulCount, .userIdText, .userHelpIndicator {
+/* .aHelpful, .helpfulCount, .userIdText, .userHelpIndicator {
   border-right: 1px solid black;
+} */
+.userIdText, .userHelpIndicator{
+  display: flex;
+  /* flex: 1; */
+  /* width: 4vh; */
+  white-space: nowrap;
+  border-top:none;
+  border-Left:none;
+  border-right: .15em solid black;
+  border-bottom: none;
+  /* margin-top: none; */
 }
-.qna.hide {
- display: none;
+p.userIdText, p.answerHelpfulText, p.userHelpIndicator{
+  padding-right:.15em
+}
+p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
+  padding-left:.15em
+}
+
+.answerHelpfulText {
+  border-top:none;
+  border-Left:none;
+  padding-right: .15em;
+  border-right: .15em solid black;
+  border-bottom: none;
 }
 .hide {
   display: none;
@@ -118,8 +140,9 @@
   border: .01rem solid #ddd; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
-  width: 10vh; /* Set a small width */
-  height: 10vh;
+  width: 6vh; /* Set a small width */
+  height: 6vh;
+  margin-top: 1rem;
 }
 .answerThumbnail {
   border: .01rem solid #ddd; /* Gray border */
@@ -133,12 +156,10 @@
 }
 
 
-.userIdText {
-  margin-top: 0vh;
-}
 .answerText {
-  margin-top: 2vh;
+  /* margin-top: 2vh; */
   margin-bottom: 0vh;
+  height: .5rem;
 }
 
 
@@ -148,10 +169,13 @@
   flex-direction: column;
   justify-content: center;
 
+
 }
 .row.list.container{
   display: flex;
   flex-direction: row;
+  width: 100vw;
+
 }
 .questionList.row {
   display: flex;
@@ -167,6 +191,7 @@
 .main.container {
   display: flex;
   flex-direction: column;
+  width: 170vh
 
 
 
@@ -177,12 +202,12 @@
 }
 /*search bar*/
 .search {
-display: flex;
+ display: flex;
  justify-content: center;
  flex-direction: row;
 }
 .searchInput{
-  width: 52.4vw;
+  width: 30vw;
 }
 .searchBtn {
   display: flex;
@@ -207,6 +232,7 @@ display: flex;
 
 .questionListButton.container {
   display: flex;
+  flex-basis: auto;
   flex-direction: column;
   justify-content: center;
 }
@@ -274,11 +300,14 @@ h3.addQuestionBtn {
 .questionList.scroll.container {
   height: 50vh;
   overflow-y:scroll;
+  overflow-x: hidden;
 
+  /* justify-content: center; */
 }
 .questionList.container {
   height: 50vh;
   overflow-y:scroll;
+  overflow-x: hidden;
 }
 
 .answerList.hide {
@@ -288,3 +317,34 @@ h3.addQuestionBtn {
   height: 15vh;
   overflow-y:scroll;
 }
+
+.answererDetails {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+
+
+}
+.answerList {
+  flex:1;
+}
+.aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
+  margin: 0em;
+}
+.helpulQuestion.display{
+  display: flex;
+}
+.aHelpful, .helpfulCount {
+  border-right: .15em solid black;
+  justify-content: space-evenly;
+  padding-right: .15em;
+}
+.qhelpfulIndicator, .addAnswerText{
+  padding-left: .15em;
+}
+.helpulQuestion.display {
+  padding-right: 3em;
+}
+
