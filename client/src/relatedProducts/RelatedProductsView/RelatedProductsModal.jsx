@@ -21,6 +21,7 @@ const RelatedProductsModal = (props) => {
             props.features.map((feature, i) => {
 
             return (
+
               <React.Fragment key={i++} >
                 <tr>
                   <td>
