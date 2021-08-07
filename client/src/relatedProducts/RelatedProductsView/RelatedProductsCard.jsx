@@ -13,9 +13,7 @@ const getStars = function (starsObject) {
   }
 
   let average = total / numberOfRatings;
-
   let htmlElements = Stars(average);
-
   return htmlElements;
 };
 
@@ -24,6 +22,7 @@ const RelatedProductsCard = (props) => {
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <h2 className='productName'>{props.name}</h2>
+        <button className='yourOutfitActionButton' onClick={(e) => {props.handleCompareItems(props, e)}}>X</button>
         <h3 className='productCategory'>{props.category}</h3>
         {(function() {
           if (props.salePrice === null) {
@@ -40,21 +39,23 @@ const RelatedProductsCard = (props) => {
           }
         })()}
         <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}></img>
-        <div className="reviewStars">{getStars(props.starRating)}</div>
+        <span className="reviewStars">{getStars(props.starRating)}</span>
     </div>
   )
 
 }
 
 RelatedProductsCard.propTypes = {
-  photo: propTypes.any,
+  photo: propTypes.string,
   salePrice: propTypes.any,
   originalPrice: propTypes.any,
-  category: propTypes.any,
-  name: propTypes.any,
-  handleProductChange: propTypes.any,
-  id: propTypes.any,
-  starRating: propTypes.object
+  category: propTypes.string,
+  name: propTypes.string,
+  handleProductChange: propTypes.func,
+  handleCompareItems: propTypes.func,
+  id: propTypes.number,
+  starRating: propTypes.any,
+
   };
 
   export default RelatedProductsCard;

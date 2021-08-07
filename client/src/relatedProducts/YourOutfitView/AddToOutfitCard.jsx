@@ -16,7 +16,7 @@ const AddToOutfitCard = (props) => {
 
 AddToOutfitCard.propTypes = {
   handleAddToOutfit: propTypes.func,
-  outfitProps: propTypes.any,
+  outfitProps: propTypes.object,
   state: propTypes.object
   };
 
