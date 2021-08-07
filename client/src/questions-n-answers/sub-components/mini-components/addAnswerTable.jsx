@@ -4,7 +4,8 @@ import propTypes from 'prop-types';
 const AddAnswer = (props) => {
 
   return (
-    <table className={`answerTable ${props.classname}`}>
+    <div >
+    <table >
       <tbody>
         <tr >
           <td className='aHelpful'>Helpful?</td>
@@ -14,16 +15,17 @@ const AddAnswer = (props) => {
         </tr>
       </tbody>
     </table>
+    </div>
   )
 }
 
 AddAnswer.propTypes ={
+  recordClick: propTypes.func.isRequired,
   addAnswerOnClick:propTypes.func.isRequired,
   questionName: propTypes.string.isRequired,
   currentI: propTypes.number.isRequired,
   question_id: propTypes.number.isRequired,
   helpfulQuestionClick: propTypes.func.isRequired,
-  classname: propTypes.string.isRequired,
   data: propTypes.number.isRequired
 }
 

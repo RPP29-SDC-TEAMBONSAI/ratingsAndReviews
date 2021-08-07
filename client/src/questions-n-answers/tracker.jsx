@@ -1,12 +1,14 @@
 import React from 'react';
 import {interactions} from '../clientRoutes/qa'
+import propTypes from 'prop-types';
 
 
 class ClickTracker extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      interactions: []
+      interactions: [],
+
 
     }
     this.recordClick = this.recordClick.bind(this)
@@ -113,6 +115,11 @@ class ClickTracker extends React.Component {
       ? this.props.children(renderProps)
       : this.props.children
   }
+
+}
+
+ClickTracker.propTypes = {
+  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
 
 }
 

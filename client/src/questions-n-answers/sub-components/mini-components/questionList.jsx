@@ -3,31 +3,20 @@ import propTypes from 'prop-types';
 import AnswerImages from './answerImages.jsx';
 
 
-const QuestionList = (props) => {
 
-  let scrollClass = props.addAnswerScroll(props.answerCount)
+const QuestionList = (props) => {
 
   return (
     <div>
-      <h4 className={''}>Q: {props.question.question_body}</h4>
-      <div className={scrollClass ? scrollClass : 'list container'}>
+      <div className={'questionText container'}>
+        <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
+      </div>
+      <div className={props.answerState? 'answerListScroll': ''}>
 
       {props.answers.map((answer, index) => {
 
-
-        let _class= props.answerHide(props.classname, index, props.questionClickCount)
-        let showOrHideClass = props.answerTableHide(props.answerCount, index)
-        let showClass;
-        // console.log(_class)
-
-        if (showOrHideClass === 'answerListTable') {
-
-          showClass = 'answerListTable'
-        }
-
-
         return (
-          <div className={showClass ? showClass: _class} key={index}>
+          <div className={!props.answerState && index <=1 || props.answerState ? 'answerList': 'answerList hide'} key={index}>
             <h4 className={`answerText`}>A: {answer.body}</h4>
             <div className='answerImage container'>
               {answer.photos.map((photo, index) => {
@@ -52,21 +41,18 @@ const QuestionList = (props) => {
 
       })}
       </div>
-      </div>
+    </div>
   )
 }
 
 QuestionList.propTypes = {
+  recordClick: propTypes.func.isRequired,
+  answerState: propTypes.any,
   helpfulAnswerClick:propTypes.func.isRequired,
   currentI: propTypes.number.isRequired,
   addToReported: propTypes.func.isRequired,
-  addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   currentI: propTypes.number.isRequired,
-  answerHide: propTypes.func.isRequired,
-  answerTableHide: propTypes.func.isRequired,
-  classname: propTypes.string.isRequired,
-  answerCount: propTypes.number.isRequired,
   question: propTypes.object.isRequired
 }
 

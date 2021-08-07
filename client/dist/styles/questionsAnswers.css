@@ -1,153 +1,29 @@
-.questionList.container {
-  display: block;
-}
-
-.search {
-  width: 100%;
-  box-sizing: border-box;
-}
-.searchBtn {
-  float: right;
-
-}
-
-.qna.container {
-  display: flex;
-
-  flex-direction: row;
-}
-.questionAndAnswer {
-  flex-grow: 2;
-  flex-shrink: 2;
-  justify-content: flex-start;
-  flex-direction: column;
-  margin-top: auto;
-  margin-bottom: 25px;
-
-}
-.qna.table {
-  flex-grow: 1;
-  flex-shrink: 1;
-  justify-content: flex-end;
-  flex-direction: column;
-
-
-}
-h4.answerText {
-  margin-top: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-h4.questionText{
-  margin-top: 0px
-}
-h4 {
-  margin-top: 0px;
-}
-
 .inputBox {
   padding: 0 5px 0 0;
   overflow: hidden;
 
 }
-
-
 .qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
   text-decoration: underline;
 
 }
-
-.answerTable {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .aHelpful, .helpfulCount, .userIdText, .userHelpIndicator {
   border-right: 1px solid black;
 }
-
-
-.moreAnsweredBtn, .addQuestionBtn {
-  height: 50px;
-  width: 225px;
-}
-
-
-
-.userIdText.container{
-  margin-bottom: 15px;
-  display: flex;
-}
-
-.loadMoreAnswersButton {
-  margin-top: 0px;
-  margin-bottom: 5%;
-}
-
-.questionListButton.container {
-  margin-bottom: 5%;
-}
-
 .qna.hide {
  display: none;
 }
 .hide {
   display: none;
 }
-
-.loadMoreAnswersButton {
-  width: 15%;
-  height: 3.5%;
-
-  cursor: pointer;
-  display:block;
-  color:#444;
-  border:1px solid #CCC;
-  background:#DDD;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-  padding: 5px;
-  text-align: center;
-
-}
-
-h3.loadMoreAnswersButton:hover {
-  color:navy;
-  background: beige;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-}
-.list.scroll.container {
-  height: 18vh;
-  overflow-y:scroll;
-
-}
-
-.question.container {
-  margin-bottom: 5vh;
-  display: flex;
-
-  flex-direction: row;
-}
-.questionHide.container{
-  display:none
-
-}
-
 .moreAnsweredBtn.Hide {
   display: none;
-}
-
-.questionList.scroll {
-  height: 50vh;
-  overflow-y: scroll;
-
 }
 .qFormHide {
   display:  none;
 }
 .qForm {
   display: flex;
-/*
-  flex-direction: column; */
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -159,16 +35,9 @@ h3.loadMoreAnswersButton:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .qFormData {
-
   position: fixed;
-
-
   flex-direction: column;
-   /* flex-direction:column; */
   justify-content:center;
-
-
-  /* left: 10%; */
   background-color: #B2D2A4;
   border-radius: 25px;
   text-align: center;
@@ -210,14 +79,8 @@ h3.loadMoreAnswersButton:hover {
 .aFormData {
   position: fixed;
   display: flex;
-
-
   flex-direction: column;
-   /* flex-direction:column; */
   justify-content:center;
-
-
-  /* left: 10%; */
   background-color: #B2D2A4;
   border-radius: 25px;
   text-align: center;
@@ -269,10 +132,159 @@ h3.loadMoreAnswersButton:hover {
   display: none;
 }
 
-.answererDetails{
-  margin-bottom: 5vh;
+
+.userIdText {
+  margin-top: 0vh;
+}
+.answerText {
+  margin-top: 2vh;
+  margin-bottom: 0vh;
 }
 
-.answerListTable.Hide {
+
+/*question List display */
+.list.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.row.list.container{
+  display: flex;
+  flex-direction: row;
+}
+.questionList.row {
+  display: flex;
+  flex:.5;
+
+}
+.addAnswerList.row {
+  margin-top: 1.3em;
+  justify-content: flex-end;
+  flex-direction: column;
+
+}
+.main.container {
+  display: flex;
+  flex-direction: column;
+
+
+
+}
+.questionTitle{
+ display: flex;
+ flex-direction: column;
+}
+/*search bar*/
+.search {
+display: flex;
+ justify-content: center;
+ flex-direction: row;
+}
+.searchInput{
+  width: 52.4vw;
+}
+.searchBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+.title.container.row{
+  display: flex;
+  flex-direction: column;
+}
+.search.container{
+  display: flex;
+  flex-direction: row;
+
+}
+.componentTitle{
+  display: flex;
+  justify-content: center;
+}
+
+
+.questionListButton.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loadMoreAnswersButton {
+  display: flex;
+  justify-content: center;
+  width: 10em;
+  height: 1.3em;
+  cursor: pointer;
+  text-align: center;
+  align-self: center;
+}
+.buttomButtons.containter {
+  display: flex;
+  justify-content: center;
+}
+
+.buttomButtons.container{
+  display: flex;
+}
+.moreAnsweredBtn, .addQuestionBtn {
+  display: flex;
+  width: 10em;
+  height: 1.3em;
+  cursor: pointer;
+  color:#444;
+  border:1px solid #CCC;
+  background:#DDD;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.moreAnsweredBtn {
+  width: 15.8em;
+}
+h3.loadMoreAnswersButton:hover{
+  color:navy;
+}
+h3.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
+  color:navy;
+  background: beige;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+h3.loadMoreAnswersButton{
+  margin-bottom: 0em;
+  display: flex;
+}
+h3.addQuestionBtn {
+  display: flex;
+}
+.questionListButton.container {
+  display: flex;
+  width: 55vw;
+}
+.bottomButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+}
+.list.container.hide {
   display: none;
+}
+
+.questionList.scroll.container {
+  height: 50vh;
+  overflow-y:scroll;
+
+}
+.questionList.container {
+  height: 50vh;
+  overflow-y:scroll;
+}
+
+.answerList.hide {
+  display: none;
+}
+.answerListScroll {
+  height: 15vh;
+  overflow-y:scroll;
 }
