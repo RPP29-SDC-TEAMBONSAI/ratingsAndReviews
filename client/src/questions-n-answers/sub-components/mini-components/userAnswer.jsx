@@ -201,6 +201,7 @@ class UserAnswer extends React.Component {
 }
 
 UserAnswer.propTypes = {
+  recordClick:propTypes.func.isRequired,
   question_id: propTypes.number.isRequired,
   updateAnswers: propTypes.func.isRequired,
   currentItemName: propTypes.string.isRequired,
