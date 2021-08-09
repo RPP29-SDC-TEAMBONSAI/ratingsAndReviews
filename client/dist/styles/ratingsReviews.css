@@ -613,10 +613,6 @@
   padding: 0px;
 }
 
-.r-name {
-  padding-bottom: 20px;
-}
-
 .r-title {
   padding-bottom: 3px;
 }
@@ -677,4 +673,19 @@
 .r-required {
   color: red;
   font-size: small;
+}
+
+.r-full-min{
+  padding-right: 15px;
+  text-align: right;
+  font-size: small;
+  color: gray;
+}
+
+
+.r-name-note,
+.r-email-note {
+  font-size: small;
+  color: rgb(80, 80, 80);
+  padding: 5px 3px 15px 3px;
 }
