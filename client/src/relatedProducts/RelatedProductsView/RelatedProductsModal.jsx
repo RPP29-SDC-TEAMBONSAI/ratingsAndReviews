@@ -10,7 +10,7 @@ const RelatedProductsModal = (props) => {
       <div className='modalOpen'>
         <div className='modalTable'>
           <h1>Comparing</h1>
-          <table>
+          <table className='rpModalTable'>
             <tbody>
               <tr>
                 <th>{props.modifiedCurrent.name}</th>

@@ -78,18 +78,20 @@ RP MODAL STLYING
   width: 50%;
   height: 50%;
   margin: auto;
+
 }
-table {
+
+.rpModalTable {
   border: 1px solid rgb(190,190,190);
 }
 
-td,
+.relatedProductsModal td,
 th {
     border: 1px solid rgb(190, 190, 190);
     padding: 10px;
 }
 
-td {
+.relatedProductsModal td {
     text-align: center;
 }
 
