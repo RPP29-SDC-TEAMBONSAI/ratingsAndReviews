@@ -55,13 +55,11 @@ class QuestionsNAnswers extends React.Component {
         let answerIds = data.data
         let copy = this.props.data.slice()
         let sortedData= this.filterAnswersNQuestions(copy)
-        let showButton = helper.showMoreAnsweredQuestions(sortedData)
         let answers = helper.showReportedClass(sortedData[1], answerIds)
 
           this.setState({
             questions: sortedData[0],
             answers: answers,
-            showQuestionButton: showButton,
             reported: answerIds
           })
       })
@@ -79,7 +77,7 @@ class QuestionsNAnswers extends React.Component {
     if (prevProps.data.length !== this.props.data.length) {
 
       let sortedData = this.filterAnswersNQuestions(copy)
-      let showButton = helper.showMoreAnsweredQuestions(sortedData)
+
 
       let answerIds = this.state.reported
 
@@ -97,7 +95,7 @@ class QuestionsNAnswers extends React.Component {
         this.setState({
           questions: sortedData[0],
           answers:sortedData[1],
-          showQuestionButton: showButton,
+
         })
       })
     }
@@ -126,7 +124,7 @@ class QuestionsNAnswers extends React.Component {
               .then(newData => {
 
                 let sortedData = this.filterAnswersNQuestions(newData.data)
-                let showButton = helper.showMoreAnsweredQuestions(sortedData)
+
                 let answerIds = this.state.reported
 
                 sortedData[1].forEach((answer) => {
@@ -144,7 +142,6 @@ class QuestionsNAnswers extends React.Component {
                   questions: sortedData[0],
                   answers: sortedData[1],
                   helpfulQuestionCount: 0,
-                  showQuestionButton: showButton,
                   reported: answerIds,
 
                 })
@@ -156,7 +153,7 @@ class QuestionsNAnswers extends React.Component {
       if (prevState.questions.length !== this.state.questions.length) {
         let copy = this.props.data.slice()
         let sortedData= this.filterAnswersNQuestions(copy)
-        let showButton = helper.showMoreAnsweredQuestions(sortedData)
+
         let answerIds = this.state.reported
         sortedData[1].forEach((answer) => {
 
@@ -172,7 +169,7 @@ class QuestionsNAnswers extends React.Component {
           this.setState({
             questions: sortedData[0],
             answers: sortedData[1],
-            showQuestionButton: showButton,
+
             reported: answerIds
           })
         })
@@ -191,7 +188,7 @@ class QuestionsNAnswers extends React.Component {
               .then(newData => {
 
                 let sortedData = this.filterAnswersNQuestions(newData.data)
-                let showButton = helper.showMoreAnsweredQuestions(sortedData)
+
                 let answerIds = this.state.reported.slice()
 
                 sortedData[1].forEach((answer) => {
@@ -217,7 +214,7 @@ class QuestionsNAnswers extends React.Component {
 
     if(prevState.answers.length !== this.state.answers.length) {
       let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
-      let showButton = helper.showMoreAnsweredQuestions(sortedData)
+
       let answerIds = this.state.answers.slice()
 
       sortedData[1].forEach((answer) => {
@@ -232,7 +229,7 @@ class QuestionsNAnswers extends React.Component {
         })
 
         this.setState({
-          showQuestionButton: showButton,
+
           answers: sortedData[1],
           questions: sortedData[0]
 
@@ -353,12 +350,12 @@ class QuestionsNAnswers extends React.Component {
       .then(data => {
         let questions = data.data
         let filtered = helper.filterAll(questions);
-        let showButton = helper.showMoreAnsweredQuestions(filtered)
+
 
         this.setState({
           questions: filtered[0],
           answers: filtered[1],
-          showQuestionButton: showButton
+
 
         })
       })

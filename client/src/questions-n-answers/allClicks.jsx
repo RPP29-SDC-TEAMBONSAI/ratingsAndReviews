@@ -20,18 +20,12 @@ class AllClicks extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.questionClickCount !== this.state.questionClickCount) {
-      console.log('here')
       let showMoreAnsweredQuestions = helper.moreAnsweredQButtonDisplay(this.state.questionClickCount, this.state.lastIndex);
-      console.log(showMoreAnsweredQuestions)
       this.setState({
         showQuestionButton: showMoreAnsweredQuestions
       })
     }
   }
-
-  //componentDidUpdate that??
-  //checks question count difference and runs function that determines if show button state should be updated?
-  //use showQuestionButton as prop to show or hide more answered questions button
 
 
   moreAnsweredQorLoadMoreAnswers(e) {
