@@ -16,9 +16,7 @@ class QuestionsNAnswers extends React.Component {
       questions: [],
       answers: [],
       answerClickCount: 0,
-      questionClickCount: 1,
       showQuestionButton: false,
-      lastIndex : null,
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
       helpfulQuestionCount: 0,
@@ -32,22 +30,22 @@ class QuestionsNAnswers extends React.Component {
       reported: []
     };
     //factor all clicks out into their own renderProps onclick??
-    this.loadQuestionClick = this.loadQuestionClick.bind(this)
-    this.showScrollContainer = this.showScrollContainer.bind(this)
+
     this.searchFilter = this.searchFilter.bind(this)
     this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
+    this.questionSearchChange = this.questionSearchChange.bind(this)
 
     this.showQuestions = this.showQuestions.bind(this)
-    this.getReportedAns = getReportedAns.bind(this)
-    this.questionSearchChange = this.questionSearchChange.bind(this)
+
     this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
     this.helpfulAnswerClick = this.helpfulAnswerClick.bind(this)
-    this.updateQuestions = this.updateQuestions.bind(this)
-    this.addQuestion = this.addQuestion.bind(this)
-    this.updateAnswers = this.updateAnswers.bind(this)
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
-    this.addToReported = this.addToReported.bind(this)
+    this.addQuestion = this.addQuestion.bind(this)
 
+    this.updateQuestions = this.updateQuestions.bind(this)
+    this.updateAnswers = this.updateAnswers.bind(this)
+    this.addToReported = this.addToReported.bind(this)
+    this.getReportedAns = getReportedAns.bind(this)
 
   }
   componentDidMount() {
@@ -263,12 +261,22 @@ class QuestionsNAnswers extends React.Component {
       })
     }
 
-    if (prevState.questionClickCount !== this.state.questionClickCount) {
-      let showOrHide = helper.moreAnsweredQButtonDisplay(this.state.questionClickCount, this.state.lastIndex)
-      this.setState({
-        showQuestionButton: showOrHide
-      })
-    }
+    //this previously managed show/hide functionality of more answered questions
+
+    //we can create a new state boolean in allClicks renderprops component
+    //function will be ran on mount and update that -
+    //recieves current questionClick count and current lastIndex
+    //uses the helper moreAnsweredQButtonDisplay to determine display state
+    //updates the new state boolean
+
+    //new state boolean is used in place of current this.state.boolean  should work ??🔥
+
+    // if (prevState.questionClickCount !== allClicksProps.questionClickCount) {
+    //   let showOrHide = helper.moreAnsweredQButtonDisplay(allClicksProps.questionClickCount, allClicksProps.lastIndex)
+    //   this.setState({
+    //     showQuestionButton: showOrHide
+    //   })
+    // }
   }
 
   filterAnswersNQuestions(currentQuestions) {
@@ -276,19 +284,6 @@ class QuestionsNAnswers extends React.Component {
     return filtered
   }
 
-  loadQuestionClick(e) {
-    let count = this.state.questionClickCount + 2
-    let lastI = this.state.questions.length - 1
-    this.setState({
-      questionClickCount: count,
-      lastIndex: lastI
-    })
-  }
-
-  showScrollContainer() {
-    let show = helper.qListScrollClass(this.state.questionClickCount);
-    return show
-  }
 
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
@@ -320,7 +315,6 @@ class QuestionsNAnswers extends React.Component {
   showQuestions(currentCount, index) {
     let show = helper.showQuestionsClass(currentCount, index);
     return show
-
   }
 
   questionSearchChange(e) {
@@ -435,7 +429,7 @@ class QuestionsNAnswers extends React.Component {
 
   render () {
 
-    let scrollContainerClass = this.showScrollContainer()
+
 
     return (
       <ClickTracker>
@@ -443,7 +437,7 @@ class QuestionsNAnswers extends React.Component {
         <AllClicks>
           {allClicksProps => (
             <div className={`main container`}>
-              <div className='test2'>
+
               <div className='title container row'>
 
                 <h3 className='componentTitle'>Questions & Answers</h3>
@@ -478,16 +472,17 @@ class QuestionsNAnswers extends React.Component {
                 />
 
               </div>
-              <div className={scrollContainerClass? 'questionList scroll container': 'questionList container'}>
+              <div className='questionList scroll container'>
                 <div className={''}>
                   {this.state.questions.map((question, index) => {
                   let currentClass;
                   let show = false;
-                  if (this.state.questionClickCount === 1 && index <= this.state.questionClickCount) {
+                  if (allClicksProps.questionClickCount === 1 && index <= allClicksProps.questionClickCount) {
                     show = true
                   }
-                  if (this.state.questionClickCount >= 3 && index <= this.state.questionClickCount) {
+                  if (allClicksProps.questionClickCount >= 3 && index <= allClicksProps.questionClickCount) {
                     show = true
+
                   }
                   return <QuestionsContainer
                           answerState={allClicksProps.loadAnswerState}
@@ -499,8 +494,7 @@ class QuestionsNAnswers extends React.Component {
                           helpfulQuestionClick={this.helpfulQuestionClick}
                           currentI={index}
                           showQuestions={this.showQuestions}
-
-                          questionClickCount={this.state.questionClickCount}
+                          questionClickCount={allClicksProps.questionClickCount}
                           answers={this.state.answers[index]}
                           question={question}
                           addAnswerOnClick={this.addAnswerOnClick}
@@ -517,14 +511,13 @@ class QuestionsNAnswers extends React.Component {
                   </h3>
                 </div>
                 <div className='bottomButtons'>
-                  <h3 className={this.state.showQuestionButton ? 'moreAnsweredBtn' : 'moreAnsweredBtn Hide'}
-                          onClick={(e) => {this.loadQuestionClick(), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
+                  <h3 className={allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
+                          onClick={(e) => {allClicksProps.loadNewQuestions(this.state.questions.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
-
                   <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</h3>
                 </div>
               </div>
-              </div>
+
             </div>
           )}
         </AllClicks>

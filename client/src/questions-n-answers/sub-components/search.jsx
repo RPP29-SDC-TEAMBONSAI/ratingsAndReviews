@@ -12,7 +12,7 @@ const Search = (props) => {
         type='text'
         value={props.currentInput}
         name='question'
-        onChange={props.questionSearchChange}>
+        onChange={(e) => props.questionSearchChange(e)}>
       </input>
       <input className='searchBtn' type="submit" value='Search'></input>
 

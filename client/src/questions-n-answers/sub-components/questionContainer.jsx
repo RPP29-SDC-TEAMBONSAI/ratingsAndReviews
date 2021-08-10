@@ -18,7 +18,6 @@ const QuestionsContainer = (props) => {
       <div className='questionList row'>
         <QuestionList
           answerState={props.answerState}
-
           recordClick={props.recordClick}
           addToReported={props.addToReported}
           helpfulAnswerClick= {props.helpfulAnswerClick}

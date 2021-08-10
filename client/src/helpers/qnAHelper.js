@@ -218,7 +218,7 @@ module.exports = {
 
     return newQuestions
   },
-
+//need to fix more answered questions display
   showMoreAnsweredQuestions(arr) {
 
     let showButton;
@@ -231,9 +231,11 @@ module.exports = {
   },
 
   moreAnsweredQButtonDisplay(qClickCount, index) {
-    let result = true;
+    console.log(index)
+    console.log(qClickCount)
+    let result = false;
     if (qClickCount === index || qClickCount + 1 === index) {
-      result= false;
+      result= true;
     }
     return result
   },

@@ -237,7 +237,8 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 
 .questionListButton.container {
   display: flex;
-  flex-basis: auto;
+  justify-content: start;
+
   flex-direction: column;
   /* justify-content: center; */
 }
@@ -291,7 +292,7 @@ h3.addQuestionBtn {
 .questionListButton.container {
   display: flex;
   justify-content: start;
-  /* width: 55vw; */
+  width: 65vw;
 }
 
 .list.container.hide {
@@ -352,8 +353,11 @@ h3.addQuestionBtn {
 .bottomButtons {
   display: flex;
 
+
 }
 h3.moreAnsweredBtn {
+  display: flex;
   margin-right: 2.5em;
+  justify-content: start;
 }
 
