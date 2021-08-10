@@ -9,6 +9,8 @@ class AllClicks extends React.Component {
       questionClickCount: 1,
       lastIndex:null,
       showQuestionButton: false,
+      helpfulQuestionCount: 0,
+      question_id: null,
 
 
 

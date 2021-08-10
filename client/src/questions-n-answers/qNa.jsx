@@ -34,7 +34,6 @@ class QuestionsNAnswers extends React.Component {
     this.searchFilter = this.searchFilter.bind(this)
     this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
-
     this.showQuestions = this.showQuestions.bind(this)
 
     this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
@@ -169,7 +168,6 @@ class QuestionsNAnswers extends React.Component {
           this.setState({
             questions: sortedData[0],
             answers: sortedData[1],
-
             reported: answerIds
           })
         })
@@ -257,23 +255,6 @@ class QuestionsNAnswers extends React.Component {
         answers: answers
       })
     }
-
-    //this previously managed show/hide functionality of more answered questions
-
-    //we can create a new state boolean in allClicks renderprops component
-    //function will be ran on mount and update that -
-    //recieves current questionClick count and current lastIndex
-    //uses the helper moreAnsweredQButtonDisplay to determine display state
-    //updates the new state boolean
-
-    //new state boolean is used in place of current this.state.boolean  should work ??🔥
-
-    // if (prevState.questionClickCount !== allClicksProps.questionClickCount) {
-    //   let showOrHide = helper.moreAnsweredQButtonDisplay(allClicksProps.questionClickCount, allClicksProps.lastIndex)
-    //   this.setState({
-    //     showQuestionButton: showOrHide
-    //   })
-    // }
   }
 
   filterAnswersNQuestions(currentQuestions) {
