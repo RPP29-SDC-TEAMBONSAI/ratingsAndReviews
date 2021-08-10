@@ -7,7 +7,7 @@ import propTypes from 'prop-types';
 import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
 import {updateHelpfulness, questions, updateAnswerHelpfulness, addToReported, getReportedAns} from '../clientRoutes/qa';
 import ClickTracker from './tracker.jsx'
-import AllClicks from './allClicks.jsx';
+
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
     super(props)
@@ -104,75 +104,66 @@ class QuestionsNAnswers extends React.Component {
         question_id:this.state.question_id
       })
     }
+    //new question helpfulness
+    if (prevProps.allClicksProps.question_id !== this.props.allClicksProps.question_id) {
 
-    if (prevProps.allClicksProps.question_id !== this.props.question_id) {
+      updateHelpfulness(this.props.allClicksProps.question_id)
+        .then(data=>
+          questions(this.props.product_id)
+            .then(newData => {
+              let sortedData = this.filterAnswersNQuestions(newData.data)
+              let answerIds = this.state.reported
 
-      if (this.props.helpfulQuestionCount === 1)  {
-        updateHelpfulness(this.props.question_id)
-          .then(data=>
-            questions(this.props.product_id)
-              .then(newData => {
-                let sortedData = this.filterAnswersNQuestions(newData.data)
-                let answerIds = this.state.reported
+              sortedData[1].forEach((answer) => {
+                answer.forEach(obj => {
+                  if (answerIds.includes(obj.id)) {
 
-                sortedData[1].forEach((answer) => {
-                  answer.forEach(obj => {
-                    if (answerIds.includes(obj.id)) {
+                    obj.report = 'reported'
+                  } else {
+                    obj.report = 'report'
+                  }
+                })
 
-                      obj.report = 'reported'
-                    } else {
-                      obj.report = 'report'
-                    }
-                  })
+              this.setState({
+                questions: sortedData[0],
+                answers: sortedData[1],
+                reported: answerIds,
+              })
+            })
+          })
+        )
+    }
+    //new answer helpfulness
+    if (prevProps.allClicksProps.answerId !== this.props.allClicksProps.answerId) {
+      updateAnswerHelpfulness(this.props.allClicksProps.answerId)
+        .then(data => {
+          questions(this.props.product_id)
+            .then(newData => {
+
+              let sortedData = this.filterAnswersNQuestions(newData.data)
+
+              let answerIds = this.state.reported.slice()
+
+              sortedData[1].forEach((answer) => {
+
+                answer.forEach(obj => {
+
+                  if (answerIds.includes(obj.id)) {
+                    obj.report = 'reported'
+                  } else {
+                    obj.report = 'report'
+                  }
+                })
 
                 this.setState({
                   questions: sortedData[0],
                   answers: sortedData[1],
-                  reported: answerIds,
+                  reported: answerIds
 
                 })
               })
             })
-          )
-      }
-    }
-    if (prevProps.allClicksProps.answerId !== this.props.answerId) {
-
-      console.log(prevProps.allClicksProps.helpfulAnswerCount )
-      console.log(this.props.helpfulAnswerCount)
-
-      if (this.props.helpfulAnswerCount === 1) {
-        updateAnswerHelpfulness(this.props.answerId)
-          .then(data => {
-            questions(this.props.product_id)
-              .then(newData => {
-
-                let sortedData = this.filterAnswersNQuestions(newData.data)
-
-                let answerIds = this.state.reported.slice()
-
-                sortedData[1].forEach((answer) => {
-
-                  answer.forEach(obj => {
-
-                    if (answerIds.includes(obj.id)) {
-                      obj.report = 'reported'
-                    } else {
-                      obj.report = 'report'
-                    }
-                  })
-
-                  this.setState({
-                    questions: sortedData[0],
-                    answers: sortedData[1],
-                    reported: answerIds
-
-                  })
-                })
-              })
-          })
-
-      }
+        })
     }
 
     if (prevState.questions.length !== this.state.questions.length) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import helper from '../helpers/qnAHelper.js'
-class AllClicks extends React.Component {
+class QnAClicks extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -112,8 +112,8 @@ class AllClicks extends React.Component {
 
 }
 
-AllClicks.propTypes = {
+QnAClicks.propTypes = {
   children: propTypes.oneOfType([propTypes.func, propTypes.obj])
 
 }
-export default AllClicks;
+export default QnAClicks;
