@@ -56,13 +56,33 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.6);
 }
+.questionClose {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 21vh;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50em;
+  background-color: lightgray;
+
+}
+.questionClose:hover{
+  background-color: white;
+  cursor: pointer;
+}
 .qFormData {
+  display: flex;
   position: fixed;
   flex-direction: column;
   justify-content:center;
   background-color: #B2D2A4;
   border-radius: 25px;
   text-align: center;
+  width: 50vh;
+  height: 50vh;
   margin-bottom: 1vh;
   z-index: 2;
 }

@@ -19,25 +19,17 @@ class QuestionsNAnswers extends React.Component {
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
       qFormShowOrHide: 'qFormHide',
-      aFormShowOrHide: 'aFormHide',
-      currentQuestion:'',
       reported: []
     };
-    //factor all clicks out into their own renderProps onclick??
 
     this.searchFilter = this.searchFilter.bind(this)
     this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.showQuestions = this.showQuestions.bind(this)
-
-
-    this.addQuestion = this.addQuestion.bind(this)
-
     this.updateQuestions = this.updateQuestions.bind(this)
     this.updateAnswers = this.updateAnswers.bind(this)
     this.addToReported = this.addToReported.bind(this)
     this.getReportedAns = getReportedAns.bind(this)
-
   }
   componentDidMount() {
     getReportedAns()
@@ -288,6 +280,7 @@ class QuestionsNAnswers extends React.Component {
 
 
   updateQuestions () {
+    console.log('hi')
 
     return questions(this.props.product_id)
       .then(data => {
@@ -302,22 +295,10 @@ class QuestionsNAnswers extends React.Component {
 
         })
       })
-
   }
 
-  addQuestion(e) {
 
-    if (this.state.qFormShowOrHide === 'qForm') {
-      this.setState({
-        qFormShowOrHide: 'qFormHide'
-      })
-    } else {
 
-      this.setState({
-        qFormShowOrHide: 'qForm'
-      })
-    }
-  }
 
   updateAnswers() {
     questions(this.props.product_id)
@@ -366,9 +347,7 @@ class QuestionsNAnswers extends React.Component {
             <div className={`main container`}>
 
               <div className='title container row'>
-
                 <h3 className='componentTitle'>Questions & Answers</h3>
-
                 <Search
                   recordClick={trackerProps.recordClick}
                   currentInput={this.state.questionSearchVal}
@@ -376,33 +355,32 @@ class QuestionsNAnswers extends React.Component {
                 />
               </div>
 
-              <div className={this.state.qFormShowOrHide}>
-
+              <div className={this.props.allClicksProps.QuestionFormDisplayClass}>
                 <UserQuestion
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateQuestions={this.updateQuestions}
                   qFormShowOrHide={this.state.qFormShowOrHide}
-                  addQuestion={this.addQuestion}
+                  addQuestion={this.props.allClicksProps.addQuestion}
                   product_id={this.props.product_id}
+                  QuestionFormDisplayClass={this.props.allClicksProps.QuestionFormDisplayClass}
+                  closeQuestionForm={this.props.allClicksProps.closeQuestionForm}
                 />
-
               </div>
-              <div className={this.props.allClicksProps.answerFormDisplayClass}>
 
+              <div className={this.props.allClicksProps.answerFormDisplayClass}>
                 <UserAnswer
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
-                  question_id={this.state.question_id}
+                  question_id={this.props.allClicksProps.question_id}
                   updateAnswers={this.updateAnswers}
                   currentQuestion={this.props.allClicksProps.currentQuestion}
                   answerFormDisplayClass={this.props.allClicksProps.answerFormDisplayClass}
                   closeAnswerForm={this.props.allClicksProps.closeAnswerForm}
+                  aFormQuestion_id={this.props.allClicksProps.aFormQuestion_id}
                 />
-
-
-
               </div>
+
               <div className='questionList scroll container'>
                 <div className={''}>
                   {this.state.questions.map((question, index) => {
@@ -445,7 +423,7 @@ class QuestionsNAnswers extends React.Component {
                   <h3 className={this.props.allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
                           onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.questions.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
-                  <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</h3>
+                  <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.addQuestion()}}>ADD A QUESTION +</h3>
                 </div>
               </div>
 

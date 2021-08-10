@@ -36,7 +36,9 @@ const QuestionsContainer = (props) => {
           helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
           questionName={props.question.question_body}
+          aFormQuestion_id={props.aFormQuestion_id}
           question_id={props.question_id}
+
         />
       </div>
       </div>

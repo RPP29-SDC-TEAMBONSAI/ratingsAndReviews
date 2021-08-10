@@ -17,6 +17,7 @@ class UserQuestion extends React.Component {
 
   onQuestionSubmit(e) {
     e.preventDefault()
+    console.log(e)
 
     let newObj = {
       body: this.state.yourQuestion,
@@ -54,7 +55,10 @@ class UserQuestion extends React.Component {
   render() {
     return (
 
-      <form  className={'qFormData'} onSubmit={this.onQuestionSubmit}>
+      <form  className='qFormData' onSubmit={this.onQuestionSubmit}>
+        <div>
+          <h1 className={this.props.QuestionFormDisplayClass ? 'questionClose': 'qFormHide'} onClick={(e) => this.props.closeQuestionForm()}>x</h1>
+        </div>
         <div  className='askQuestionForm'>
          <h4>Ask Your Question</h4>
          <h3 > {`About the [${this.props.currentItemName}]`} </h3>
