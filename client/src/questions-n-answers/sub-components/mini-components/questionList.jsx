@@ -27,7 +27,7 @@ const QuestionList = (props) => {
             <div className='answererDetails'>
               <p className='userIdText'>by {answer.answerer_name}, {answer.date}</p>
               <p className='answerHelpfulText'>helpful?</p>
-              <p className={`userHelpfulBtn ${props.currentI.toString()}`}>Yes</p>
+              <p className='userHelpfulBtn' onClick={(e) => props.helpfulAnswerClick(answer.id)}>Yes</p>
               <p className='userHelpIndicator'>({answer.helpfulness})</p>
               <p className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</p>
             </div>

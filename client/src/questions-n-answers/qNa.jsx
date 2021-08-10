@@ -15,15 +15,9 @@ class QuestionsNAnswers extends React.Component {
     this.state ={
       questions: [],
       answers: [],
-      answerClickCount: 0,
       showQuestionButton: false,
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
-      helpfulQuestionCount: 0,
-      question_id: 0,
-      helpfulAnswerCount: 0,
-      answer_id: 0,
-      answerHelpfulnessCount: 0,
       qFormShowOrHide: 'qFormHide',
       aFormShowOrHide: 'aFormHide',
       currentQuestion:'',
@@ -36,8 +30,7 @@ class QuestionsNAnswers extends React.Component {
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.showQuestions = this.showQuestions.bind(this)
 
-    this.helpfulQuestionClick = this.helpfulQuestionClick.bind(this)
-    this.helpfulAnswerClick = this.helpfulAnswerClick.bind(this)
+
     this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
 
@@ -112,23 +105,18 @@ class QuestionsNAnswers extends React.Component {
       })
     }
 
+    if (prevProps.allClicksProps.question_id !== this.props.question_id) {
 
-    if(prevState.helpfulQuestionCount !== this.state.helpfulQuestionCount) {
-
-      if (this.state.helpfulQuestionCount === 1) {
-
-        updateHelpfulness(this.state.question_id)
+      if (this.props.helpfulQuestionCount === 1)  {
+        updateHelpfulness(this.props.question_id)
           .then(data=>
             questions(this.props.product_id)
               .then(newData => {
-
                 let sortedData = this.filterAnswersNQuestions(newData.data)
-
                 let answerIds = this.state.reported
 
                 sortedData[1].forEach((answer) => {
                   answer.forEach(obj => {
-
                     if (answerIds.includes(obj.id)) {
 
                       obj.report = 'reported'
@@ -140,7 +128,6 @@ class QuestionsNAnswers extends React.Component {
                 this.setState({
                   questions: sortedData[0],
                   answers: sortedData[1],
-                  helpfulQuestionCount: 0,
                   reported: answerIds,
 
                 })
@@ -148,39 +135,14 @@ class QuestionsNAnswers extends React.Component {
             })
           )
       }
-
-      if (prevState.questions.length !== this.state.questions.length) {
-        let copy = this.props.data.slice()
-        let sortedData= this.filterAnswersNQuestions(copy)
-
-        let answerIds = this.state.reported
-        sortedData[1].forEach((answer) => {
-
-          answer.forEach(obj => {
-
-            if (answerIds.includes(obj.id)) {
-              obj.report = 'reported'
-            } else {
-              obj.report = 'report'
-            }
-          })
-
-          this.setState({
-            questions: sortedData[0],
-            answers: sortedData[1],
-            reported: answerIds
-          })
-        })
-      }
     }
+    if (prevProps.allClicksProps.answerId !== this.props.answerId) {
 
-    if (prevState.answerHelpfulnessCount !== this.state.answerHelpfulnessCount) {
+      console.log(prevProps.allClicksProps.helpfulAnswerCount )
+      console.log(this.props.helpfulAnswerCount)
 
-      if (this.state.answerHelpfulnessCount === 1) {
-        this.setState({
-          answerHelpfulnessCount:0
-        })
-        updateAnswerHelpfulness(this.state.answer_id)
+      if (this.props.helpfulAnswerCount === 1) {
+        updateAnswerHelpfulness(this.props.answerId)
           .then(data => {
             questions(this.props.product_id)
               .then(newData => {
@@ -199,7 +161,9 @@ class QuestionsNAnswers extends React.Component {
                       obj.report = 'report'
                     }
                   })
+
                   this.setState({
+                    questions: sortedData[0],
                     answers: sortedData[1],
                     reported: answerIds
 
@@ -207,8 +171,36 @@ class QuestionsNAnswers extends React.Component {
                 })
               })
           })
+
       }
     }
+
+    if (prevState.questions.length !== this.state.questions.length) {
+      let copy = this.props.data.slice()
+      let sortedData= this.filterAnswersNQuestions(copy)
+
+      let answerIds = this.state.reported
+      sortedData[1].forEach((answer) => {
+
+        answer.forEach(obj => {
+
+          if (answerIds.includes(obj.id)) {
+            obj.report = 'reported'
+          } else {
+            obj.report = 'report'
+          }
+        })
+
+        this.setState({
+          questions: sortedData[0],
+          answers: sortedData[1],
+          reported: answerIds
+        })
+      })
+    }
+
+
+
 
     if(prevState.answers.length !== this.state.answers.length) {
       let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
@@ -304,26 +296,6 @@ class QuestionsNAnswers extends React.Component {
     })
   }
 
-  helpfulQuestionClick(e, questionId) {
-
-    if (this.state.question_id !== questionId) {
-      this.setState({
-        helpfulQuestionCount: 1,
-        question_id:questionId
-      })
-    }
-
-  }
-
-  helpfulAnswerClick(e, body, cAnswer) {
-
-    if (this.state.answer_id !== body) {
-      this.setState({
-        answer_id: body,
-        answerHelpfulnessCount: 1
-      })
-    }
-  }
 
   updateQuestions () {
 
@@ -412,8 +384,6 @@ class QuestionsNAnswers extends React.Component {
     return (
       <ClickTracker>
         {trackerProps => (
-        // <AllClicks>
-        //   {allClicksProps => (
             <div className={`main container`}>
 
               <div className='title container row'>
@@ -468,7 +438,7 @@ class QuestionsNAnswers extends React.Component {
                           recordClick={trackerProps.recordClick}
                           key={index}
                           addToReported={this.addToReported}
-                          helpfulAnswerClick={this.helpfulAnswerClick}
+                          helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
                           helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
                           currentI={index}
                           showQuestions={this.showQuestions}
@@ -497,8 +467,6 @@ class QuestionsNAnswers extends React.Component {
               </div>
 
             </div>
-        //   )}
-        // </AllClicks>
         )}
       </ClickTracker>
     )

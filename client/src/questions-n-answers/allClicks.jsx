@@ -11,6 +11,10 @@ class AllClicks extends React.Component {
       showQuestionButton: false,
       helpfulQuestionCount: 0,
       question_id: null,
+      answerId: null,
+      helpfulAnswerCount: 0,
+      clickedHQuestions: [],
+      clickedHAnswers:[]
 
 
 
@@ -18,6 +22,8 @@ class AllClicks extends React.Component {
     this.moreAnsweredQorLoadMoreAnswers = this.moreAnsweredQorLoadMoreAnswers.bind(this)
     this.loadNewQuestions = this.loadNewQuestions.bind(this)
     this.helpfulQuestionIndicatorClick = this.helpfulQuestionIndicatorClick.bind(this)
+    this.helpfulAnswerIndicatorClick = this.helpfulAnswerIndicatorClick.bind(this)
+    this.resetQuestionCount =  this.resetQuestionCount.bind(this)
 
   }
 
@@ -47,14 +53,38 @@ class AllClicks extends React.Component {
     })
 
   }
-  helpfulQuestionIndicatorClick(questionId) {
-    if (this.state.question_id !== questionId) {
+  helpfulQuestionIndicatorClick(questionId, index) {
+
+    if (!this.state.clickedHQuestions.includes(questionId)) {
+      let copy = this.state.clickedHQuestions.slice()
+      copy.push(questionId)
       this.setState({
         helpfulQuestionCount: 1,
-        question_id: questionId
+        question_id: questionId,
+        clickedHQuestions:copy
       })
     }
 
+
+  }
+  helpfulAnswerIndicatorClick(answerId) {
+
+    if (!this.state.clickedHAnswers.includes(answerId)) {
+      let copy = this.state.clickedHAnswers.slice()
+      copy.push(answerId)
+        this.setState({
+          helpfulAnswerCount: 1,
+          answerId: answerId,
+          clickedHAnswers: copy
+        })
+
+    }
+  }
+
+  resetQuestionCount() {
+    this.setState({
+      helpfulQuestionCount:0
+    })
   }
 
 
@@ -66,10 +96,13 @@ class AllClicks extends React.Component {
       showQuestionButton: this.state.showQuestionButton,
       helpfulQuestionCount: this.state.helpfulQuestionCount,
       question_id: this.state.question_id,
+      answerId: this.state.answerId,
+      helpfulAnswerCount: this.state.helpfulAnswerCount,
       loadMoreAnsOrQ: this.moreAnsweredQorLoadMoreAnswers,
       loadNewQuestions: this.loadNewQuestions,
-      helpfulQuestionIndicatorClick: this.helpfulQuestionIndicatorClick
-
+      helpfulQuestionIndicatorClick: this.helpfulQuestionIndicatorClick,
+      helpfulAnswerIndicatorClick: this.helpfulAnswerIndicatorClick,
+      resetQuestionCount: this.resetQuestionCount
     }
 
     return typeof this.props.children === 'function'

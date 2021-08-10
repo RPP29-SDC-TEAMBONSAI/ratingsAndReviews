@@ -108,7 +108,11 @@ class App extends React.Component {
             {allClicksProps => (
               <QuestionsNAnswers
                 allClicksProps={allClicksProps}
+                helpfulQuestionCount={allClicksProps.helpfulQuestionCount}
+                question_id={allClicksProps.question_id}
                 product_id={this.state.product_id}
+                answerId={allClicksProps.answerId}
+                helpfulAnswerCount={allClicksProps.helpfulAnswerCount}
                 data={this.state.qNa}
                 QuestionSavedData ={this.state.savedQnA}
                 currentItemName={this.state.currentItemName}
