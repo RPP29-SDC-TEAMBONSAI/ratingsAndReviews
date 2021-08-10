@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 const AddAnswer = (props) => {
-
   return (
     <div className='helpfulQuestion container'>
       <div className='helpulQuestion display'>
@@ -11,7 +10,6 @@ const AddAnswer = (props) => {
         <p className='helpfulCount'>({props.data ? props.data : 0})</p>
         <p className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(props.questionName, props.question_id), props.recordClick(e)}}>Add Answer</p>
       </div>
-
     </div>
   )
 }

@@ -27,23 +27,23 @@ class UserAnswer extends React.Component {
     this.checkbox = this.checkbox.bind(this)
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
 
+    if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
       let newPhotos = prevState.photos.concat(this.state.photos.slice())
+
       if (!this.state.photos.length) {
+
         this.setState({
           photos: []
         })
       } else {
-      this.setState({
-        photos: newPhotos,
-        checked: false
-      })
+
+        this.setState({
+          photos: newPhotos,
+          checked: false
+        })
+      }
     }
-
-    }
-
-
   }
 
 
@@ -209,10 +209,13 @@ class UserAnswer extends React.Component {
 
 UserAnswer.propTypes = {
   recordClick:propTypes.func.isRequired,
-  question_id: propTypes.number.isRequired,
+
   updateAnswers: propTypes.func.isRequired,
   currentItemName: propTypes.string.isRequired,
   currentQuestion: propTypes.string.isRequired,
+  answerFormDisplayClass: propTypes.any,
+  closeAnswerForm: propTypes.func.isRequired,
+  aFormQuestion_id: propTypes.number.isRequired
 }
 
 export default UserAnswer;

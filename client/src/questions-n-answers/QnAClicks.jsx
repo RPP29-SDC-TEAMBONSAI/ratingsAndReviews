@@ -32,7 +32,6 @@ class QnAClicks extends React.Component {
     this.closeAnswerForm = this.closeAnswerForm.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
     this.closeQuestionForm = this.closeQuestionForm.bind(this)
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,7 +43,6 @@ class QnAClicks extends React.Component {
     }
   }
 
-
   moreAnsweredQorLoadMoreAnswers(e) {
     if (e.target.className === 'loadMoreAnswersButton') {
       this.setState({
@@ -52,6 +50,7 @@ class QnAClicks extends React.Component {
       })
     }
   }
+
   loadNewQuestions(questionLength){
     let count = this.state.questionClickCount + 2
     let lastI = questionLength
@@ -59,10 +58,9 @@ class QnAClicks extends React.Component {
       questionClickCount: count,
       lastIndex: lastI
     })
-
   }
-  helpfulQuestionIndicatorClick(questionId, index) {
 
+  helpfulQuestionIndicatorClick(questionId, index) {
     if (!this.state.clickedHQuestions.includes(questionId)) {
       let copy = this.state.clickedHQuestions.slice()
       copy.push(questionId)
@@ -72,11 +70,9 @@ class QnAClicks extends React.Component {
         clickedHQuestions:copy
       })
     }
-
-
   }
-  helpfulAnswerIndicatorClick(answerId) {
 
+  helpfulAnswerIndicatorClick(answerId) {
     if (!this.state.clickedHAnswers.includes(answerId)) {
       let copy = this.state.clickedHAnswers.slice()
       copy.push(answerId)
@@ -85,9 +81,9 @@ class QnAClicks extends React.Component {
           answerId: answerId,
           clickedHAnswers: copy
         })
-
     }
   }
+
   addAnswerOnClick(currentQ, currentQId) {
     console.log(currentQId)
     this.setState({
@@ -97,17 +93,20 @@ class QnAClicks extends React.Component {
     })
 
   }
+
   closeAnswerForm() {
     this.setState({
       answerFormDisplayClass:'aFormHide'
     })
   }
+
   addQuestion() {
     this.setState({
       QuestionFormDisplayClass: 'qForm'
     })
 
   }
+
   closeQuestionForm() {
     this.setState({
       QuestionFormDisplayClass: 'qFormHide'
@@ -119,7 +118,6 @@ class QnAClicks extends React.Component {
       helpfulQuestionCount:0
     })
   }
-
 
   render () {
     const renderProps = {
@@ -150,7 +148,6 @@ class QnAClicks extends React.Component {
     ? this.props.children(renderProps)
     : this.props.children
   }
-
 }
 
 QnAClicks.propTypes = {

@@ -35,7 +35,6 @@ class App extends React.Component {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     const product = params.product_id || this.state.product_id;
-    console.log(params)
     this.getStateData(product);
   }
 
@@ -67,9 +66,7 @@ class App extends React.Component {
 
     ])
       .then((results) => {
-        console.log(results[2].data)
         this.setState({
-
           productInformation: results[1].data,
           styles: results[2].data,
           relatedProducts: results[3].data,

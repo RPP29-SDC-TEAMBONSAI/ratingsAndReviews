@@ -18,7 +18,6 @@ class QuestionsNAnswers extends React.Component {
       showQuestionButton: false,
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
-      qFormShowOrHide: 'qFormHide',
       reported: []
     };
 
@@ -34,7 +33,6 @@ class QuestionsNAnswers extends React.Component {
   componentDidMount() {
     getReportedAns()
       .then(data => {
-
         let answerIds = data.data
         let copy = this.props.data.slice()
         let sortedData= this.filterAnswersNQuestions(copy)
@@ -49,79 +47,41 @@ class QuestionsNAnswers extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-
     let copy = this.props.data.slice()
-    if (prevProps.product_id !== this.props.product_id) {
-      this.setState({
-        questionClickCount:1
-      })
-    }
 
     if (prevProps.data.length !== this.props.data.length) {
-
       let sortedData = this.filterAnswersNQuestions(copy)
+      let answerIds = this.state.reported.slice()
+      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
-
-      let answerIds = this.state.reported
-
-       sortedData[1].forEach((answer) => {
-         answer.forEach(obj => {
-
-           if (answerIds.includes(obj.id)) {
-             obj.report = 'reported'
-           } else {
-             obj.report = 'report'
-           }
-
-         })
-
-        this.setState({
-          questions: sortedData[0],
-          answers:sortedData[1],
-
-        })
+      this.setState({
+        questions: sortedData[0],
+        answers:newAnswers,
       })
     }
 
     if (prevState.qSearchCharCount !== this.state.qSearchCharCount) {
-
       if (this.state.qSearchCharCount >= 3) {
         this.searchFilter(this.state.questionSearchVal)
       }
     }
-    if (this.state.question_id !== prevState.question_id) {
-
-      this.setState({
-        question_id:this.state.question_id
-      })
-    }
     //new question helpfulness
     if (prevProps.allClicksProps.question_id !== this.props.allClicksProps.question_id) {
-
+      // console.log(this.props.allClicksProps.question_id)
       updateHelpfulness(this.props.allClicksProps.question_id)
         .then(data=>
           questions(this.props.product_id)
             .then(newData => {
               let sortedData = this.filterAnswersNQuestions(newData.data)
-              let answerIds = this.state.reported
-
-              sortedData[1].forEach((answer) => {
-                answer.forEach(obj => {
-                  if (answerIds.includes(obj.id)) {
-
-                    obj.report = 'reported'
-                  } else {
-                    obj.report = 'report'
-                  }
-                })
+              let answerIds = this.state.reported.slice()
+              let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
               this.setState({
                 questions: sortedData[0],
-                answers: sortedData[1],
+                answers: newAnswers,
                 reported: answerIds,
               })
             })
-          })
         )
     }
     //new answer helpfulness
@@ -130,28 +90,14 @@ class QuestionsNAnswers extends React.Component {
         .then(data => {
           questions(this.props.product_id)
             .then(newData => {
-
               let sortedData = this.filterAnswersNQuestions(newData.data)
-
               let answerIds = this.state.reported.slice()
+              let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
-              sortedData[1].forEach((answer) => {
-
-                answer.forEach(obj => {
-
-                  if (answerIds.includes(obj.id)) {
-                    obj.report = 'reported'
-                  } else {
-                    obj.report = 'report'
-                  }
-                })
-
-                this.setState({
-                  questions: sortedData[0],
-                  answers: sortedData[1],
-                  reported: answerIds
-
-                })
+              this.setState({
+                questions: sortedData[0],
+                answers: newAnswers,
+                reported: answerIds
               })
             })
         })
@@ -160,73 +106,35 @@ class QuestionsNAnswers extends React.Component {
     if (prevState.questions.length !== this.state.questions.length) {
       let copy = this.props.data.slice()
       let sortedData= this.filterAnswersNQuestions(copy)
+      let answerIds = this.state.reported.slice()
+      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
-      let answerIds = this.state.reported
-      sortedData[1].forEach((answer) => {
-
-        answer.forEach(obj => {
-
-          if (answerIds.includes(obj.id)) {
-            obj.report = 'reported'
-          } else {
-            obj.report = 'report'
-          }
-        })
-
-        this.setState({
-          questions: sortedData[0],
-          answers: sortedData[1],
-          reported: answerIds
-        })
+      this.setState({
+        questions: sortedData[0],
+        answers: newAnswers,
+        reported: answerIds
       })
     }
 
-
-
-
     if(prevState.answers.length !== this.state.answers.length) {
       let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
-
       let answerIds = this.state.answers.slice()
+      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
-      sortedData[1].forEach((answer) => {
-
-        answer.forEach(obj => {
-
-          if (answerIds.includes(obj.id)) {
-            obj.report = 'reported'
-          } else {
-            obj.report = 'report'
-          }
-        })
-
-        this.setState({
-
-          answers: sortedData[1],
-          questions: sortedData[0]
-
-        })
+      this.setState({
+        answers: newAnswers,
+        questions: sortedData[0]
       })
     }
 
     if (prevState.reported.length !== this.state.reported.length) {
-
       let answerIds = this.state.reported.slice()
       let answers = this.state.answers.slice()
-
-      answers.forEach((answer) => {
-
-        answer.forEach(obj => {
-
-          if (answerIds.includes(obj.id)) {
-            obj.report = 'reported'
-          }
-        })
-      })
+      let newAnswers = helper.addReportedProp(answers, answerIds)
 
       this.setState({
-        reported: this.state.reported,
-        answers: answers
+        reported: this.state.reported.slice(),
+        answers: newAnswers
       })
     }
   }
@@ -235,7 +143,6 @@ class QuestionsNAnswers extends React.Component {
     let filtered = helper.filterAll(currentQuestions)
     return filtered
   }
-
 
   searchFilter(searchValue) {
     let copy = this.state.questions.slice()
@@ -262,8 +169,6 @@ class QuestionsNAnswers extends React.Component {
       }
   }
 
-
-
   showQuestions(currentCount, index) {
     let show = helper.showQuestionsClass(currentCount, index);
     return show
@@ -278,73 +183,50 @@ class QuestionsNAnswers extends React.Component {
     })
   }
 
-
   updateQuestions () {
-    console.log('hi')
-
     return questions(this.props.product_id)
       .then(data => {
         let questions = data.data
         let filtered = helper.filterAll(questions);
 
-
         this.setState({
           questions: filtered[0],
           answers: filtered[1],
-
-
         })
       })
   }
-
-
-
 
   updateAnswers() {
     questions(this.props.product_id)
       .then(currentQuestions => {
-
         let sortedData= helper.filterAll(currentQuestions.data)
-        let answerIds = this.state.reported
+        let answerIds = this.state.reported.slice()
+        let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
-        sortedData[1].forEach((answer) => {
-
-          answer.forEach(obj => {
-
-            if (answerIds.includes(obj.id)) {
-              obj.report = 'reported'
-            } else {
-              obj.report = 'report'
-            }
-          })
-
-          this.setState({
-            questions: sortedData[0],
-            answers: sortedData[1],
-            aFormShowOrHide: 'aFormHide',
-            reported: answerIds
-          })
+        this.setState({
+          questions: sortedData[0],
+          answers: newAnswers,
+          aFormShowOrHide: 'aFormHide',
+          reported: answerIds
         })
       })
   }
 
- addToReported(e, ansId) {
+  addToReported(e, ansId) {
    addToReported(ansId)
      .then(data => {
        this.setState({
          reported: data
        })
      })
- }
+  }
 
   render () {
-
-
 
     return (
       <ClickTracker>
         {trackerProps => (
-            <div className={`main container`}>
+            <div className='mainQnA container'>
 
               <div className='title container row'>
                 <h3 className='componentTitle'>Questions & Answers</h3>
@@ -360,7 +242,6 @@ class QuestionsNAnswers extends React.Component {
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateQuestions={this.updateQuestions}
-                  qFormShowOrHide={this.state.qFormShowOrHide}
                   addQuestion={this.props.allClicksProps.addQuestion}
                   product_id={this.props.product_id}
                   QuestionFormDisplayClass={this.props.allClicksProps.QuestionFormDisplayClass}
@@ -372,7 +253,6 @@ class QuestionsNAnswers extends React.Component {
                 <UserAnswer
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
-                  question_id={this.props.allClicksProps.question_id}
                   updateAnswers={this.updateAnswers}
                   currentQuestion={this.props.allClicksProps.currentQuestion}
                   answerFormDisplayClass={this.props.allClicksProps.answerFormDisplayClass}
@@ -384,33 +264,34 @@ class QuestionsNAnswers extends React.Component {
               <div className='questionList scroll container'>
                 <div className={''}>
                   {this.state.questions.map((question, index) => {
-                  let currentClass;
-                  let show = false;
-                  if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
-                    show = true
-                  }
-                  if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
-                    show = true
+                    let show = false;
 
-                  }
-                  return <QuestionsContainer
-                          answerState={this.props.allClicksProps.loadAnswerState}
-                          loadAnswerState={this.props.allClicksProps.loadAnswerState}
-                          recordClick={trackerProps.recordClick}
-                          key={index}
-                          addToReported={this.addToReported}
-                          helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
-                          helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
-                          currentI={index}
-                          showQuestions={this.showQuestions}
-                          questionClickCount={this.props.allClicksProps.questionClickCount}
-                          answers={this.state.answers[index]}
-                          question={question}
-                          addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
-                          question_id={question.question_id}
-                          show={show}
-                        />
-                  })}
+                    if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
+                      show = true
+                    }
+
+                    if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
+                      show = true
+                    }
+
+                    return (
+                      <QuestionsContainer
+                            answerState={this.props.allClicksProps.loadAnswerState}
+                            recordClick={trackerProps.recordClick}
+                            key={index}
+                            addToReported={this.addToReported}
+                            helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
+                            helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
+                            currentI={index}
+                            showQuestions={this.showQuestions}
+                            questionClickCount={this.props.allClicksProps.questionClickCount}
+                            answers={this.state.answers[index]}
+                            question={question}
+                            addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
+                            question_id={question.question_id}
+                            show={show}
+                      />
+                  )})}
                 </div>
               </div>
               <div className='questionListButton container'>
@@ -439,6 +320,7 @@ QuestionsNAnswers.propTypes = {
   QuestionSavedData: propTypes.array.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
+  allClicksProps: propTypes.any
 }
 
 export default QuestionsNAnswers;
