@@ -114,8 +114,22 @@ const helper = {
       return starFilters.includes(review.rating);
     })
   },
-  auditReviews: (review) => {
-    return true;
+  validateEmail: (email) => {
+    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return regex.test(String(email).toLowerCase());
+  },
+  auditReviews: (review, chars) => {
+    let { rating, summary, body, recommend, name, email, characteristics } = review;
+    let warnings = '';
+    if (rating === 0) warnings += 'Star Rating not selected\n';
+    if (recommend === '') warnings += 'Recommend not selected\n';
+    if (body.length < 49) warnings += 'Review body must be 50 characters or longer\n';
+    if (body.length > 999) warnings += 'Review body is longer than maximum characters allowed of 1000'
+    if (name === '') warnings += 'Nickname not entered\n';
+    if (!helper.validateEmail(email)) warnings += 'Email invalid\n';
+    if (Object.keys(characteristics).length !== Object.keys(chars).length) warnings += 'One or more factors is not selected\n';
+    return warnings;
   }
 }
 
