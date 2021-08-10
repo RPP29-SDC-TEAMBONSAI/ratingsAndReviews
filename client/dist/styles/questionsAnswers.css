@@ -97,7 +97,27 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.6);
 }
+.closeAnswerHide {
+  display: none;
+}
+.closeAnswer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 12.5%;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50em;
+  background-color: lightgray;
+  z-index: 1;
 
+}
+.closeAnswer:hover{
+  background-color: white;
+  cursor: pointer;
+}
 .aFormData {
   position: fixed;
   display: flex;

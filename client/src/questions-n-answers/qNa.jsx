@@ -31,7 +31,6 @@ class QuestionsNAnswers extends React.Component {
     this.showQuestions = this.showQuestions.bind(this)
 
 
-    this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
 
     this.updateQuestions = this.updateQuestions.bind(this)
@@ -348,17 +347,6 @@ class QuestionsNAnswers extends React.Component {
       })
   }
 
-
- addAnswerOnClick(e, arr) {
-
-   this.setState({
-    aFormShowOrHide: 'aForm',
-    currentQuestion: arr[0],
-    question_id: arr[1]
-
-   })
- }
-
  addToReported(e, ansId) {
    addToReported(ansId)
      .then(data => {
@@ -400,15 +388,19 @@ class QuestionsNAnswers extends React.Component {
                 />
 
               </div>
-              <div className={this.state.aFormShowOrHide}>
+              <div className={this.props.allClicksProps.answerFormDisplayClass}>
+
                 <UserAnswer
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   question_id={this.state.question_id}
                   updateAnswers={this.updateAnswers}
-
-                  currentQuestion={this.state.currentQuestion}
+                  currentQuestion={this.props.allClicksProps.currentQuestion}
+                  answerFormDisplayClass={this.props.allClicksProps.answerFormDisplayClass}
+                  closeAnswerForm={this.props.allClicksProps.closeAnswerForm}
                 />
+
+
 
               </div>
               <div className='questionList scroll container'>
@@ -436,7 +428,7 @@ class QuestionsNAnswers extends React.Component {
                           questionClickCount={this.props.allClicksProps.questionClickCount}
                           answers={this.state.answers[index]}
                           question={question}
-                          addAnswerOnClick={this.addAnswerOnClick}
+                          addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
                           question_id={question.question_id}
                           show={show}
                         />

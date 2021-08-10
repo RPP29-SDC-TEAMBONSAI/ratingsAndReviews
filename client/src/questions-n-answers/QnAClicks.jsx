@@ -14,16 +14,20 @@ class QnAClicks extends React.Component {
       answerId: null,
       helpfulAnswerCount: 0,
       clickedHQuestions: [],
-      clickedHAnswers:[]
-
-
+      clickedHAnswers:[],
+      answerFormDisplayClass: 'aFormHide',
+      currentQuestion: '',
+      aFormQuestion_id: null
 
     }
+
     this.moreAnsweredQorLoadMoreAnswers = this.moreAnsweredQorLoadMoreAnswers.bind(this)
     this.loadNewQuestions = this.loadNewQuestions.bind(this)
     this.helpfulQuestionIndicatorClick = this.helpfulQuestionIndicatorClick.bind(this)
     this.helpfulAnswerIndicatorClick = this.helpfulAnswerIndicatorClick.bind(this)
     this.resetQuestionCount =  this.resetQuestionCount.bind(this)
+    this.addAnswerOnClick = this.addAnswerOnClick.bind(this)
+    this.closeAnswerForm = this.closeAnswerForm.bind(this)
 
   }
 
@@ -80,6 +84,19 @@ class QnAClicks extends React.Component {
 
     }
   }
+  addAnswerOnClick(currentQ, currentQId) {
+    this.setState({
+      answerFormDisplayClass: 'aForm',
+      currentQuestion: currentQ,
+      aFormQuestion_id: currentQId
+    })
+
+  }
+  closeAnswerForm() {
+    this.setState({
+      answerFormDisplayClass:'aFormHide'
+    })
+  }
 
   resetQuestionCount() {
     this.setState({
@@ -98,11 +115,16 @@ class QnAClicks extends React.Component {
       question_id: this.state.question_id,
       answerId: this.state.answerId,
       helpfulAnswerCount: this.state.helpfulAnswerCount,
+      answerFormDisplayClass: this.state.answerFormDisplayClass,
+      currentQuestion: this.state.currentQuestion,
+      aFormQuestion_id: this.state.aFormQuestion_id,
+      closeAnswerForm: this.closeAnswerForm,
       loadMoreAnsOrQ: this.moreAnsweredQorLoadMoreAnswers,
       loadNewQuestions: this.loadNewQuestions,
       helpfulQuestionIndicatorClick: this.helpfulQuestionIndicatorClick,
       helpfulAnswerIndicatorClick: this.helpfulAnswerIndicatorClick,
-      resetQuestionCount: this.resetQuestionCount
+      resetQuestionCount: this.resetQuestionCount,
+      addAnswerOnClick: this.addAnswerOnClick
     }
 
     return typeof this.props.children === 'function'

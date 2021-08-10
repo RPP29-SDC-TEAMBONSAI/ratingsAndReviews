@@ -148,9 +148,13 @@ class UserAnswer extends React.Component {
       uploadClass = 'uploadButtonHide'
     }
     return (
-      <form  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
+      <div  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
+        <div>
+          <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={this.props.closeAnswerForm}>x</h1>
+        </div>
 
-        <div  className=''>
+        <div  className='currentQuestion'>
+
           <h3 className=''> {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
         </div>
 
@@ -193,8 +197,13 @@ class UserAnswer extends React.Component {
            return <AnswerImages key={index} photo={photo}/>
          })}
        </div>
+       <div>
 
-      </form>
+       </div>
+
+       {/*  */}
+      </div>
+
 
     )
   }
