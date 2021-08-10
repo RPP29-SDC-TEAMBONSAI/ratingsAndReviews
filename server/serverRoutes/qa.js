@@ -161,6 +161,7 @@ module.exports = {
     }
 
     postAll().then(data => {
+      console.log('posted QA interactions, sending response...')
       //once data is received we know request is complete, send 200 to client
       res.send(200)
     })
