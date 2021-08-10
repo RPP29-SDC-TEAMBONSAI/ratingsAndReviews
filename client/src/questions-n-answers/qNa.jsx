@@ -412,8 +412,8 @@ class QuestionsNAnswers extends React.Component {
     return (
       <ClickTracker>
         {trackerProps => (
-        <AllClicks>
-          {allClicksProps => (
+        // <AllClicks>
+        //   {allClicksProps => (
             <div className={`main container`}>
 
               <div className='title container row'>
@@ -455,24 +455,24 @@ class QuestionsNAnswers extends React.Component {
                   {this.state.questions.map((question, index) => {
                   let currentClass;
                   let show = false;
-                  if (allClicksProps.questionClickCount === 1 && index <= allClicksProps.questionClickCount) {
+                  if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
                     show = true
                   }
-                  if (allClicksProps.questionClickCount >= 3 && index <= allClicksProps.questionClickCount) {
+                  if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
                     show = true
 
                   }
                   return <QuestionsContainer
-                          answerState={allClicksProps.loadAnswerState}
-                          loadAnswerState={allClicksProps.loadAnswerState}
+                          answerState={this.props.allClicksProps.loadAnswerState}
+                          loadAnswerState={this.props.allClicksProps.loadAnswerState}
                           recordClick={trackerProps.recordClick}
                           key={index}
                           addToReported={this.addToReported}
                           helpfulAnswerClick={this.helpfulAnswerClick}
-                          helpfulQuestionClick={this.helpfulQuestionClick}
+                          helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
                           currentI={index}
                           showQuestions={this.showQuestions}
-                          questionClickCount={allClicksProps.questionClickCount}
+                          questionClickCount={this.props.allClicksProps.questionClickCount}
                           answers={this.state.answers[index]}
                           question={question}
                           addAnswerOnClick={this.addAnswerOnClick}
@@ -485,20 +485,20 @@ class QuestionsNAnswers extends React.Component {
               <div className='questionListButton container'>
                 <div className='lButton'>
                   <h3 className={'loadMoreAnswersButton'}
-                      onClick={(e) => {trackerProps.recordClick(e), allClicksProps.loadMoreAnsOrQ(e)}}>{allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
+                      onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.loadMoreAnsOrQ(e)}}>{this.props.allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
                   </h3>
                 </div>
                 <div className='bottomButtons'>
-                  <h3 className={allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
-                          onClick={(e) => {allClicksProps.loadNewQuestions(this.state.questions.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
+                  <h3 className={this.props.allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
+                          onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.questions.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
                   <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.addQuestion()}}>ADD A QUESTION +</h3>
                 </div>
               </div>
 
             </div>
-          )}
-        </AllClicks>
+        //   )}
+        // </AllClicks>
         )}
       </ClickTracker>
     )

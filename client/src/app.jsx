@@ -5,7 +5,7 @@ import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProduc
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import propTypes from 'prop-types';
-
+import AllClicks from './questions-n-answers/allClicks.jsx';
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
 import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
@@ -104,11 +104,17 @@ class App extends React.Component {
           <RelatedProducts
             state={this.state}
             handleProductChange={this.handleProductChange}/>
-          <QuestionsNAnswers
-            product_id={this.state.product_id}
-            data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}
-            currentItemName={this.state.currentItemName}/>
+          <AllClicks>
+            {allClicksProps => (
+              <QuestionsNAnswers
+                allClicksProps={allClicksProps}
+                product_id={this.state.product_id}
+                data={this.state.qNa}
+                QuestionSavedData ={this.state.savedQnA}
+                currentItemName={this.state.currentItemName}
+              />
+            )}
+          </AllClicks>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>

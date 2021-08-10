@@ -17,6 +17,7 @@ class AllClicks extends React.Component {
     }
     this.moreAnsweredQorLoadMoreAnswers = this.moreAnsweredQorLoadMoreAnswers.bind(this)
     this.loadNewQuestions = this.loadNewQuestions.bind(this)
+    this.helpfulQuestionIndicatorClick = this.helpfulQuestionIndicatorClick.bind(this)
 
   }
 
@@ -46,6 +47,15 @@ class AllClicks extends React.Component {
     })
 
   }
+  helpfulQuestionIndicatorClick(questionId) {
+    if (this.state.question_id !== questionId) {
+      this.setState({
+        helpfulQuestionCount: 1,
+        question_id: questionId
+      })
+    }
+
+  }
 
 
   render () {
@@ -54,8 +64,11 @@ class AllClicks extends React.Component {
       questionClickCount: this.state.questionClickCount,
       lastIndex: this.state.lastIndex,
       showQuestionButton: this.state.showQuestionButton,
+      helpfulQuestionCount: this.state.helpfulQuestionCount,
+      question_id: this.state.question_id,
       loadMoreAnsOrQ: this.moreAnsweredQorLoadMoreAnswers,
       loadNewQuestions: this.loadNewQuestions,
+      helpfulQuestionIndicatorClick: this.helpfulQuestionIndicatorClick
 
     }
 
