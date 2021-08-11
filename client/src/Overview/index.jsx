@@ -4,7 +4,8 @@ import ProductInfo from "./components/ProductInfo.jsx";
 import AddToCart from "./components/AddToCart.jsx";
 import StyleSelector from "./components/StyleSelector.jsx";
 import ImageGallery from "./components/ImageGallery.jsx";
-import ExpandedView from "./components/ExpandedView.jsx"
+import ExpandedView from "./components/ExpandedView.jsx";
+import $ from 'jquery';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class Overview extends React.Component {
       bag: [],
       mainPhoto: 0,
       firstPhotoInPhotoSelectorIndex: 0,
-      expandedView: false
+      expandedView: false,
+      zoomView: false
     };
     this.changeAvailableQuantity = this.changeAvailableQuantity.bind(this);
     this.addToBag = this.addToBag.bind(this);
@@ -30,6 +32,9 @@ class Overview extends React.Component {
     this.upArrow = this.upArrow.bind(this);
     this.downArrow = this.downArrow.bind(this);
     this.expandedView = this.expandedView.bind(this);
+    this.expandedClassName = this.expandedClassName.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.zoomView = this.zoomView.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -110,6 +115,7 @@ class Overview extends React.Component {
   addToBag() {
     if (this.state.sizeSelected.length === 0) {
       alert("Please Select Size");
+    console.log(document.getElementsByClassName('selectSize'))
     } else {
       let item = {
         product_id: this.props.state.product_id,
@@ -176,11 +182,79 @@ expandedView() {
 
 }
 
+handleMouseMove(e) {
+  let magnifying_area = document.getElementsByClassName('expanded-view-div')[0];
+  let magnifying_img = document.getElementsByClassName('expanded-view-main-photo')[0];
+  let total_area = document.getElementsByClassName('overview-expanded')[0]
+
+
+  let clientX = e.pageX - total_area.offsetWidth/2;
+  let clientY = e.pageY - total_area.offsetHeight/2;
+
+  let mWidth = magnifying_area.offsetWidth
+  let mHeight = magnifying_area.offsetHeight
+
+
+
+  let X = ((clientX / mWidth) * 200) * -1;
+  let Y = ((clientY / mHeight) * 200) * -1;
+
+  if (this.state.zoomView) {
+    magnifying_img.style.transform = 'translate(' + X + '%,' + Y + '%) scale(2.5)'
+  } else {
+    magnifying_img.style.transform = 'translate(' + 0 + '%,' + 0 + '%) scale(1)'
+
+  }
+
+}
+
+zoomView () {
+  let magnifying_img = document.getElementsByClassName('expanded-view-main-photo')[0];
+  if (this.state.zoomView) {
+    this.setState({
+      zoomView: false
+    })
+    magnifying_img.style.transform = 'translate(' + 0 + '%,' + 0 + '%) scale(1)'
+    magnifying_img.style.cursor = 'crosshair'
+  } else {
+    this.setState({
+      zoomView: true
+    })
+    magnifying_img.style.transform = 'translate(' + 0 + '%,' + 0 + '%) scale(2.5)'
+    magnifying_img.style.cursor = 'zoom-out'
+
+
+  }
+
+
+}
+
+
+expandedClassName() {
+  return  (this.state.expandedView ? "overview-expanded" : "overview")
+}
+
   render() {
 
     return (
       <div>
-      <div className="overview" style={{display: this.state.expandedView ? "none" : "flex"}}>
+        <div className = "overview-expanded" onMouseMove = {this.handleMouseMove} style={{display: this.state.expandedView ? "flex" : "none"}}>
+
+
+      <ExpandedView
+      state={this.props.state}
+        OverviewState={this.state}
+        changeMainPhoto={this.changeMainPhoto}
+        mainImageLeftArrow = {this.mainImageLeftArrow}
+        mainImageRightArrow = {this.mainImageRightArrow}
+        upArrow = {this.upArrow}
+        downArrow = {this.downArrow}
+        expandedView = {this.expandedView}
+        handleMouseMove = {this.handleMouseMove}
+        zoomView = {this.zoomView}
+        />
+      </div>
+      <div className = "overview">
         <div className="column-one">
           <ImageGallery
             state={this.props.state}
@@ -208,17 +282,6 @@ expandedView() {
             changeSelectedQuantity={this.changeSelectedQuantity}
           />
         </div>
-      </div>
-      <div className = "expanded-view-div" style={{display: this.state.expandedView ? "flex" : "none"}}>
-      <ExpandedView state={this.props.state}
-        OverviewState={this.state}
-        changeMainPhoto={this.changeMainPhoto}
-        mainImageLeftArrow = {this.mainImageLeftArrow}
-        mainImageRightArrow = {this.mainImageRightArrow}
-        upArrow = {this.upArrow}
-        downArrow = {this.downArrow}
-        expandedView = {this.expandedView}/>
-
       </div>
       </div>
     );
