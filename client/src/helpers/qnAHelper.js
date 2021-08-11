@@ -251,11 +251,11 @@ module.exports = {
   },
 
   qListScrollClass (count) {
-    let newClass;
+    let show;
     if (count > 1) {
-      newClass = 'questionList scroll container'
+      show = true
     }
-    return newClass
+    return show
 
   },
 
@@ -295,25 +295,20 @@ module.exports = {
 
   },
 
-  answerScrollClass(count){
-    let newClass;
-
-    if (count % 2 !== 0) {
-      newClass = 'list scroll container'
-    }
-
-    return newClass
-  },
-
   showQuestionsClass(clickCount, index) {
-
-    let newClass;
-    if (clickCount % 2 !== 0) {
-      if (index <= clickCount) {
-        newClass = 'questionText'
-      }
+    let show= false;
+    if (index <= clickCount) {
+      show=true
     }
-    return newClass
+    return show
+
+    // let newClass;
+    // if (clickCount % 2 !== 0) {
+    //   if (index <= clickCount) {
+    //     newClass = 'questionText'
+    //   }
+    // }
+    // return newClass
   },
 
   showReportedClass(answers, ids) {

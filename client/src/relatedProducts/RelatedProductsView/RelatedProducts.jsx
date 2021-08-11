@@ -2,13 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
+import RelatedProductsModal from './RelatedProductsModal.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
 import axios from 'axios';
-
 const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
-
 
 
 export default class RelatedProducts extends React.Component {
@@ -19,286 +18,204 @@ export default class RelatedProducts extends React.Component {
       relatedProductsStyles: [],
       yourOutfitItems:[],
       allPropsObj: [],
-      outfitPropsObj: [],
-      // rpLoaded: true,
-      // yoLoaded: true,
-      // loaded:true,
-
+      outfitPropsObj: {},
+      modalShow: false,
+      clickedProductInfo: {},
+      modifiedCurrent: {},
+      features: []
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
-    this.getRelatedStateData = this.getRelatedStateData.bind(this);
-    this.getOutfitData = this.getOutfitData.bind(this);
+    this.handleCompareItems = this.handleCompareItems.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.product = this.product.bind(this)
     this.style = this.style.bind(this)
     this.outFit = this.outFit.bind(this)
   }
 
   componentDidMount () {
-    //(products request)
     let product = this.product()
-
-    //(styles request)
     let getStyle = this.style()
-
-    //(outfit request)
     let outFitData = this.outFit()
-    // let outFitData = new Promise((resolve, reject) => {
-    //   axios.get(api + `products/${this.props.state.product_id}/styles`, {
-    //     headers: {
-    //       'Authorization': TOKEN
-    //     }
-    //   })
-    //   .then((styleData)=> {
-    //     let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-    //     resolve(outfitPropsObj);
-    //   })
-    // })
-    //gather the promises for everything in a single then
+
     product.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-          // //use your helper to get correct style data
+          let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
 
-          let resultStyleWithId=[];
-          data.forEach((product, pi) => {
-            styleData.forEach((style, si) => {
-              if (pi === si) {
-              resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
-              }
-            })
-          })
-          // console.log(JSON.stringify(resultStyleWithId))
-          //use your helper to create allProps obj
-          // console.log(resultStyleWithId)
-          // console.log(resultStyleWithId, "🔥")
-          console.log(data)
+          let values = [];
+          let keys = Object.keys(localStorage);
+          let i = keys.length;
+          while ( i-- ) {
+            values.push( JSON.parse(localStorage.getItem(keys[i])) );
+            }
 
-          let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
-          // console.log(allPropsObj)
-          //set state all at once 🤙
           this.setState({
-            relatedProducts: data,
-            relatedProductsStyles: resultStyleWithId,
-            allPropsObj:allPropsObj,
-            // rpLoaded: true,
-            outfitPropsObj: fitData,
-            // yoLoaded: true
+           relatedProducts: data,
+           relatedProductsStyles: styleData,
+           allPropsObj:allPropsObj,
+           outfitPropsObj: fitData,
+           yourOutfitItems: values
           })
         })
       })
     })
   }
+
 
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.state.product_id !== this.props.state.product_id) {
-      // this.getRelatedStateData();
       let product = this.product()
       let getStyle = this.style()
       let outFitData = this.outFit()
+
       product.then(data => {
         getStyle.then(styleData => {
           outFitData.then(fitData => {
-            // //use your helper to get correct style data
-
-            let resultStyleWithId=[];
-            data.forEach((product, pi) => {
-              styleData.forEach((style, si) => {
-                if (pi === si) {
-                resultStyleWithId.push(helper.addIdToStylesData(style, product.id))
-                }
-              })
-            })
-            // console.log(JSON.stringify(resultStyleWithId))
-            //use your helper to create allProps obj
-            // console.log(resultStyleWithId)
-            // console.log(resultStyleWithId, "🔥")
-            console.log(data)
-
-            let allPropsObj = helper.compileRelatedProductsDataToProps(data, resultStyleWithId)
-            // console.log(allPropsObj)
-            //set state all at once 🤙
-            let values = [],
-            keys = Object.keys(localStorage),
-            i = keys.length;
-
-            this.outFit()
+            let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
+            let values = [];
+            let keys = Object.keys(localStorage);
+            let i = keys.length;
 
             while ( i-- ) {
-                values.push( JSON.parse(localStorage.getItem(keys[i])) );
-            }
-            // this.setState({
-            //   yourOutfitItems: values
-            // })
+              values.push( JSON.parse(localStorage.getItem(keys[i])) );
+              }
+
             this.setState({
-              relatedProducts: data,
-              relatedProductsStyles: resultStyleWithId,
-              allPropsObj:allPropsObj,
-              // rpLoaded: true,
-              outfitPropsObj: fitData,
-              yourOutfitItems: values
-              // yoLoaded: true
+             relatedProducts: data,
+             relatedProductsStyles: styleData,
+             allPropsObj:allPropsObj,
+             outfitPropsObj: fitData,
+             yourOutfitItems: values
             })
           })
         })
       })
-      // this.getOutfitData();
-
     }
   }
-  outFit() {
-    return new Promise((resolve, reject) => {
-      axios.get(api + `products/${this.props.state.product_id}/styles`, {
-        headers: {
-          'Authorization': TOKEN
-        }
+
+    outFit() {
+      return new Promise((resolve, reject) => {
+        axios.get(api + `products/${this.props.state.product_id}/styles`, {
+          headers: {
+            'Authorization': TOKEN
+          }
+        })
+        .then((styleData)=> {
+          let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
+          resolve(outfitPropsObj);
+        })
+        .catch(err=> {
+           console.log(err)
+        })
       })
-      .then((styleData)=> {
-
-
-        let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-        resolve(outfitPropsObj);
-
-      })
-      .catch(err=> {
-        // console.log(err)
-      })
-    })
-  }
-  style() {
-    return new Promise((resolve, reject) => {
-      let result =[]
-      this.props.state.relatedProducts.forEach((productId) => {
-        return productsStyle(productId)
-          .then(data => {
-            result.push(data.data)
-            if (result.length === this.props.state.relatedProducts.length) {
-              // console.log(result)
-              resolve(result)
-            }
-          })
-      })
-    })
-  }
-  product () {
-   return new Promise((resolve, reject) => {
-      let result=[]
-      this.props.state.relatedProducts.forEach((productId) => {
-        return productsWithId(productId)
-          .then(data => {
-            result.push(data.data)
-            if (result.length === this.props.state.relatedProducts.length) {
-
-              resolve(result)
-            }
-          })
-      })
-    })
-  }
-
-
-
-  getRelatedStateData() {
-
-
-    // this.setState({
-    //   rpLoaded: false
-    // });
-    // // console.log(this)
-
-    // this.props.state.relatedProducts.forEach((productId) => {
-
-
-    //   Promise.all([
-
-    //     productsWithId(productId),
-    //     productsStyle(productId)
-    //   ])
-    //   .then((results) => {
-    //     // console.log(results)
-
-
-    //     // console.log(JSON.stringify(results[1].data));
-    //     let resultStyleWithId = helper.addIdToStylesData(results[1].data, results[0].data.id)
-    //     // console.log(resultStyleWithId)
-    //     this.setState({
-    //       relatedProducts: [...this.state.relatedProducts, results[0].data],
-    //       relatedProductsStyles: [...this.state.relatedProductsStyles, resultStyleWithId]
-    //     })
-    //     // console.log(this.state)
-    //   })
-    //   .then(() => {
-    //     let allPropsObj = helper.compileRelatedProductsDataToProps(this.state.relatedProducts,this.state.relatedProductsStyles);
-
-    //     this.setState({
-    //       allPropsObj: allPropsObj,
-    //     })
-    //   })
-    //   .then(() => {
-    //     this.setState({
-    //       rpLoaded: true,
-    //     })
-
-
-    //   })
-    //   .catch((err) => {
-    //     // console.log('this is the err 🥲 ', err)
-    //   });
-    // });
     }
 
-    getOutfitData () {
-    // this.setState({
-    //   yoLoaded: false
-    // });
+    style() {
+      return new Promise((resolve, reject) => {
+        let result =[]
+        this.props.state.relatedProducts.forEach((productId) => {
+          return productsStyle(productId)
+            .then(data => {
 
-    // axios.get(api + `products/${this.props.state.product_id}/styles`, {
-    //   headers: {
-    //     'Authorization': TOKEN
-    //   }
-    // })
-    // .then((styleData)=> {
-    //   let outfitPropsObj = helper.compileYourOutfitDataToProps(this.props.state.productInformation , styleData.data);
-    //   return outfitPropsObj;
-    // })
-    // .then(outfitPropsObj => {
-    //   this.setState({
-    //     outfitPropsObj: outfitPropsObj,
-    //     yoLoaded: true
-    //   })
-    // })
-    // .catch((err) => {
-    //   // console.log('err errrr', err)
-    //   res.status(500).end()
-    // })
+              let splitted = data.config.url.split('?')
+              let curId = Number(splitted[1])
+              result.push(helper.addIdToStylesData(data.data, curId))
 
+              if (result.length === this.props.state.relatedProducts.length) {
+                result.sort((a, b) => a['product_id'] - b['product_id']);
+                resolve(result)
+              }
+            })
+        })
+      })
     }
+
+    product () {
+      return new Promise((resolve, reject) => {
+         let result=[]
+         this.props.state.relatedProducts.forEach((productId) => {
+           return productsWithId(productId)
+             .then(data => {
+               result.push(data.data)
+               if (result.length === this.props.state.relatedProducts.length) {
+                 result.sort((a, b) => a['id'] - b['id']);
+                 resolve(result)
+               }
+             })
+         })
+       })
+     }
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-      // console.log(`❤️ handler received ${JSON.stringify(outfitItem)}`);
-      // console.log(`💙 yourOutfitItemsbefore: ${JSON.stringify(this.state.yourOutfitItems)}`)
-      localStorage.setItem('outfitItem', outfitItem);
+      localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
       this.setState({
         yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
       })
-      // console.log(`🧡 yourOutfitItemsafter: ${JSON.stringify(this.state.yourOutfitItems)}`)
-    }
-    handleRemoveFromOutfit(){
 
     }
+
+    handleRemoveFromOutfit(outfitItem, e) {
+      e.preventDefault();
+      let removedItemId = outfitItem.product_id;
+      let outfitItemsCopy = Object.assign(this.state.yourOutfitItems);
+      let filtered = outfitItemsCopy.filter(product => {
+        return product.product_id !== removedItemId
+      });
+      localStorage.removeItem(removedItemId);
+      this.setState({
+        yourOutfitItems: filtered
+      })
+    }
+
+    handleCompareItems(item, e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const formattedFeatures = helper.formatFeatures(this.props.state.productInformation, item);
+      const uniqueFeatArray = formattedFeatures[0];
+      const modifiedClicked = formattedFeatures[2];
+      const modifiedCurrent = formattedFeatures[1];
+
+      this.setState({
+        clickedProductInfo: modifiedClicked,
+        modifiedCurrent: modifiedCurrent,
+        features: uniqueFeatArray,
+      }, () => {this.setState({
+        modalShow: !this.state.modalShow
+        })
+      })
+    }
+
+
+    closeModal(e) {
+      e.preventDefault();
+      this.setState({
+        modalShow: !this.state.modalShow
+      });
+    }
+
 
   render() {
-    // if (this.props.state.loaded === false || this.state.rpLoaded === false || this.state.yoLoaded === false) {
-    //   return <div className='isLoading'>Loading...</div>
-    // }
+    if (this.props.state.loaded === false) {
+      return <div className='isLoading'>Loading...</div>
+    }
 
     return (
       <div className='relatedProducts'>
         <RelatedProductsList
         allProps={this.state.allPropsObj}
         handleProductChange={this.props.handleProductChange}
+        handleCompareItems={this.handleCompareItems}
         state={this.props.state} />
+        <RelatedProductsModal
+        modalShow={this.state.modalShow}
+        closeModal={this.closeModal}
+        clickedProductInfo={this.state.clickedProductInfo}
+        modifiedCurrent={this.state.modifiedCurrent}
+        features={this.state.features}
+         />
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
         handleAddToOutfit={this.handleAddToOutfit}
@@ -314,3 +231,4 @@ RelatedProducts.propTypes = {
   handleProductChange: propTypes.func,
   state: propTypes.object
 }
+

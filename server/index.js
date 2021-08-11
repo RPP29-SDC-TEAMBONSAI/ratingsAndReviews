@@ -3,9 +3,9 @@ const app = express();
 const PORT = 3000;
 
 // SERVER ROUTES
-const { reviews, reviewsMeta, reviewsHelpful, reviewsReport } = require("./serverRoutes/reviews.js");
+const { reviews, reviewsMeta, reviewsHelpful, reviewsReport, reviewsAdd, reviewsInteraction } = require("./serverRoutes/reviews.js");
 const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
-const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported} = require("./serverRoutes/qa.js");
+const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported, interactions} = require("./serverRoutes/qa.js");
 const { cart } = require("./serverRoutes/cart.js");
 
 const multer = require('multer')
@@ -40,6 +40,17 @@ app.get('/products', products)
   .get('/reported/answers', getReported)
   .put('/reviews/:review_id/helpful', reviewsHelpful)
   .put('/reviews/:review_id/report', reviewsReport)
+<<<<<<< HEAD
+  .post('/qa/interactions', interactions)
+=======
+>>>>>>> 0767be8a61da276eeb87377e9021b289bac260af
+  .post('/reviews/add', reviewsAdd)
+  //interactions
+  .post('/reviews/interaction', reviewsInteraction)
+<<<<<<< HEAD
+=======
+  .post('/qa/interactions', interactions)
+>>>>>>> 0767be8a61da276eeb87377e9021b289bac260af
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

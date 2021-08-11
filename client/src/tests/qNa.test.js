@@ -31,7 +31,7 @@ describe('QuestionsNAnswers', () => {
 
     const instance = wrapper.instance()
 
-
+    console.log(instance)
     jest.spyOn(instance, 'componentDidMount')
     instance.componentDidMount()
     // console.log(instance)

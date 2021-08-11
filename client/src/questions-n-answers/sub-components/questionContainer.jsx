@@ -3,57 +3,51 @@ import AddAnswer from './mini-components/addAnswerTable.jsx';
 import propTypes from 'prop-types';
 import QuestionList from './mini-components/questionList.jsx';
 
+
 const QuestionsContainer = (props) => {
 
-  let showQuestionClass = props.showQuestions(props.questionClickCount, props.currentI)
-  // let show = false;
-  // if (props.questionClickCount === 1 && props.currentI <= props.questionClickCount) {
-  //   show = true
-  // }
-  // if (props.questionClickCount >= 3 && props.currentI<= props.questionClickCount) {
-  //   show = true
-  // }
-
-
+  let showQuestion= props.showQuestions(props.questionClickCount, props.currentI)
+  let showScroll;
+  if (props.currentI > 2 && showQuestion) {
+    showScroll = 'scroll'
+  }
 
   return (
-    <div className={props.show ? `question container`: `questionHide container`}>
-      <div className='questionAndAnswer'>
+    <div className={showQuestion? 'list container' : 'list container hide'}>
+      <div className='row list container'>
+      <div className='questionList row'>
         <QuestionList
-          answerClass={props.answerClass}
+          answerState={props.answerState}
+
+          recordClick={props.recordClick}
           addToReported={props.addToReported}
           helpfulAnswerClick= {props.helpfulAnswerClick}
-          answerHide={props.answerHide}
-          answerHide2={props.answerHide2}
-          addAnswerScroll={props.addAnswerScroll}
-          answerTableHide={props.answerTableHide}
           question={props.question}
           currentI={props.currentI}
           answers={props.answers}
           questionCount={props.questionClickCount}
-          answerCount={props.answerCount}
-          classname={showQuestionClass ? showQuestionClass : props.classname}
-          show={props.show}
           questionClickCount={props.questionClickCount}
         />
       </div>
-      <div className='qna table'>
+      <div className='addAnswerList row'>
         <AddAnswer
+          recordClick={props.recordClick}
           addAnswerOnClick={props.addAnswerOnClick}
           currentI={props.currentI}
           helpfulQuestionClick={props.helpfulQuestionClick}
           data={props.question.question_helpfulness}
           questionName={props.question.question_body}
-          classname={showQuestionClass ? showQuestionClass : props.classname}
           question_id={props.question_id}
-
         />
+      </div>
       </div>
     </div>
   )
 }
 
 QuestionsContainer.propTypes = {
+  answerState:propTypes.any.isRequired,
+  recordClick:propTypes.func.isRequired,
   addToReported:propTypes.func.isRequired,
   question_id: propTypes.number.isRequired,
   addAnswerOnClick: propTypes.func.isRequired,
@@ -61,12 +55,7 @@ QuestionsContainer.propTypes = {
   helpfulQuestionClick: propTypes.func.isRequired,
   showQuestions: propTypes.func.isRequired,
   questionClickCount: propTypes.number.isRequired,
-  answerCount: propTypes.number.isRequired,
-  classname: propTypes.string.isRequired,
   currentI: propTypes.number.isRequired,
-  answerHide: propTypes.func.isRequired,
-  answerTableHide: propTypes.func.isRequired,
-  addAnswerScroll: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
   question: propTypes.object.isRequired
 }
