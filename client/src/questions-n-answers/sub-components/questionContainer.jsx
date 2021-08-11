@@ -15,31 +15,30 @@ const QuestionsContainer = (props) => {
   return (
     <div className={showQuestion? 'list container' : 'list container hide'}>
       <div className='row list container'>
-      <div className='questionList row'>
-        <QuestionList
-          answerState={props.answerState}
 
-          recordClick={props.recordClick}
-          addToReported={props.addToReported}
-          helpfulAnswerClick= {props.helpfulAnswerClick}
-          question={props.question}
-          currentI={props.currentI}
-          answers={props.answers}
-          questionCount={props.questionClickCount}
-          questionClickCount={props.questionClickCount}
-        />
-      </div>
-      <div className='addAnswerList row'>
-        <AddAnswer
-          recordClick={props.recordClick}
-          addAnswerOnClick={props.addAnswerOnClick}
-          currentI={props.currentI}
-          helpfulQuestionClick={props.helpfulQuestionClick}
-          data={props.question.question_helpfulness}
-          questionName={props.question.question_body}
-          question_id={props.question_id}
-        />
-      </div>
+        <div className='questionList row'>
+          <QuestionList
+            answerState={props.answerState}
+            recordClick={props.recordClick}
+            addToReported={props.addToReported}
+            helpfulAnswerClick= {props.helpfulAnswerClick}
+            question={props.question}
+            answers={props.answers}
+          />
+        </div>
+
+        <div className='addAnswerList row'>
+          <AddAnswer
+            recordClick={props.recordClick}
+            addAnswerOnClick={props.addAnswerOnClick}
+            currentI={props.currentI}
+            helpfulQuestionClick={props.helpfulQuestionClick}
+            data={props.question.question_helpfulness}
+            questionName={props.question.question_body}
+            question_id={props.question_id}
+          />
+        </div>
+
       </div>
     </div>
   )

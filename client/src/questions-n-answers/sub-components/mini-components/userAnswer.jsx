@@ -27,29 +27,30 @@ class UserAnswer extends React.Component {
     this.checkbox = this.checkbox.bind(this)
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
 
+    if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
       let newPhotos = prevState.photos.concat(this.state.photos.slice())
+
       if (!this.state.photos.length) {
+
         this.setState({
           photos: []
         })
       } else {
-      this.setState({
-        photos: newPhotos,
-        checked: false
-      })
+
+        this.setState({
+          photos: newPhotos,
+          checked: false
+        })
+      }
     }
-
-    }
-
-
   }
 
 
   onAnswerSubmit(e) {
     e.preventDefault()
-    let currentId = this.props.question_id
+    let currentId = this.props.aFormQuestion_id
+
     let newObj = {
       body: this.state.yourAnswer.substring(0),
       name: this.state.nickName.substring(0),
@@ -59,13 +60,15 @@ class UserAnswer extends React.Component {
 
     }
 
+
     postAnswer(newObj)
       .then(confirmation=> {
-        // console.log(confirmation, "✅")
         if (confirmation.status === 201) {
           this.props.updateAnswers();
+
         }
       })
+
 
       this.setState({
         yourAnswer: '',
@@ -149,8 +152,12 @@ class UserAnswer extends React.Component {
     }
     return (
       <form  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
+        <div>
+          <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={this.props.closeAnswerForm}>x</h1>
+        </div>
 
-        <div  className=''>
+        <div  className='currentQuestion'>
+
           <h3 className=''> {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
         </div>
 
@@ -193,8 +200,8 @@ class UserAnswer extends React.Component {
            return <AnswerImages key={index} photo={photo}/>
          })}
        </div>
-
       </form>
+
 
     )
   }
@@ -202,10 +209,13 @@ class UserAnswer extends React.Component {
 
 UserAnswer.propTypes = {
   recordClick:propTypes.func.isRequired,
-  question_id: propTypes.number.isRequired,
+
   updateAnswers: propTypes.func.isRequired,
   currentItemName: propTypes.string.isRequired,
   currentQuestion: propTypes.string.isRequired,
+  answerFormDisplayClass: propTypes.any,
+  closeAnswerForm: propTypes.func.isRequired,
+  aFormQuestion_id: propTypes.number.isRequired
 }
 
 export default UserAnswer;

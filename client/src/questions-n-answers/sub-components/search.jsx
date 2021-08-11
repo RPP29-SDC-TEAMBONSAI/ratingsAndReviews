@@ -4,18 +4,16 @@ import propTypes from 'prop-types';
 const Search = (props) => {
   return (
     <div className='search container'>
-
-
       <input
         onClick={(e) => props.recordClick(e)}
         className='searchInput'
         type='text'
         value={props.currentInput}
         name='question'
-        onChange={props.questionSearchChange}>
+        onChange={(e) => props.questionSearchChange(e)}>
       </input>
-      <input className='searchBtn' type="submit" value='Search'></input>
 
+      <input className='searchBtn' type="submit" value='Search'></input>
     </div>
   )
 }
