@@ -218,7 +218,7 @@ module.exports = {
 
     return newQuestions
   },
-
+//need to fix more answered questions display
   showMoreAnsweredQuestions(arr) {
 
     let showButton;
@@ -231,9 +231,11 @@ module.exports = {
   },
 
   moreAnsweredQButtonDisplay(qClickCount, index) {
-    let result = true;
+    console.log(index)
+    console.log(qClickCount)
+    let result = false;
     if (qClickCount === index || qClickCount + 1 === index) {
-      result= false;
+      result= true;
     }
     return result
   },
@@ -302,13 +304,6 @@ module.exports = {
     }
     return show
 
-    // let newClass;
-    // if (clickCount % 2 !== 0) {
-    //   if (index <= clickCount) {
-    //     newClass = 'questionText'
-    //   }
-    // }
-    // return newClass
   },
 
   showReportedClass(answers, ids) {
@@ -325,95 +320,20 @@ module.exports = {
     // console.log(answers, "👌")
     return answers;
 
-
+  },
+  addReportedProp(currentAnswers, answerIds) {
+    currentAnswers.forEach((answer) => {
+      answer.forEach(obj => {
+        if (answerIds.includes(obj.id)) {
+          obj.report = 'reported'
+        } else {
+          obj.report = 'report'
+        }
+      })
+    })
+    return currentAnswers
   }
 
-
-
 }
-
-
-//old filterAll
-// let filteredQuestions = this.sortQuestions(currentQuestions);
-// let answers = []
-
-// currentQuestions.forEach((question) => {
-//   answers.push(question.answers)
-
-// })
-
-// let answerVals = []
-// filteredQuestions.forEach((question) => {
-//   let values = Object.values(question.answers)
-//   answerVals.push(values)
-// })
-
-// let filteredAnswers = this.sortAnswers(answerVals)
-// return [filteredQuestions, filteredAnswers]
-
-
-//
-
-// //previous sort answer functionality.
-//     //needs optimization
-//     if (count >=0) {
-//       let current = answers.splice(0, 1);
-//       let filteredOutSeller = current[0].filter((answer) => {
-//         if (answer.answerer_name !== 'Seller') {
-
-//           return answer
-
-//         }
-
-//       })
-
-//       let countArr = filteredOutSeller.map((answer) => {
-//         return answer.helpfulness
-//       })
-//       countArr = countArr.sort((a, b) => (b - a));
-//       let sortedArr=[]
-
-//       countArr.forEach((number) => {
-//         filteredOutSeller.forEach((answer) => {
-//           if (number === answer.helpfulness) {
-//             sortedArr.push(answer)
-//           }
-//         })
-//       })
-//       let filterSeller = current[0].filter((answer) => {
-//         if (answer.answerer_name === 'Seller') {
-
-//           return answer
-//         }
-//       })
-//       let sellerCountArr = filterSeller.map((answer) => {
-//         return answer.helpfulness
-//       })
-//       sellerCountArr = sellerCountArr.sort().reverse()
-
-//       let sellerSortArr =[]
-
-
-//       sellerCountArr.forEach(number => {
-//         filterSeller.forEach(answer => {
-//           if (number === answer.helpfulness) {
-//             sellerSortArr.push(answer)
-//           }
-//         })
-//       })
-
-//       if (sellerSortArr.length) {
-
-
-//         sortedArr = sellerSortArr.concat(sortedArr)
-//       }
-//       final.push(sortedArr)
-//       count --
-//       this.sortAnswers(answers, count, final)
-
-//     }
-//     console.log(final, "🤙")
-
-//     return final
 
 

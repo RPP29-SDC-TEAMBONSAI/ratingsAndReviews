@@ -5,7 +5,7 @@ import RelatedProducts from './RelatedProducts/RelatedProductsView/RelatedProduc
 import QuestionsNAnswers from './questions-n-answers/qNa.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import propTypes from 'prop-types';
-
+import QnAClicks from './questions-n-answers/QnAClicks.jsx';
 // CLIENT ROUTES
 import { reviews, reviewsMeta } from "./clientRoutes/reviews.js";
 import { products, productsWithId, productsStyle, productsRelated } from "./clientRoutes/products.js";
@@ -35,7 +35,6 @@ class App extends React.Component {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     const product = params.product_id || this.state.product_id;
-    console.log(params)
     this.getStateData(product);
   }
 
@@ -67,9 +66,7 @@ class App extends React.Component {
 
     ])
       .then((results) => {
-        console.log(results[2].data)
         this.setState({
-
           productInformation: results[1].data,
           styles: results[2].data,
           relatedProducts: results[3].data,
@@ -104,11 +101,17 @@ class App extends React.Component {
           <RelatedProducts
             state={this.state}
             handleProductChange={this.handleProductChange}/>
-          <QuestionsNAnswers
-            product_id={this.state.product_id}
-            data={this.state.qNa}
-            QuestionSavedData ={this.state.savedQnA}
-            currentItemName={this.state.currentItemName}/>
+          <QnAClicks>
+            {allClicksProps => (
+              <QuestionsNAnswers
+                allClicksProps={allClicksProps}
+                product_id={this.state.product_id}
+                data={this.state.qNa}
+                QuestionSavedData ={this.state.savedQnA}
+                currentItemName={this.state.currentItemName}
+              />
+            )}
+          </QnAClicks>
           <RatingsAndReviews
             product_id={this.state.product_id}/>
         </div>

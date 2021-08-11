@@ -8,32 +8,35 @@ const QuestionList = (props) => {
 
   return (
     <div className='list container'>
-      <div className={''}>
-        <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
-      </div>
-      <div className={props.answerState? 'answerListScroll': ''}>
+      <div className='test'>
+        <div className={''}>
+          <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
+        </div>
+        <div className={props.answerState? 'answerListScroll': ''}>
 
-      {props.answers.map((answer, index) => {
+        {props.answers.map((answer, index) => {
+          return (
+            <div className={!props.answerState && index <=1 || props.answerState ? 'answerList': 'answerList hide'} key={index}>
 
-        return (
-          <div className={!props.answerState && index <=1 || props.answerState ? 'answerList': 'answerList hide'} key={index}>
-            <h4 className={`answerText`}>A: {answer.body}</h4>
-            <div className='answerImage container'>
-              {answer.photos.map((photo, index) => {
-                return <AnswerImages key={index} photo={photo}/>
-              })}
+              <h4 className={`answerText`}>A: {answer.body}</h4>
+
+              <div className='answerImage container'>
+                {answer.photos.map((photo, index) => {
+                  return <AnswerImages key={index} photo={photo}/>
+                })}
+              </div>
+
+              <div className='answererDetails'>
+                <p className='userIdText'>by {answer.answerer_name}, {answer.date}</p>
+                <p className='answerHelpfulText'>helpful?</p>
+                <p className='userHelpfulBtn' onClick={(e) => props.helpfulAnswerClick(answer.id)}>Yes</p>
+                <p className='userHelpIndicator'>({answer.helpfulness})</p>
+                <p className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</p>
+              </div>
             </div>
-            <div className='answererDetails'>
-              <p className='userIdText'>by {answer.answerer_name}, {answer.date}</p>
-              <p className='answerHelpfulText'>helpful?</p>
-              <p className={`userHelpfulBtn ${props.currentI.toString()}`}>Yes</p>
-              <p className='userHelpIndicator'>({answer.helpfulness})</p>
-              <p className='userReportBtn' onClick={(e) => {props.addToReported(e, answer.id), props.recordClick(e)}}>{answer.report}</p>
-            </div>
-          </div>
-        )
-
-      })}
+          )
+        })}
+        </div>
       </div>
     </div>
   )
@@ -43,10 +46,8 @@ QuestionList.propTypes = {
   recordClick: propTypes.func.isRequired,
   answerState: propTypes.any,
   helpfulAnswerClick:propTypes.func.isRequired,
-  currentI: propTypes.number.isRequired,
   addToReported: propTypes.func.isRequired,
   answers: propTypes.array.isRequired,
-  currentI: propTypes.number.isRequired,
   question: propTypes.object.isRequired
 }
 
