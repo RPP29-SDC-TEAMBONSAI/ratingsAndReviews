@@ -9,7 +9,7 @@ const ImageGallery = (props) => {
       <div className="image-gallery" >
         <div className="image-sidebar">
           {function () {
-            console.log('number of photos', props.state.styles[props.OverviewState.styleIndex].photos.length)
+            //console.log('number of photos', props.state.styles[props.OverviewState.styleIndex].photos.length)
             if (props.OverviewState.firstPhotoInPhotoSelectorIndex > 0) {
               return (
                 <button className = "upArrow" onClick = {props.upArrow}>^</button>

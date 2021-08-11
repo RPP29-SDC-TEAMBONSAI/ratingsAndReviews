@@ -28,6 +28,8 @@ export default class RelatedProducts extends React.Component {
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
     this.handleCompareItems = this.handleCompareItems.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
     this.product = this.product.bind(this)
     this.style = this.style.bind(this)
     this.outFit = this.outFit.bind(this)
@@ -196,6 +198,14 @@ export default class RelatedProducts extends React.Component {
       });
     }
 
+    handlePrevClick() {
+      console.log('prev clicked')
+    }
+
+    handleNextClick() {
+      console.log('next clicked')
+    }
+
 
   render() {
     if (this.props.state.loaded === false) {
@@ -208,7 +218,10 @@ export default class RelatedProducts extends React.Component {
         allProps={this.state.allPropsObj}
         handleProductChange={this.props.handleProductChange}
         handleCompareItems={this.handleCompareItems}
+        handlePrevClick={this.handlePrevClick}
+        handleNextClick={this.handleNextClick}
         state={this.props.state} />
+
         <RelatedProductsModal
         modalShow={this.state.modalShow}
         closeModal={this.closeModal}
@@ -216,6 +229,7 @@ export default class RelatedProducts extends React.Component {
         modifiedCurrent={this.state.modifiedCurrent}
         features={this.state.features}
          />
+
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
         handleAddToOutfit={this.handleAddToOutfit}
