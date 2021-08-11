@@ -17,9 +17,7 @@ const RelatedProductsModal = (props) => {
                 <th>Feature</th>
                 <th>{props.clickedProductInfo.name}</th>
                 </tr>
-           {props.features.length > 0 ?
-            props.features.map((feature, i) => {
-
+           {props.features.map((feature, i) => {
             return (
 
               <React.Fragment key={i++} >
@@ -43,7 +41,7 @@ const RelatedProductsModal = (props) => {
 
               </React.Fragment>
             )
-            }) : <div>Loading</div>}
+            })}
               </tbody>
             </table>
           <button className='closeModal' onClick={(e) => {props.closeModal(e)}}>close</button>

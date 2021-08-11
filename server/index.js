@@ -40,17 +40,10 @@ app.get('/products', products)
   .get('/reported/answers', getReported)
   .put('/reviews/:review_id/helpful', reviewsHelpful)
   .put('/reviews/:review_id/report', reviewsReport)
-<<<<<<< HEAD
   .post('/qa/interactions', interactions)
-=======
->>>>>>> 0767be8a61da276eeb87377e9021b289bac260af
   .post('/reviews/add', reviewsAdd)
-  //interactions
   .post('/reviews/interaction', reviewsInteraction)
-<<<<<<< HEAD
-=======
   .post('/qa/interactions', interactions)
->>>>>>> 0767be8a61da276eeb87377e9021b289bac260af
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
