@@ -6,10 +6,11 @@ const ImageGallery = (props) => {
     let keyTwo = -1;
 
     return (
-      <div className="image-gallery">
+      <div className="image-gallery" >
         <div className="image-sidebar">
           {function () {
-            if (props.OverviewState.mainPhoto > 0) {
+            console.log('number of photos', props.state.styles[props.OverviewState.styleIndex].photos.length)
+            if (props.OverviewState.firstPhotoInPhotoSelectorIndex > 0) {
               return (
                 <button className = "upArrow" onClick = {props.upArrow}>^</button>
               )
@@ -19,7 +20,8 @@ const ImageGallery = (props) => {
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
             (photo) => {
               keyOne += 1;
-              if (keyOne < 7) {
+
+              if (keyOne >= props.OverviewState.firstPhotoInPhotoSelectorIndex && keyOne < (7 + Number(props.OverviewState.firstPhotoInPhotoSelectorIndex))) {
               if (keyOne == props.OverviewState.mainPhoto) {
                 return (
                   <img
@@ -46,7 +48,7 @@ const ImageGallery = (props) => {
             }
           )}
           {function () {
-            if (props.OverviewState.mainPhoto < props.state.styles[props.OverviewState.styleIndex].photos.length -1) {
+            if ((props.OverviewState.firstPhotoInPhotoSelectorIndex + 7) < props.state.styles[props.OverviewState.styleIndex].photos.length -1) {
               return (
                  <button className = "downArrow" onClick = {props.downArrow}>v</button>
               )
@@ -55,7 +57,7 @@ const ImageGallery = (props) => {
 
         </div>
 
-        <div key = "div">
+        <div >
           {props.state.styles[props.OverviewState.styleIndex].photos.map(
               (photo) => {
                 keyTwo += 1;
@@ -63,7 +65,6 @@ const ImageGallery = (props) => {
                   return (
                     <div className = "main-image">
                       {function() {
-                        //console.log('left', props.OverviewState.mainPhoto)
                         if (props.OverviewState.mainPhoto > 0) {
                           return (
                             <button className = "main-image-left-arrow" onClick = {props.mainImageLeftArrow}>{function() {
@@ -74,12 +75,13 @@ const ImageGallery = (props) => {
                       }()
                     }
                     <img
-                      className="main-photo"
+                      className= "main-photo"
                       key={keyTwo}
                       value={keyTwo}
                       src={photo.url}
-                      onClick={props.changeMainPhoto}
+                      onClick = {props.expandedView}
                     ></img>
+
                     {function() {
                       if (props.OverviewState.mainPhoto < props.state.styles[props.OverviewState.styleIndex].photos.length -1) {
                         return (
