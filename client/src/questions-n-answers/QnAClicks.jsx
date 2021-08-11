@@ -47,6 +47,7 @@ class QnAClicks extends React.Component {
     if (e.target.className === 'loadMoreAnswersButton') {
       this.setState({
         loadAnswerState: !this.state.loadAnswerState
+
       })
     }
   }

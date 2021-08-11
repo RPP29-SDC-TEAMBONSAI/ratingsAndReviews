@@ -27,10 +27,7 @@ class ClickTracker extends React.Component {
             interactions:[]
           })
         })
-
-
     //reset state of interactions after ok response is received from server
-
     }
 
     let ele;

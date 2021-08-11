@@ -13,16 +13,16 @@ class QuestionsNAnswers extends React.Component {
     super(props)
 
     this.state ={
-      questions: [],
-      answers: [],
       showQuestionButton: false,
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
-      reported: []
+      reported: [],
+      dynamicData: [],
+      savedData: []
     };
 
     this.searchFilter = this.searchFilter.bind(this)
-    this.filterAnswersNQuestions = this.filterAnswersNQuestions.bind(this)
+
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.showQuestions = this.showQuestions.bind(this)
     this.updateQuestions = this.updateQuestions.bind(this)
@@ -35,28 +35,26 @@ class QuestionsNAnswers extends React.Component {
       .then(data => {
         let answerIds = data.data
         let copy = this.props.data.slice()
-        let sortedData= this.filterAnswersNQuestions(copy)
-        let answers = helper.showReportedClass(sortedData[1], answerIds)
+        let dynamicData = helper.createDynamicData(copy)
+        let finalData = helper.addReportedProp(dynamicData, answerIds)
 
           this.setState({
-            questions: sortedData[0],
-            answers: answers,
-            reported: answerIds
+            dynamicData: finalData,
+            reported: answerIds,
+            savedData: dynamicData.slice()
           })
       })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let copy = this.props.data.slice()
 
     if (prevProps.data.length !== this.props.data.length) {
-      let sortedData = this.filterAnswersNQuestions(copy)
-      let answerIds = this.state.reported.slice()
-      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
 
+      let dynamicData = helper.createDynamicData(this.props.data)
+      let answerIds = this.state.reported.slice()
+      let finalData = helper.addReportedProp(dynamicData, answerIds)
       this.setState({
-        questions: sortedData[0],
-        answers:newAnswers,
+        dynamicData: finalData
       })
     }
 
@@ -67,18 +65,16 @@ class QuestionsNAnswers extends React.Component {
     }
     //new question helpfulness
     if (prevProps.allClicksProps.question_id !== this.props.allClicksProps.question_id) {
-      // console.log(this.props.allClicksProps.question_id)
       updateHelpfulness(this.props.allClicksProps.question_id)
         .then(data=>
           questions(this.props.product_id)
             .then(newData => {
-              let sortedData = this.filterAnswersNQuestions(newData.data)
+              let dynamicData = helper.createDynamicData(newData.data)
               let answerIds = this.state.reported.slice()
-              let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
+              let finalData = helper.addReportedProp(dynamicData, answerIds)
 
               this.setState({
-                questions: sortedData[0],
-                answers: newAnswers,
+                dynamicData: finalData,
                 reported: answerIds,
               })
             })
@@ -90,81 +86,46 @@ class QuestionsNAnswers extends React.Component {
         .then(data => {
           questions(this.props.product_id)
             .then(newData => {
-              let sortedData = this.filterAnswersNQuestions(newData.data)
+              let dynamicData = helper.createDynamicData(newData.data)
               let answerIds = this.state.reported.slice()
-              let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
+              let finalData = helper.addReportedProp(dynamicData, answerIds)
+
 
               this.setState({
-                questions: sortedData[0],
-                answers: newAnswers,
+                dynamicData: finalData,
                 reported: answerIds
               })
             })
         })
     }
 
-    if (prevState.questions.length !== this.state.questions.length) {
-      let copy = this.props.data.slice()
-      let sortedData= this.filterAnswersNQuestions(copy)
-      let answerIds = this.state.reported.slice()
-      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
-
-      this.setState({
-        questions: sortedData[0],
-        answers: newAnswers,
-        reported: answerIds
-      })
-    }
-
-    if(prevState.answers.length !== this.state.answers.length) {
-      let sortedData = this.filterAnswersNQuestions(this.state.questions.slice())
-      let answerIds = this.state.answers.slice()
-      let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
-
-      this.setState({
-        answers: newAnswers,
-        questions: sortedData[0]
-      })
-    }
-
     if (prevState.reported.length !== this.state.reported.length) {
       let answerIds = this.state.reported.slice()
-      let answers = this.state.answers.slice()
-      let newAnswers = helper.addReportedProp(answers, answerIds)
-
+      let finalData = helper.addReportedProp(this.state.dynamicData.slice(), answerIds)
       this.setState({
-        reported: this.state.reported.slice(),
-        answers: newAnswers
+        reported: answerIds,
+        dynamicData: finalData
+
       })
     }
-  }
-
-  filterAnswersNQuestions(currentQuestions) {
-    let filtered = helper.filterAll(currentQuestions)
-    return filtered
   }
 
   searchFilter(searchValue) {
-    let copy = this.state.questions.slice()
-    let original = this.props.QuestionSavedData
-    let newQuestions = helper.filterAll(original)
+    let copy = this.state.dynamicData.slice()
+    let original = this.state.savedData
 
     if (this.state.qSearchCharCount >= 3 && searchValue.length <=2) {
-
       this.setState({
-        questions: newQuestions[0],
-        answers: newQuestions[1]
+        dynamicData: original
       })
 
     } else {
-
       let newQuestions = helper.filterSearchInput(copy, searchValue);
-      let newQnA = helper.filterAll(newQuestions)
-
+      let newDynamic = helper.createDynamicData(newQuestions)
+      let answerIds = this.state.reported.slice()
+      let finalData = helper.addReportedProp(newDynamic, answerIds)
         this.setState({
-          questions: newQnA[0],
-          answers: newQnA[1]
-
+          dynamicData: finalData
         })
       }
   }
@@ -186,30 +147,29 @@ class QuestionsNAnswers extends React.Component {
   updateQuestions () {
     return questions(this.props.product_id)
       .then(data => {
-        let questions = data.data
-        let filtered = helper.filterAll(questions);
-
+        let answerIds = this.state.reported.slice()
+        let dynamicData = helper.createDynamicData(data.data);
+        let finalData = helper.addReportedProp(dynamicData, answerIds)
         this.setState({
-          questions: filtered[0],
-          answers: filtered[1],
+          dynamicData:finalData
         })
+        this.props.allClicksProps.closeQuestionForm()
       })
   }
 
   updateAnswers() {
     questions(this.props.product_id)
       .then(currentQuestions => {
-        let sortedData= helper.filterAll(currentQuestions.data)
+        let dynamicData= helper.createDynamicData(currentQuestions.data)
         let answerIds = this.state.reported.slice()
-        let newAnswers = helper.addReportedProp(sortedData[1], answerIds)
+        let finalData = helper.addReportedProp(dynamicData, answerIds)
 
         this.setState({
-          questions: sortedData[0],
-          answers: newAnswers,
-          aFormShowOrHide: 'aFormHide',
-          reported: answerIds
+          dynamicData:finalData,
         })
+        this.props.allClicksProps.closeAnswerForm()
       })
+
   }
 
   addToReported(e, ansId) {
@@ -263,7 +223,7 @@ class QuestionsNAnswers extends React.Component {
 
               <div className='questionList scroll container'>
                 <div className={''}>
-                  {this.state.questions.map((question, index) => {
+                  {this.state.dynamicData.map((question, index) => {
                     let show = false;
 
                     if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
@@ -285,11 +245,12 @@ class QuestionsNAnswers extends React.Component {
                             currentI={index}
                             showQuestions={this.showQuestions}
                             questionClickCount={this.props.allClicksProps.questionClickCount}
-                            answers={this.state.answers[index]}
+                            answers={question.answers}
                             question={question}
                             addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
                             question_id={question.question_id}
                             show={show}
+
                       />
                   )})}
                 </div>
@@ -302,7 +263,7 @@ class QuestionsNAnswers extends React.Component {
                 </div>
                 <div className='bottomButtons'>
                   <h3 className={this.props.allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
-                          onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.questions.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
+                          onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.dynamicData.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
                   <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.addQuestion()}}>ADD A QUESTION +</h3>
                 </div>
