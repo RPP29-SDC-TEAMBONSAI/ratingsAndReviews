@@ -6,7 +6,9 @@ const AnswerImages = (props) => {
       <img className='thumbnail' src={props.photo}></img>
   )
 }
+
 AnswerImages.propTypes ={
   photo: propTypes.string.isRequired
 }
+
 export default AnswerImages

@@ -17,14 +17,12 @@ class UserQuestion extends React.Component {
 
   onQuestionSubmit(e) {
     e.preventDefault()
-
     let newObj = {
       body: this.state.yourQuestion,
       name: this.state.nickName,
       email: this.state.email,
       product_id: this.props.product_id
     }
-    // console.log(newObj)
 
     postQuestion(newObj)
       .then(data => {
@@ -38,23 +36,20 @@ class UserQuestion extends React.Component {
       email:'Your Email'
     })
     this.props.addQuestion()
-
   }
+
   questionFormChange(e) {
-    // console.log(e.target.value)
 
     this.setState({
       [e.target.name]: e.target.value
-
     })
-
   }
-
-
   render() {
     return (
-
-      <form  className={'qFormData'} onSubmit={this.onQuestionSubmit}>
+      <form  className='qFormData' onSubmit={this.onQuestionSubmit}>
+        <div>
+          <h1 className={this.props.QuestionFormDisplayClass ? 'questionClose': 'qFormHide'} onClick={(e) => this.props.closeQuestionForm()}>x</h1>
+        </div>
         <div  className='askQuestionForm'>
          <h4>Ask Your Question</h4>
          <h3 > {`About the [${this.props.currentItemName}]`} </h3>
@@ -82,7 +77,9 @@ UserQuestion.propTypes = {
   currentItemName: propTypes.string.isRequired,
   addQuestion: propTypes.func.isRequired,
   updateQuestions: propTypes.func.isRequired,
-  product_id: propTypes.number.isRequired
+  product_id: propTypes.number.isRequired,
+  QuestionFormDisplayClass: propTypes.any,
+  closeQuestionForm: propTypes.func.isRequired
 }
 
 export default UserQuestion
