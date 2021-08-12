@@ -17,10 +17,11 @@ const RelatedProductsList = (props) => {
         features={product.features}
         handleProductChange={props.handleProductChange}
         handleCompareItems={props.handleCompareItems}
-        starRating={product.starRating}
+        starRating={props.reviews[index]}
        />
      </div>
-  })
+  });
+
   let prevButton;
   if (props.displayedProductsIndices[0] > 0) {
     prevButton =  <button
@@ -38,6 +39,7 @@ const RelatedProductsList = (props) => {
     className='nextButton'
     onClick={() => {props.handleNextClick()}} >Next</button>
   }
+
 
   return (
     <div className='relatedProductsListContainer'>
@@ -62,7 +64,8 @@ RelatedProductsList.propTypes = {
   handleCompareItems: propTypes.func,
   handlePrevClick: propTypes.func,
   handleNextClick: propTypes.func,
-  displayedProductsIndices: propTypes.array
+  displayedProductsIndices: propTypes.array,
+  reviews: propTypes.array
   };
 
 export default RelatedProductsList;

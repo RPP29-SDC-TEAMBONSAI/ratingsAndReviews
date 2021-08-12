@@ -12,10 +12,14 @@ const getStars = function (starsObject) {
     total = starsObject[star] * star + total;
   }
 
+
   let average = total / numberOfRatings;
   let htmlElements = Stars(average);
+
   return htmlElements;
 };
+
+
 
 const RelatedProductsCard = (props) => {
 
@@ -41,8 +45,9 @@ const RelatedProductsCard = (props) => {
             )
           }
         })()}
-        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}></img>
-        <span className="reviewStars">{getStars(props.starRating)}</span>
+        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'} alt='clothing product'></img>
+
+        <span className="reviewStars">{getStars(props.starRating.ratings)}</span>
         </div>
     </div>
   )

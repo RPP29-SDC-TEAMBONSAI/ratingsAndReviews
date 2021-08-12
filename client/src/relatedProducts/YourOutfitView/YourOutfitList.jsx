@@ -29,7 +29,7 @@ YourOutfitList.propTypes = {
   handleRemoveFromOutfit: propTypes.func,
   outfitProps: propTypes.object,
   state: propTypes.object,
-  outfitItems: propTypes.array,
+  outfitItems: propTypes.array
   };
 
 export default YourOutfitList;

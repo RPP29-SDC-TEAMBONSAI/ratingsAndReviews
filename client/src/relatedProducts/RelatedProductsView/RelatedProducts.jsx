@@ -4,7 +4,8 @@ import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
 import RelatedProductsModal from './RelatedProductsModal.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
-import {productsWithId, productsStyle, outfitStyle} from "../../clientRoutes/products.js";
+import {productsWithId, productsStyle} from "../../clientRoutes/products.js";
+import {reviewsMeta} from '../../clientRoutes/reviews.js';
 import axios from 'axios';
 const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
@@ -23,7 +24,8 @@ export default class RelatedProducts extends React.Component {
       clickedProductInfo: {},
       modifiedCurrent: {},
       features: [],
-      displayedProductsIndices: [0, 1, 2]
+      displayedProductsIndices: [0, 1, 2],
+      reviewData: []
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
@@ -31,34 +33,40 @@ export default class RelatedProducts extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.handlePrevClick = this.handlePrevClick.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
-    this.product = this.product.bind(this)
-    this.style = this.style.bind(this)
-    this.outFit = this.outFit.bind(this)
+    this.product = this.product.bind(this);
+    this.style = this.style.bind(this);
+    this.outFit = this.outFit.bind(this);
+    this.reviews = this.reviews.bind(this);
   }
 
   componentDidMount () {
     let product = this.product()
     let getStyle = this.style()
     let outFitData = this.outFit()
+    let reviewData = this.reviews();
 
     product.then(data => {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
-          let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
+          reviewData.then(reviewData => {
 
-          let values = [];
-          let keys = Object.keys(localStorage);
-          let i = keys.length;
-          while ( i-- ) {
-            values.push( JSON.parse(localStorage.getItem(keys[i])) );
+            let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
+
+            let values = [];
+            let keys = Object.keys(localStorage);
+            let i = keys.length;
+            while ( i-- ) {
+              values.push( JSON.parse(localStorage.getItem(keys[i])) );
             }
 
-          this.setState({
-           relatedProducts: data,
-           relatedProductsStyles: styleData,
-           allPropsObj:allPropsObj,
-           outfitPropsObj: fitData,
-           yourOutfitItems: values
+            this.setState({
+              relatedProducts: data,
+              relatedProductsStyles: styleData,
+              allPropsObj:allPropsObj,
+              outfitPropsObj: fitData,
+              yourOutfitItems: values,
+              reviewData: reviewData
+            })
           })
         })
       })
@@ -75,6 +83,7 @@ export default class RelatedProducts extends React.Component {
       product.then(data => {
         getStyle.then(styleData => {
           outFitData.then(fitData => {
+            reviewData.then(reviewData => {
             let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
             let values = [];
             let keys = Object.keys(localStorage);
@@ -89,7 +98,9 @@ export default class RelatedProducts extends React.Component {
              relatedProductsStyles: styleData,
              allPropsObj:allPropsObj,
              outfitPropsObj: fitData,
-             yourOutfitItems: values
+             yourOutfitItems: values,
+             reviewData: reviewData
+            })
             })
           })
         })
@@ -140,10 +151,26 @@ export default class RelatedProducts extends React.Component {
          this.props.state.relatedProducts.forEach((productId) => {
            return productsWithId(productId)
              .then(data => {
-               result.push(data.data)
+               result.push(data.data);
                if (result.length === this.props.state.relatedProducts.length) {
                  result.sort((a, b) => a['id'] - b['id']);
-                 resolve(result)
+                 resolve(result);
+               }
+             })
+         })
+       })
+     }
+
+     reviews () {
+       return new Promise((resolve, reject) => {
+         let result = [];
+         this.props.state.relatedProducts.forEach((productId) => {
+           return reviewsMeta(productId)
+             .then(data => {
+               result.push(data.data);
+               if (result.length === this.props.state.relatedProducts.length) {
+                 result.sort((a, b) => a['product_id'] - b['product_id']);
+                 resolve(result);
                }
              })
          })
@@ -240,6 +267,7 @@ export default class RelatedProducts extends React.Component {
         handleNextClick={this.handleNextClick}
         state={this.props.state}
         displayedProductsIndices={this.state.displayedProductsIndices}
+        reviews={this.state.reviewData}
          />
 
         <RelatedProductsModal
@@ -255,7 +283,8 @@ export default class RelatedProducts extends React.Component {
         handleAddToOutfit={this.handleAddToOutfit}
         handleRemoveFromOutfit={this.handleRemoveFromOutfit}
         outfitItems={this.state.yourOutfitItems}
-        state={this.props.state} />
+        state={this.props.state}
+         />
       </div>
     );
   }
