@@ -152,11 +152,15 @@ export default class RelatedProducts extends React.Component {
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-      localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
-      this.setState({
-        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
-      })
 
+      if (this.state.yourOutfitItems.some(({product_id}) => product_id === outfitItem.product_id)) {
+        alert('Item already in outfit')
+      } else {
+        localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
+        this.setState({
+          yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
+        })
+      }
     }
 
     handleRemoveFromOutfit(outfitItem, e) {
