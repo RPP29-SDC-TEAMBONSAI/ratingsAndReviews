@@ -72,7 +72,6 @@ class App extends React.Component {
           relatedProducts: results[3].data,
           //do not remove please
           qNa: results[4].data,
-          savedQnA: results[4].data,
           currentItemName:results[1].data.name,
           product_id:results[1].data.id,
           ratings: results[5].data.ratings
@@ -107,7 +106,6 @@ class App extends React.Component {
                 allClicksProps={allClicksProps}
                 product_id={this.state.product_id}
                 data={this.state.qNa}
-                QuestionSavedData ={this.state.savedQnA}
                 currentItemName={this.state.currentItemName}
               />
             )}

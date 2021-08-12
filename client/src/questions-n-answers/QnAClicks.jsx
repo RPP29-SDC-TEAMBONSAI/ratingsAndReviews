@@ -47,6 +47,7 @@ class QnAClicks extends React.Component {
     if (e.target.className === 'loadMoreAnswersButton') {
       this.setState({
         loadAnswerState: !this.state.loadAnswerState
+
       })
     }
   }
@@ -151,7 +152,7 @@ class QnAClicks extends React.Component {
 }
 
 QnAClicks.propTypes = {
-  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
+  children: propTypes.any
 
 }
 export default QnAClicks;

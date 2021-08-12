@@ -45,6 +45,8 @@
     "eslint-plugin-react": "^7.24.0",
     "express": "^4.17.1",
     "jest": "^27.0.6",
+    "jsdom": "16.7.0",
+    "jsdom-global": "3.0.2",
     "nodemon": "^2.0.12",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2"
@@ -58,7 +60,6 @@
     "fs": "0.0.1-security",
     "imgbb-uploader": "^1.3.3",
     "jquery": "^3.6.0",
-    "jsdom": "^16.6.0",
     "multer": "^1.4.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
