@@ -12,9 +12,13 @@ const getStars = function (starsObject) {
   }
   let average = total / numberOfRatings;
   let htmlElements = Stars(average);
-  return htmlElements;
-};
 
+  if (numberOfRatings !== 0) {
+    return htmlElements
+  } else {
+    return <div className='stars'>{htmlElements.props.children[0]}</div>
+  }
+};
 
 const YourOutfitCard = (props) => {
 

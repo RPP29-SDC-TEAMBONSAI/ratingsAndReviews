@@ -12,11 +12,16 @@ const getStars = function (starsObject) {
     total = starsObject[star] * star + total;
   }
 
-
   let average = total / numberOfRatings;
   let htmlElements = Stars(average);
 
-  return htmlElements;
+  if (numberOfRatings !== 0) {
+    return htmlElements
+  } else {
+    return <div className='stars'>{htmlElements.props.children[0]}</div>
+  }
+
+
 };
 
 
