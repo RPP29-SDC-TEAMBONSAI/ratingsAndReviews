@@ -21,24 +21,36 @@ const RelatedProductsList = (props) => {
        />
      </div>
   })
+  let prevButton;
+  if (props.displayedProductsIndices[0] > 0) {
+    prevButton =  <button
+    className='prevButton'
+    onClick={() => {props.handlePrevClick()}} >Prev</button>
+  } else {
+    prevButton = null;
+  }
+
+  let nextButton;
+  if (props.displayedProductsIndices[2] === relatedItemsList.length - 1) {
+    nextButton = null;
+  } else {
+    nextButton =<button
+    className='nextButton'
+    onClick={() => {props.handleNextClick()}} >Next</button>
+  }
 
   return (
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
       <div className='relatedProductsList'>
-
-        <button
-        className='prevButton'
-        onClick={() => {props.handlePrevClick()}} >Prev</button>
+        {prevButton}
 
         {relatedItemsList[props.displayedProductsIndices[0]]}
         {relatedItemsList[props.displayedProductsIndices[1]]}
         {relatedItemsList[props.displayedProductsIndices[2]]}
 
+        {nextButton}
 
-        <button
-        className='nextButton'
-        onClick={() => {props.handleNextClick()}} >Next</button>
       </div>
     </div>
   )
