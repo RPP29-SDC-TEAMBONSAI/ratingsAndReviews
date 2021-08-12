@@ -22,7 +22,6 @@ class QuestionsNAnswers extends React.Component {
     };
 
     this.searchFilter = this.searchFilter.bind(this)
-
     this.questionSearchChange = this.questionSearchChange.bind(this)
     this.showQuestions = this.showQuestions.bind(this)
     this.updateQuestions = this.updateQuestions.bind(this)
@@ -38,11 +37,11 @@ class QuestionsNAnswers extends React.Component {
         let dynamicData = helper.createDynamicData(copy)
         let finalData = helper.addReportedProp(dynamicData, answerIds)
 
-          this.setState({
-            dynamicData: finalData,
-            reported: answerIds,
-            savedData: dynamicData.slice()
-          })
+        this.setState({
+          dynamicData: finalData,
+          reported: answerIds,
+          savedData: dynamicData.slice()
+        })
       })
   }
 

@@ -32,7 +32,9 @@ module.exports = {
       return b.question_helpfulness - a.question_helpfulness
       // return b = a
     })
+
     let newQuestionsWithAnsArr = finalQuestions.filter((question) => {
+
       let newAns = Object.values(question.answers)
       let finalAns = this.sortAnswers(newAns)
       question.answers = finalAns
@@ -58,20 +60,24 @@ module.exports = {
   },
 
   moreAnsweredQButtonDisplay(qClickCount, index) {
-    // console.log(index)
-    // console.log(qClickCount)
     let result = false;
-    if (qClickCount === index || qClickCount + 1 === index) {
-      result= true;
+    if (qClickCount>=3) {
+      if (qClickCount === index || qClickCount -1 === index) {
+        result = true
+      } else {
+        result = false
+      }
     }
+
     return result
   },
 
   showQuestionsClass(clickCount, index) {
-    let show= false;
-
+    let show;
     if (index <= clickCount) {
-      show=true
+      show = true
+    } else {
+      show = false
     }
 
     return show
@@ -81,16 +87,15 @@ module.exports = {
     currentQuestions.forEach((question) => {
       question.answers.forEach((answer) => {
         if (answerIds.includes(answer.id)) {
-
           answer.report = 'reported'
         } else {
           answer.report ='report'
         }
       })
     })
+
     return currentQuestions
   }
-
 }
 
 
