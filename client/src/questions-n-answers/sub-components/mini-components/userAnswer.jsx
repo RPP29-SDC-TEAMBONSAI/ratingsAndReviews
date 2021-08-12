@@ -215,7 +215,7 @@ UserAnswer.propTypes = {
   currentQuestion: propTypes.string.isRequired,
   answerFormDisplayClass: propTypes.any,
   closeAnswerForm: propTypes.func.isRequired,
-  aFormQuestion_id: propTypes.number.isRequired
+  aFormQuestion_id: propTypes.any
 }
 
 export default UserAnswer;
