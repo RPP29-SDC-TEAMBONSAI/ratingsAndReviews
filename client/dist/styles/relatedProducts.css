@@ -21,6 +21,30 @@ REALTED PRODUCTS STYLING
 
 }
 
+.relatedProductsCardTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.relatedProductsCardTop, .productName {
+  flex-wrap: wrap
+}
+
+
+.relatedProductsActionButton {
+  height: 4em;
+  width: 4em;
+}
+
+.relatedProductsCardBottom {
+  display: flex;
+  flex-direction: column;
+}
+.relatedProductsCardBottom, img {
+  display: flex;
+  align-self: center
+}
+
 /*-----------------
 YOUR OUTFIT STYLING
 -----------------*/
