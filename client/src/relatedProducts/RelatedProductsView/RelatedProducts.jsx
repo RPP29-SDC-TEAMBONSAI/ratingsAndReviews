@@ -204,7 +204,9 @@ export default class RelatedProducts extends React.Component {
 
     handleNextClick() {
       console.log('next clicked')
+
     }
+
 
 
   render() {

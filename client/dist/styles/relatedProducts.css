@@ -4,6 +4,7 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsList {
   display: flex;
+  overflow-x: scroll;
 }
 
 .relatedProductsCardList {
@@ -14,7 +15,7 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsCard {
   flex-grow: 1;
-  flex-shrink: 1;
+  flex-shrink: 0;
   border: solid;
   margin: 1rem .25em;
 

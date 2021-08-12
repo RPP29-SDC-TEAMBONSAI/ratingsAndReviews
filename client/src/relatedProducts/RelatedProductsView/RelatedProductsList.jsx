@@ -26,11 +26,13 @@ const RelatedProductsList = (props) => {
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
       <div className='relatedProductsList'>
+
         <button
         className='prevButton'
         onClick={() => {props.handlePrevClick()}} >Prev</button>
 
         {relatedItemsList}
+
 
         <button
         className='nextButton'
