@@ -40,9 +40,9 @@ export default class RelatedProducts extends React.Component {
   }
 
   componentDidMount () {
-    let product = this.product()
-    let getStyle = this.style()
-    let outFitData = this.outFit()
+    let product = this.product();
+    let getStyle = this.style();
+    let outFitData = this.outFit();
     let reviewData = this.reviews();
 
     product.then(data => {
@@ -76,14 +76,16 @@ export default class RelatedProducts extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.state.product_id !== this.props.state.product_id) {
-      let product = this.product()
-      let getStyle = this.style()
-      let outFitData = this.outFit()
+      let product = this.product();
+      let getStyle = this.style();
+      let outFitData = this.outFit();
+      let reviewData = this.reviews();
 
       product.then(data => {
         getStyle.then(styleData => {
           outFitData.then(fitData => {
             reviewData.then(reviewData => {
+
             let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
             let values = [];
             let keys = Object.keys(localStorage);
@@ -183,6 +185,8 @@ export default class RelatedProducts extends React.Component {
       if (this.state.yourOutfitItems.some(({product_id}) => product_id === outfitItem.product_id)) {
         alert('Item already in outfit')
       } else {
+        let itemWithReviews = outfitItem;
+        itemWithReviews['reviews'] = this.props.state.ratings;
         localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
         this.setState({
           yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]

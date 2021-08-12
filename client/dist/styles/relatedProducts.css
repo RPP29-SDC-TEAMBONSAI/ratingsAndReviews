@@ -51,7 +51,7 @@ YOUR OUTFIT STYLING
 
 .yourOutfitList {
   display: flex;
-  border: solid;
+
 }
 .yourOutfitCardList {
   flex-direction: row;

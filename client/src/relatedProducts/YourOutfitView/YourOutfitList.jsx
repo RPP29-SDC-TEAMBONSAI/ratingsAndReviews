@@ -4,6 +4,7 @@ import YourOutfitCard from './YourOutfitCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const YourOutfitList = (props) => {
+
   return (
     <div className='yourOutfitListContainer'>
       <h2>Your Outfit: </h2>
@@ -13,6 +14,7 @@ const YourOutfitList = (props) => {
         return (<div className='outfitItem' key={i}>
                  <YourOutfitCard
                   key={outfitItem.id}
+                  id={outfitItem.product_id}
                   outfitProps={outfitItem}
                   starRating={props.state.ratings}
                   handleRemoveFromOutfit={props.handleRemoveFromOutfit}
