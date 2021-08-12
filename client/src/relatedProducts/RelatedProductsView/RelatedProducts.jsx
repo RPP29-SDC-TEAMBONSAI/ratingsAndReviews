@@ -22,7 +22,8 @@ export default class RelatedProducts extends React.Component {
       modalShow: false,
       clickedProductInfo: {},
       modifiedCurrent: {},
-      features: []
+      features: [],
+      displayedProductsIndices: [0, 1, 2]
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
@@ -199,12 +200,23 @@ export default class RelatedProducts extends React.Component {
     }
 
     handlePrevClick() {
-      console.log('prev clicked')
+      let copy = [...this.state.displayedProductsIndices]
+      let incremented = copy.map(index => {
+        return index-= 1;
+      })
+      this.setState({
+        displayedProductsIndices: incremented
+      })
     }
 
     handleNextClick() {
-      console.log('next clicked')
-
+      let copy = [...this.state.displayedProductsIndices]
+      let incremented = copy.map(index => {
+        return index+= 1;
+      })
+      this.setState({
+        displayedProductsIndices: incremented
+      })
     }
 
 
@@ -222,7 +234,9 @@ export default class RelatedProducts extends React.Component {
         handleCompareItems={this.handleCompareItems}
         handlePrevClick={this.handlePrevClick}
         handleNextClick={this.handleNextClick}
-        state={this.props.state} />
+        state={this.props.state}
+        displayedProductsIndices={this.state.displayedProductsIndices}
+         />
 
         <RelatedProductsModal
         modalShow={this.state.modalShow}

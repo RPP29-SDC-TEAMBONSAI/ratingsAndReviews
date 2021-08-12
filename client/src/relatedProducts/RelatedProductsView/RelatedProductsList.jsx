@@ -31,7 +31,9 @@ const RelatedProductsList = (props) => {
         className='prevButton'
         onClick={() => {props.handlePrevClick()}} >Prev</button>
 
-        {relatedItemsList}
+        {relatedItemsList[props.displayedProductsIndices[0]]}
+        {relatedItemsList[props.displayedProductsIndices[1]]}
+        {relatedItemsList[props.displayedProductsIndices[2]]}
 
 
         <button
@@ -47,7 +49,8 @@ RelatedProductsList.propTypes = {
   handleProductChange: propTypes.func,
   handleCompareItems: propTypes.func,
   handlePrevClick: propTypes.func,
-  handleNextClick: propTypes.func
+  handleNextClick: propTypes.func,
+  displayedProductsIndices: propTypes.array
   };
 
 export default RelatedProductsList;
