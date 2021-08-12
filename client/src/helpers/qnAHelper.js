@@ -28,6 +28,7 @@ module.exports = {
 
   createDynamicData(questions) {
 
+
     let finalQuestions = questions.sort((a, b) => {
       return b.question_helpfulness - a.question_helpfulness
       // return b = a

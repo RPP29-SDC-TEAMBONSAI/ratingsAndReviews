@@ -4,14 +4,14 @@ import testData from './QnA-testData'
 
 describe('helper', () => {
   describe('createDynamicData', () => {
-    let data = testData.data()
+    let data = testData.helperTestData()
     let dynamicData;
     beforeEach(() => {
       dynamicData = helper.createDynamicData(data)
     })
 
     test('it should match the length of the original question results array input', () => {
-      expect(dynamicData.length === testData.data().length).toBe(true)
+      expect(dynamicData.length === testData.helperTestData().length).toBe(true)
     })
 
     test('each question in dynamicData array, should contain an answers array', () => {
@@ -40,7 +40,7 @@ describe('helper', () => {
     let newQuestionsWithAnsArr;
     let sortedAns;
     beforeEach(() => {
-      let finalQuestions = testData.data().sort((a, b) => {
+      let finalQuestions = testData.helperTestData().sort((a, b) => {
         return b.question_helpfulness - a.question_helpfulness
         // return b = a
       })
@@ -99,7 +99,7 @@ describe('helper', () => {
 
   describe('filterSearchInput', () => {
     test('should return a new questions results array, that include search term', ()=> {
-      let questions= testData.data();;
+      let questions= testData.helperTestData();;
       let value = '123'
       let value2='photos for all'
       let newQuestions = helper.filterSearchInput(questions, value);
@@ -163,13 +163,13 @@ describe('helper', () => {
   describe('addReportedProp', () => {
     let answerIds =[]
     test('it should add a report property to answers', () => {
-      let newQuestions = helper.createDynamicData(testData.data())
+      let newQuestions = helper.createDynamicData(testData.helperTestData())
       newQuestions = helper.addReportedProp(newQuestions, answerIds)
       expect(Boolean(newQuestions[0].answers[0].report)).toBe(true)
     })
     test('it should add a reported property, to answers that have been reported', () => {
       answerIds = [1, 2, 3]
-      let newQuestions = helper.createDynamicData(testData.data())
+      let newQuestions = helper.createDynamicData(testData.helperTestData())
       newQuestions = helper.addReportedProp(newQuestions, answerIds)
       expect(newQuestions[0].answers[2].report).toEqual('reported')
       expect(newQuestions[0].answers[3].report).toEqual('reported')

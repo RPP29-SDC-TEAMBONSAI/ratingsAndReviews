@@ -46,7 +46,8 @@ class QuestionsNAnswers extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+  //  console.log(this.props.data, "🤙")
+  //  console.log(prevProps.data, "🤙")
     if (prevProps.data.length !== this.props.data.length) {
 
       let dynamicData = helper.createDynamicData(this.props.data)
@@ -110,6 +111,7 @@ class QuestionsNAnswers extends React.Component {
   }
 
   searchFilter(searchValue) {
+
     let copy = this.state.dynamicData.slice()
     let original = this.state.savedData
 
@@ -123,10 +125,13 @@ class QuestionsNAnswers extends React.Component {
       let newDynamic = helper.createDynamicData(newQuestions)
       let answerIds = this.state.reported.slice()
       let finalData = helper.addReportedProp(newDynamic, answerIds)
+
+
         this.setState({
           dynamicData: finalData
         })
       }
+
   }
 
   showQuestions(currentCount, index) {
@@ -277,7 +282,7 @@ class QuestionsNAnswers extends React.Component {
 
 QuestionsNAnswers.propTypes = {
   currentItemName: propTypes.string.isRequired,
-  QuestionSavedData: propTypes.array.isRequired,
+  // QuestionSavedData: propTypes.array.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
   allClicksProps: propTypes.any

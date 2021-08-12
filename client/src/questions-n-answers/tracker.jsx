@@ -116,7 +116,7 @@ class ClickTracker extends React.Component {
 }
 
 ClickTracker.propTypes = {
-  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
+  children: propTypes.any
 
 }
 

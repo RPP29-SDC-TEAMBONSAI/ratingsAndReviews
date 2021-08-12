@@ -152,7 +152,7 @@ class QnAClicks extends React.Component {
 }
 
 QnAClicks.propTypes = {
-  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
+  children: propTypes.any
 
 }
 export default QnAClicks;
