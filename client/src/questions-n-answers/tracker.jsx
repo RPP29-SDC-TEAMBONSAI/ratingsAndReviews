@@ -27,10 +27,7 @@ class ClickTracker extends React.Component {
             interactions:[]
           })
         })
-
-
     //reset state of interactions after ok response is received from server
-
     }
 
     let ele;
@@ -119,7 +116,7 @@ class ClickTracker extends React.Component {
 }
 
 ClickTracker.propTypes = {
-  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
+  children: propTypes.any
 
 }
 

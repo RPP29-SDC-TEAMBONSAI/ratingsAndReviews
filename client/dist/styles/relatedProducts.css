@@ -4,6 +4,7 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsList {
   display: flex;
+
 }
 
 .relatedProductsCardList {
@@ -14,10 +15,34 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsCard {
   flex-grow: 1;
-  flex-shrink: 1;
+  flex-shrink: 0;
   border: solid;
   margin: 1rem .25em;
 
+}
+
+.relatedProductsCardTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.relatedProductsCardTop, .productName {
+  flex-wrap: wrap
+}
+
+
+.relatedProductsActionButton {
+  height: 4em;
+  width: 4em;
+}
+
+.relatedProductsCardBottom {
+  display: flex;
+  flex-direction: column;
+}
+.relatedProductsCardBottom, img {
+  display: flex;
+  align-self: center
 }
 
 /*-----------------
@@ -76,20 +101,22 @@ RP MODAL STLYING
   align-items: center;
   background: white;
   width: 50%;
-  height: 50%;
+  height: 75%;
   margin: auto;
+
 }
-table {
+
+.rpModalTable {
   border: 1px solid rgb(190,190,190);
 }
 
-td,
+.relatedProductsModal td,
 th {
     border: 1px solid rgb(190, 190, 190);
     padding: 10px;
 }
 
-td {
+.relatedProductsModal td {
     text-align: center;
 }
 

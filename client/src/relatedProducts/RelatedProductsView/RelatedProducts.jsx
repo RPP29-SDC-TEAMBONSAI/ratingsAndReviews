@@ -22,12 +22,15 @@ export default class RelatedProducts extends React.Component {
       modalShow: false,
       clickedProductInfo: {},
       modifiedCurrent: {},
-      features: []
+      features: [],
+      displayedProductsIndices: [0, 1, 2]
     }
     this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
     this.handleRemoveFromOutfit = this.handleRemoveFromOutfit.bind(this);
     this.handleCompareItems = this.handleCompareItems.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
     this.product = this.product.bind(this)
     this.style = this.style.bind(this)
     this.outFit = this.outFit.bind(this)
@@ -149,11 +152,15 @@ export default class RelatedProducts extends React.Component {
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-      localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
-      this.setState({
-        yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
-      })
 
+      if (this.state.yourOutfitItems.some(({product_id}) => product_id === outfitItem.product_id)) {
+        alert('Item already in outfit')
+      } else {
+        localStorage.setItem(outfitItem.product_id, JSON.stringify(outfitItem));
+        this.setState({
+          yourOutfitItems: [...this.state.yourOutfitItems, outfitItem]
+        })
+      }
     }
 
     handleRemoveFromOutfit(outfitItem, e) {
@@ -196,6 +203,27 @@ export default class RelatedProducts extends React.Component {
       });
     }
 
+    handlePrevClick() {
+      let copy = [...this.state.displayedProductsIndices]
+      let incremented = copy.map(index => {
+        return index-= 1;
+      })
+      this.setState({
+        displayedProductsIndices: incremented
+      })
+    }
+
+    handleNextClick() {
+      let copy = [...this.state.displayedProductsIndices]
+      let incremented = copy.map(index => {
+        return index+= 1;
+      })
+      this.setState({
+        displayedProductsIndices: incremented
+      })
+    }
+
+
 
   render() {
     if (this.props.state.loaded === false) {
@@ -208,7 +236,12 @@ export default class RelatedProducts extends React.Component {
         allProps={this.state.allPropsObj}
         handleProductChange={this.props.handleProductChange}
         handleCompareItems={this.handleCompareItems}
-        state={this.props.state} />
+        handlePrevClick={this.handlePrevClick}
+        handleNextClick={this.handleNextClick}
+        state={this.props.state}
+        displayedProductsIndices={this.state.displayedProductsIndices}
+         />
+
         <RelatedProductsModal
         modalShow={this.state.modalShow}
         closeModal={this.closeModal}
@@ -216,6 +249,7 @@ export default class RelatedProducts extends React.Component {
         modifiedCurrent={this.state.modifiedCurrent}
         features={this.state.features}
          />
+
         <YourOutfitList
         outfitProps={this.state.outfitPropsObj}
         handleAddToOutfit={this.handleAddToOutfit}

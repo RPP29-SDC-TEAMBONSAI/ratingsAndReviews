@@ -14,7 +14,7 @@ const QuestionList = (props) => {
         </div>
         <div className={props.answerState? 'answerListScroll': ''}>
 
-        {props.answers.map((answer, index) => {
+        {props.question.answers.map((answer, index) => {
           return (
             <div className={!props.answerState && index <=1 || props.answerState ? 'answerList': 'answerList hide'} key={index}>
 
