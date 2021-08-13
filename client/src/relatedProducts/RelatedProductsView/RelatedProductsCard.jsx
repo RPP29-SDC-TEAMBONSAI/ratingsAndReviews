@@ -20,11 +20,7 @@ const getStars = function (starsObject) {
   } else {
     return <div className='stars'>{htmlElements.props.children[0]}</div>
   }
-
-
 };
-
-
 
 const RelatedProductsCard = (props) => {
 
@@ -50,7 +46,9 @@ const RelatedProductsCard = (props) => {
             )
           }
         })()}
-        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'} alt='clothing product'></img>
+        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}
+        alt='clothing product'
+        className='relatedProductImage'></img>
 
         <span className="reviewStars">{getStars(props.starRating.ratings)}</span>
         </div>

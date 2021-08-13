@@ -43,7 +43,7 @@ const RelatedProductsList = (props) => {
 
   return (
     <div className='relatedProductsListContainer'>
-      <h2>Related Products:</h2>
+      <h2 className='relatedProductsTitle'>Related Products:</h2>
       <div className='relatedProductsList'>
         {prevButton}
 

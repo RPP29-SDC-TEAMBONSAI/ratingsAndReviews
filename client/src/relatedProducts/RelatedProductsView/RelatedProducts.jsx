@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from '../YourOutfitView/YourOutfitList.jsx';
 import RelatedProductsModal from './RelatedProductsModal.jsx';
+import withClickTracker from '../withClickTracker.jsx';
 import helper from '../../helper-functions/rpHelpers.js';
 import {productsWithId, productsStyle} from "../../clientRoutes/products.js";
 import {reviewsMeta} from '../../clientRoutes/reviews.js';
@@ -11,7 +12,7 @@ const TOKEN = require("../../../../config.js").GITHUB_TOKEN;
 const api = require("../../../../config.js").API;
 
 
-export default class RelatedProducts extends React.Component {
+class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -260,9 +261,10 @@ export default class RelatedProducts extends React.Component {
     if (this.props.state.loaded === false) {
       return <div className='isLoading'>Loading...</div>
     }
+    const { recordCount } = this.props;
 
     return (
-      <div className='relatedProducts'>
+      <div className='relatedProducts' onClick={recordCount}>
         <RelatedProductsList
         allProps={this.state.allPropsObj}
         handleProductChange={this.props.handleProductChange}
@@ -296,6 +298,8 @@ export default class RelatedProducts extends React.Component {
 
 RelatedProducts.propTypes = {
   handleProductChange: propTypes.func,
-  state: propTypes.object
+  state: propTypes.object,
+  recordCount: propTypes.func
 }
 
+export default withClickTracker(RelatedProducts);
