@@ -4,7 +4,8 @@ const AddToCart = (props) => {
   if (props.state.styles.length > 0) {
     let val = 0;
     return (
-      <div>
+      <>
+        <div className = "select-size-and-quantity">
         <select className="selectSize" onChange={props.changeAvailableQuantity}>
           <option id = "select-size">SELECT SIZE</option>
           {Object.entries(
@@ -39,9 +40,13 @@ const AddToCart = (props) => {
             }
           })()}
         </select>
+        </div>
+        <div className = "bag-and-favorite">
         <button className="addToBag" onClick = {props.addToBag}>ADD TO BAG +</button>
         <button className="favoriteStar">⭒</button>
-      </div>
+        </div>
+        </>
+
     );
   } else {
     return null;
