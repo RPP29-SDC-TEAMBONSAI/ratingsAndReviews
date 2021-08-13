@@ -4,29 +4,54 @@ import RelatedProductsCard from './RelatedProductsCard.jsx';
 
 
 const RelatedProductsList = (props) => {
+  let relatedItemsList = props.allProps.map((product, index) => {
+    return <div key={index}>
+      <RelatedProductsCard
+        key={product.itemId}
+        name={product.itemName}
+        category={product.itemCategory}
+        originalPrice={product.originalPrice}
+        salePrice={product.salePrice}
+        photo={product.photoUrl.thumbnail_url}
+        id={product.itemId}
+        features={product.features}
+        handleProductChange={props.handleProductChange}
+        handleCompareItems={props.handleCompareItems}
+        starRating={product.starRating}
+       />
+     </div>
+  })
+  let prevButton;
+  if (props.displayedProductsIndices[0] > 0) {
+    prevButton =  <button
+    className='prevButton'
+    onClick={() => {props.handlePrevClick()}} >Prev</button>
+  } else {
+    prevButton = null;
+  }
+
+  let nextButton;
+  if (props.displayedProductsIndices[2] === relatedItemsList.length - 1) {
+    nextButton = null;
+  } else {
+    nextButton =<button
+    className='nextButton'
+    onClick={() => {props.handleNextClick()}} >Next</button>
+  }
+
   return (
     <div className='relatedProductsListContainer'>
       <h2>Related Products:</h2>
-    <div className='relatedProductsList'>
-    {props.allProps.map((product, index) => {
-      return <div key={index}>
-        <RelatedProductsCard
-          key={product.itemId}
-          name={product.itemName}
-          category={product.itemCategory}
-          originalPrice={product.originalPrice}
-          salePrice={product.salePrice}
-          photo={product.photoUrl.thumbnail_url}
-          id={product.itemId}
-          features={product.features}
-          handleProductChange={props.handleProductChange}
-          handleCompareItems={props.handleCompareItems}
-          starRating={product.starRating}
-         />
-       </div>
-    })}
+      <div className='relatedProductsList'>
+        {prevButton}
 
-    </div>
+        {relatedItemsList[props.displayedProductsIndices[0]]}
+        {relatedItemsList[props.displayedProductsIndices[1]]}
+        {relatedItemsList[props.displayedProductsIndices[2]]}
+
+        {nextButton}
+
+      </div>
     </div>
   )
 }
@@ -34,7 +59,10 @@ const RelatedProductsList = (props) => {
 RelatedProductsList.propTypes = {
   allProps: propTypes.array,
   handleProductChange: propTypes.func,
-  handleCompareItems: propTypes.func
+  handleCompareItems: propTypes.func,
+  handlePrevClick: propTypes.func,
+  handleNextClick: propTypes.func,
+  displayedProductsIndices: propTypes.array
   };
 
 export default RelatedProductsList;

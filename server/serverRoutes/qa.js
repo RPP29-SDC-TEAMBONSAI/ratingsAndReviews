@@ -18,13 +18,10 @@ module.exports = {
         'Authorization': TOKEN
       }
     }).then((data) => {
-
       res.send(data.data.results).end();
-
     })
   },
   answers: (req, res) => {
-
     res.status(200).end();
 
   },
@@ -53,7 +50,6 @@ module.exports = {
       }
     })
       .then(data => {
-
         res.send(200)
       })
       .catch(err => console.log(err))
@@ -67,7 +63,6 @@ module.exports = {
         'Authorization': TOKEN
       }
     }).then(data => {
-
       res.send(200)
     })
     .catch(err => console.log(err, "🤙"))
@@ -91,7 +86,6 @@ module.exports = {
   },
 
   getUrl: (req, res) => {
-
     let file=req.body.file.split('base64,')[1]
     const options = {
       apiKey: key,
@@ -104,43 +98,34 @@ module.exports = {
   },
 
   addToReported: (req, res) => {
-
     const data = new Uint8Array(Buffer.from(req.body.id.toString()))
-    console.log(data)
+
     let write = async() => {
       let value = new Promise((resolve, reject) => {
         fs.writeFile(`./client/src/questions-n-answers/reviewAnswers/${req.body.id.toString()}.txt`, data, (err) => {
           if (err) { console.log(err, "😢")}
-
           resolve(true)
         })
       })
-     let final= await(value);
+
+      let final= await(value);
       return final
     }
 
      write().then(data => {
        fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
-
          let answerIds = [];
-
          files.forEach((file) => {
            let newFile = Number(file.split('.')[0])
            answerIds.push(newFile)
-
          })
          res.send(answerIds)
-
        })
      })
-
-
-
   },
+
   getReported: (req, res) => {
-
     return fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
-
        let answerIds = [];
        if (files.length > 0) {
          files.forEach((file) => {
@@ -150,47 +135,36 @@ module.exports = {
           })
         }
        res.send(answerIds)
-
      })
   },
   interactions: (req, res) => {
-    console.log(req.body)
-
     postAll = () => {
-
       return new Promise((resolve, reject) => {
-
         let result = [];
-        console.log(req.body.interactions)
+
         req.body.interactions.forEach(interaction => {
+
           return axios.post(api + 'interactions', interaction, {
             headers: {
               'Authorization': TOKEN
             }
           })
-            .then(data => {
-              console.log()
-              // result.push(data.response)
-              result.push(data.status)
-              if (result.length >=5) {
-
-                resolve(result)
-
-              }
-            })
+          .then(data => {
+            // result.push(data.response)
+            result.push(data.status)
+            if (result.length >=5) {
+              resolve(result)
+            }
+          })
         })
-
       })
-
     }
+
     postAll().then(data => {
-      console.log(data, "🤙")
+      console.log('posted QA interactions, sending response...')
       //once data is received we know request is complete, send 200 to client
       res.send(200)
     })
 
   }
-
-
-
 }

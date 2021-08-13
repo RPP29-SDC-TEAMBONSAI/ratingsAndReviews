@@ -22,17 +22,14 @@ class ClickTracker extends React.Component {
       //send array of interactions to server to be posted
       return interactions(newResults)
         .then(data => {
-          console.log(data, 'qa interactions data posted to API')
+          // console.log(data, 'qa interactions data posted to API')
           this.setState({
             interactions:[]
           })
         })
-
-
     //reset state of interactions after ok response is received from server
-
     }
-    console.log(e.target.className)
+
     let ele;
     if (e.target.className === 'moreAnsweredBtn') {
       ele = 'more answered questions button'
@@ -119,7 +116,7 @@ class ClickTracker extends React.Component {
 }
 
 ClickTracker.propTypes = {
-  children: propTypes.oneOfType([propTypes.func, propTypes.obj])
+  children: propTypes.any
 
 }
 

@@ -41,7 +41,6 @@ app.get('/products', products)
   .put('/reviews/:review_id/helpful', reviewsHelpful)
   .put('/reviews/:review_id/report', reviewsReport)
   .post('/reviews/add', reviewsAdd)
-  //interactions
   .post('/reviews/interaction', reviewsInteraction)
   .post('/qa/interactions', interactions)
 
