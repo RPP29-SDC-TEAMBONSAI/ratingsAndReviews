@@ -21,9 +21,7 @@ const getStars = function (starsObject) {
 };
 
 const YourOutfitCard = (props) => {
-
   let outfitItemRatings = JSON.parse(localStorage.getItem(props.id)).reviews;
-
 
   return (
     <div className='yourOutfitCard'>
