@@ -45,10 +45,11 @@ module.exports = {
     return axios.post(`/reviews/add`, review)
   },
   reviewsInteraction: (event) => {
-    let interaction = event.target.getAttribute('interaction');
+    event.stopPropagation();
+    name = event.target.className || null;
     axios.post(
       `/reviews/interaction`, {
-        element: interaction,
+        element: name,
         widget: 'Ratings And Reviews - Team Cotija',
         time: new Date()
       }

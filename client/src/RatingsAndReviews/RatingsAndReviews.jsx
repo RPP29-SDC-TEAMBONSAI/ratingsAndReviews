@@ -2,6 +2,7 @@ import React from 'react';
 import RatingsBreakdown from './RatingsBreakdown/RatingsBreakdown.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 import PropTypes from 'prop-types';
+import ReviewsClicker from './ReviewsClicker.jsx';
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -46,7 +47,11 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div className="ratings-and-reviews" id="link_to_reviews" style={{display: this.state.hidden ? "none" : "flex"}}>
+      <div
+        className="ratings-and-reviews"
+        id="link_to_reviews"
+        style={{display: this.state.hidden ? "none" : "flex"}}
+        onClick={this.props.recordClick}>
         <RatingsBreakdown
           product_id={this.props.product_id}
           starFilterClick={this.setStarFilter}
@@ -63,7 +68,8 @@ class RatingsAndReviews extends React.Component {
 };
 
 RatingsAndReviews.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  recordClick: PropTypes.func
 }
 
-export default RatingsAndReviews;
+export default ReviewsClicker(RatingsAndReviews);

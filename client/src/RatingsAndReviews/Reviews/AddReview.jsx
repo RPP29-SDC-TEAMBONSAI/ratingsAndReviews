@@ -4,7 +4,7 @@ import Stars from '../../stars/stars.jsx';
 import helper from '../../helper-functions/rnRHelper.js';
 const { getFactorDetailArray, auditReviews } = helper;
 import { getUrl } from '../../clientRoutes/qa';
-import { reviewsInteraction, reviewAdd } from '../../clientRoutes/reviews.js';
+import { reviewAdd } from '../../clientRoutes/reviews.js';
 
 class AddReview extends React.Component {
   constructor(props) {
@@ -24,6 +24,8 @@ class AddReview extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleOverallRatingChange = this.handleOverallRatingChange.bind(this);
     this.onFileUpload = this.onFileUpload.bind(this);
+    this.imitateUpload = this.imitateUpload.bind(this);
+    this.submitReview = this.submitReview.bind(this);
   }
 
   handleChange(event) {
@@ -93,17 +95,27 @@ class AddReview extends React.Component {
     }
   };
 
+  imitateUpload() {
+    document.getElementById('r-photo-add').click();
+  }
+
+  submitReview(event) {
+    let warnings = auditReviews(this.state, this.props.characteristics);
+    if (warnings === '') {
+      reviewAdd(this.state, this.props.product_id)
+      this.props.close(event);
+    } else {
+      window.alert('Please fix the following before submitting your review:\n\n' + warnings);
+    }
+  }
+
   render() {
     return (
       <div className="add-review-form">
         <div className="add-review-top">
           <div
-            interaction="closed review form"
             className="x"
-            onClick={(e) => {
-              this.props.close(e);
-              reviewsInteraction(e);
-            }}>
+            onClick={this.props.close}>
               ✕
             </div>
           <div className="review-title">Write Your Review</div>
@@ -177,9 +189,7 @@ class AddReview extends React.Component {
           <button
             className="r-photo-button"
             style={{display: this.state.allowUpload ? "inline-block" : "none"}}
-            onClick={() => {
-              document.getElementById('r-photo-add').click();
-            }}>
+            onClick={this.imitateUpload}>
             Add A Photo
           </button>
           <div className="r-photos">
@@ -223,23 +233,8 @@ class AddReview extends React.Component {
           </div>
           {/* SUBMIT BUTTON */}
           <button
-            interaction="submitted review form"
             className="r-submit"
-            onClick={(e) => {
-              console.log(this.state);
-              console.log(this.props.characteristics);
-              let warnings = auditReviews(this.state, this.props.characteristics);
-              if (warnings === '') {
-                reviewAdd(this.state, this.props.product_id)
-                window.alert('Review Submitted');
-                this.props.close(e);
-                reviewsInteraction(e);
-              } else {
-                window.alert(
-                  'Please fix the following before submitting your review:\n\n' + warnings
-                  );
-              }
-            }}>
+            onClick={this.submitReview}>
               Sumbit Review
             </button>
         </div>

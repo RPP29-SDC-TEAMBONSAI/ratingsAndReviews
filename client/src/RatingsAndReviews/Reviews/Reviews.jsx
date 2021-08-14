@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReviewsHeader from './ReviewsHeader.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import { reviews, reviewsMeta, reviewsInteraction } from '../../clientRoutes/reviews.js';
+import { reviews, reviewsMeta } from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rnRHelper.js';
 const { sortByRelevance, filterReviewsByStars } = helper;
 
@@ -113,22 +113,14 @@ class Reviews extends React.Component {
             viewPhoto={this.viewPhoto}/>
           <div className="review-buttons">
             <button
-              interaction="loaded more reviews"
               className="review-button"
-              onClick={(e) => {
-                this.loadTwoMore(e);
-                reviewsInteraction(e);
-              }}
+              onClick={this.loadTwoMore}
               style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
                 MORE REVIEWS
             </button>
             <button
-              interaction="opened review form"
               className="review-button"
-              onClick={(e) => {
-                this.openAddReview();
-                reviewsInteraction(e);
-              }}>
+              onClick={this.openAddReview}>
                 ADD A REVIEW +
             </button>
           </div>
