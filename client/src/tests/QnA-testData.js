@@ -359,7 +359,7 @@ module.exports = {
                             "id": 1992444,
                             "body": "Its the best! Seriously magic fabric",
                             "date": "2019-09-18T00:00:00.000Z",
-                            "answerer_name": "warmkid",
+                            "answerer_name": "seller",
                             "helpfulness": 1,
                             "photos": []
                         },
@@ -367,7 +367,7 @@ module.exports = {
                             "id": 1992445,
                             "body": "Supposedly suede, but I think its synthetic",
                             "date": "2019-09-18T00:00:00.000Z",
-                            "answerer_name": "warmkid",
+                            "answerer_name": "seller",
                             "helpfulness": 9,
                             "photos": []
                         },
@@ -668,11 +668,61 @@ module.exports = {
         },
         QnAcurrentProductId:() => {
             return 28218
+        },
+        showQuestionsData1:() => {
+            return [
+                {
+                    "question_id": 290500,
+                    "question_body": "1231",
+                    "question_date": "2021-08-09T00:00:00.000Z",
+                    "asker_name": "asd",
+                    "question_helpfulness": 0,
+                    "reported": false,
+                    "answers": {
+                        "2710242": {
+                            "id": 2710242,
+                            "body": "PHOTO KING",
+                            "date": "2021-08-09T00:00:00.000Z",
+                            "answerer_name": "isaac",
+                            "helpfulness": 28,
+                            "photos": []
+                        },
+                        "2710243": {
+                            "id": 2710243,
+                            "body": "PHOTO HERE PLEASE",
+                            "date": "2021-08-09T00:00:00.000Z",
+                            "answerer_name": "isaac",
+                            "helpfulness": 31,
+                            "photos": [
+                                "https://i.ibb.co/LZYsK7L/dfdccc3712ed263d4903fa18806adab7-sc2-carbot-feature-003.jpg"
+                            ]
+                        },
+                        "2710244": {
+                            "id": 2710244,
+                            "body": "multi phto",
+                            "date": "2021-08-09T00:00:00.000Z",
+                            "answerer_name": "isaac",
+                            "helpfulness": 45,
+                            "photos": [
+                                "https://i.ibb.co/BLmK4w3/w3kr4m2fi3111.png",
+                                "https://i.ibb.co/LZYsK7L/dfdccc3712ed263d4903fa18806adab7-sc2-carbot-feature-003.jpg"
+                            ]
+                        },
+                    },
+                },
+                {
+                    "question_id": 290531,
+                    "question_body": "231s",
+                    "question_date": "2021-08-11T00:00:00.000Z",
+                    "asker_name": "asdas",
+                    "question_helpfulness": 0,
+                    "reported": false,
+                    "answers": {}
+                },
+            ]
+
         }
-
-
-
-}
+    }
 // data:[
 //     //     {
 //     //         "question_id": 290500,
@@ -1002,4 +1052,3 @@ module.exports = {
 //     //     }
 //     // ],
 
-// //   product_id: 28212,
