@@ -48,7 +48,7 @@ class AddReview extends React.Component {
 
   handleOverallRatingChange(event) {
     this.setState({
-      rating: event.target.getAttribute('starNum')
+      rating: event.target.getAttribute('starnum')
     });
   }
 
@@ -124,7 +124,7 @@ class AddReview extends React.Component {
         </div>
         {/* FACTOR INPUTS */}
         <div className="radio-factor-title">Rank the following factors for this product <a className='r-required'>*</a></div>
-        {Object.keys(this.props.characteristics).map((factor, index) => {
+        {Object.keys(this.props.characteristics || {}).map((factor, index) => {
           return (
             <div className="radio-options-wrapper" key={index}>
               <div className="radio-options-title">{factor}</div>

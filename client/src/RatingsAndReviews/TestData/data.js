@@ -1,6 +1,6 @@
 const reviews = {
-  28212: {
-    "product": "28212",
+  36300: {
+    "product": "36300",
     "page": 0,
     "count": 1000,
     "results": [
@@ -119,8 +119,8 @@ const reviews = {
 };
 
 const reviewMeta = {
-  28212: {
-    "product_id": "28212",
+  36300: {
+    "product_id": "36300",
     "ratings": {
       "4": "1",
       "5": "1"

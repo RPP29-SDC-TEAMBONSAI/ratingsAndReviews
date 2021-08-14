@@ -111,6 +111,14 @@ describe('Review component', () => {
       Promise.resolve(instance.getStateData(1, null))
         .then(() => expect(instance.state.reviews.length).toBe(1));
     });
+
+    test('should not change review state on get request error', () => {
+      const instance = wrapper.instance();
+      jest.spyOn(instance, 'getStateData');
+
+      Promise.resolve(instance.getStateData('a', null))
+        .catch((err) => expect(err).toBeTruthy());
+    });
   });
 
   describe('handleSortChange', () => {

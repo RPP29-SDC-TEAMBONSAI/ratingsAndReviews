@@ -19,7 +19,7 @@ module.exports = {
   res.status(200).end();
   },
   productsWithId: (req, res) => {
-    // console.log('product id req', req)28212
+    // console.log('product id req', req)36300
     let request = req.originalUrl.split('?');
 
     axios.get(api + `products/${request[1]}`, {

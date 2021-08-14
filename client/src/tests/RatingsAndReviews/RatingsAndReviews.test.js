@@ -16,7 +16,7 @@ const mockEvent = (attr, value) => {
 }
 
 const props = {
-  product_id: 28212,
+  product_id: 36300,
 }
 
 let wrapper;

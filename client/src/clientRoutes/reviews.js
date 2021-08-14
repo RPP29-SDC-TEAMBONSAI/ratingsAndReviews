@@ -3,12 +3,12 @@ const axios = require("axios");
 module.exports = {
   reviews: (page, count, sort, product_id) => {
     return axios.get(
-      `/reviews?page=${page || 1}&count=${count || 5}&sort=${sort || 'newest'}&product_id=${product_id || 28212}`
+      `/reviews?page=${page || 1}&count=${count || 5}&sort=${sort || 'newest'}&product_id=${product_id || 36300}`
     );
   },
   reviewsMeta: (product_id) => {
     return axios.get(
-      `/reviews/meta?product_id=${product_id || 28212}`
+      `/reviews/meta?product_id=${product_id || 36300}`
     );
   },
   reviewHelpful: (review_id) => {
