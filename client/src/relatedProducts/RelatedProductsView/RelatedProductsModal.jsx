@@ -11,30 +11,29 @@ const RelatedProductsModal = (props) => {
         <div className='modalTable'>
           <h1>Comparing</h1>
           <table className='rpModalTable'>
-            <tbody>
-              <tr>
-                <th>{props.modifiedCurrent.name}</th>
-                <th>Feature</th>
-                <th>{props.clickedProductInfo.name}</th>
+            <tbody className='rpModalTbody'>
+              <tr className='rpModalTrow'>
+                <th className='rpModalTdheader'>{props.modifiedCurrent.name}</th>
+                <th className='rpModalTdheader'>Feature</th>
+                <th className='rpModalTdheader'>{props.clickedProductInfo.name}</th>
                 </tr>
            {props.features.map((feature, i) => {
             return (
-
               <React.Fragment key={i++} >
-                <tr>
-                  <td>
+                <tr className='rpModalTrow'>
+                  <td className='rpModalTdata'>
                     {
                     props.modifiedCurrent.features[feature] !== undefined ?
                       props.modifiedCurrent.features[feature] :
-                      'n/a'
+                      ''
                     }
                   </td>
-                  <td>{feature}</td>
-                  <td>
+                  <td className='rpModalTdata'>{feature}</td>
+                  <td className='rpModalTdata'>
                   {
                     props.clickedProductInfo.features[feature] !== undefined ?
                       props.clickedProductInfo.features[feature] :
-                      'n/a'
+                      ''
                     }
                   </td>
                 </tr>
