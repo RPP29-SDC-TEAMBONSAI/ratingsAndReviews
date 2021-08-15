@@ -1,5 +1,5 @@
 const productInfo = {
-  id: 28212,
+  id: 36300,
   campus: 'hr-rpp',
   name: 'Camo Onesie',
   slogan: 'Blend in to your crowd',
@@ -113,7 +113,7 @@ var styles = [
   }
 ]
 const mockProps = {
-  product_id: 28212,
+  product_id: 36300,
   productInformation: productInfo,
   styles: styles,
   ratings: { '4': '1', '5': '1' }

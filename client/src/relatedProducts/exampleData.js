@@ -1,5 +1,5 @@
 const currentProduct = {
-    "id": 28212,
+    "id": 36300,
     "campus": "hr-rpp",
     "name": "Camo Onesie",
     "slogan": "Blend in to your crowd",
@@ -21,7 +21,7 @@ const currentProduct = {
 }
 
 const currentProductStyles = {
-        "product_id": "28212",
+        "product_id": "36300",
         "results": [
             {
                 "style_id": 162332,
@@ -385,7 +385,7 @@ const relatedProducts = [
   28217,
   28219,
   28220,
-  28212,
+  36300,
   28214
 ]
 
@@ -474,7 +474,7 @@ const relatedProductsInfo = [
   ]
 },
 {
-  "id": 28212,
+  "id": 36300,
   "campus": "hr-rpp",
   "name": "Camo Onesie",
   "slogan": "Blend in to your crowd",

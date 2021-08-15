@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Stars from '../../stars/stars.jsx'
 import helper from '../../helper-functions/rnRHelper.js';
 const { formatDate, truncateSummary, createRecommendDiv, createResponseDiv } = helper;
-import { reviewHelpful, reviewReport, reviewsInteraction } from '../../clientRoutes/reviews.js';
+import { reviewHelpful, reviewReport } from '../../clientRoutes/reviews.js';
 
 class IndividualReviewTile extends React.Component {
   constructor(props) {
@@ -62,14 +62,10 @@ class IndividualReviewTile extends React.Component {
               {this.props.review.photos.map((photo, index) => {
                 return (
                   <img
-                    interaction="photo viewed"
                     className="irt-photo"
                     key={index} src={photo.url}
                     alt="image"
-                    onClick={(e) => {
-                      this.props.viewPhoto(e);
-                      reviewsInteraction(e);
-                    }}/>
+                    onClick={this.props.viewPhoto}/>
                 )
               })}
             </div>
@@ -80,20 +76,12 @@ class IndividualReviewTile extends React.Component {
             <div className="irt-helpfulness-info">
               <div className="irt-helpful-text">Helpful?</div>
               <div
-                interaction="helpful"
                 className="irt-yes-clickable"
-                onClick={(e) => {
-                  this.handleHelpful(e);
-                  reviewsInteraction(e);
-                }}>Yes</div>
+                onClick={this.handleHelpful}>Yes</div>
               <div className="irt-rating-helpfulness">({this.props.review.helpfulness + this.state.helpful})</div>
               <div
-                interaction="reported"
                 className="irt-report-clickable"
-                onClick={(e) => {
-                  this.handleReport(e);
-                  reviewsInteraction(e);
-                }}>Report</div>
+                onClick={this.handleReport}>Report</div>
             </div>
           </div>
         </div>
