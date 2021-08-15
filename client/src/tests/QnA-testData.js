@@ -720,8 +720,444 @@ module.exports = {
                     "answers": {}
                 },
             ]
+        },
+        questions1_productId: () => {
+            return 36300
+        },
+        questions1: () => {
+            return [
+                {
+                    "question_id": 290555,
+                    "question_body": "Can I wash it?",
+                    "question_date": "2018-02-08T00:00:00.000Z",
+                    "asker_name": "cleopatra",
+                    "question_helpfulness": 9,
+                    "reported": false,
+                    "answers": {
+                        "2710375": {
+                            "id": 2710375,
+                            "body": "I've thrown it in the wash and it seems fine",
+                            "date": "2018-02-08T00:00:00.000Z",
+                            "answerer_name": "marcanthony",
+                            "helpfulness": 8,
+                            "photos": []
+                        },
+                        "2710393": {
+                            "id": 2710393,
+                            "body": "It says not to",
+                            "date": "2018-03-08T00:00:00.000Z",
+                            "answerer_name": "ceasar",
+                            "helpfulness": 1,
+                            "photos": []
+                        },
+                        "2710425": {
+                            "id": 2710425,
+                            "body": "I wouldn't machine wash it",
+                            "date": "2018-03-08T00:00:00.000Z",
+                            "answerer_name": "ceasar",
+                            "helpfulness": 0,
+                            "photos": []
+                        },
+                        "2710430": {
+                            "id": 2710430,
+                            "body": "Only if you want to ruin it!",
+                            "date": "2018-03-08T00:00:00.000Z",
+                            "answerer_name": "ceasar",
+                            "helpfulness": 5,
+                            "photos": []
+                        },
 
+                    }
+                },
+                {
+                    "question_id": 290554,
+                    "question_body": "How long does it last?",
+                    "question_date": "2019-07-06T00:00:00.000Z",
+                    "asker_name": "funnygirl",
+                    "question_helpfulness": 7,
+                    "reported": false,
+                    "answers": {
+                        "2710394": {
+                            "id": 2710394,
+                            "body": "It runs small",
+                            "date": "2019-11-17T00:00:00.000Z",
+                            "answerer_name": "dschulman",
+                            "helpfulness": 2,
+                            "photos": [
+                                "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
+                                "https://images.unsplash.com/photo-1536922645426-5d658ab49b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                            ]
+                        },
+                        "2710418": {
+                            "id": 2710418,
+                            "body": "Showing no wear after a few months!",
+                            "date": "2019-09-06T00:00:00.000Z",
+                            "answerer_name": "sillyguy",
+                            "helpfulness": 10,
+                            "photos": []
+                        }
+                    }
+                },
+                {
+                    "question_id": 290551,
+                    "question_body": "What fabric is the top made of?",
+                    "question_date": "2018-01-04T00:00:00.000Z",
+                    "asker_name": "yankeelover",
+                    "question_helpfulness": 3,
+                    "reported": false,
+                    "answers": {
+                        "2710334": {
+                            "id": 2710334,
+                            "body": "Something pretty soft but I can't be sure",
+                            "date": "2018-01-04T00:00:00.000Z",
+                            "answerer_name": "metslover",
+                            "helpfulness": 5,
+                            "photos": [
+                                "https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
+                                "https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                "https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80"
+                            ]
+                        },
+                        "2710336": {
+                            "id": 2710336,
+                            "body": "Its the best! Seriously magic fabric",
+                            "date": "2018-01-04T00:00:00.000Z",
+                            "answerer_name": "metslover",
+                            "helpfulness": 7,
+                            "photos": []
+                        },
+                        "2710337": {
+                            "id": 2710337,
+                            "body": "DONT BUY IT! It's bad for the environment",
+                            "date": "2018-01-04T00:00:00.000Z",
+                            "answerer_name": "metslover",
+                            "helpfulness": 8,
+                            "photos": []
+                        },
+                        "2710386": {
+                            "id": 2710386,
+                            "body": "Suede",
+                            "date": "2018-11-04T00:00:00.000Z",
+                            "answerer_name": "metslover",
+                            "helpfulness": 7,
+                            "photos": []
+                        },
+                        "2710424": {
+                            "id": 2710424,
+                            "body": "Supposedly suede, but I think its synthetic",
+                            "date": "2018-12-04T00:00:00.000Z",
+                            "answerer_name": "metslover",
+                            "helpfulness": 3,
+                            "photos": []
+                        },
+                        "3715390": {
+                            "id": 3715390,
+                            "body": "test post images",
+                            "date": "2021-08-13T00:00:00.000Z",
+                            "answerer_name": "test ",
+                            "helpfulness": 0,
+                            "photos": []
+                        }
+                    }
+                }
+
+            ]
+        },
+        questions2_productId: () => {
+            return '36300'
+        },
+        questons2: () => {
+          return [
+            {
+                "question_id": 290555,
+                "question_body": "Can I wash it?",
+                "question_date": "2018-02-08T00:00:00.000Z",
+                "asker_name": "cleopatra",
+                "question_helpfulness": 9,
+                "reported": false,
+                "answers": {
+                    "2710375": {
+                        "id": 2710375,
+                        "body": "I've thrown it in the wash and it seems fine",
+                        "date": "2018-02-08T00:00:00.000Z",
+                        "answerer_name": "marcanthony",
+                        "helpfulness": 8,
+                        "photos": []
+                    },
+                    "2710393": {
+                        "id": 2710393,
+                        "body": "It says not to",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 1,
+                        "photos": []
+                    },
+                    "2710425": {
+                        "id": 2710425,
+                        "body": "I wouldn't machine wash it",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 0,
+                        "photos": []
+                    },
+                    "2710430": {
+                        "id": 2710430,
+                        "body": "Only if you want to ruin it!",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 5,
+                        "photos": []
+                    },
+                    "2710436": {
+                        "id": 2710436,
+                        "body": "Yes",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "Seller",
+                        "helpfulness": 5,
+                        "photos": []
+                    }
+                }
+            },
+            {
+                "question_id": 290554,
+                "question_body": "How long does it last?",
+                "question_date": "2019-07-06T00:00:00.000Z",
+                "asker_name": "funnygirl",
+                "question_helpfulness": 7,
+                "reported": false,
+                "answers": {
+                    "2710394": {
+                        "id": 2710394,
+                        "body": "It runs small",
+                        "date": "2019-11-17T00:00:00.000Z",
+                        "answerer_name": "dschulman",
+                        "helpfulness": 2,
+                        "photos": [
+                            "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
+                            "https://images.unsplash.com/photo-1536922645426-5d658ab49b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                        ]
+                    },
+                    "2710418": {
+                        "id": 2710418,
+                        "body": "Showing no wear after a few months!",
+                        "date": "2019-09-06T00:00:00.000Z",
+                        "answerer_name": "sillyguy",
+                        "helpfulness": 10,
+                        "photos": []
+                    }
+                }
+            },
+            {
+                "question_id": 290551,
+                "question_body": "What fabric is the top made of?",
+                "question_date": "2018-01-04T00:00:00.000Z",
+                "asker_name": "yankeelover",
+                "question_helpfulness": 3,
+                "reported": false,
+                "answers": {
+                    "2710334": {
+                        "id": 2710334,
+                        "body": "Something pretty soft but I can't be sure",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 5,
+                        "photos": [
+                            "https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
+                            "https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80"
+                        ]
+                    },
+                    "2710336": {
+                        "id": 2710336,
+                        "body": "Its the best! Seriously magic fabric",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 7,
+                        "photos": []
+                    },
+                    "2710337": {
+                        "id": 2710337,
+                        "body": "DONT BUY IT! It's bad for the environment",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 8,
+                        "photos": []
+                    },
+                    "2710386": {
+                        "id": 2710386,
+                        "body": "Suede",
+                        "date": "2018-11-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 7,
+                        "photos": []
+                    },
+                    "2710424": {
+                        "id": 2710424,
+                        "body": "Supposedly suede, but I think its synthetic",
+                        "date": "2018-12-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 3,
+                        "photos": []
+                    },
+                    "3715390": {
+                        "id": 3715390,
+                        "body": "test post images",
+                        "date": "2021-08-13T00:00:00.000Z",
+                        "answerer_name": "test ",
+                        "helpfulness": 0,
+                        "photos": []
+                    }
+                }
+            },
+            {
+                "question_id": 396790,
+                "question_body": "yooo what's good",
+                "question_date": "2021-08-14T00:00:00.000Z",
+                "asker_name": "batman",
+                "question_helpfulness": 0,
+                "reported": false,
+                "answers": {}
+            }
+          ]
+        },
+        reportedAnsData1: () => {
+          [
+            {
+                "question_id": 290555,
+                "question_body": "Can I wash it?",
+                "question_date": "2018-02-08T00:00:00.000Z",
+                "asker_name": "cleopatra",
+                "question_helpfulness": 11,
+                "reported": false,
+                "answers": {
+                    "2710375": {
+                        "id": 2710375,
+                        "body": "I've thrown it in the wash and it seems fine",
+                        "date": "2018-02-08T00:00:00.000Z",
+                        "answerer_name": "marcanthony",
+                        "helpfulness": 8,
+                        "photos": []
+                    },
+                    "2710393": {
+                        "id": 2710393,
+                        "body": "It says not to",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 1,
+                        "photos": []
+                    },
+                    "2710425": {
+                        "id": 2710425,
+                        "body": "I wouldn't machine wash it",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 0,
+                        "photos": []
+                    },
+                    "2710430": {
+                        "id": 2710430,
+                        "body": "Only if you want to ruin it!",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "ceasar",
+                        "helpfulness": 5,
+                        "photos": []
+                    },
+                    "2710436": {
+                        "id": 2710436,
+                        "body": "Yes",
+                        "date": "2018-03-08T00:00:00.000Z",
+                        "answerer_name": "Seller",
+                        "helpfulness": 7,
+                        "photos": []
+                    }
+                }
+            },
+            {
+                "question_id": 290554,
+                "question_body": "How long does it last?",
+                "question_date": "2019-07-06T00:00:00.000Z",
+                "asker_name": "funnygirl",
+                "question_helpfulness": 7,
+                "reported": false,
+                "answers": {
+                    "2710394": {
+                        "id": 2710394,
+                        "body": "It runs small",
+                        "date": "2019-11-17T00:00:00.000Z",
+                        "answerer_name": "dschulman",
+                        "helpfulness": 2,
+                        "photos": [
+                            "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
+                            "https://images.unsplash.com/photo-1536922645426-5d658ab49b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                        ]
+                    },
+                    "2710418": {
+                        "id": 2710418,
+                        "body": "Showing no wear after a few months!",
+                        "date": "2019-09-06T00:00:00.000Z",
+                        "answerer_name": "sillyguy",
+                        "helpfulness": 10,
+                        "photos": []
+                    }
+                }
+            },
+            {
+                "question_id": 290551,
+                "question_body": "What fabric is the top made of?",
+                "question_date": "2018-01-04T00:00:00.000Z",
+                "asker_name": "yankeelover",
+                "question_helpfulness": 3,
+                "reported": false,
+                "answers": {
+                    "2710334": {
+                        "id": 2710334,
+                        "body": "Something pretty soft but I can't be sure",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 5,
+                        "photos": [
+                            "https://images.unsplash.com/photo-1530519729491-aea5b51d1ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
+                            "https://images.unsplash.com/photo-1511127088257-53ccfcc769fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "https://images.unsplash.com/photo-1500603720222-eb7a1f997356?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80"
+                        ]
+                    },
+                    "2710336": {
+                        "id": 2710336,
+                        "body": "Its the best! Seriously magic fabric",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 7,
+                        "photos": []
+                    },
+                    "2710337": {
+                        "id": 2710337,
+                        "body": "DONT BUY IT! It's bad for the environment",
+                        "date": "2018-01-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 8,
+                        "photos": []
+                    },
+                    "2710386": {
+                        "id": 2710386,
+                        "body": "Suede",
+                        "date": "2018-11-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 7,
+                        "photos": []
+                    },
+                    "2710424": {
+                        "id": 2710424,
+                        "body": "Supposedly suede, but I think its synthetic",
+                        "date": "2018-12-04T00:00:00.000Z",
+                        "answerer_name": "metslover",
+                        "helpfulness": 3,
+                        "photos": []
+                    }
+                }
+            }
+          ]
         }
+
     }
 // data:[
 //     //     {
