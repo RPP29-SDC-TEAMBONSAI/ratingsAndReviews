@@ -16,7 +16,7 @@ jest.mock('../clientRoutes/products.js')
 const props = {
   state: {
     relatedProducts: [28213, 28214, 28215, 28216],
-    product_id: 28212,
+    product_id: 36300,
     ratings: {4: "1", 5: "1"},
     productInformation: {
       id: 28213,
