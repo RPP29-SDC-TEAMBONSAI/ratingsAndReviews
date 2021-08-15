@@ -158,18 +158,18 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   z-index: 3;
 }
 .thumbnail {
-  border: .01rem solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 6vh; /* Set a small width */
+  border: .01rem solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 6vh;
   height: 6vh;
   margin-top: 1rem;
+
 }
 .answerThumbnail {
-  border: .01rem solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 10vh; /* Set a small width */
+  border: .01rem solid #ddd;
+  border-radius: 4px;
+  width: 10vh;
   height: 10vh;
 }
 .answerThumbnail.Hide{
@@ -180,18 +180,21 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   margin-bottom: 0vh;
   height: .7rem;
 }
-/*question List display */
+
 .list.container {
   display: flex;
   justify-content: start;
+  flex-direction: column;
 }
 .row.list.container{
   display: flex;
   flex-direction: row;
   width: 100vw;
+
 }
 .questionList.row {
   display: flex;
+  flex-direction: column;
   flex:.5;
 }
 .addAnswerList.row {
@@ -209,7 +212,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
  display: flex;
  flex-direction: column;
 }
-/*search bar*/
+
 .search {
  display: flex;
  flex-direction: row;
@@ -296,13 +299,14 @@ h3.addQuestionBtn {
 .questionList.scroll.container {
   height: 50vh;
   overflow-y:scroll;
+  overflow-x: hidden;
 }
 .questionList.container {
   display: flex;
   width: 65vw;
   height: 50vh;
   overflow-y:scroll;
-  overflow-x: hidden;
+  flex-direction: column;
 }
 .answerList.hide {
   display: none;
@@ -344,4 +348,9 @@ h3.moreAnsweredBtn {
   margin-right: 2.5em;
   justify-content: start;
 }
+.answerImage.container {
+  display: flex;
+  flex-direction: row;
+}
+
 
