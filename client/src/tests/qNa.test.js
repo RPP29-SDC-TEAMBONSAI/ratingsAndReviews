@@ -9,22 +9,14 @@ import QnAClicks from '../questions-n-answers/QnAClicks.jsx'
 // import QuestionList from '../questions-n-answers/sub-components/mini-components/questionList.jsx'
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals'
 import {addToReported, getReportedAns} from '../clientRoutes/qa.js'
-import ClickTracker from '../questions-n-answers/tracker.jsx'
-import QuestionList from '../questions-n-answers/sub-components/mini-components/questionList.jsx'
-import AddAnswer from '../questions-n-answers/sub-components/mini-components/addAnswerTable.jsx'
-import QuestionsContainer from '../questions-n-answers/sub-components/questionContainer.jsx'
-// // jest.mock()
-
 
 jest.mock('../clientRoutes/qa.js')
-
 const props = {
   product_id: testData.QnAcurrentProductId(),
   currentItemName: 'camo onsie',
   data: testData.QnAComponentQuestionsData()
 
 }
-
 
 describe('QuestionsNAnswers', () => {
   let wrapper
@@ -46,7 +38,6 @@ describe('QuestionsNAnswers', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
   describe('ComponentDidMount', () => {
     describe('getReportedAns', () => {
       beforeEach(() => {
@@ -112,7 +103,6 @@ describe('QuestionsNAnswers', () => {
     })
   })
   describe('componentDidUpdate', () => {
-
     test('should not filter when user question character count is less than 3', () => {
       let searchInput = wrapper.find('input.searchInput')
       jest.spyOn(component, 'searchFilter')
@@ -125,7 +115,6 @@ describe('QuestionsNAnswers', () => {
       expect(component.state.dynamicData.length === component.state.savedData.length)
       expect(component.searchFilter).toBeCalledTimes(0)
     })
-
     test('should start filtering questions when search character count is 3', () => {
       let searchInput = wrapper.find('input.searchInput')
       jest.spyOn(component, 'searchFilter')
@@ -138,7 +127,6 @@ describe('QuestionsNAnswers', () => {
       expect(component.state.dynamicData.length !== component.state.savedData.length)
       expect(component.searchFilter).toBeCalledTimes(1)
     })
-
     test('should continue filtering answers as character count increases (past 3)', () => {
 
       let searchInput = wrapper.find('input.searchInput')
@@ -160,7 +148,6 @@ describe('QuestionsNAnswers', () => {
       expect(component.searchFilter).toBeCalledTimes(3)
       expect(dynamicDataAt3Count.length > dynamicDataAt4Count.length && dynamicDataAt4Count.length > dynamicDataAt5Count.length).toBe(true)
     })
-
     test('should return to original display state when user clears search input', () => {
       let searchInput = wrapper.find('input.searchInput')
       searchInput.simulate('change', {target: {value: 't'}})
@@ -173,7 +160,6 @@ describe('QuestionsNAnswers', () => {
       expect(prevState.dynamicData.length < component.state.dynamicData.length).toBe(true)
       expect(component.state.dynamicData.length === testData.QnAComponentQuestionsData().length)
     })
-
     test('should return to original display state when users removes search characters so that less than three remain', () => {
       let searchInput = wrapper.find('input.searchInput')
       searchInput.simulate('change', {target: {value: 't'}})
@@ -188,11 +174,9 @@ describe('QuestionsNAnswers', () => {
 
       expect(prevState.dynamicData.length < component.state.dynamicData.length).toBe(true)
     })
-
     describe('questionSearchChange', () => {
       test('it should incriment qSearchCharCount state by one, on each new input character', () => {
         let searchInput = wrapper.find('input.searchInput')
-
 
         searchInput.simulate('change', {target: {value: 't'}})
         let value = component.state.qSearchCharCount
@@ -210,7 +194,6 @@ describe('QuestionsNAnswers', () => {
         let value4 = component.state.qSearchCharCount
         expect(value4).toEqual(4)
       })
-
       test('it should change question questionSearchVal state, as characters are added', () => {
         let searchInput = wrapper.find('input.searchInput')
 
@@ -226,9 +209,7 @@ describe('QuestionsNAnswers', () => {
   })
 })
 describe('Questions/Answers Display', () => {
-
   describe('questionlist display', () => {
-
     test('on load, if dynamicData length is greater than 2, it should hide all but first two questions/answers', () => {
       let component;
       return new Promise((resolve, reject) => {
@@ -240,7 +221,6 @@ describe('Questions/Answers Display', () => {
 
           </QnAClicks>
         )
-
         resolve(component)
       })
       .then(newComponent => {
@@ -249,11 +229,9 @@ describe('Questions/Answers Display', () => {
         expect(questions[1].props.className).toEqual('list scroll container')
         expect(questions[2].props.className).toEqual('list container hide')
       })
-
     })
   })
   describe('more answered questions button display', () =>{
-
     test('on load, if dynamicData length is less than 2, it should hide more answered questions button and show the only two questions', () => {
       let component;
       let props = {
@@ -261,19 +239,15 @@ describe('Questions/Answers Display', () => {
         currentItemName: 'camo onsie',
         data: testData.showQuestionsData1()
       }
-
       return new Promise((resolve, reject) => {
         component = renderer.create(
           <QnAClicks>
             {allClicksProps => {
               return <QuestionsNAnswers allClicksProps={allClicksProps} {...props}/>
             }}
-
           </QnAClicks>
         )
         resolve(component)
-
-
       })
       .then(newComponent => {
         let questions = newComponent.toJSON().children[3].children
@@ -282,7 +256,6 @@ describe('Questions/Answers Display', () => {
         expect(questions[0].props.className).toEqual('list scroll container')
         expect(questions[1].props.className).toEqual('list scroll container')
         expect(button.props.className).toEqual('moreAnsweredBtn Hide')
-
       })
     })
   })
@@ -290,8 +263,7 @@ describe('Questions/Answers Display', () => {
 describe('Other Functionality', () => {
   let wrapper
   let component;
-  // let data = []
-  // getReportedAns.mockImplementation(() => Promise.resolve({data:data}))
+
   beforeEach(() => {
     wrapper = mount(
         <QnAClicks>
@@ -306,23 +278,19 @@ describe('Other Functionality', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
   describe('showQuestions', () => {
-
     test('it should return true, if current question index is less than current question click count', () => {
       let index = 1
       let count = 5
       let showQuestions = wrapper.find(QuestionsNAnswers).instance().showQuestions
       expect(showQuestions(count, index)).toEqual(true)
     })
-
     test('it should return true, if current question index equals questions click count', () => {
       let index= 3
       let count = 3
       let showQuestions = wrapper.find(QuestionsNAnswers).instance().showQuestions
       expect(showQuestions(count, index)).toEqual(true)
     })
-
     test('it should return false if question index is greater than question click count', () => {
       let index= 4
       let count = 3
@@ -334,14 +302,12 @@ describe('Other Functionality', () => {
     let props
     let wrapper
     let component
-
     beforeEach(() => {
       props = {
         product_id: testData.questions1_productId(),
         currentItemName: 'camo onsie',
         data: testData.questions1()
       }
-
       wrapper = mount(
         <QnAClicks>
           {allClicksProps => {
@@ -371,14 +337,12 @@ describe('Other Functionality', () => {
     let props
     let wrapper
     let component
-
     beforeEach(() => {
       props = {
         product_id: testData.questions1_productId(),
         currentItemName: 'camo onsie',
         data: testData.questions1()
       }
-
       wrapper = mount(
         <QnAClicks>
           {allClicksProps => {
@@ -387,19 +351,16 @@ describe('Other Functionality', () => {
         </QnAClicks>
       )
       component = wrapper.find(QuestionsNAnswers).instance()
-
     })
     afterEach(() => {
       jest.clearAllMocks()
     })
-
     test('triggering update answers, should add an answer to a question in dynamicData state', () => {
       let prevAnsLength = component.state.dynamicData[0].answers.length
       component.updateAnswers().then(() => {
         expect(prevAnsLength < component.state.dynamicData[0].answers.length).toBe(true)
       })
     })
-
     test('triggering update answers, should add an answer to a question in savedData state', () => {
       let prevAnsLength = component.state.savedData[0].answers.length
       component.updateAnswers().then(() => {
@@ -407,12 +368,10 @@ describe('Other Functionality', () => {
       })
     })
   })
-
   describe('addToReported', () => {
     let props
     let wrapper
     let recordClick
-
     beforeEach(() => {
       props = {
         product_id: testData.questions1_productId(),
@@ -573,39 +532,7 @@ describe('Other Functionality', () => {
         expect(newWrapper.toJSON().children[3].children[1].children[0].children[0].children[0].children[1].children[0].children[2].children[4].children[0]).toBe('reported')
       })
     })
-
-    // test('')
-
   })
-
 })
 
 
-// describe('extras', () => {
-//   test('moreAnswered', () => {
-//     let component;
-//     let props = {
-//       product_id: testData.QnAcurrentProductId(),
-//       currentItemName: 'camo onsie',
-//       data: testData.showQuestionsData1()
-//     }
-//     return new Promise((resolve, reject) => {
-//       component = renderer.create(
-//         <QnAClicks>
-//           {allClicksProps => {
-//             return <QuestionsNAnswers allClicksProps={allClicksProps} {...props}/>
-//           }}
-
-//         </QnAClicks>
-//       )
-//       resolve(component)
-
-
-//     })
-//     .then(newComponent => {
-//       console.log(newComponent.toJSON().children[4].children[1].children[0].props.className)
-//       // console.log(newComponent.getInstance())
-//     })
-
-//   })
-// })
