@@ -19,6 +19,7 @@ const withClickTracker= WrappedComponent => {
         time: new Date(Date.now(e.target.timeStamp)),
         module: 'Related Products'
       }
+      //console.log(interaction)
 
       this.setState(prevState => {
         return {

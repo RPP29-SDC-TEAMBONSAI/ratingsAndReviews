@@ -226,8 +226,8 @@ class AddReview extends React.Component {
             interaction="submitted review form"
             className="r-submit"
             onClick={(e) => {
-              console.log(this.state);
-              console.log(this.props.characteristics);
+              //console.log(this.state);
+              //console.log(this.props.characteristics);
               let warnings = auditReviews(this.state, this.props.characteristics);
               if (warnings === '') {
                 reviewAdd(this.state, this.props.product_id)

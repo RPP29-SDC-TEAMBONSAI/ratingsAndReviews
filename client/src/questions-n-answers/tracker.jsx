@@ -18,7 +18,7 @@ class ClickTracker extends React.Component {
 
     let newResults =this.state.interactions.slice();
     if (newResults.length > 5) {
-      console.log('ready to be sent')
+      //console.log('ready to be sent')
       //send array of interactions to server to be posted
       return interactions(newResults)
         .then(data => {

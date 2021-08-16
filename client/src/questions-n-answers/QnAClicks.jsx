@@ -86,7 +86,7 @@ class QnAClicks extends React.Component {
   }
 
   addAnswerOnClick(currentQ, currentQId) {
-    console.log(currentQId)
+    //console.log(currentQId)
     this.setState({
       answerFormDisplayClass: 'aForm',
       currentQuestion: currentQ,
