@@ -14,7 +14,7 @@ const RelatedProductsModal = (props) => {
             <tbody className='rpModalTbody'>
               <tr className='rpModalTrow'>
                 <th className='rpModalTdheader'>{props.modifiedCurrent.name}</th>
-                <th className='rpModalTdheader'>Feature</th>
+                <th className='rpModalTdheader'></th>
                 <th className='rpModalTdheader'>{props.clickedProductInfo.name}</th>
                 </tr>
            {props.features.map((feature, i) => {

@@ -1,13 +1,9 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import helper from '../helper-functions/rpHelpers';
 import exampleData from '../RelatedProducts/exampleData.js';
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
 import RelatedProducts from '../relatedProducts/RelatedProductsView/RelatedProducts.jsx';
-import renderer from 'react-test-renderer'
-import axios from 'axios';
-import {productsWithId, productsStyle} from '../clientRoutes/products.js'
-
 
 
 const addToOutfitProps = {
