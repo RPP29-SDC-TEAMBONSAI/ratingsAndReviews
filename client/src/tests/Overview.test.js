@@ -32,6 +32,17 @@ import ExpandedView from '../Overview/components/ExpandedView.jsx'
 // })
 
 
+// let component;
+
+// const wrapper = mount (
+//   <Overview state = {mockProps} />
+// )
+
+//component = wrapper.find(Overview).instance()
+
+// afterEach(() => {
+//   jest.clearAllMocks()
+// })
 
 describe('Overview', () => {
   const wrapper = shallow(
@@ -40,11 +51,16 @@ describe('Overview', () => {
     test('should display current product information', () => {
       const component = renderer.create(<Overview state = {mockProps}/>);
       const instance = component.getInstance();
+      console.log('its a wrap', wrapper.find('.expandedProductCatagory').text())
+
+      console.log('nope', component.toJSON().children[1].children[1].children[0].children[1])
+
       expect(component.toJSON().children[1].children[1].children[0].children[1].children[0]).toBe('Jackets');
       expect(component.toJSON().children[1].children[1].children[0].children[2].children[0]).toBe('Camo Onesie');
       expect(component.toJSON().children[1].children[1].children[0].children[3].children[0]).toBe('Forest Green & Black')
       expect(component.toJSON().children[1].children[1].children[0].children[4].children[0]).toBe('The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.')
       expect(component.toJSON().children[1].children[1].children[0].children[5].children[2]).toBe('140.00')
+      console.log()
     })
     test('changeSelectedQuantity should work', () => {
       instance.changeSelectedQuantity({target: {value: 2}});
@@ -60,7 +76,7 @@ describe('Overview', () => {
   })
 
   describe('ImageGallery', () => {
-    test('should render', () => {
+    test('should render sidebar with 7 images', () => {
 
     })
   })
@@ -72,3 +88,4 @@ describe('Overview', () => {
 
     })
   })
+

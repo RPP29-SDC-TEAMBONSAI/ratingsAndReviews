@@ -127,7 +127,7 @@ module.exports = {
   getReported: (req, res) => {
     return fs.readdir('./client/src/questions-n-answers/reviewAnswers/', (err, files) => {
        let answerIds = [];
-       if (files.length > 0) {
+       if (files !==undefined) {
          files.forEach((file) => {
            let newFile = Number(file.split('.')[0])
            answerIds.push(newFile)
