@@ -22,18 +22,19 @@ const RelatedProductsModal = (props) => {
               <React.Fragment key={i++} >
                 <tr className='rpModalTrow'>
                   <td className='rpModalTdata'>
-                    {
-                    props.modifiedCurrent.features[feature] !== undefined ?
-                      props.modifiedCurrent.features[feature] :
-                      ''
+
+                  {
+                    props.modifiedCurrent.features[feature] === null ? '√'
+                      : props.modifiedCurrent.features[feature] !== undefined ? props.modifiedCurrent.features[feature]
+                      : ''
                     }
                   </td>
                   <td className='rpModalTdata'>{feature}</td>
                   <td className='rpModalTdata'>
                   {
-                    props.clickedProductInfo.features[feature] !== undefined ?
-                      props.clickedProductInfo.features[feature] :
-                      ''
+                    props.clickedProductInfo.features[feature] === null ? '√'
+                      : props.clickedProductInfo.features[feature] !== undefined ? props.clickedProductInfo.features[feature]
+                      : ''
                     }
                   </td>
                 </tr>

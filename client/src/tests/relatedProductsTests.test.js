@@ -21,7 +21,6 @@ describe('RelatedProducts methods', () => {
   beforeEach(() => {
     wrapper = shallow(<RelatedProducts {...exampleData.relatedProductsProps} />).dive();
 
-
   })
   afterEach(() => {
     jest.clearAllMocks()
