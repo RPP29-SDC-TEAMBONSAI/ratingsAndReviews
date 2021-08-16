@@ -8,12 +8,13 @@ import UserAnswer from './sub-components/mini-components/userAnswer.jsx';
 import {updateHelpfulness, questions, updateAnswerHelpfulness, addToReported, getReportedAns} from '../clientRoutes/qa';
 import ClickTracker from './tracker.jsx'
 
+
+
 class QuestionsNAnswers extends React.Component {
   constructor(props) {
     super(props)
 
     this.state ={
-      showQuestionButton: false,
       questionSearchVal: 'HAVE A QUESTION? SEARCH FOR ANSWERS...',
       qSearchCharCount: 0,
       reported: [],
@@ -37,24 +38,27 @@ class QuestionsNAnswers extends React.Component {
         let dynamicData = helper.createDynamicData(copy)
         let finalData = helper.addReportedProp(dynamicData, answerIds)
 
+
         this.setState({
           dynamicData: finalData,
           reported: answerIds,
-          savedData: dynamicData.slice()
+          savedData: finalData.slice(),
+
+
         })
       })
   }
 
   componentDidUpdate(prevProps, prevState) {
-  //  console.log(this.props.data, "🤙")
-  //  console.log(prevProps.data, "🤙")
-    if (prevProps.data.length !== this.props.data.length) {
 
+    if (prevProps.data.length !== this.props.data.length) {
       let dynamicData = helper.createDynamicData(this.props.data)
       let answerIds = this.state.reported.slice()
       let finalData = helper.addReportedProp(dynamicData, answerIds)
       this.setState({
-        dynamicData: finalData
+        dynamicData: finalData,
+        reported: answerIds,
+        savedData: finalData.slice()
       })
     }
 
@@ -76,6 +80,7 @@ class QuestionsNAnswers extends React.Component {
               this.setState({
                 dynamicData: finalData,
                 reported: answerIds,
+                savedData: finalData.slice()
               })
             })
         )
@@ -90,10 +95,10 @@ class QuestionsNAnswers extends React.Component {
               let answerIds = this.state.reported.slice()
               let finalData = helper.addReportedProp(dynamicData, answerIds)
 
-
               this.setState({
                 dynamicData: finalData,
-                reported: answerIds
+                reported: answerIds,
+                savedData: finalData.slice()
               })
             })
         })
@@ -103,8 +108,9 @@ class QuestionsNAnswers extends React.Component {
       let answerIds = this.state.reported.slice()
       let finalData = helper.addReportedProp(this.state.dynamicData.slice(), answerIds)
       this.setState({
+        dynamicData: finalData,
         reported: answerIds,
-        dynamicData: finalData
+        savedData: finalData.slice()
 
       })
     }
@@ -133,12 +139,6 @@ class QuestionsNAnswers extends React.Component {
       }
 
   }
-
-  showQuestions(currentCount, index) {
-    let show = helper.showQuestionsClass(currentCount, index);
-    return show
-  }
-
   questionSearchChange(e) {
     let newCount = this.state.qSearchCharCount + 1
 
@@ -148,6 +148,11 @@ class QuestionsNAnswers extends React.Component {
     })
   }
 
+  showQuestions(currentCount, index) {
+    let show = helper.showQuestionsClass(currentCount, index);
+    return show
+  }
+
   updateQuestions () {
     return questions(this.props.product_id)
       .then(data => {
@@ -155,14 +160,15 @@ class QuestionsNAnswers extends React.Component {
         let dynamicData = helper.createDynamicData(data.data);
         let finalData = helper.addReportedProp(dynamicData, answerIds)
         this.setState({
-          dynamicData:finalData
+          dynamicData:finalData,
+          savedData: finalData.slice()
         })
         this.props.allClicksProps.closeQuestionForm()
       })
   }
 
   updateAnswers() {
-    questions(this.props.product_id)
+    return questions(this.props.product_id)
       .then(currentQuestions => {
         let dynamicData= helper.createDynamicData(currentQuestions.data)
         let answerIds = this.state.reported.slice()
@@ -177,15 +183,19 @@ class QuestionsNAnswers extends React.Component {
   }
 
   addToReported(e, ansId) {
-   addToReported(ansId)
-     .then(data => {
-       this.setState({
-         reported: data
-       })
-     })
+   if(!this.state.reported.includes(ansId)){
+    addToReported(ansId)
+      .then(data => {
+
+        this.setState({
+          reported: data
+        })
+      })
+    }
   }
 
   render () {
+
 
     return (
       <ClickTracker>
@@ -226,8 +236,8 @@ class QuestionsNAnswers extends React.Component {
               </div>
 
               <div className='questionList scroll container'>
-                <div className={''}>
                   {this.state.dynamicData.map((question, index) => {
+
                     let show = false;
 
                     if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
@@ -237,6 +247,7 @@ class QuestionsNAnswers extends React.Component {
                     if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
                       show = true
                     }
+                    // this.showQuestion(this.props.allClicksProps.questionClickCount, index)
 
                     return (
                       <QuestionsContainer
@@ -253,11 +264,11 @@ class QuestionsNAnswers extends React.Component {
                             question={question}
                             addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
                             question_id={question.question_id}
+
                             show={show}
 
                       />
                   )})}
-                </div>
               </div>
               <div className='questionListButton container'>
                 <div className='lButton'>
@@ -266,11 +277,13 @@ class QuestionsNAnswers extends React.Component {
                   </h3>
                 </div>
                 <div className='bottomButtons'>
-                  <h3 className={this.props.allClicksProps.showQuestionButton? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
+
+                  <h3 className={this.props.allClicksProps.showQuestionButton ? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
                           onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.dynamicData.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
-                  <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.addQuestion()}}>ADD A QUESTION +</h3>
                 </div>
+                  <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.addQuestion()}}>ADD A QUESTION +</h3>
+
               </div>
 
             </div>

@@ -74,12 +74,15 @@ module.exports = {
   },
 
   showQuestionsClass(clickCount, index) {
+
     let show;
+
     if (index <= clickCount) {
       show = true
     } else {
       show = false
     }
+
 
     return show
   },
