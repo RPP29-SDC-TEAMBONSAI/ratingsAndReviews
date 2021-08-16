@@ -31,8 +31,6 @@ module.exports = {
       console.log('erroryuh', err)
       res.status(500).end()
     })
-    //implement API request for product details
-    //send info to client
   },
   productsStyle: (req, res) => {
     let request = req.originalUrl.split('?');
