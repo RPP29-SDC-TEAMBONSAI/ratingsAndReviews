@@ -234,25 +234,7 @@ class AddReview extends React.Component {
           {/* SUBMIT BUTTON */}
           <button
             className="r-submit"
-<<<<<<< HEAD
-            onClick={(e) => {
-              //console.log(this.state);
-              //console.log(this.props.characteristics);
-              let warnings = auditReviews(this.state, this.props.characteristics);
-              if (warnings === '') {
-                reviewAdd(this.state, this.props.product_id)
-                window.alert('Review Submitted');
-                this.props.close(e);
-                reviewsInteraction(e);
-              } else {
-                window.alert(
-                  'Please fix the following before submitting your review:\n\n' + warnings
-                  );
-              }
-            }}>
-=======
             onClick={this.submitReview}>
->>>>>>> 23622a96b9a661b83809045007389d875359bec6
               Sumbit Review
             </button>
         </div>

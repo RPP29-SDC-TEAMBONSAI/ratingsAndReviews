@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import helper from '../helper-functions/rpHelpers';
 import exampleData from '../RelatedProducts/exampleData.js';
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
@@ -7,24 +7,53 @@ import RelatedProducts from '../relatedProducts/RelatedProductsView/RelatedProdu
 import renderer from 'react-test-renderer'
 import axios from 'axios';
 import {productsWithId, productsStyle} from '../clientRoutes/products.js'
-import { ConsoleWriter } from 'istanbul-lib-report';
-import { relatedProductsStyles } from '../relatedProducts/exampleData';
 
 
 
+const addToOutfitProps = {
+  handleAddToOutfit: () => {},
+  outfitProps: {'obj': 'data'},
+  state: {'obj': 'data'}
+
+}
 jest.mock('axios')
 jest.mock('../clientRoutes/products.js')
 
 
 let wrapper;
-describe('RelatedProducts', () => {
+describe('RelatedProducts methods', () => {
   beforeEach(() => {
-    wrapper = shallow(<RelatedProducts />);
+    wrapper = shallow(<RelatedProducts {...exampleData.relatedProductsProps} />).dive();
+
 
   })
   afterEach(() => {
     jest.clearAllMocks()
   })
+
+  test('product method should be called a function', () => {
+    const instance = wrapper.instance();
+    expect(typeof instance.product).toBe('function');
+  })
+  test('style method should be called a function', () => {
+    const instance = wrapper.instance();
+    expect(typeof instance.style).toBe('function');
+  })
+  test('outFit method should be called a function', () => {
+    const instance = wrapper.instance();
+    expect(typeof instance.outFit).toBe('function');
+  })
+  test('reviews method should be called a function', () => {
+    const instance = wrapper.instance();
+    expect(typeof instance.reviews).toBe('function');
+  })
+  test('handleAddToOutfit method should be called a function', () => {
+    const instance = wrapper.instance();
+    expect(typeof instance.handleAddToOutfit).toBe('function');
+  })
+
+})
+
 
   describe('addIdToStylesData helper function', () => {
     test('Should add an id property to styles data', () => {
@@ -177,7 +206,6 @@ describe('RelatedProducts', () => {
     })
 
   })
-})
 
 
 
