@@ -25,7 +25,7 @@ module.exports = {
         'Authorization': TOKEN
       }
     }).then((data)=> {
-      console.log(data)
+      // console.log(data)
       res.send(data.data)
     })
     .catch((err) => {
