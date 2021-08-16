@@ -96,7 +96,9 @@ class UserAnswer extends React.Component {
 
     reader.readAsDataURL(this.state.tempPhoto, 'base64')
 
+
     reader.onload = () => {
+      console.log(reader.result)
 
       this.setState({
         data: reader.result,
@@ -116,6 +118,7 @@ class UserAnswer extends React.Component {
   photoConfirm(e) {
     let url = this.state.data.substring(0)
     let photos = this.state.photos.slice()
+    console.log(url)
 
     // console.log(this.state.tempPhoto.size)
 

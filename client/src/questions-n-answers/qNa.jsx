@@ -42,7 +42,7 @@ class QuestionsNAnswers extends React.Component {
         this.setState({
           dynamicData: finalData,
           reported: answerIds,
-          savedData: dynamicData.slice(),
+          savedData: finalData.slice(),
 
 
         })
@@ -56,7 +56,9 @@ class QuestionsNAnswers extends React.Component {
       let answerIds = this.state.reported.slice()
       let finalData = helper.addReportedProp(dynamicData, answerIds)
       this.setState({
-        dynamicData: finalData
+        dynamicData: finalData,
+        reported: answerIds,
+        savedData: finalData.slice()
       })
     }
 
@@ -74,11 +76,11 @@ class QuestionsNAnswers extends React.Component {
               let dynamicData = helper.createDynamicData(newData.data)
               let answerIds = this.state.reported.slice()
               let finalData = helper.addReportedProp(dynamicData, answerIds)
-              let show =
 
               this.setState({
                 dynamicData: finalData,
                 reported: answerIds,
+                savedData: finalData.slice()
               })
             })
         )
@@ -95,7 +97,8 @@ class QuestionsNAnswers extends React.Component {
 
               this.setState({
                 dynamicData: finalData,
-                reported: answerIds
+                reported: answerIds,
+                savedData: finalData.slice()
               })
             })
         })
@@ -105,8 +108,9 @@ class QuestionsNAnswers extends React.Component {
       let answerIds = this.state.reported.slice()
       let finalData = helper.addReportedProp(this.state.dynamicData.slice(), answerIds)
       this.setState({
+        dynamicData: finalData,
         reported: answerIds,
-        dynamicData: finalData
+        savedData: finalData.slice()
 
       })
     }
@@ -156,14 +160,15 @@ class QuestionsNAnswers extends React.Component {
         let dynamicData = helper.createDynamicData(data.data);
         let finalData = helper.addReportedProp(dynamicData, answerIds)
         this.setState({
-          dynamicData:finalData
+          dynamicData:finalData,
+          savedData: finalData.slice()
         })
         this.props.allClicksProps.closeQuestionForm()
       })
   }
 
   updateAnswers() {
-    questions(this.props.product_id)
+    return questions(this.props.product_id)
       .then(currentQuestions => {
         let dynamicData= helper.createDynamicData(currentQuestions.data)
         let answerIds = this.state.reported.slice()
@@ -178,12 +183,15 @@ class QuestionsNAnswers extends React.Component {
   }
 
   addToReported(e, ansId) {
-   addToReported(ansId)
-     .then(data => {
-       this.setState({
-         reported: data
-       })
-     })
+   if(!this.state.reported.includes(ansId)){
+    addToReported(ansId)
+      .then(data => {
+
+        this.setState({
+          reported: data
+        })
+      })
+    }
   }
 
   render () {

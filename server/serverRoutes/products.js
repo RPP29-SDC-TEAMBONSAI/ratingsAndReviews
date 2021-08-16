@@ -19,14 +19,13 @@ module.exports = {
   res.status(200).end();
   },
   productsWithId: (req, res) => {
-    // console.log('product id req', req)28212
     let request = req.originalUrl.split('?');
-
     axios.get(api + `products/${request[1]}`, {
       headers: {
         'Authorization': TOKEN
       }
     }).then((data)=> {
+      // console.log(data)
       res.send(data.data)
     })
     .catch((err) => {
@@ -53,7 +52,7 @@ module.exports = {
   },
   productsRelated: (req, res) => {
     let request = req.originalUrl.split('?');
-    //console.log('🐮' ,request);
+
     axios.get(api + `products/${request[1]}/related`, {
       headers: {
         'Authorization': TOKEN

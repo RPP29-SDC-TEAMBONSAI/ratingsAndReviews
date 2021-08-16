@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 
 const AddToOutfitCard = (props) => {
-  //console.log(`oufitProps: ${JSON.stringify(props.outfitProps)}`)
+
   return (
     <div className='addToOutfitCard'>
         <button className='addToOutfitButton'
