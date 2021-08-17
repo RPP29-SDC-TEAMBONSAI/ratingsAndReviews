@@ -18,17 +18,17 @@ let props = {
 
 let wrapper;
 
-describe('RelatedProductsCard', () => {
-  beforeEach(() => {
-    wrapper = shallow(<RelatedProductsCard {...props} />)
-  })
-  afterEach(() => {
-    jest.clearAllMocks();
-  })
-  test('should render component with props', () => {
-    const instance = wrapper.instance();
-    console.log(wrapper.props());
+// describe('RelatedProductsCard', () => {
+//   beforeEach(() => {
+//     wrapper = shallow(<RelatedProductsCard {...props} />)
+//   })
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//   })
+//   test('should render component with props', () => {
+//     const instance = wrapper.instance();
+//     console.log(wrapper.props());
 
-  })
-})
+//   })
+// })
 

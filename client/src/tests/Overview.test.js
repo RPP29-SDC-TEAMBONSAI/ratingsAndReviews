@@ -42,7 +42,7 @@ describe('props', () => {
     test('should be snap shotty', () => {
       const component = renderer.create(<Overview state = {mockProps}/>);
       const instance = component.getInstance();
-      console.log('yurrrp', component.toJSON())
+      //console.log('yurrrp', component.toJSON())
 
     })
   })

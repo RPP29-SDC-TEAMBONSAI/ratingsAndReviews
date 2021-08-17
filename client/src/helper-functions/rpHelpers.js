@@ -1,7 +1,6 @@
 
 const helper = {
-  compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles, starRating) => {
-
+  compileRelatedProductsDataToProps: (relatedProducts, relatedProductsStyles) => {
     let allPropsObj = {};
     let relatedProductsCopy = relatedProducts.slice();
     let relatedProductsStylesCopy= relatedProductsStyles.slice();
@@ -12,12 +11,8 @@ const helper = {
       itemDetail['itemName'] = item['name'];
       itemDetail['itemCategory'] = item['category'];
       itemDetail['features'] = item['features'];
-      itemDetail['starRating'] = starRating
-
       allPropsObj[item['id']] = itemDetail;
-
     })
-
 
     relatedProductsStylesCopy.forEach(item => {
       let itemDetail = {};
@@ -37,6 +32,7 @@ const helper = {
         'photoUrl': firstResult['photos'][0],
       };
     })
+
     return Object.values(allPropsObj);
   },
 

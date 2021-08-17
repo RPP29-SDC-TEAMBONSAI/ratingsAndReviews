@@ -26,7 +26,7 @@ const RelatedProductsList = (props) => {
   if (props.displayedProductsIndices[0] > 0) {
     prevButton =  <button
     className='prevButton'
-    onClick={() => {props.handlePrevClick()}} >Prev</button>
+    onClick={() => {props.handlePrevClick()}} >{String.fromCharCode(60)}</button>
   } else {
     prevButton = null;
   }
@@ -37,7 +37,7 @@ const RelatedProductsList = (props) => {
   } else {
     nextButton =<button
     className='nextButton'
-    onClick={() => {props.handleNextClick()}} >Next</button>
+    onClick={() => {props.handleNextClick()}} >{String.fromCharCode(62)}</button>
   }
 
 
