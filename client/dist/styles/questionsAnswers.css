@@ -106,34 +106,17 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .closeAnswerHide {
   display: none;
 }
-.closeAnswer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 12.5%;
-  height: 5vh;
-  width: 5vh;
-  border-radius: 50em;
-  background-color: lightgray;
-  z-index: 1;
-
-}
-.closeAnswer:hover{
-  background-color: white;
-  cursor: pointer;
-}
 .aFormData {
   position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content:center;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
+  background-color: lightsteelblue;
+  border-radius: 1em;
   margin-bottom: 1vh;
+  padding:2.0rem;
   z-index: 2;
+  height: 75vh;
+  width: 35vw;
 }
 .photos {
   margin-bottom: 1vh;
@@ -142,27 +125,12 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   display:none;
 
 }
-.photoConfirmationHide {
-  display: none;
-}
-.photoConfirmation {
-  width: 75%;
-  height: 90%;
-  position: fixed;
-  top: 0%;
-  left: 10%;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
-  margin-bottom: 1vh;
-  z-index: 3;
-}
 .thumbnail {
-  border: .01rem solid #ddd;
+  border: .01rem solid white;
   border-radius: 4px;
   padding: 5px;
-  width: 6vh;
-  height: 6vh;
+  width: 10vh;
+  height: 10vh;
   margin-top: 1rem;
 
 }
@@ -175,12 +143,6 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .answerThumbnail.Hide{
   display: none;
 }
-.answerText {
-
-  margin-bottom: 0vh;
-  height: .7rem;
-}
-
 .list.container {
   display: flex;
   justify-content: start;
@@ -190,7 +152,6 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   display: flex;
   flex-direction: row;
   width: 100vw;
-
 }
 .questionList.row {
   display: flex;
@@ -274,18 +235,18 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .moreAnsweredBtn {
   width: 15.8em;
 }
-h3.loadMoreAnswersButton:hover{
+.loadMoreAnswersButton:hover{
   color:navy;
 }
-h3.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
+.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
   color:navy;
   background: beige;
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }
-h3.loadMoreAnswersButton{
+.loadMoreAnswersButton{
   display: flex;
 }
-h3.addQuestionBtn {
+.addQuestionBtn {
   display: flex;
 }
 .questionListButton.container {
@@ -339,18 +300,121 @@ h3.addQuestionBtn {
 .helpulQuestion.display {
   padding-right: 3em;
 }
-
 .bottomButtons {
   display: flex;
 }
-h3.moreAnsweredBtn {
+.moreAnsweredBtn {
   display: flex;
   margin-right: 2.5em;
   justify-content: start;
 }
-.answerImage.container {
+/*addAnswer component CSS*/
+.closeAnswer{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  position:absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50em;
+  background-color: lightsteelblue;
+  z-index: 1;
+}
+.closeAnswer:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.answerFormPhotoThumbnail{
+  display: flex;
+  justify-content: center;
+}
+.addAnswerForm{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  bottom: 25vh;
+}
+.currentQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 5vh;
+  margin: 0;
+}
+textarea.addAnswerFormText {
+ display: flex;
+ height: 15vh;
+ resize:none;
+ overflow-y: scroll;
+ justify-content: start;
+}
+.addAnswerFormNickNameInput{
+  width: 20vw;
+  overflow-x: auto;
+}
+.addAnswerFormEmail {
+  width: 20vw;
+  overflow-x: auto;
+}
+.addAnswerFormUploadPhotoTitle {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .25vh;
+}
+.answerFormAsterisk{
+  margin-bottom:.25vh;
+  width: 20vw;
+  overflow-x: auto;
+}
+.answerFormAsterisk.answer:after, .answerFormAsterisk.nickName:after, .answerFormAsterisk.email:after{
+  display: fixed;
+  content: ' *';
+  color: #B22222;
+  margin-bottom: none;
+}
+.photoConfirmationHide {
+  display: none;
+}
+.photoConfirmation {
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+  height: 75vh;
+  position: fixed;
+  background-color: lightgray;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  z-index: 3;
 }
 
+.answerConfirmPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: center;
+}
+.addAnswerPhotoConfirmButton{
+  display: flex;
 
+  justify-content: center;
+  width: 5vw;
+}
+.closeConfirmation{
+  display: flex;
+  justify-content: start;
+  margin: 0;
+  padding-left: .25em;
+}
+.confirmPhoto.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.closeConfirmation:hover{
+  color: darkred;
+  cursor: pointer;
+}
