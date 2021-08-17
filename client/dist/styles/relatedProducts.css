@@ -4,7 +4,7 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsList {
   display: flex;
-
+  justify-content: center;
 }
 
 .relatedProductsCardList {
@@ -17,23 +17,15 @@ REALTED PRODUCTS STYLING
   flex-grow: 1;
   flex-shrink: 0;
   border: solid;
-  margin: 1rem .25em;
-
+  margin: 2rem;
+  width: 20rem;
+  cursor: pointer;
 }
 
 .relatedProductsCardTop {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.relatedProductsCardTop, .productName {
-  flex-wrap: wrap
-}
-
-
-.relatedProductsActionButton {
-  height: 4em;
-  width: 4em;
 }
 
 .relatedProductsCardBottom {
@@ -45,12 +37,34 @@ REALTED PRODUCTS STYLING
   align-self: center
 }
 
+.relatedProductsActionButton {
+  height: 4em;
+  width: 4em;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+
+.nextButton, .prevButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  font-size: x-large;
+  background: transparent;
+  border: none;
+}
+
+
 /*-----------------
 YOUR OUTFIT STYLING
 -----------------*/
 
 .yourOutfitList {
   display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
 
 }
 .yourOutfitCardList {
@@ -63,13 +77,33 @@ YOUR OUTFIT STYLING
   flex-grow: 1;
   flex-shrink: 1;
   border: solid;
-  margin: 1rem .25em;
+  margin: 2rem;
+  width: 20rem;
   align-items: center;
   justify-content: center;
 }
 
+.yourOutfitActionButton {
+  font-size: x-large;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .addToOutfitButton {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 3em;
+  align-items: center;
+  overflow-wrap: break-word;
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.addToOutfitCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*--------------
@@ -100,7 +134,7 @@ RP MODAL STLYING
   flex-direction: column;
   align-items: center;
   background: white;
-  width: 50%;
+  width: 60%;
   height: 75%;
   margin: auto;
 
@@ -120,6 +154,16 @@ th {
     text-align: center;
 }
 
+/*------------
+HOVER STYLING
+-------------*/
+.yourOutfitActionButton:hover,
+.nextButton:hover,
+.prevButton:hover,
+.relatedProductsActionButton:hover {
+  transform: scale(1.2);
+}
+
 
 
 /*----------
@@ -132,6 +176,10 @@ TEXT STLYING
 
 .saleProductPrice {
   color: red;
+}
+
+.productName, h2 {
+
 }
 
 /*----------
