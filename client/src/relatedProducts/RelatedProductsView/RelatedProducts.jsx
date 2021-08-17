@@ -50,7 +50,6 @@ class RelatedProducts extends React.Component {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
           reviewData.then(reviewData => {
-
             let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
 
             let values = [];

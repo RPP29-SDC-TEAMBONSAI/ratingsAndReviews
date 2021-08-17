@@ -2,6 +2,12 @@
 REALTED PRODUCTS STYLING
 -----------------------*/
 
+.relatedProductsTitle {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 0.25rem;
+}
+
 .relatedProductsList {
   display: flex;
   justify-content: center;
@@ -60,6 +66,12 @@ REALTED PRODUCTS STYLING
 /*-----------------
 YOUR OUTFIT STYLING
 -----------------*/
+
+.yourOutfitTitle {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 0.25rem;
+}
 
 .yourOutfitList {
   display: flex;
@@ -157,10 +169,15 @@ th {
 /*------------
 HOVER STYLING
 -------------*/
-.yourOutfitActionButton:hover,
+
 .nextButton:hover,
 .prevButton:hover,
 .relatedProductsActionButton:hover {
+  color: dimgray;
+  transform: scale(1.2);
+}
+.yourOutfitActionButton:hover {
+  color: darkred;
   transform: scale(1.2);
 }
 
@@ -178,15 +195,13 @@ TEXT STLYING
   color: red;
 }
 
-.productName, h2 {
-
-}
 
 /*----------
 IMAGE STLYING
 -----------*/
 
-img {
+#rpImage,
+#outfitImage {
   width: 250px;
   height: 300px;
 }
