@@ -6,21 +6,29 @@ const AddToCart = (props) => {
     return (
       <>
         <div className = "select-size-and-quantity">
-        <select className="selectSize" onChange={props.changeAvailableQuantity}>
-          <option id = "select-size">SELECT SIZE</option>
+          <div className = "select-items">
           {Object.entries(
             props.state.styles[props.OverviewState.styleIndex].skus
           ).map(([key, value]) => {
             if (value.quantity > 0) {
               val += 1;
               return (
-                <option key={val} value={value.quantity + ' ' + value.size}>
+                <div key={key} className = {'drop-down ' + value.size} value={value.quantity + ' ' + value.size + ' ' + key} onClick={props.changeAvailableQuantity}>
                   {value.size}
-                </option>
+                </div>
               );
             }
           })}
-        </select>
+          </div>
+          <div className="selectSize" >
+          <div id = "select-size" onClick = {props.dropDown}>{function() {
+            if (props.OverviewState.sizeSelected.length > 0) {
+              return (props.OverviewState.sizeSelected)
+            } else {
+              return ('SELECT SIZE')
+            }
+          }()}</div>
+          </div>
         <select className="quantity" onChange = {props.changeSelectedQuantity}>
           {(function () {
             let jsxElements = [];

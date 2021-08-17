@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reviewsInteraction } from '../../clientRoutes/reviews.js';
 
 const ReviewsHeader = (props) => {
   return (
@@ -10,14 +9,7 @@ const ReviewsHeader = (props) => {
           <select
             className="sort-options"
             value={props.sortBy}
-            onChange={(e) => {
-              props.handleSortChange(e);
-              reviewsInteraction({
-                target: {
-                  getAttribute: () => `sorted by ${e.target.value}`
-                }
-              });
-            }}>
+            onChange={props.handleSortChange}>
             <option value="relevant">relevance</option>
             <option value="helpful">helpfulness</option>
             <option value="newest">newest</option>
@@ -32,13 +24,9 @@ const ReviewsHeader = (props) => {
               className="sort-option"
               key={index}>
                 <div
-                  interaction="removed star filters"
                   className="remove-star-filter"
                   star={sfilter}
-                  onClick={(e) => {
-                    props.starFilterClick(e);
-                    reviewsInteraction(e);
-                  }}>
+                  onClick={props.starFilterClick}>
                     ✕
                 </div>
                 <div className="sort-option-text">{sfilter} stars</div>

@@ -65,8 +65,8 @@ const helper = {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return newDate.toLocaleDateString(undefined, options);
   },
-  createResponseDiv: (response) => {
-    if (response !== '' && response !== undefined) {
+   createResponseDiv: (response) => {
+    if (response !== '' && response !== undefined && response != null) {
       return (
         <div className="irt-response-to-review">
           <div className="irt-response-title">Response:</div>

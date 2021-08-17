@@ -258,6 +258,28 @@
 
 /*AddToCart*/
 
+.select-items {
+  display: none;
+    flex-direction: column;
+    border: 1px solid black;
+    z-index: 10;
+    width: 30%;
+    margin-right: -25%;
+    background: white;
+    margin-bottom: -4em;
+    border-radius: 5%;
+
+}
+
+.drop-down:hover{
+  background-color: blue;
+  color: white;
+  cursor: default;
+}
+
+#select-size {
+  cursor: default;
+}
 
 .select-size-and-quantity {
   display: flex;

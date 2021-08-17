@@ -6,6 +6,7 @@ import StyleSelector from "./components/StyleSelector.jsx";
 import ImageGallery from "./components/ImageGallery.jsx";
 import ExpandedView from "./components/ExpandedView.jsx";
 import $ from 'jquery';
+import {addToCart} from "../clientRoutes/cart.js"
 
 class Overview extends React.Component {
   constructor(props) {
@@ -15,12 +16,14 @@ class Overview extends React.Component {
       styleIndex: 0,
       quantityAvailable: 0,
       quantitySelected: 0,
+      sku: 0,
       sizeSelected: "",
       bag: [],
       mainPhoto: 0,
       firstPhotoInPhotoSelectorIndex: 0,
       expandedView: false,
-      zoomView: false
+      zoomView: false,
+      dropDown: false
     };
     this.changeAvailableQuantity = this.changeAvailableQuantity.bind(this);
     this.addToBag = this.addToBag.bind(this);
@@ -35,9 +38,12 @@ class Overview extends React.Component {
     this.expandedClassName = this.expandedClassName.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.zoomView = this.zoomView.bind(this);
+    this.dropDown = this.dropDown.bind(this);
+    this.dropDownFalse = this.dropDownFalse.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
+
     if (prevProps.state.product_id !== this.props.state.product_id) {
       this.setState({
         styleIndex: 0,
@@ -52,13 +58,21 @@ class Overview extends React.Component {
           sizeMenu.options[i].selected = false;
         }
       }
-      let selectMenu = document.getElementsByClassName("selectSize")[0];
-      for (let i = 0; i < selectMenu.options.length; i++) {
-        if (selectMenu.options[i].selected) {
-          selectMenu.options[i].selected = false;
-        }
-      }
+
+      // let selectMenu = document.getElementsByClassName("selectSize")[0];
+      // for (let i = 0; i < selectMenu.options.length; i++) {
+      //   if (selectMenu.options[i].selected) {
+      //     selectMenu.options[i].selected = false;
+      //   }
+      // }
     }
+    if (this.state.dropDown === true) {
+
+      document.getElementsByClassName('select-items')[0].style.display = 'flex';
+    } else {
+      document.getElementsByClassName('select-items')[0].style.display = 'none';
+    }
+
   }
 
   changeStyle(e) {
@@ -71,12 +85,12 @@ class Overview extends React.Component {
     });
 
     //document.getElementsByClassName('selectSize')[0].options[0].click()
-    let selectMenu = document.getElementsByClassName("selectSize")[0];
-    for (let i = 0; i < selectMenu.options.length; i++) {
-      if (selectMenu.options[i].selected) {
-        selectMenu.options[i].selected = false;
-      }
-    }
+    // let selectMenu = document.getElementsByClassName("selectSize")[0];
+    // for (let i = 0; i < selectMenu.options.length; i++) {
+    //   if (selectMenu.options[i].selected) {
+    //     selectMenu.options[i].selected = false;
+    //   }
+    // }
     let sizeMenu = document.getElementsByClassName("quantity")[0];
     for (let i = 0; i < sizeMenu.options.length; i++) {
       if (sizeMenu.options[i].selected) {
@@ -86,18 +100,21 @@ class Overview extends React.Component {
   }
 
   changeAvailableQuantity(e) {
-    if (e.target.value == "SELECT SIZE") {
-      this.setState({
-        quantityAvailable: 0,
-        sizeSelected: "",
-      });
-    } else {
-      let split = e.target.value.split(" ");
+    // if (e.target.value == "SELECT SIZE") {
+    //   this.setState({
+    //     quantityAvailable: 0,
+    //     sizeSelected: "",
+    //   });
+
+      let split = e.target.getAttribute('value').split(" ");
       this.setState({
         quantityAvailable: split[0],
         sizeSelected: split[1],
+        sku: split[2],
+        dropDown: false
       });
-    }
+
+
   }
 
   changeSelectedQuantity(e) {
@@ -114,22 +131,33 @@ class Overview extends React.Component {
 
   addToBag() {
     if (this.state.sizeSelected.length === 0) {
-      alert("Please Select Size");
-    console.log(document.getElementsByClassName('selectSize'))
-    } else {
-      let item = {
-        product_id: this.props.state.product_id,
-        styleIndex: this.state.styleIndex,
-        size: this.state.sizeSelected,
-        quantity: this.state.quantitySelected,
-      };
-
-      let cart = this.state.bag;
-      cart.push(item);
 
       this.setState({
-        bag: cart,
-      });
+        dropDown: true
+      })
+       alert("Please Select Size");
+    //document.getElementsByClassName('XS')[0].change()
+    //document.getElementById('select-size').click()
+    //document.getElementsByClassName('style-selector-image')[].click()
+    } else {
+      // let item = {
+      //   product_id: this.props.state.product_id,
+      //   styleIndex: this.state.styleIndex,
+      //   size: this.state.sizeSelected,
+      //   quantity: this.state.quantitySelected,
+      // };
+
+      // let cart = this.state.bag;
+      // cart.push(item);
+
+      // this.setState({
+      //   bag: cart,
+      // });
+
+      //make post request with sku
+      addToCart(this.state.sku).then(data => {
+        console.log(data)
+      })
     }
   }
 
@@ -152,7 +180,6 @@ class Overview extends React.Component {
 }
 
 upArrow() {
-  console.log('up', this.state.firstPhotoInPhotoSelectorIndex)
     let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) - 1;
     this.setState({
       firstPhotoInPhotoSelectorIndex: newFirstPhoto
@@ -161,7 +188,6 @@ upArrow() {
 }
 
 downArrow() {
-  console.log('down', this.state.firstPhotoInPhotoSelectorIndex)
     let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) + 1;
     this.setState({
       firstPhotoInPhotoSelectorIndex: newFirstPhoto
@@ -225,7 +251,22 @@ zoomView () {
 
 
   }
+}
 
+dropDown() {
+
+  this.setState({
+    dropDown: true
+  })
+}
+
+dropDownFalse() {
+  if (this.state.dropDown){
+
+    this.setState({
+      dropDown: false
+    })
+  }
 
 }
 
@@ -237,10 +278,8 @@ expandedClassName() {
   render() {
 
     return (
-      <div>
+      <div onClick = {this.dropDownFalse} >
         <div className = "overview-expanded" onMouseMove = {this.handleMouseMove} style={{display: this.state.expandedView ? "flex" : "none"}}>
-
-
       <ExpandedView
       state={this.props.state}
         OverviewState={this.state}
@@ -280,6 +319,7 @@ expandedClassName() {
             changeAvailableQuantity={this.changeAvailableQuantity}
             addToBag={this.addToBag}
             changeSelectedQuantity={this.changeSelectedQuantity}
+            dropDown = {this.dropDown}
           />
         </div>
       </div>

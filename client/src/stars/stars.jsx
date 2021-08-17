@@ -8,11 +8,11 @@ const defaultCb = () => { return }
 
 const getStarDivWithClassName = (name, style, cb) => {
   return <div className={name} style={style}>
-    <a starNum="1" onClick={cb}>{seq}</a>
-    <a starNum="2" onClick={cb}>{seq}</a>
-    <a starNum="3" onClick={cb}>{seq}</a>
-    <a starNum="4" onClick={cb}>{seq}</a>
-    <a starNum="5" onClick={cb}>{seq}</a>
+    <a starnum="1" onClick={cb}>{seq}</a>
+    <a starnum="2" onClick={cb}>{seq}</a>
+    <a starnum="3" onClick={cb}>{seq}</a>
+    <a starnum="4" onClick={cb}>{seq}</a>
+    <a starnum="5" onClick={cb}>{seq}</a>
   </div>;
 }
 
