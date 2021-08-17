@@ -4,7 +4,7 @@ REALTED PRODUCTS STYLING
 
 .relatedProductsList {
   display: flex;
-
+  justify-content: center;
 }
 
 .relatedProductsCardList {
@@ -17,7 +17,8 @@ REALTED PRODUCTS STYLING
   flex-grow: 1;
   flex-shrink: 0;
   border: solid;
-  margin: 1rem .25em;
+  margin: 2rem;
+  width: 20rem;
   cursor: pointer;
 }
 
@@ -26,10 +27,15 @@ REALTED PRODUCTS STYLING
   flex-direction: row;
   justify-content: space-between;
 }
-.relatedProductsCardTop, .productName {
-  flex-wrap: wrap
-}
 
+.relatedProductsCardBottom {
+  display: flex;
+  flex-direction: column;
+}
+.relatedProductsCardBottom, img {
+  display: flex;
+  align-self: center
+}
 
 .relatedProductsActionButton {
   height: 4em;
@@ -50,14 +56,6 @@ REALTED PRODUCTS STYLING
   border: none;
 }
 
-.relatedProductsCardBottom {
-  display: flex;
-  flex-direction: column;
-}
-.relatedProductsCardBottom, img {
-  display: flex;
-  align-self: center
-}
 
 /*-----------------
 YOUR OUTFIT STYLING
@@ -65,6 +63,7 @@ YOUR OUTFIT STYLING
 
 .yourOutfitList {
   display: flex;
+  justify-content: flex-start;
   overflow-x: scroll;
 
 }
@@ -78,7 +77,8 @@ YOUR OUTFIT STYLING
   flex-grow: 1;
   flex-shrink: 1;
   border: solid;
-  margin: 1rem .25em;
+  margin: 2rem;
+  width: 20rem;
   align-items: center;
   justify-content: center;
 }
@@ -97,6 +97,7 @@ YOUR OUTFIT STYLING
   align-items: center;
   overflow-wrap: break-word;
   cursor: pointer;
+  margin-right: auto;
 }
 
 .addToOutfitCard {
@@ -175,6 +176,10 @@ TEXT STLYING
 
 .saleProductPrice {
   color: red;
+}
+
+.productName, h2 {
+
 }
 
 /*----------
