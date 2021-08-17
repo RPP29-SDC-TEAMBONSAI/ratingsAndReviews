@@ -1,7 +1,4 @@
-.inputBox {
-  padding: 0 5px 0 0;
-  overflow: hidden;
-}
+
 .qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
   text-decoration: underline;
 }
@@ -32,92 +29,15 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .moreAnsweredBtn.Hide {
   display: none;
 }
-.qFormHide {
-  display:  none;
-}
-.qForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.questionClose {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 21vh;
-  height: 5vh;
-  width: 5vh;
-  border-radius: 50em;
-  background-color: lightgray;
-}
-.questionClose:hover{
-  background-color: white;
-  cursor: pointer;
-}
-.qFormData {
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  justify-content:center;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
-  width: 50vh;
-  height: 50vh;
-  margin-bottom: 1vh;
-  z-index: 2;
-}
-.userQuestion {
-  width: 35vh;
-  height:15vh;
-  resize: none;
-  overflow-y: scroll;
-}
-.askQuestionForm {
-  margin-bottom: 1vh;
-}
-.userNickName, .userEmail {
-   width: 35vh;
-}
-.aFormHide {
-  display: none;
-}
-.aForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
-}
+
+
+
+
+
 .closeAnswerHide {
   display: none;
 }
-.aFormData {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  background-color: lightsteelblue;
-  border-radius: 1em;
-  margin-bottom: 1vh;
-  padding:2.0rem;
-  z-index: 2;
-  height: 75vh;
-  width: 35vw;
-}
+
 .photos {
   margin-bottom: 1vh;
 }
@@ -127,8 +47,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .thumbnail {
   border: .01rem solid white;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 1em;
   width: 10vh;
   height: 10vh;
   margin-top: 1rem;
@@ -136,7 +55,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .answerThumbnail {
   border: .01rem solid #ddd;
-  border-radius: 4px;
+  border-radius: 1em;
   width: 10vh;
   height: 10vh;
 }
@@ -227,9 +146,9 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   height: 1.3em;
   cursor: pointer;
   color:#444;
-  border:1px solid #CCC;
+  border:.1rem solid #CCC;
   background:#DDD;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  box-shadow: 0 0 1rem rgba(0,0,0,0.2);
   text-align: center;
 }
 .moreAnsweredBtn {
@@ -241,7 +160,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
   color:navy;
   background: beige;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+  box-shadow: 0 0 1rem rgba(0,0,0,0.6);
 }
 .loadMoreAnswersButton{
   display: flex;
@@ -308,7 +227,119 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   margin-right: 2.5em;
   justify-content: start;
 }
+
+/* questionAdd form CSS */
+.addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
+  margin: 1vh;
+}
+.addQuestionAsterisk.productTitle:after, .addQuestionAsterisk.userNickName:after, .addQuestionAsterisk.userEmail:after{
+  content: ' *';
+  color: #B22222;
+  height: 3vh;
+}
+.qFormData {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  padding:.7rem;
+  z-index: 2;
+  height: 75vh;
+  width: 35vw;
+}
+.qFormHide {
+  display:  none;
+}
+.qForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.questionClose.container {
+  display: flex;
+  flex-direction: column;
+  height: 5vh;
+  width: 15vw;
+}
+.questionCloseMarker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 1vh;
+  width: 1vw;
+}
+.questionCloseMarker:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.askQuestionForm {
+  display: flex;
+  flex-direction: column;
+}
+.askQuestionForm.title {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+}
+.userQuestion {
+  width: 30vw;
+  height:15vh;
+  resize: none;
+  overflow-y: scroll;
+  margin-bottom: 1vh;
+}
+.userNickName, .userEmail {
+  display: flex;
+  width: 20vw;
+  overflow-x: auto;
+  margin-bottom: 1vh;
+}
+.userQSubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+}
+
 /*addAnswer component CSS*/
+.aFormData {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  padding:2.0rem;
+  z-index: 2;
+  height: 75vh;
+  width: 35vw;
+}
+.aFormHide {
+  display: none;
+}
+.aForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
 .closeAnswer{
   display: flex;
   flex-direction: column;
@@ -371,10 +402,10 @@ textarea.addAnswerFormText {
   overflow-x: auto;
 }
 .answerFormAsterisk.answer:after, .answerFormAsterisk.nickName:after, .answerFormAsterisk.email:after{
-  display: fixed;
+
   content: ' *';
   color: #B22222;
-  margin-bottom: none;
+
 }
 .photoConfirmationHide {
   display: none;
@@ -390,7 +421,6 @@ textarea.addAnswerFormText {
   margin-bottom: 1vh;
   z-index: 3;
 }
-
 .answerConfirmPhoto {
   display: flex;
   flex-direction: column;

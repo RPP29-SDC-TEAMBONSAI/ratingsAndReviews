@@ -18,9 +18,7 @@ class UserAnswer extends React.Component {
       confirmationState: 'photoConfirmationHide',
       checked: false,
       fileName: 0
-
     }
-
     this.answerFormChange = this.answerFormChange.bind(this)
     this.onAnswerSubmit = this.onAnswerSubmit.bind(this)
     this.userPhotoUpload = this.userPhotoUpload.bind(this)
@@ -33,8 +31,6 @@ class UserAnswer extends React.Component {
     this.resetPhotoConfirmationState = this.resetPhotoConfirmationState.bind(this)
   }
   componentDidUpdate(prevProps, prevState) {
-
-
     if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
       let newPhotos = prevState.photos.concat(this.state.photos.slice())
 
@@ -53,10 +49,7 @@ class UserAnswer extends React.Component {
         })
       }
     }
-
   }
-
-
   onAnswerSubmit(e) {
     e.preventDefault()
     let currentId = this.props.aFormQuestion_id
@@ -88,7 +81,6 @@ class UserAnswer extends React.Component {
         checked: false
       })
   }
-
   answerFormChange(e) {
     this.setState({
       [e.target.name] : e.target.value
@@ -234,8 +226,6 @@ class UserAnswer extends React.Component {
             />
             <button className={uploadClass? uploadClass: 'uploadButton'}
                     type='button'
-
-
                     onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
                     >Upload
             </button>

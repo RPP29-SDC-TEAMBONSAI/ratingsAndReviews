@@ -15,6 +15,7 @@ class UserQuestion extends React.Component {
     this.questionFormChange = this.questionFormChange.bind(this)
     this.setValidity = this.setValidity.bind(this)
     this.setInputValidity = this.setInputValidity.bind(this)
+    this.resetForm = this.resetForm.bind(this)
   }
 
   onQuestionSubmit(e) {
@@ -31,6 +32,11 @@ class UserQuestion extends React.Component {
         this.props.updateQuestions()
 
       })
+    this.setState({
+      yourQuestion: '',
+      nickName: '',
+      email:''
+    })
 
     this.props.addQuestion()
   }
@@ -54,29 +60,63 @@ class UserQuestion extends React.Component {
     e.target.setCustomValidity('')
 
   }
+  resetForm(e) {
+    this.setState({
+      yourQuestion: '',
+      nickName: '',
+      email:''
+    })
+  }
   render() {
     return (
-      <form  className='qFormData' onSubmit={this.onQuestionSubmit}>
-        <div>
-          <h1 className={this.props.QuestionFormDisplayClass ? 'questionClose': 'qFormHide'} onClick={(e) => this.props.closeQuestionForm()}>x</h1>
+      <div className='qFormData' >
+        <div className='questionClose container'>
+          <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'qFormHide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
         </div>
-        <div  className='askQuestionForm'>
-         <h4>Ask Your Question</h4>
-         <h3 > {`About the [${this.props.currentItemName}]`} </h3>
-        </div>
-        <div className='askQuestionForm'>
-          <textarea className='userQuestion' maxLength='1000' type='text' onClick={(e) => this.props.recordClick(e)} onInput={this.setInputValidity} onInvalid={this.setValidity} placeholder='Your Question' onChange={this.questionFormChange} name='yourQuestion' required></textarea>
-        </div>
-        <div className='askQuestionForm'>
-          <input className='userNickName' type='text' onClick={(e) => this.props.recordClick(e)} onInput={this.setInputValidity} onInvalid={this.setValidity} placeholder='What is Your Nickname?' onChange={this.questionFormChange} name='nickName'required></input>
-        </div >
-        <div className='askQuestionForm'>
-          <input className='userEmail' type='email' onClick={(e) => this.props.recordClick(e)} placeholder='Your Email' onChange={this.questionFormChange} name='email' required></input>
-        </div>
-        <div className='askQuestionForm'>
-          <button className='userQSubmit'onClick={(e) => this.props.recordClick(e)} type='submit'>Submit Your Question</button>
-        </div>
-      </form>
+        <form className='askQuestionForm' onSubmit={(e) => {this.onQuestionSubmit(e), this.resetForm()}}>
+          <h1 className='askQuestionForm title'>Ask Your Question</h1>
+          <h3 className='addQuestionAsterisk productTitle'> {`About the: ${this.props.currentItemName}`} </h3>
+          <textarea className='userQuestion'
+                    maxLength='1000'
+                    type='text'
+                    value={this.state.yourQuestion}
+                    onClick={(e) => this.props.recordClick(e)}
+                    onInput={this.setInputValidity}
+                    onInvalid={this.setValidity}
+                    placeholder='Your Question'
+                    onChange={this.questionFormChange}
+                    name='yourQuestion'
+                    required
+          />
+          <h3 className='addQuestionAsterisk userNickName'>whats your nickname?</h3>
+          <input className='userNickName'
+                  type='text'
+                  value={this.state.nickName}
+                  onClick={(e) => this.props.recordClick(e)}
+                  onInput={this.setInputValidity}
+                  onInvalid={this.setValidity}
+                  placeholder='What is Your Nickname?'
+                  onChange={this.questionFormChange}
+                  name='nickName'required
+          />
+          <h3 className='addQuestionAsterisk userEmail'>whats your email?</h3>
+          <input className='userEmail'
+                  type='email'
+                  value={this.state.email}
+                  onClick={(e) => this.props.recordClick(e)}
+                  placeholder='Your Email'
+                  onChange={this.questionFormChange}
+                  name='email' required
+          />
+          <div className='userQSubmit'>
+            <button
+                    onClick={(e) => this.props.recordClick(e)}
+                    type='submit'
+                    >Submit Your Question
+            </button>
+          </div>
+        </form>
+      </div>
     )
   }
 }
