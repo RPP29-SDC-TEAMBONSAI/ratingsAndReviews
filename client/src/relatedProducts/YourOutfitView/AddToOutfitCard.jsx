@@ -5,11 +5,14 @@ import propTypes from 'prop-types';
 const AddToOutfitCard = (props) => {
 
   return (
-    <div className='addToOutfitCard' data-testid='outfit-1'>
+    <div className='addToOutfitCard' >
         <button className='addToOutfitButton'
         style={{'fontSize': '50px'}}
-        onClick={(e) => {props.handleAddToOutfit(props.outfitProps, e)}}
-        >+</button>
+        onClick={(e) => {props.handleAddToOutfit(props.outfitProps, e)}}>
+           <span>+</span>
+
+           <span>Add to Outfit</span>
+        </button>
     </div>
   )
 }
