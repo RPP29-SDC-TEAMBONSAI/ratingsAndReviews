@@ -9,25 +9,28 @@ class UserAnswer extends React.Component {
 
     this.state = {
       yourAnswer: '',
-      nickName: 'Example: jack543!',
-      email:'Example: jack@email.com',
+      nickName: '',
+      email:'',
       photos: [],
       hideButton: null,
       tempPhoto:null,
       data: '',
       confirmationState: 'photoConfirmationHide',
-      checked: false
+      checked: false,
+      fileName: 0
     }
-
     this.answerFormChange = this.answerFormChange.bind(this)
     this.onAnswerSubmit = this.onAnswerSubmit.bind(this)
     this.userPhotoUpload = this.userPhotoUpload.bind(this)
     this.userFileChange = this.userFileChange.bind(this)
     this.photoConfirm = this.photoConfirm.bind(this)
     this.checkbox = this.checkbox.bind(this)
+    this.setValidity = this.setValidity.bind(this)
+    this.setInputValidity = this.setInputValidity.bind(this)
+    this.resetConfirmationState = this.resetConfirmationFormState.bind(this)
+    this.resetPhotoConfirmationState = this.resetPhotoConfirmationState.bind(this)
   }
   componentDidUpdate(prevProps, prevState) {
-
     if (prevState.photos[prevState.photos.length -1] !== this.state.photos[this.state.photos.length -1]) {
       let newPhotos = prevState.photos.concat(this.state.photos.slice())
 
@@ -39,18 +42,17 @@ class UserAnswer extends React.Component {
       } else {
 
         this.setState({
+          fileName:this.state.fileName + 1,
+
           photos: newPhotos,
           checked: false
         })
       }
     }
   }
-
-
   onAnswerSubmit(e) {
     e.preventDefault()
     let currentId = this.props.aFormQuestion_id
-
     let newObj = {
       body: this.state.yourAnswer.substring(0),
       name: this.state.nickName.substring(0),
@@ -60,7 +62,6 @@ class UserAnswer extends React.Component {
 
     }
 
-
     postAnswer(newObj)
       .then(confirmation=> {
         if (confirmation.status === 201) {
@@ -68,8 +69,6 @@ class UserAnswer extends React.Component {
 
         }
       })
-
-
       this.setState({
         yourAnswer: '',
         nickName: 'Example: jack543!',
@@ -82,7 +81,6 @@ class UserAnswer extends React.Component {
         checked: false
       })
   }
-
   answerFormChange(e) {
     this.setState({
       [e.target.name] : e.target.value
@@ -91,58 +89,82 @@ class UserAnswer extends React.Component {
 
   userPhotoUpload(e) {
     let reader = new FileReader()
-    // let newForm = new FormData()
-    // newForm.append('image', this.state.tempPhoto)
-
     reader.readAsDataURL(this.state.tempPhoto, 'base64')
 
     reader.onload = () => {
-
       this.setState({
+        fileName: this.state.fileName + 1,
         data: reader.result,
         confirmationState: 'photoConfirmation'
       })
     }
   }
-
   userFileChange(e) {
-
     this.setState({
-
       tempPhoto: e.target.files[0]
     })
   }
-
   photoConfirm(e) {
     let url = this.state.data.substring(0)
     let photos = this.state.photos.slice()
 
-    // console.log(this.state.tempPhoto.size)
 
+    if (e.target.className === 'addAnswerPhotoConfirmButton') {
+      photos.push(url.toString())
+      getUrl(url)
+        .then(newUrl => {
+          let newPhotos =[]
+          newPhotos.push(newUrl)
 
-    photos.push(url.toString())
-
-
-
-    getUrl(url)
-      .then(newUrl => {
-        // console.log
-        let newPhotos =[]
-        newPhotos.push(newUrl)
-
-        this.setState({
-          photos: newPhotos,
-          confirmationState:'photoConfirmationHide',
+          this.setState({
+            fileName:this.state.fileName + 1,
+            photos: newPhotos,
+            confirmationState:'photoConfirmationHide',
+            checked:false,
+          })
         })
-      })
-
+    }
   }
-
   checkbox(e) {
    this.setState({
-     checked: true
+     checked: !this.state.checked
    })
 
+  }
+  setValidity(e) {
+    if (e.target.className === 'addAnswerFormText' ) {
+      e.target.setCustomValidity('Your answer cannot be empty')
+    }
+    if (e.target.className === 'addAnswerFormNickNameInput') {
+      e.target.setCustomValidity('your nickname cannot be empty')
+    }
+  }
+  setInputValidity(e) {
+    e.target.setCustomValidity('')
+  }
+  resetConfirmationFormState(e) {
+    this.setState({
+      fileName:'',
+      yourAnswer: '',
+      nickName: '',
+      email:'',
+      photos: [],
+      hideButton: null,
+      tempPhoto:null,
+      data: '',
+      confirmationState: 'photoConfirmationHide',
+      checked: false
+    })
+  }
+  resetPhotoConfirmationState(e) {
+    this.setState({
+      fileName:'',
+      hideButton: null,
+      tempPhoto:null,
+      data: '',
+      confirmationState: 'photoConfirmationHide',
+      checked: false
+    })
   }
 
   render() {
@@ -150,62 +172,102 @@ class UserAnswer extends React.Component {
     if (this.state.photos.length === 5) {
       uploadClass = 'uploadButtonHide'
     }
+
     return (
-      <form  className={'aFormData'} onSubmit={this.onAnswerSubmit}>
-        <div>
-          <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={this.props.closeAnswerForm}>x</h1>
-        </div>
-
-        <div  className='currentQuestion'>
-
-          <h3 className=''> {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
-        </div>
-
-        <div className=''>
-          <h3>Your Answer</h3>
-          <textarea className='addAnswerFormText' onClick={(e)=> this.props.recordClick(e)} maxLength='1000' type='text' value={this.state.yourAnswer} onChange={this.answerFormChange} name='yourAnswer'></textarea>
-        </div>
-
-        <div className=''>
-          <h3>What is your nickname</h3>
-          <input className='addAnswerFormNickName' onClick={(e)=> this.props.recordClick(e)} type='text' maxLength='60' value={this.state.nickName} onChange={this.answerFormChange} name='nickName'></input>
-        </div >
-
-        <div className=''>
-          <h3>What is your email?</h3>
-          <input className='addAnswerFormEmail' onClick={(e)=> this.props.recordClick(e)} type='text' value={this.state.email} onChange={this.answerFormChange} name='email'></input>
-        </div>
-
-        <div>
-          <h3>Upload Your Photos</h3>
-            <input onChange={this.userFileChange} onClick={(e)=> this.props.recordClick(e)} name='file' className='photos' type='file' accept='image/png, image/jpeg'></input>
-          <button className={uploadClass? uploadClass: 'uploadButton'} type='button' onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload()}}>Upload</button>
-        </div>
-
-        <div className=''>
-          <input type='submit' className='addAnswersubmit' onClick={(e)=> this.props.recordClick(e)} value='Submit Your Answer' ></input>
-        </div>
-
-       <div className={this.state.confirmationState}>
-         <h4>Confirm Your Photo Selection</h4>
-         <input id='checkbox1' className='checkbox1' type='checkbox'  checked={this.state.checked}  onClick={(e)=> this.props.recordClick(e)} onChange={this.checkbox}/>
-         <label htmlFor='checkbox1'><img src={this.state.data}></img></label>
-         <div>
-           <button className='photoConfirmButton' type='button' onClick={(e)=> {this.props.recordClick(e), this.photoConfirm()}}>Confirm</button>
-         </div>
-       </div>
-
-       <div>
-         {this.state.photos.map((photo, index) => {
-           return <AnswerImages key={index} photo={photo}/>
-         })}
-       </div>
-      </form>
-
-
+      <div className='aFormData'>
+        <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={(e) => {this.props.closeAnswerForm(e), this.resetConfirmationFormState(e)}}>x</h1>
+        <form className='addAnswerForm' onSubmit={this.onAnswerSubmit}>
+          <h3 className='currentQuestion'> {`${this.props.currentItemName}: ${this.props.currentQuestion}`}</h3>
+          <h3 className='answerFormAsterisk answer'>Your Answer</h3>
+          <textarea className='addAnswerFormText'
+                    value ={this.state.yourAnswer}
+                    onInput={this.setInputValidity}
+                    onClick={(e)=> {this.props.recordClick(e)}}
+                    maxLength='1000' type='text'
+                    placeholder='your answer here...'
+                    onChange={this.answerFormChange}
+                    name='yourAnswer'
+                    required
+                    onInvalid={this.setValidity}
+          />
+          <h3 className='answerFormAsterisk nickName'>What is your nickname?</h3>
+          <input className='addAnswerFormNickNameInput'
+                onInput={this.setInputValidity}
+                onClick={(e)=> this.props.recordClick(e)}
+                type='text'
+                maxLength='60'
+                placeholder='Example: Jack543!'
+                onChange={this.answerFormChange}
+                value ={this.state.nickName}
+                name='nickName'
+                required
+                onInvalid={this.setValidity}
+          />
+          <h3 className='answerFormAsterisk email'>What is your email?</h3>
+          <input className='addAnswerFormEmail'
+                onInput={this.setInputValidity}
+                onClick={(e)=> this.props.recordClick(e)}
+                type='email'
+                placeholder='Example: jack@email.com'
+                onChange={this.answerFormChange}
+                value ={this.state.email}
+                name='email'
+                required
+          />
+          <div>
+            <h3 className='addAnswerFormUploadPhotoTitle'>Upload Your Photos</h3>
+            <input onChange={this.userFileChange}
+                  onClick={(e)=> this.props.recordClick(e)}
+                  key={this.state.fileName}
+                  name='file'
+                  className='photos'
+                  type='file'
+                  accept='image/png, image/jpeg'
+            />
+            <button className={uploadClass? uploadClass: 'uploadButton'}
+                    type='button'
+                    onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
+                    >Upload
+            </button>
+          </div>
+          <div>
+            <input type='submit'
+                  className='addAnswersubmit'
+                  onClick={(e)=> this.props.recordClick(e)}
+                  value='Submit Your Answer'
+            />
+          </div>
+          <div className={this.state.confirmationState}>
+            <h2 className='closeConfirmation' onClick={this.resetPhotoConfirmationState}>x</h2>
+            <div className='confirmPhoto container'>
+              <h4>Confirm Your Photo Selection</h4>
+              <input id='checkbox1'
+                    type='checkbox'
+                    checked={this.state.checked}
+                    onClick={(e)=> this.props.recordClick(e)}
+                    onChange={this.checkbox}
+              />
+              <label htmlFor='checkbox1'>
+                <img className='answerConfirmPhoto' src={this.state.data}></img>
+              </label>
+              <button className='addAnswerPhotoConfirmButton'
+                      type='button'
+                      onClick={(e)=> {this.props.recordClick(e), this.photoConfirm(e)}}
+                      >Confirm
+              </button>
+            </div>
+          </div>
+          <div className='answerFormPhotoThumbnail'>
+            {this.state.photos.map((photo, index) => {
+              return <AnswerImages key={index} photo={photo}/>
+            })}
+          </div>
+        </form>
+      </div>
     )
   }
 }
+
 
 UserAnswer.propTypes = {
   recordClick:propTypes.func.isRequired,

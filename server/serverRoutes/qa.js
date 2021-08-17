@@ -44,6 +44,7 @@ module.exports = {
   updateAnswerHelpfulness: (req, res) => {
 
     let id = Number(req.url.split('=')[1])
+
     axios.put(api + `qa/answers/${id}/helpful`, id.toString(), {
       headers: {
         'Authorization': TOKEN
@@ -89,12 +90,13 @@ module.exports = {
     let file=req.body.file.split('base64,')[1]
     const options = {
       apiKey: key,
-      expiration: 360,
       base64string: file,
-
     };
     imgbbUploader(options)
-     .then((response) =>res.send(response.url))
+     .then((response) =>{
+      //  console.log(response)
+       res.send(response.display_url)
+      })
   },
 
   addToReported: (req, res) => {
