@@ -2,10 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import YourOutfitCard from './YourOutfitCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
-//import withClickTracker from '../withClickTracker.jsx';
 
 const YourOutfitList = (props) => {
-  //const { count, recordCount } = props;
+
   return (
     <div className='yourOutfitListContainer' >
       <h2 className='yourOutfitTitle' >Your Outfit: </h2>
@@ -13,15 +12,16 @@ const YourOutfitList = (props) => {
       <AddToOutfitCard handleAddToOutfit={props.handleAddToOutfit} outfitProps={props.outfitProps} state={props.state} />
       {props.outfitItems.map((outfitItem, i) => {
         return (<div className='outfitItem' key={i}>
-                 <YourOutfitCard
-                  key={outfitItem.id}
-                  id={outfitItem.product_id}
-                  outfitProps={outfitItem}
-                  starRating={props.state.ratings}
-                  handleRemoveFromOutfit={props.handleRemoveFromOutfit}
+                  <YourOutfitCard
+                   key={outfitItem.id}
+                   id={outfitItem.product_id}
+                   outfitProps={outfitItem}
+                   starRating={props.state.ratings}
+                   handleRemoveFromOutfit={props.handleRemoveFromOutfit}
                   />
-               </div>)
-      })}
+                </div>)
+      })
+      }
     </div>
     </div>
   )

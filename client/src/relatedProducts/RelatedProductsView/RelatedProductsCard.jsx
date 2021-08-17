@@ -23,7 +23,6 @@ const getStars = function (starsObject) {
 };
 
 const RelatedProductsCard = (props) => {
-
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <div className='relatedProductsCardTop'>
