@@ -198,9 +198,12 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .answererDetails {
   display: flex;
   flex-direction: row;
+  margin: 0;
+
 }
 .answerList {
   flex:1;
+  margin: 0;
   flex-direction: row;
 }
 .aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
@@ -454,4 +457,12 @@ textarea.addAnswerFormText {
 }
 .answerText {
   margin-bottom: 0;
+  margin-top: 2vh;
+}
+.questionText {
+  margin-bottom: 0;
+}
+
+p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
+margin-top: 0;
 }
