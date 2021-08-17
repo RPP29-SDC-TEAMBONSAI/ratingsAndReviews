@@ -50,16 +50,5 @@ describe('Review component', () => {
         expect(wrapper.find('select').props().value).toBe('newest');
       });
     });
-
-    test('should call starFilterClick when clearing star filters', () => {
-      const event = { target: { value: 5 } };
-      Promise.resolve(wrapper.find('.sort-option div.remove-star-filter').simulate('click', event))
-      .then(() => {
-        wrapper.update();
-      })
-      .then(() => {
-        expect(wrapper.props().starFilters).toBe([]);
-      });
-    });
   });
 });
