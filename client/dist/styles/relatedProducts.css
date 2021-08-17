@@ -32,10 +32,10 @@ REALTED PRODUCTS STYLING
   display: flex;
   flex-direction: column;
 }
-.relatedProductsCardBottom, img {
+/* .relatedProductsCardBottom, img {
   display: flex;
   align-self: center
-}
+} */
 
 .relatedProductsActionButton {
   height: 4em;
@@ -186,7 +186,8 @@ TEXT STLYING
 IMAGE STLYING
 -----------*/
 
-img {
+
+/* img {
   width: 250px;
   height: 300px;
-}
+} */

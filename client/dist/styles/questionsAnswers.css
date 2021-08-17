@@ -244,14 +244,15 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .qFormData {
   position: fixed;
   display: flex;
-  flex-direction: column;
-  background-color: lightsteelblue;
-  border-radius: 1em;
+
+  background-color: white	;
+
   margin-bottom: 1vh;
   padding:.7rem;
   z-index: 2;
   height: 75vh;
-  width: 35vw;
+  width: 52vw;
+  /* border: 1rem solid white; */
 }
 .qFormHide {
   display:  none;
@@ -268,12 +269,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.questionClose.container {
-  display: flex;
-  flex-direction: column;
-  height: 5vh;
-  width: 15vw;
-}
+
 .questionCloseMarker {
   display: flex;
   flex-direction: column;
@@ -296,25 +292,88 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   justify-self: end;
   align-items: center;
 }
-.userQuestion {
+textarea.userQuestion {
   width: 30vw;
   height:15vh;
   resize: none;
   overflow-y: scroll;
   margin-bottom: 1vh;
+  border: .1rem solid lightgray;
+  overflow: hidden;
+}
+textarea.userQuestion:hover {
+  border-color: grey;
 }
 .userNickName, .userEmail {
   display: flex;
   width: 20vw;
+
   overflow-x: auto;
   margin-bottom: 1vh;
 }
+input.userNickName, input.userEmail {
+  border: .1rem solid lightgray;
+  resize: none;
+}
+input.userNickName:hover, input.userEmail:hover {
+  border: .12rem solid grey;
+  resize: none;
+}
 .userQSubmit {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  width: 20vw;
+  width: 20vw; */
+
+  /* height: 100%; */
+  margin-top: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  border-radius: 1em;
+  background-color: white;
+
 }
+
+.userQSubmit.btn {
+
+  /* width: 60rem; */
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 10rem;
+  /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
+
+}
+.userQSubmit:hover{
+
+  box-shadow: 0px 15px 20px lightgray;
+  color: white;
+
+  transform: translateY(-7px);
+  background-color: white;
+}
+.userQSubmit.btn:hover {
+  background-color: royalblue;
+}
+
+/* .userQSumbit.btn:hover {
+  background-color: royalblue;
+} */
+
+
+
 
 /*addAnswer component CSS*/
 .aFormData {
@@ -466,3 +525,14 @@ textarea.addAnswerFormText {
 p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
 margin-top: .25rem;
 }
+
+
+img.currentQuestionProductPhoto.img {
+  display: flex;
+  flex-direction: row;
+  border-radius: 2em;
+  width: 15vw;
+  height: 15vw;
+  padding: 1rem;
+}
+

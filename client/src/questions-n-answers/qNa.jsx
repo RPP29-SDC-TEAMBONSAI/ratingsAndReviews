@@ -213,6 +213,7 @@ class QuestionsNAnswers extends React.Component {
 
               <div className={this.props.allClicksProps.QuestionFormDisplayClass}>
                 <UserQuestion
+                  currentProductPhoto={this.props.currentProductPhoto}
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateQuestions={this.updateQuestions}
