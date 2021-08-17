@@ -50,10 +50,10 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   border-radius: 1em;
   width: 10vh;
   height: 10vh;
-  margin-top: 1rem;
-
+  margin-top: .5rem;
 }
 .answerThumbnail {
+
   border: .01rem solid #ddd;
   border-radius: 1em;
   width: 10vh;
@@ -201,6 +201,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .answerList {
   flex:1;
+  flex-direction: row;
 }
 .aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
   margin: 0em;
@@ -447,4 +448,10 @@ textarea.addAnswerFormText {
 .closeConfirmation:hover{
   color: darkred;
   cursor: pointer;
+}
+.answerImage.container{
+  display: flex;
+}
+.answerText {
+  margin-bottom: 0;
 }
