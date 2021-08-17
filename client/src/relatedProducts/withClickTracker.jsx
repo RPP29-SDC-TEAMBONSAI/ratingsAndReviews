@@ -52,7 +52,7 @@ const withClickTracker= WrappedComponent => {
         })
       })
       .then(data => {
-        console.log('interactions successful', data)
+        //console.log('interactions successful', data)
       })
       .then(() => {
         this.setState({interactions: [], count: 0})
