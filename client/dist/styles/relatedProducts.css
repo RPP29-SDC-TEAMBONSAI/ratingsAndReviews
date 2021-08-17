@@ -18,7 +18,7 @@ REALTED PRODUCTS STYLING
   flex-shrink: 0;
   border: solid;
   margin: 1rem .25em;
-
+  cursor: pointer;
 }
 
 .relatedProductsCardTop {
@@ -38,6 +38,7 @@ REALTED PRODUCTS STYLING
   background: transparent;
   border: none;
 }
+
 
 .nextButton, .prevButton {
   cursor: pointer;
@@ -86,6 +87,7 @@ YOUR OUTFIT STYLING
   font-size: x-large;
   background: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .addToOutfitButton {
@@ -149,6 +151,16 @@ th {
 
 .relatedProductsModal td {
     text-align: center;
+}
+
+/*------------
+HOVER STYLING
+-------------*/
+.yourOutfitActionButton:hover,
+.nextButton:hover,
+.prevButton:hover,
+.relatedProductsActionButton:hover {
+  transform: scale(1.2);
 }
 
 
