@@ -46,7 +46,7 @@ const RelatedProductsCard = (props) => {
             )
           }
         })()}
-        <img src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}
+        <img id='rpImage' src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}
         alt='clothing product'
         className='relatedProductImage'></img>
 
