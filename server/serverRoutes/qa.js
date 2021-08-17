@@ -94,7 +94,6 @@ module.exports = {
     };
     imgbbUploader(options)
      .then((response) =>{
-
        res.send(response.display_url)
       })
   },

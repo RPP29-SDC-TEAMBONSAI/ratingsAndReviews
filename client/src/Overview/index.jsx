@@ -115,7 +115,7 @@ class Overview extends React.Component {
   addToBag() {
     if (this.state.sizeSelected.length === 0) {
       alert("Please Select Size");
-    console.log(document.getElementsByClassName('selectSize'))
+    //console.log(document.getElementsByClassName('selectSize'))
     } else {
       let item = {
         product_id: this.props.state.product_id,
@@ -152,7 +152,7 @@ class Overview extends React.Component {
 }
 
 upArrow() {
-  console.log('up', this.state.firstPhotoInPhotoSelectorIndex)
+  //console.log('up', this.state.firstPhotoInPhotoSelectorIndex)
     let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) - 1;
     this.setState({
       firstPhotoInPhotoSelectorIndex: newFirstPhoto
@@ -161,7 +161,7 @@ upArrow() {
 }
 
 downArrow() {
-  console.log('down', this.state.firstPhotoInPhotoSelectorIndex)
+  //console.log('down', this.state.firstPhotoInPhotoSelectorIndex)
     let newFirstPhoto = Number(this.state.firstPhotoInPhotoSelectorIndex) + 1;
     this.setState({
       firstPhotoInPhotoSelectorIndex: newFirstPhoto
