@@ -70,9 +70,12 @@ class UserQuestion extends React.Component {
   render() {
     return (
       <div className='qFormData' >
-        <div className='questionClose container'>
+
           <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'qFormHide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
-        </div>
+
+
+          <img className='currentQuestionProductPhoto img'src={this.props.currentProductPhoto} />
+
         <form className='askQuestionForm' onSubmit={(e) => {this.onQuestionSubmit(e), this.resetForm()}}>
           <h1 className='askQuestionForm title'>Ask Your Question</h1>
           <h3 className='addQuestionAsterisk productTitle'> {`About the: ${this.props.currentItemName}`} </h3>
@@ -109,7 +112,7 @@ class UserQuestion extends React.Component {
                   name='email' required
           />
           <div className='userQSubmit'>
-            <button
+            <button className='userQSubmit btn'
                     onClick={(e) => this.props.recordClick(e)}
                     type='submit'
                     >Submit Your Question
@@ -122,6 +125,7 @@ class UserQuestion extends React.Component {
 }
 
 UserQuestion.propTypes = {
+  currentProductPhoto:propTypes.string.isRequired,
   recordClick:propTypes.func.isRequired,
   currentItemName: propTypes.string.isRequired,
   addQuestion: propTypes.func.isRequired,
