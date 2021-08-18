@@ -252,18 +252,19 @@ class QuestionsNAnswers extends React.Component {
                   )})}
               </div>
               <div className='questionListButton container'>
-                <div className='lButton'>
+
                   <h3 className='loadMoreAnswersButton'
                       onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.loadMoreAnsOrQ(e)}}>{this.props.allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
                   </h3>
-                </div>
+
                 <div className='bottomButtons'>
 
                   <h3 className={this.props.allClicksProps.showQuestionButton ? 'hide' : 'moreAnsweredBtn'}
                           onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.dynamicData.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
-                </div>
                   <h3 className='addQuestionBtn' onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.addQuestion()}}>ADD A QUESTION +</h3>
+                </div>
+
 
               </div>
 

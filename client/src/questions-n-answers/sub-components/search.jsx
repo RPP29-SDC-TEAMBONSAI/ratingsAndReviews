@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 const Search = (props) => {
   return (
     <div className='search container'>
+
       <input
         onClick={(e) => props.recordClick(e)}
         className='searchInput'
