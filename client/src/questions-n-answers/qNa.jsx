@@ -202,14 +202,14 @@ class QuestionsNAnswers extends React.Component {
         {trackerProps => (
             <div className='mainQnA container'>
 
-              <div className='title container row'>
+              {/* <div className='title container row'> */}
                 <h3 className='componentTitle'>Questions & Answers</h3>
                 <Search
                   recordClick={trackerProps.recordClick}
                   currentInput={this.state.questionSearchVal}
                   questionSearchChange={this.questionSearchChange}
                 />
-              </div>
+              {/* </div> */}
 
               <div className={this.props.allClicksProps.QuestionFormDisplayClass}>
                 <UserQuestion
@@ -237,7 +237,8 @@ class QuestionsNAnswers extends React.Component {
                 />
               </div>
 
-              <div className='questionList scroll container'>
+              <div className='test'>
+
                   {this.state.dynamicData.map((question, index) => {
 
                     let show = false;
@@ -249,29 +250,33 @@ class QuestionsNAnswers extends React.Component {
                     if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
                       show = true
                     }
+
+
                     // this.showQuestion(this.props.allClicksProps.questionClickCount, index)
 
                     return (
-                      <QuestionsContainer
-                            answerState={this.props.allClicksProps.loadAnswerState}
-                            recordClick={trackerProps.recordClick}
-                            key={index}
-                            addToReported={this.addToReported}
-                            helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
-                            helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
-                            currentI={index}
-                            showQuestions={this.showQuestions}
-                            questionClickCount={this.props.allClicksProps.questionClickCount}
-                            answers={question.answers}
-                            question={question}
-                            addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
-                            question_id={question.question_id}
 
-                            show={show}
+                        <QuestionsContainer
+                              answerState={this.props.allClicksProps.loadAnswerState}
+                              recordClick={trackerProps.recordClick}
+                              key={index}
+                              addToReported={this.addToReported}
+                              helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
+                              helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
+                              currentI={index}
+                              showQuestions={this.showQuestions}
+                              questionClickCount={this.props.allClicksProps.questionClickCount}
+                              answers={question.answers}
+                              question={question}
+                              addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
+                              question_id={question.question_id}
+                              show={show}
 
-                      />
+                        />
+
                   )})}
-              </div>
+
+                  </div>
               <div className='questionListButton container'>
                 <div className='lButton'>
                   <h3 className={'loadMoreAnswersButton'}
@@ -290,6 +295,7 @@ class QuestionsNAnswers extends React.Component {
 
             </div>
         )}
+
       </ClickTracker>
     )
   }

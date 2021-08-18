@@ -60,18 +60,37 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .list.container {
   display: flex;
-  justify-content: start;
+  width: 60vw;
   flex-direction: column;
 }
 .row.list.container{
   display: flex;
   flex-direction: row;
-  width: 100vw;
+
+  width: 80vw;
+
 }
 .questionList.row {
   display: flex;
-  flex-direction: column;
-  flex:.5;
+  flex-direction: row;
+  overflow-y: auto;
+  height: 25vh;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
+
+
+
+
+}
+.qList.row {
+  display: flex;
+  flex-direction: row;
+}
+.questionList.row::-webkit-scrollbar {
+  display: none;
+}
+.answerList.scroll {
+
 }
 .addAnswerList.row {
   margin-top: 1.3em;
@@ -81,8 +100,12 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .mainQnA.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-right: 13vw;
+  height: 100vh;
+
+
+
+  justify-content: center;
+  margin: 0;
 }
 .questionTitle{
  display: flex;
@@ -167,40 +190,70 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .questionListButton.container {
   display: flex;
   justify-content: start;
-  width: 65vw;
+
 }
-.list.container.hide {
-  display: none;
-}
-.questionList.scroll.container {
-  height: 50vh;
-  overflow-y:scroll;
-  overflow-x: hidden;
-}
+
+
 .questionList.container {
   display: flex;
   width: 65vw;
-  height: 50vh;
-  overflow-y:scroll;
+
+
+
+
+
+
+
   flex-direction: column;
 }
 .answerList.hide {
   display: none;
 }
-.answerListScroll {
-  height: 15vh;
-  overflow-y:scroll;
+div.test {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 50vh;
+  /* height: 100vh;
+  overflow: hidden; */
+
+
+}
+
+
+div.helpfulQuestion.container {
+  display: flex;
+  height: 3vh;
+
+
 }
 .answererDetails {
   display: flex;
   flex-direction: row;
+
   margin: 0;
 }
-.answerList {
-  flex:1;
-  margin: 0;
-  flex-direction: row;
+.answerList.scroll {
+
+
+  width: 75vw;
+
+
+
+
 }
+.questionList.scroll.container {
+
+
+
+  /* overflow-y: auto;
+  overflow: hidden; */
+
+
+
+
+}
+
 .aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
   margin: 0em;
 }
@@ -214,6 +267,10 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .qhelpfulIndicator, .addAnswerText{
   padding-left: .15em;
+}
+p.addAnswerText{
+  width: 7vw;
+
 }
 .helpulQuestion.display {
   padding-right: 3em;
@@ -488,11 +545,17 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
   margin-top: 2vh;
 }
 .questionText {
-  margin-bottom: 0;
+
+
+  padding: .25rem;
+  margin: 0;
+
+
+  width: 65vw;
 }
 
 p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
-margin-top: .25rem;
+ margin: 0;
 }
 
 
@@ -653,4 +716,21 @@ input.photos {
   color: white;
   transform: translateY(-7px);
   background-color: royalblue;
+}
+.showQuestion {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+
+
+  width: 75vw;
+  height: 20vh;
+  /* border-bottom: .15rem solid lightgray; */
+  border-top: .1em solid grey;
+}
+.qa.row {
+  display: flex;
+  margin: .1em;
+  width: 75vw;
+  /* border-top: .15rem solid steelblue; */
 }

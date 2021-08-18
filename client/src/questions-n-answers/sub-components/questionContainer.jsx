@@ -14,22 +14,11 @@ const QuestionsContainer = (props) => {
   }
 
   return (
-    <div className={showQuestion? 'list scroll container' : 'list container hide'}>
-      <div className='row list container'>
 
-        <div className='questionList row'>
-          <QuestionList
-            answerState={props.answerState}
-            recordClick={props.recordClick}
-            addToReported={props.addToReported}
-            helpfulAnswerClick= {props.helpfulAnswerClick}
-            question={props.question}
-            answers={props.answers}
-          />
-        </div>
-
-        <div className='addAnswerList row'>
-          <AddAnswer
+    <div className={showQuestion?  'showQuestion': 'hide'}>
+        <div className='qa row'>
+        <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
+        <AddAnswer
             recordClick={props.recordClick}
             addAnswerOnClick={props.addAnswerOnClick}
             currentI={props.currentI}
@@ -38,9 +27,23 @@ const QuestionsContainer = (props) => {
             questionName={props.question.question_body}
             question_id={props.question_id}
           />
-        </div>
+          </div>
+        <div className={'questionList row'}>
+          <QuestionList
+            answerState={props.answerState}
+            recordClick={props.recordClick}
+            addToReported={props.addToReported}
+            helpfulAnswerClick= {props.helpfulAnswerClick}
+            question={props.question}
+            answers={props.answers}
+            showQuestion={props.showQuestion}
+          />
+
+
+
 
       </div>
+
     </div>
   )
 }
