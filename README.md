@@ -18,18 +18,21 @@
 *Questions & Answers*
 
 *Related Items & Outfit Creation*
+
      The core of the Related Items & Outfit Creation module rests in two lists for the end user. The first of these is a list of related products, determined internally, that change depending on the current product a user is viewing. This list is comprised of card elements in a horizontally scrolling carousel that have information such as name, price, star rating, and image of a related product. The scrolling of this list is done by buttons that conditionally render and dissapear depending on if there are items available in the desired direction of scroll. The cards feature a clickable action button that opens a comparison modal that displays the features of the current item being viewed and the related item that was clicked. If a related product card is clicked outside of this action button, the user is redirected to the landing page for the item that they clicked.
      The Outfit Creation list initially appears as empty, except for a button reading 'Add to Outfit'. Clicking this button will add the current product being viewed to a user's outfit list, populating the list with a card similar to the related products cards above. Users can add as many items as they want to their outfit, but are prevented from adding the same item twice. The user's outfit persists through navigation to other pages and exiting browser windows by relying on local storage. These outfit cards contain an action button that remove an item from the outfit. 
      The primary challenge in creating this module came from needing data from numerous different endpoints that than needed to be altered and combined in order to reach the desired functionality. I had to be mindful of when and where to make API calls so I would have the necessary data for each subcomponent without overloading the server with requests. A change in the primary product being displayed means that a new list of 5-10 related product cards needs to be generated, of which each card would need data from multiple endpoints. This data then had to be run through numerous helper functions to be formatted in a useable way. The end result was accomplished by careful consideration and constant refactor to the base data structures I rely on the display each list and card.
      
 *Additional Features*
-Click Tracker: Each module within the application has implemented a click tracker that records the element clicked, the module that element is within, and the time of click. This data is then posted to client's API. There were two approaches taken in recording clicks- higher order components, and the render props method. Both accomplish the same goal, and are implemented individually for each module.
+Click Tracker: 
+Each module within the application has implemented a click tracker that records the element clicked, the module that element is within, and the time of click. This data is then posted to client's API. There were two approaches taken in recording clicks- higher order components, and the render props method. Both accomplish the same goal, and are implemented individually for each module.
 
-Dark Mode: The web page includes the option a user to toggle light or dark mode. This allows optimal experience in very bright areas, and battery savings in dimmer settings.
+Dark Mode: 
+The web page includes the option a user to toggle light or dark mode. This allows optimal experience in very bright areas, and battery savings in dimmer settings.
 
 
 ### Optimizations
--The client wanted their new site to meet to following metrics: 
+- The client wanted their new site to meet to following metrics: 
  * Time to first paint: 0.8s
  * Time to first meaningful paint: 2.0s
  * Time to interactive: 2.5s
