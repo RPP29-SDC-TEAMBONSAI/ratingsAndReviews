@@ -1,7 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+
 const Search = (props) => {
+
   return (
     <div className='search container'>
 
@@ -12,9 +14,12 @@ const Search = (props) => {
         placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...'
         name='question'
         onChange={(e) => props.questionSearchChange(e)}>
-      </input>
 
-      <input className='searchBtn' type="submit" value='Search'></input>
+      </input>
+      <div className='iconContainer'>
+
+      <img className='searchBtn' src='https://i.ibb.co/6NL5q3Q/6aad782c2d7e.png'></img>
+      </div>
     </div>
   )
 }

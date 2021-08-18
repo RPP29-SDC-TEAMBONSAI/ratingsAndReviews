@@ -1,5 +1,5 @@
 
-.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn {
+.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn, .addAnswerText {
   text-decoration: underline;
 }
 .userIdText, .userHelpIndicator{
@@ -16,33 +16,39 @@ p.userIdText, p.answerHelpfulText, p.userHelpIndicator{
 p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   padding-left:.15em
 }
-.answerHelpfulText {
-  border-top:none;
-  border-Left:none;
-  padding-right: .15em;
-  border-right: .15em solid black;
-  border-bottom: none;
+.title.container {
+  display: flex;
+
+  flex-direction: column;
+
 }
+
 .hide {
   display: none;
 }
 .thumbnail {
   border: .01rem solid white;
   border-radius: 1em;
-  width: 10vh;
-  height: 10vh;
-  margin-top: 2.5vh;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin-top: .5vh;
+
 }
-.questionList.row {
+.questionList.row{
   display: flex;
   flex-direction: row;
-  overflow-y: auto;
-  height: 25vh;
-  scrollbar-width: 0;
+  overflow-y: scroll;
+
+  height: 15vh;
+
+
+
+
 
 }
 
 .questionList.row::-webkit-scrollbar {
+  -ms-overflow-style: none;
   display: none;
 }
 
@@ -50,39 +56,55 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   display: flex;
   flex-direction: column;
   padding: 1rem;
-
-
-
-
   margin: 0;
 }
-.search {
- display: flex;
- flex-direction: row;
 
-}
 .searchInput{
   display: flex;
-  height: 6vh;
-  width: 70vw;
+  height: 7vh;
+  width: 73vw;
+  border-right: none;
+  font-size: large;
+
+  border-top:.1rem  solid black;
+  border-bottom: .1rem  solid black;
+  border-left: .1rem solid black;;
+}
+.iconContainer {
+  display: flex;
+  padding-right: 1vw;
+  border-left: none;
+  border-right: .1rem solid black;
+  border-top: .1rem  solid black;
+  border-bottom: .1rem  solid black;
+  align-items: center;
+  justify-content: center;
+
 }
 .searchBtn {
   display: flex;
   flex-direction: row;
   justify-content: start;
+  width: 4vh;
+  height: 4vh;
+
+
+}
+.searchBtn:hover{
+  cursor:text;
 }
 
 .search.container{
   display: flex;
   flex-direction: row;
-
   justify-content: center;
 }
 .componentTitle{
   display: flex;
   justify-content: flex-start;
-  width: 21.5vw;
-  justify-content: flex-end;
+  width: 30vw;
+  justify-content: center;
+
 
   /* justify-content: start;
   align-items: start; */
@@ -132,7 +154,9 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 
 .questionList.container {
   display: flex;
-  width: 65vw;
+  width: 35vh;
+
+
   flex-direction: column;
 }
 
@@ -141,19 +165,25 @@ div.list.container {
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
-
   height: 50vh;
+
+
   -ms-overflow-style: none;
 }
 
 .list.container::-webkit-scrollbar {
-  display: none;
+  -ms-overflow-style: none;
+  /* display: none; */
+  height: 100vh;
 }
 
 
 div.helpfulQuestion.container {
   display: flex;
-  height: 3vh;
+  margin: 0;
+  align-items: center;
+
+
 }
 .answererDetails {
   display: flex;
@@ -162,22 +192,27 @@ div.helpfulQuestion.container {
   padding: .25rem;
 }
 .answerList.scroll {
-  width: 75vw;
+width: 75vw;
+
+
 }
 
 .aHelpful, .qhelpfulIndicator, .qhelpfulIndicator, .addAnswerText, .helpfulCount{
   margin: 0em;
 }
-.aHelpful, .helpfulCount {
+.aHelpful {
+  padding-right: 1vw;
+}
+.helpfulCount {
   border-right: .15em solid black;
   justify-content: space-evenly;
-  padding-right: .15em;
+  padding-right: 1vw;
 }
-.qhelpfulIndicator, .addAnswerText{
+.qhelpfulIndicator{
   padding-left: .15em;
 }
 p.addAnswerText{
-  width: 7vw;
+  padding-left: 1vw;
 }
 
 .bottomButtons {
@@ -444,16 +479,26 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
 .answerText {
   margin-bottom: 0;
   margin-top: 2vh;
+  width: 50vw;
   padding: .25rem;
 }
 .questionText {
   padding: .25rem;
   margin: 0;
-  width: 65vw;
+  width: 50vw;
 }
 
 p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
  margin: 0;
+
+}
+p.userIdText, p.answerHelpfulText, p.userReportBtn {
+  margin: 0;
+  padding-right: 1vw;
+  padding-left: 1vw;
+ }
+p.userHelpIndicator {
+  padding-right: 1vw;
 }
 img.currentQuestionProductPhoto.img {
   display: flex;
@@ -611,12 +656,14 @@ input.photos {
   display: flex;
   flex-direction: column;
   margin-top: 5vh;
+
   width: 75vw;
-  height: 20vh;
+
   border-top: .1em solid grey;
 }
 .qa.row {
   display: flex;
-  margin: .1em;
-  width: 75vw;
+  /* margin: .1em; */
+  width: 80vw;
+  margin-top:5vh;
 }

@@ -62,14 +62,14 @@ describe('QuestionsNAnswers', () => {
         expect(wrapper.toTree().rendered.instance.state.reported[0]).toEqual(1992445)
       })
       test('when there are previously reported ids, answer table display should represent reported for ids in reported state array', () => {
-        expect(wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('reported')
-        expect(wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('reported')
+        expect(wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('Reported')
+        expect(wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('Reported')
 
       })
       test('answers that have not been reported, should display report', () => {
-        expect(wrapper.toJSON().children[4].children[0].children[1].children[0].children[1].children[1].children[4].children[0]).toEqual('report')
-        expect(wrapper.toJSON().children[4].children[2].children[1].children[0].children[2].children[1].children[4].children[0]).toEqual('report')
-        expect(wrapper.toJSON().children[4].children[4].children[1].children[0].children[0].children[2].children[4].children[0]).toEqual('report')
+        expect(wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[1].children[1].children[4].children[0]).toEqual('Report')
+        expect(wrapper.toJSON().children[0].children[4].children[2].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('Report')
+        expect(wrapper.toJSON().children[0].children[4].children[8].children[1].children[0].children[0].children[1].children[4].children[0]).toEqual('Report')
       })
     })
     test('on mount, it should contain a dynamicData array and savedData array', () => {
@@ -226,7 +226,7 @@ describe('Questions/Answers Display', () => {
         resolve(component)
       })
       .then(newComponent => {
-        let questions = (newComponent.toJSON().children[4].children)
+        let questions = newComponent.toJSON().children[0].children[4].children
         expect(questions[0].props.className).toEqual('showQuestion')
         expect(questions[1].props.className).toEqual('showQuestion')
         expect(questions[2].props.className).toEqual('hide')
@@ -254,8 +254,8 @@ describe('Questions/Answers Display', () => {
         resolve(component)
       })
       .then(newComponent => {
-        let questions =newComponent.toJSON().children[4].children
-        let button = newComponent.toJSON().children[5].children[1].children[0]
+        let questions =newComponent.toJSON().children[0].children[4].children
+        let button = newComponent.toJSON().children[0].children[5].children[1].children[0]
         expect(questions[0].props.className).toEqual('showQuestion')
         expect(questions[1].props.className).toEqual('showQuestion')
         expect(button.props.className).toEqual('hide')
@@ -415,9 +415,7 @@ describe('Other Functionality', () => {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-
-
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
 
         resolve(wrapper)
       }).then(newWrapper => {
@@ -431,29 +429,30 @@ describe('Other Functionality', () => {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+
         resolve(wrapper)
       }).then(newWrapper => {
-        expect(newWrapper.toTree().rendered.instance.state.dynamicData[0].answers[0].report).toEqual('reported')
+        expect(newWrapper.toTree().rendered.instance.state.dynamicData[0].answers[0].report).toEqual('Reported')
       })
     })
     test('before addToReported is clicked for a specific answer, the display state should be report', () => {
       let e = {
         target : {className: 'moreAnsweredBtn'}
       }
-      expect(wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
+      expect(wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
     })
     test('when addToReported is clicked, it should update answer table display accordingly', () => {
       let e = {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-        expect(wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        expect(wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         // wrapper.toJSON().children[3].children[0].children[0].children[0].children[0].children[1].children[0].children[2].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
-        expect(newWrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
       })
     })
     test('when add to reported is clicked multiple times on the same answer, the state reported length should not increase', () => {
@@ -462,10 +461,10 @@ describe('Other Functionality', () => {
       }
       return new Promise ((resolve, reject) => {
 
-        expect(wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        expect(wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
         expect(newWrapper.toTree().rendered.instance.state.reported.length).toEqual(1)
@@ -476,13 +475,13 @@ describe('Other Functionality', () => {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-        expect(wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        expect(wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
-        expect(newWrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
       })
     })
     test('when add to reported is clicked multiple times on different answers, the state reported length should increase by the amount of newly added answerIds', () => {
@@ -492,8 +491,8 @@ describe('Other Functionality', () => {
       return new Promise ((resolve, reject) => {
 
         expect(wrapper.toTree().rendered.instance.state.reported.length).toEqual(0)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
         expect(newWrapper.toTree().rendered.instance.state.reported.length).toEqual(2)
@@ -505,14 +504,14 @@ describe('Other Functionality', () => {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-        expect(wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        expect(wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        expect(wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        expect(wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
-        expect(newWrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
-        expect(newWrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
       })
     })
     test('when add to reported is clicked multiple times on the on different answers in different questions, the reported state length should increase by newly added answerIds', () => {
@@ -521,8 +520,8 @@ describe('Other Functionality', () => {
       }
       return new Promise ((resolve, reject) => {
         expect(wrapper.toTree().rendered.instance.state.reported.length).toEqual(0)
-        wrapper.toJSON().children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[1].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
         expect(newWrapper.toTree().rendered.instance.state.reported.length).toEqual(2)
@@ -534,14 +533,14 @@ describe('Other Functionality', () => {
         target : {className: 'moreAnsweredBtn'}
       }
       return new Promise ((resolve, reject) => {
-        expect(wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        expect(wrapper.toJSON().children[4].children[2].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('report')
-        wrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
-        wrapper.toJSON().children[4].children[2].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        expect(wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        expect(wrapper.toJSON().children[0].children[4].children[2].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Report')
+        wrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
+        wrapper.toJSON().children[0].children[4].children[2].children[1].children[0].children[0].children[1].children[4].props.onClick(e)
         resolve(wrapper)
       }).then(newWrapper => {
-        expect(newWrapper.toJSON().children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
-        expect(newWrapper.toJSON().children[4].children[2].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[0].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
+        expect(newWrapper.toJSON().children[0].children[4].children[2].children[1].children[0].children[0].children[1].children[4].children[0]).toBe('Reported')
       })
     })
   })

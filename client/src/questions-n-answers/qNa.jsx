@@ -192,12 +192,15 @@ class QuestionsNAnswers extends React.Component {
       <ClickTracker>
         {trackerProps => (
             <div className='mainQnA container'>
+
+              <div className='title container'>
               <h3 className='componentTitle'>Questions & Answers</h3>
               <Search
                 recordClick={trackerProps.recordClick}
                 currentInput={this.state.questionSearchVal}
                 questionSearchChange={this.questionSearchChange}
               />
+
               <div className={this.props.allClicksProps.QuestionFormDisplayClass}>
                 <UserQuestion
                   currentProductPhoto={this.props.currentProductPhoto}
@@ -266,6 +269,7 @@ class QuestionsNAnswers extends React.Component {
                 </div>
 
 
+              </div>
               </div>
 
             </div>
