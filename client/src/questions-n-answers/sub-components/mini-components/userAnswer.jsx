@@ -222,30 +222,26 @@ class UserAnswer extends React.Component {
                 name='email'
                 required
           />
+          <h3 className='addAnswerFormUploadPhotoTitle'>Upload Your Photos</h3>
+          <div className='fileSelector container'>
+            <input onChange={this.userFileChange}
+                  onClick={(e)=> this.props.recordClick(e)}
+                  key={this.state.fileName}
+                  name='file'
+                  className='photos'
+                  type='file'
+                  accept='image/png, image/jpeg'
 
-
-            <h3 className='addAnswerFormUploadPhotoTitle'>Upload Your Photos</h3>
-
-              <div className='fileSelector container'>
-              <input onChange={this.userFileChange}
-                    onClick={(e)=> this.props.recordClick(e)}
-                    key={this.state.fileName}
-                    name='file'
-                    className='photos'
-                    type='file'
-                    accept='image/png, image/jpeg'
-
-              />
-
-             <div className='uploadBtn container'>
-                <button className={uploadClass? uploadClass: 'uploadButton'}
-                        id='uploadBtn'
-                        type='button'
-                        onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
-                        >Upload
-                </button>
-              </div>
-              </div>
+            />
+            <div className='uploadBtn container'>
+              <button className={uploadClass? uploadClass: 'uploadButton'}
+                      id='uploadBtn'
+                      type='button'
+                      onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
+                      >Upload
+              </button>
+            </div>
+          </div>
 
           <div className='submitAnswer container'>
             <input type='submit'

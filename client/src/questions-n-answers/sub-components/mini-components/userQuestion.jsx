@@ -17,7 +17,6 @@ class UserQuestion extends React.Component {
     this.setInputValidity = this.setInputValidity.bind(this)
     this.resetForm = this.resetForm.bind(this)
   }
-
   onQuestionSubmit(e) {
     e.preventDefault()
     let newObj = {
@@ -70,12 +69,8 @@ class UserQuestion extends React.Component {
   render() {
     return (
       <div className='qFormData' >
-
-          <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'hide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
-
-
-          <img className='currentQuestionProductPhoto img'src={this.props.currentProductPhoto} />
-
+        <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'hide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
+        <img className='currentQuestionProductPhoto img'src={this.props.currentProductPhoto} />
         <form className='askQuestionForm' onSubmit={(e) => {this.onQuestionSubmit(e), this.resetForm()}}>
           <h1 className='askQuestionForm title'>Ask Your Question</h1>
           <h3 className='addQuestionAsterisk productTitle'> {`About the: ${this.props.currentItemName}`} </h3>

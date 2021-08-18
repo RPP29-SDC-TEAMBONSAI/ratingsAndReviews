@@ -14,7 +14,8 @@ jest.mock('../clientRoutes/qa.js')
 const props = {
   product_id: testData.QnAcurrentProductId(),
   currentItemName: 'camo onsie',
-  data: testData.QnAComponentQuestionsData()
+  data: testData.QnAComponentQuestionsData(),
+  currentProductPhoto: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
 
 }
 
@@ -238,7 +239,9 @@ describe('Questions/Answers Display', () => {
       let props = {
         product_id: testData.QnAcurrentProductId(),
         currentItemName: 'camo onsie',
-        data: testData.showQuestionsData1()
+        data: testData.showQuestionsData1(),
+        currentProductPhoto:'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
+
       }
       return new Promise((resolve, reject) => {
         component = renderer.create(
@@ -306,7 +309,9 @@ describe('Other Functionality', () => {
       props = {
         product_id: testData.questions1_productId(),
         currentItemName: 'camo onsie',
-        data: testData.questions1()
+        data: testData.questions1(),
+        currentProductPhoto:'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
+
       }
       wrapper = mount(
         <QnAClicks>
@@ -341,7 +346,8 @@ describe('Other Functionality', () => {
       props = {
         product_id: testData.questions1_productId(),
         currentItemName: 'camo onsie',
-        data: testData.questions1()
+        data: testData.questions1(),
+        currentProductPhoto: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
       }
       wrapper = mount(
         <QnAClicks>
@@ -376,7 +382,9 @@ describe('Other Functionality', () => {
       props = {
         product_id: testData.questions1_productId(),
         currentItemName: 'camo onsie',
-        data: testData.questions1()
+        data: testData.questions1(),
+        currentProductPhoto: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
+
       }
       wrapper = renderer.create(
         <QnAClicks>

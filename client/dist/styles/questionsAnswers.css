@@ -26,24 +26,20 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .hide {
   display: none;
 }
-
-
 .thumbnail {
   border: .01rem solid white;
   border-radius: 1em;
   width: 10vh;
   height: 10vh;
   margin-top: 2.5vh;
-
 }
-
 .questionList.row {
   display: flex;
   flex-direction: row;
   overflow-y: auto;
   height: 25vh;
   scrollbar-width: 0;
-  -ms-overflow-style: none;
+
 }
 
 .questionList.row::-webkit-scrollbar {
@@ -55,6 +51,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  align-items: center;
   margin: 0;
 }
 .search {
@@ -63,7 +60,8 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .searchInput{
   display: flex;
-  width: 60.5vw;
+  height: 6vh;
+  width: 70vw;
 }
 .searchBtn {
   display: flex;
@@ -130,8 +128,15 @@ div.list.container {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+
   height: 50vh;
+  -ms-overflow-style: none;
 }
+
+.list.container::-webkit-scrollbar {
+  display: none;
+}
+
 
 div.helpfulQuestion.container {
   display: flex;
@@ -141,6 +146,7 @@ div.helpfulQuestion.container {
   display: flex;
   flex-direction: row;
   margin: 0;
+  padding: .25rem;
 }
 .answerList.scroll {
   width: 75vw;
@@ -423,6 +429,7 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
 .answerText {
   margin-bottom: 0;
   margin-top: 2vh;
+  padding: .25rem;
 }
 .questionText {
   padding: .25rem;
