@@ -38,10 +38,10 @@ REALTED PRODUCTS STYLING
   display: flex;
   flex-direction: column;
 }
-.relatedProductsCardBottom, img {
+/* .relatedProductsCardBottom, img {
   display: flex;
   align-self: center
-}
+} */
 
 .relatedProductsActionButton {
   height: 4em;

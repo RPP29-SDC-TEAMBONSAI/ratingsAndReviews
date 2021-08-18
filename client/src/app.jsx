@@ -24,6 +24,7 @@ class App extends React.Component {
       relatedProducts: [],
       qNa: [],
       savedQnA: [],
+      currentProductPhoto:'',
       loaded: false,
       ratings: {}
     }
@@ -66,6 +67,7 @@ class App extends React.Component {
 
     ])
       .then((results) => {
+
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
@@ -74,10 +76,12 @@ class App extends React.Component {
           qNa: results[4].data,
           currentItemName:results[1].data.name,
           product_id:results[1].data.id,
-          ratings: results[5].data.ratings
+          ratings: results[5].data.ratings,
+          currentProductPhoto: results[2].data[0].photos[0].thumbnail_url
           //do not remove
 
         })
+        console.log(this.state.currentProductPhoto)
       })
       .then(() => {
         this.setState({
@@ -107,6 +111,7 @@ class App extends React.Component {
                 product_id={this.state.product_id}
                 data={this.state.qNa}
                 currentItemName={this.state.currentItemName}
+                currentProductPhoto={this.state.currentProductPhoto}
               />
             )}
           </QnAClicks>

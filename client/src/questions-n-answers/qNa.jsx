@@ -48,7 +48,6 @@ class QuestionsNAnswers extends React.Component {
         })
       })
   }
-
   componentDidUpdate(prevProps, prevState) {
 
     if (prevProps.data.length !== this.props.data.length) {
@@ -115,7 +114,6 @@ class QuestionsNAnswers extends React.Component {
       })
     }
   }
-
   searchFilter(searchValue) {
 
     let copy = this.state.dynamicData.slice()
@@ -147,12 +145,10 @@ class QuestionsNAnswers extends React.Component {
       qSearchCharCount: newCount
     })
   }
-
   showQuestions(currentCount, index) {
     let show = helper.showQuestionsClass(currentCount, index);
     return show
   }
-
   updateQuestions () {
     return questions(this.props.product_id)
       .then(data => {
@@ -166,7 +162,6 @@ class QuestionsNAnswers extends React.Component {
         this.props.allClicksProps.closeQuestionForm()
       })
   }
-
   updateAnswers() {
     return questions(this.props.product_id)
       .then(currentQuestions => {
@@ -181,7 +176,6 @@ class QuestionsNAnswers extends React.Component {
       })
 
   }
-
   addToReported(e, ansId) {
    if(!this.state.reported.includes(ansId)){
     addToReported(ansId)
@@ -193,26 +187,20 @@ class QuestionsNAnswers extends React.Component {
       })
     }
   }
-
   render () {
-
-
     return (
       <ClickTracker>
         {trackerProps => (
             <div className='mainQnA container'>
-
-              <div className='title container row'>
-                <h3 className='componentTitle'>Questions & Answers</h3>
-                <Search
-                  recordClick={trackerProps.recordClick}
-                  currentInput={this.state.questionSearchVal}
-                  questionSearchChange={this.questionSearchChange}
-                />
-              </div>
-
+              <h3 className='componentTitle'>Questions & Answers</h3>
+              <Search
+                recordClick={trackerProps.recordClick}
+                currentInput={this.state.questionSearchVal}
+                questionSearchChange={this.questionSearchChange}
+              />
               <div className={this.props.allClicksProps.QuestionFormDisplayClass}>
                 <UserQuestion
+                  currentProductPhoto={this.props.currentProductPhoto}
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateQuestions={this.updateQuestions}
@@ -222,9 +210,9 @@ class QuestionsNAnswers extends React.Component {
                   closeQuestionForm={this.props.allClicksProps.closeQuestionForm}
                 />
               </div>
-
               <div className={this.props.allClicksProps.answerFormDisplayClass}>
                 <UserAnswer
+                  currentProductPhoto={this.props.currentProductPhoto}
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateAnswers={this.updateAnswers}
@@ -234,51 +222,44 @@ class QuestionsNAnswers extends React.Component {
                   aFormQuestion_id={this.props.allClicksProps.aFormQuestion_id}
                 />
               </div>
-
-              <div className='questionList scroll container'>
+              <div className='list container'>
                   {this.state.dynamicData.map((question, index) => {
-
                     let show = false;
-
                     if (this.props.allClicksProps.questionClickCount === 1 && index <= this.props.allClicksProps.questionClickCount) {
                       show = true
                     }
-
                     if (this.props.allClicksProps.questionClickCount >= 3 && index <= this.props.allClicksProps.questionClickCount) {
                       show = true
                     }
-                    // this.showQuestion(this.props.allClicksProps.questionClickCount, index)
 
                     return (
-                      <QuestionsContainer
-                            answerState={this.props.allClicksProps.loadAnswerState}
-                            recordClick={trackerProps.recordClick}
-                            key={index}
-                            addToReported={this.addToReported}
-                            helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
-                            helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
-                            currentI={index}
-                            showQuestions={this.showQuestions}
-                            questionClickCount={this.props.allClicksProps.questionClickCount}
-                            answers={question.answers}
-                            question={question}
-                            addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
-                            question_id={question.question_id}
-
-                            show={show}
-
-                      />
+                        <QuestionsContainer
+                              answerState={this.props.allClicksProps.loadAnswerState}
+                              recordClick={trackerProps.recordClick}
+                              key={index}
+                              addToReported={this.addToReported}
+                              helpfulAnswerClick={this.props.allClicksProps.helpfulAnswerIndicatorClick}
+                              helpfulQuestionClick={this.props.allClicksProps.helpfulQuestionIndicatorClick}
+                              currentI={index}
+                              showQuestions={this.showQuestions}
+                              questionClickCount={this.props.allClicksProps.questionClickCount}
+                              answers={question.answers}
+                              question={question}
+                              addAnswerOnClick={this.props.allClicksProps.addAnswerOnClick}
+                              question_id={question.question_id}
+                              show={show}
+                        />
                   )})}
               </div>
               <div className='questionListButton container'>
                 <div className='lButton'>
-                  <h3 className={'loadMoreAnswersButton'}
+                  <h3 className='loadMoreAnswersButton'
                       onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.loadMoreAnsOrQ(e)}}>{this.props.allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
                   </h3>
                 </div>
                 <div className='bottomButtons'>
 
-                  <h3 className={this.props.allClicksProps.showQuestionButton ? 'moreAnsweredBtn Hide' : 'moreAnsweredBtn'}
+                  <h3 className={this.props.allClicksProps.showQuestionButton ? 'hide' : 'moreAnsweredBtn'}
                           onClick={(e) => {this.props.allClicksProps.loadNewQuestions(this.state.dynamicData.length - 1), trackerProps.recordClick(e)}}>MORE ANSWERED QUESTIONS
                   </h3>
                 </div>
@@ -288,6 +269,7 @@ class QuestionsNAnswers extends React.Component {
 
             </div>
         )}
+
       </ClickTracker>
     )
   }
@@ -295,7 +277,7 @@ class QuestionsNAnswers extends React.Component {
 
 QuestionsNAnswers.propTypes = {
   currentItemName: propTypes.string.isRequired,
-  // QuestionSavedData: propTypes.array.isRequired,
+  currentProductPhoto: propTypes.string.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
   allClicksProps: propTypes.any
