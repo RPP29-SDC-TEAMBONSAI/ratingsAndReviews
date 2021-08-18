@@ -1,7 +1,4 @@
-.inputBox {
-  padding: 0 5px 0 0;
-  overflow: hidden;
-}
+
 .qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
   text-decoration: underline;
 }
@@ -32,109 +29,15 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .moreAnsweredBtn.Hide {
   display: none;
 }
-.qFormHide {
-  display:  none;
-}
-.qForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.questionClose {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 21vh;
-  height: 5vh;
-  width: 5vh;
-  border-radius: 50em;
-  background-color: lightgray;
-}
-.questionClose:hover{
-  background-color: white;
-  cursor: pointer;
-}
-.qFormData {
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  justify-content:center;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
-  width: 50vh;
-  height: 50vh;
-  margin-bottom: 1vh;
-  z-index: 2;
-}
-.userQuestion {
-  width: 35vh;
-  height:15vh;
-  resize: none;
-  overflow-y: scroll;
-}
-.askQuestionForm {
-  margin-bottom: 1vh;
-}
-.userNickName, .userEmail {
-   width: 35vh;
-}
-.aFormHide {
-  display: none;
-}
-.aForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
-}
+
+
+
+
+
 .closeAnswerHide {
   display: none;
 }
-.closeAnswer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 12.5%;
-  height: 5vh;
-  width: 5vh;
-  border-radius: 50em;
-  background-color: lightgray;
-  z-index: 1;
 
-}
-.closeAnswer:hover{
-  background-color: white;
-  cursor: pointer;
-}
-.aFormData {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
-  margin-bottom: 1vh;
-  z-index: 2;
-}
 .photos {
   margin-bottom: 1vh;
 }
@@ -142,48 +45,27 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   display:none;
 
 }
-.photoConfirmationHide {
-  display: none;
-}
-.photoConfirmation {
-  width: 75%;
-  height: 90%;
-  position: fixed;
-  top: 0%;
-  left: 10%;
-  background-color: #B2D2A4;
-  border-radius: 25px;
-  text-align: center;
-  margin-bottom: 1vh;
-  z-index: 3;
-}
 .thumbnail {
-  border: .01rem solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 6vh; /* Set a small width */
-  height: 6vh;
-  margin-top: 1rem;
+  border: .01rem solid white;
+  border-radius: 1em;
+  width: 10vh;
+  height: 10vh;
+  margin-top: .5rem;
 }
 .answerThumbnail {
-  border: .01rem solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 10vh; /* Set a small width */
+
+  border: .01rem solid #ddd;
+  border-radius: 1em;
+  width: 10vh;
   height: 10vh;
 }
 .answerThumbnail.Hide{
   display: none;
 }
-.answerText {
-
-  margin-bottom: 0vh;
-  height: .7rem;
-}
-/*question List display */
 .list.container {
   display: flex;
   justify-content: start;
+  flex-direction: column;
 }
 .row.list.container{
   display: flex;
@@ -192,6 +74,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 }
 .questionList.row {
   display: flex;
+  flex-direction: column;
   flex:.5;
 }
 .addAnswerList.row {
@@ -209,7 +92,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
  display: flex;
  flex-direction: column;
 }
-/*search bar*/
+
 .search {
  display: flex;
  flex-direction: row;
@@ -263,26 +146,26 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   height: 1.3em;
   cursor: pointer;
   color:#444;
-  border:1px solid #CCC;
+  border:.1rem solid #CCC;
   background:#DDD;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  box-shadow: 0 0 1rem rgba(0,0,0,0.2);
   text-align: center;
 }
 .moreAnsweredBtn {
   width: 15.8em;
 }
-h3.loadMoreAnswersButton:hover{
+.loadMoreAnswersButton:hover{
   color:navy;
 }
-h3.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
+.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
   color:navy;
   background: beige;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+  box-shadow: 0 0 1rem rgba(0,0,0,0.6);
 }
-h3.loadMoreAnswersButton{
+.loadMoreAnswersButton{
   display: flex;
 }
-h3.addQuestionBtn {
+.addQuestionBtn {
   display: flex;
 }
 .questionListButton.container {
@@ -296,13 +179,14 @@ h3.addQuestionBtn {
 .questionList.scroll.container {
   height: 50vh;
   overflow-y:scroll;
+  overflow-x: hidden;
 }
 .questionList.container {
   display: flex;
   width: 65vw;
   height: 50vh;
   overflow-y:scroll;
-  overflow-x: hidden;
+  flex-direction: column;
 }
 .answerList.hide {
   display: none;
@@ -314,9 +198,13 @@ h3.addQuestionBtn {
 .answererDetails {
   display: flex;
   flex-direction: row;
+  margin: 0;
+
 }
 .answerList {
   flex:1;
+  margin: 0;
+  flex-direction: row;
 }
 .aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
   margin: 0em;
@@ -335,13 +223,246 @@ h3.addQuestionBtn {
 .helpulQuestion.display {
   padding-right: 3em;
 }
-
 .bottomButtons {
   display: flex;
 }
-h3.moreAnsweredBtn {
+.moreAnsweredBtn {
   display: flex;
   margin-right: 2.5em;
   justify-content: start;
 }
 
+/* questionAdd form CSS */
+.addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
+  margin: 1vh;
+}
+.addQuestionAsterisk.productTitle:after, .addQuestionAsterisk.userNickName:after, .addQuestionAsterisk.userEmail:after{
+  content: ' *';
+  color: #B22222;
+  height: 3vh;
+}
+.qFormData {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  padding:.7rem;
+  z-index: 2;
+  height: 75vh;
+  width: 35vw;
+}
+.qFormHide {
+  display:  none;
+}
+.qForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.questionClose.container {
+  display: flex;
+  flex-direction: column;
+  height: 5vh;
+  width: 15vw;
+}
+.questionCloseMarker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 1vh;
+  width: 1vw;
+}
+.questionCloseMarker:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.askQuestionForm {
+  display: flex;
+  flex-direction: column;
+}
+.askQuestionForm.title {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+}
+.userQuestion {
+  width: 30vw;
+  height:15vh;
+  resize: none;
+  overflow-y: scroll;
+  margin-bottom: 1vh;
+}
+.userNickName, .userEmail {
+  display: flex;
+  width: 20vw;
+  overflow-x: auto;
+  margin-bottom: 1vh;
+}
+.userQSubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+}
+
+/*addAnswer component CSS*/
+.aFormData {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  padding:2.0rem;
+  z-index: 2;
+  height: 75vh;
+  width: 35vw;
+}
+.aFormHide {
+  display: none;
+}
+.aForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.closeAnswer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  position:absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50em;
+  background-color: lightsteelblue;
+  z-index: 1;
+}
+.closeAnswer:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.answerFormPhotoThumbnail{
+  display: flex;
+  justify-content: center;
+}
+.addAnswerForm{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  bottom: 25vh;
+}
+.currentQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 5vh;
+  margin: 0;
+}
+textarea.addAnswerFormText {
+ display: flex;
+ height: 15vh;
+ resize:none;
+ overflow-y: scroll;
+ justify-content: start;
+}
+.addAnswerFormNickNameInput{
+  width: 20vw;
+  overflow-x: auto;
+}
+.addAnswerFormEmail {
+  width: 20vw;
+  overflow-x: auto;
+}
+.addAnswerFormUploadPhotoTitle {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .25vh;
+}
+.answerFormAsterisk{
+  margin-bottom:.25vh;
+  width: 20vw;
+  overflow-x: auto;
+}
+.answerFormAsterisk.answer:after, .answerFormAsterisk.nickName:after, .answerFormAsterisk.email:after{
+
+  content: ' *';
+  color: #B22222;
+
+}
+.photoConfirmationHide {
+  display: none;
+}
+.photoConfirmation {
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+  height: 75vh;
+  position: fixed;
+  background-color: lightgray;
+  border-radius: 1em;
+  margin-bottom: 1vh;
+  z-index: 3;
+}
+.answerConfirmPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: center;
+}
+.addAnswerPhotoConfirmButton{
+  display: flex;
+
+  justify-content: center;
+  width: 5vw;
+}
+.closeConfirmation{
+  display: flex;
+  justify-content: start;
+  margin: 0;
+  padding-left: .25em;
+}
+.confirmPhoto.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.closeConfirmation:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.answerImage.container{
+  display: flex;
+}
+.answerText {
+  margin-bottom: 0;
+  margin-top: 2vh;
+}
+.questionText {
+  margin-bottom: 0;
+}
+
+p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
+margin-top: .25rem;
+}

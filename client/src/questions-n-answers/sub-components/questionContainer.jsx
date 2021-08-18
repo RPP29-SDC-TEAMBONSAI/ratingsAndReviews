@@ -7,13 +7,14 @@ import QuestionList from './mini-components/questionList.jsx';
 const QuestionsContainer = (props) => {
 
   let showQuestion= props.showQuestions(props.questionClickCount, props.currentI)
+
   let showScroll;
   if (props.currentI > 2 && showQuestion) {
     showScroll = 'scroll'
   }
 
   return (
-    <div className={showQuestion? 'list container' : 'list container hide'}>
+    <div className={showQuestion? 'list scroll container' : 'list container hide'}>
       <div className='row list container'>
 
         <div className='questionList row'>

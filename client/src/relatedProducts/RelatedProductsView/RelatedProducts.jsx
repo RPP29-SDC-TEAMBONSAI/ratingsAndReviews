@@ -50,7 +50,6 @@ class RelatedProducts extends React.Component {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
           reviewData.then(reviewData => {
-
             let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
 
             let values = [];
@@ -182,7 +181,6 @@ class RelatedProducts extends React.Component {
 
     handleAddToOutfit (outfitItem, e) {
       e.preventDefault();
-
       if (this.state.yourOutfitItems.some(({product_id}) => product_id === outfitItem.product_id)) {
         alert('Item already in outfit')
       } else {
@@ -262,6 +260,7 @@ class RelatedProducts extends React.Component {
       return <div className='isLoading'>Loading...</div>
     }
     const { recordCount } = this.props;
+
 
     return (
       <div className='relatedProducts' onClick={recordCount}>

@@ -33,7 +33,14 @@ class QnAClicks extends React.Component {
     this.addQuestion = this.addQuestion.bind(this)
     this.closeQuestionForm = this.closeQuestionForm.bind(this)
   }
+  componentDidMount() {
+    if (this.props.children().props.data.length - 1 === 0 || this.props.children().props.data.length - 1 === 1){
+      this.setState({
+        showQuestionButton: !this.state.showQuestionButton
+      })
+    }
 
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.questionClickCount !== this.state.questionClickCount) {
       let showMoreAnsweredQuestions = helper.moreAnsweredQButtonDisplay(this.state.questionClickCount, this.state.lastIndex);
@@ -86,7 +93,6 @@ class QnAClicks extends React.Component {
   }
 
   addAnswerOnClick(currentQ, currentQId) {
-    console.log(currentQId)
     this.setState({
       answerFormDisplayClass: 'aForm',
       currentQuestion: currentQ,
