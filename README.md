@@ -1,16 +1,21 @@
 # RPP29 Front-End-Capstone
+---
 *Team Cojita for life*
 
 ### Overview
+---
 - This project was aimed at renovating the outdated client-facing retail web-portal for a business that has suffered loss of sales due to poor user experience on their extant website. Our goal was to create a brand new retail website that was optimized for quick load times and accessibility compliance. There were four primary modules assigned critical priority: Product Detail, Ratings & Reviews, Questions & Answers, and Related Items & Outfit Creation. The scope of this project focused on front-end development, with the primary framework being React. Other technologies used include Babel, Webpack, Axios, jQuery, and Jest. The end product was deployed on an AWS EC2 instance.
 
 ### Team Members
+---
 - Jason Mollerup, Quinn Lima, Robert Lawrence, Callum Reid
 
 ### Demonstration
+---
 - include screen capture of final product going through each feature of site here
 
 ### Description
+---
 **Product Detail**
 
 **Ratings & Reviews**
@@ -35,6 +40,7 @@ The web page includes the option a user to toggle light or dark mode. This allow
 
 
 ### Optimizations
+---
 - The client wanted their new site to meet to following metrics
   * Time to first paint: 0.8s
   * Time to first meaningful paint: 2.0s
@@ -45,12 +51,14 @@ The web page includes the option a user to toggle light or dark mode. This allow
   * Preload Images: Through preloading above the fold images on our landing page, our largest contentful paint dropped by 3.4s
 
 ### Accessibility
+---
 - To increase our accessibility, we made the following improvements
   * Focused on semantic HTML throughout the development process
   * Included important aspects such as title, language, and doctype to our index.html
   * Included alt properties on all images
 
 ### Setup and Developement
+---
 - Clone a copy of the repository onto your local machine
 - In the root directory where the repository was cloned, run `npm install` to install dependancies
 - Create a `config.js` file in the root directory. Within this file, add the necessary credentials listed below:
@@ -67,6 +75,7 @@ The web page includes the option a user to toggle light or dark mode. This allow
 
 
 ### Testing
+---
 - We used Jest as our testing framework, ensuring we did not only test happy-path scenarios. Our goal was to achieve around 70% coverage using only meaningful tests for each module. 
 - To run tests:
   * In your terminal run `npm run test` to run all tests with jest.
