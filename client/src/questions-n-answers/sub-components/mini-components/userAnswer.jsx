@@ -15,7 +15,7 @@ class UserAnswer extends React.Component {
       hideButton: null,
       tempPhoto:null,
       data: '',
-      confirmationState: 'photoConfirmationHide',
+      confirmationState: 'hide',
       checked: false,
       fileName: 0
     }
@@ -77,7 +77,7 @@ class UserAnswer extends React.Component {
         hideButton: null,
         tempPhoto:null,
         data: '',
-        confirmationState: 'photoConfirmationHide',
+        confirmationState: 'hide',
         checked: false
       })
   }
@@ -179,7 +179,7 @@ class UserAnswer extends React.Component {
           <h1 className='answerFormProductImg text'>{this.props.currentItemName}</h1>
           <img className='answerFormProduct img'src={this.props.currentProductPhoto}/>
         </div>
-        <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={(e) => {this.props.closeAnswerForm(e), this.resetConfirmationFormState(e)}}>x</h1>
+        <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'hide'} onClick={(e) => {this.props.closeAnswerForm(e), this.resetConfirmationFormState(e)}}>x</h1>
         <form className='addAnswerForm form' onSubmit={this.onAnswerSubmit}>
           <div className='questionText container'>
             <h5 className='selectedQuestionText'>Selected Question:</h5>
@@ -222,30 +222,26 @@ class UserAnswer extends React.Component {
                 name='email'
                 required
           />
+          <h3 className='addAnswerFormUploadPhotoTitle'>Upload Your Photos</h3>
+          <div className='fileSelector container'>
+            <input onChange={this.userFileChange}
+                  onClick={(e)=> this.props.recordClick(e)}
+                  key={this.state.fileName}
+                  name='file'
+                  className='photos'
+                  type='file'
+                  accept='image/png, image/jpeg'
 
-
-            <h3 className='addAnswerFormUploadPhotoTitle'>Upload Your Photos</h3>
-
-              <div className='fileSelector container'>
-              <input onChange={this.userFileChange}
-                    onClick={(e)=> this.props.recordClick(e)}
-                    key={this.state.fileName}
-                    name='file'
-                    className='photos'
-                    type='file'
-                    accept='image/png, image/jpeg'
-
-              />
-
-             <div className='uploadBtn container'>
-                <button className={uploadClass? uploadClass: 'uploadButton'}
-                        id='uploadBtn'
-                        type='button'
-                        onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
-                        >Upload
-                </button>
-              </div>
-              </div>
+            />
+            <div className='uploadBtn container'>
+              <button className={uploadClass? uploadClass: 'uploadButton'}
+                      id='uploadBtn'
+                      type='button'
+                      onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
+                      >Upload
+              </button>
+            </div>
+          </div>
 
           <div className='submitAnswer container'>
             <input type='submit'

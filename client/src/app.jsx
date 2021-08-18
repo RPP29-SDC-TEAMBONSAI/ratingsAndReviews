@@ -67,7 +67,7 @@ class App extends React.Component {
 
     ])
       .then((results) => {
-        console.log(results[2].data)
+
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
@@ -81,6 +81,7 @@ class App extends React.Component {
           //do not remove
 
         })
+        console.log(this.state.currentProductPhoto)
       })
       .then(() => {
         this.setState({
