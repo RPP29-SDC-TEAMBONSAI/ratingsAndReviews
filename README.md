@@ -35,14 +35,14 @@ The web page includes the option a user to toggle light or dark mode. This allow
 
 
 ### Optimizations
-- The client wanted their new site to meet to following metrics: 
- * Time to first paint: 0.8s
- * Time to first meaningful paint: 2.0s
- * Time to interactive: 2.5s
+- The client wanted their new site to meet to following metrics
+  * Time to first paint: 0.8s
+  * Time to first meaningful paint: 2.0s
+  * Time to interactive: 2.5s
 
 - To reach these goals, we performed a number of optimizations
- * Text Compression: Using `uglifyjs-webpack-plugin`, we reduced our bundle.js size from 1.6 MiB to 352 KiB
- * Preload Images: Through preloading above the fold images on our landing page, our largest contentful paint dropped by 3.4s
+  * Text Compression: Using `uglifyjs-webpack-plugin`, we reduced our bundle.js size from 1.6 MiB to 352 KiB
+  * Preload Images: Through preloading above the fold images on our landing page, our largest contentful paint dropped by 3.4s
 
 ### Accessibility
 - To increase our accessibility, we made the following improvements
@@ -69,5 +69,5 @@ The web page includes the option a user to toggle light or dark mode. This allow
 ### Testing
 - We used Jest as our testing framework, ensuring we did not only test happy-path scenarios. Our goal was to achieve around 70% coverage using only meaningful tests for each module. 
 - To run tests:
- * In your terminal run `npm run test` to run all tests with jest.
- * If you want to run a just one particular test suite, run `npm run /path/to/test/file`
+  * In your terminal run `npm run test` to run all tests with jest.
+  * If you want to run a just one particular test suite, run `npm run /path/to/test/file`
