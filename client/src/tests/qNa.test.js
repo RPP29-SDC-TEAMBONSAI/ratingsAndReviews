@@ -255,7 +255,7 @@ describe('Questions/Answers Display', () => {
         let button = newComponent.toJSON().children[5].children[1].children[0]
         expect(questions[0].props.className).toEqual('showQuestion')
         expect(questions[1].props.className).toEqual('showQuestion')
-        expect(button.props.className).toEqual('moreAnsweredBtn Hide')
+        expect(button.props.className).toEqual('hide')
       })
     })
   })

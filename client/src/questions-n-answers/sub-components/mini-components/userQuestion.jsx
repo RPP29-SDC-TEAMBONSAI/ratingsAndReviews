@@ -71,7 +71,7 @@ class UserQuestion extends React.Component {
     return (
       <div className='qFormData' >
 
-          <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'qFormHide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
+          <h1 className={this.props.QuestionFormDisplayClass ? 'questionCloseMarker': 'hide'} onClick={(e) => {this.props.closeQuestionForm(), this.resetForm()}}>x</h1>
 
 
           <img className='currentQuestionProductPhoto img'src={this.props.currentProductPhoto} />

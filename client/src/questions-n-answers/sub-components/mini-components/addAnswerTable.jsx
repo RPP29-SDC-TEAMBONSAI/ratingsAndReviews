@@ -5,10 +5,10 @@ const AddAnswer = (props) => {
   return (
     <div className='helpfulQuestion container'>
 
-      <p className='aHelpful'>Helpful?</p>
-      <p id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => {props.helpfulQuestionClick(props.question_id, props.currentI), props.recordClick(e)}}>Yes</p>
-      <p className='helpfulCount'>({props.data ? props.data : 0})</p>
-      <p className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(props.questionName, props.question_id), props.recordClick(e)}}>Add Answer</p>
+        <p className='aHelpful'>Helpful?</p>
+        <p id={props.currentI.toString()} className='qhelpfulIndicator' onClick={(e) => {props.helpfulQuestionClick(props.question_id, props.currentI), props.recordClick(e)}}>Yes</p>
+        <p className='helpfulCount'>({props.data ? props.data : 0})</p>
+        <p className='addAnswerText' onClick={(e) => {props.addAnswerOnClick(props.questionName, props.question_id), props.recordClick(e)}}>Add Answer</p>
 
     </div>
   )

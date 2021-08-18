@@ -1,5 +1,5 @@
 
-.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
+.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn {
   text-decoration: underline;
 }
 .userIdText, .userHelpIndicator{
@@ -26,21 +26,8 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
 .hide {
   display: none;
 }
-.moreAnsweredBtn.Hide {
-  display: none;
-}
 
-.closeAnswerHide {
-  display: none;
-}
 
-.photos {
-  /* margin-bottom: 1vh; */
-}
-.uploadButtonhide {
-  display:none;
-
-}
 .thumbnail {
   border: .01rem solid white;
   border-radius: 1em;
@@ -49,27 +36,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   margin-top: 2.5vh;
 
 }
-.answerThumbnail {
-  border: .01rem solid #ddd;
-  border-radius: 1em;
-  width: 10vh;
-  height: 10vh;
-}
-.answerThumbnail.Hide{
-  display: none;
-}
-.list.container {
-  display: flex;
-  width: 60vw;
-  flex-direction: column;
-}
-.row.list.container{
-  display: flex;
-  flex-direction: row;
 
-  width: 80vw;
-
-}
 .questionList.row {
   display: flex;
   flex-direction: row;
@@ -77,41 +44,19 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   height: 25vh;
   scrollbar-width: 0;
   -ms-overflow-style: none;
-
-
-
-
 }
-.qList.row {
-  display: flex;
-  flex-direction: row;
-}
+
 .questionList.row::-webkit-scrollbar {
   display: none;
 }
-.answerList.scroll {
 
-}
-.addAnswerList.row {
-  margin-top: 1.3em;
-  justify-content: flex-end;
-  flex-direction: column;
-}
 .mainQnA.container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-
-
-
   justify-content: center;
   margin: 0;
 }
-.questionTitle{
- display: flex;
- flex-direction: column;
-}
-
 .search {
  display: flex;
  flex-direction: row;
@@ -125,10 +70,7 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   flex-direction: row;
   justify-content: start;
 }
-.title.container.row{
-  display: flex;
-  flex-direction: column;
-}
+
 .search.container{
   display: flex;
   flex-direction: row;
@@ -142,7 +84,6 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   justify-content: start;
   flex-direction: column;
 }
-
 .loadMoreAnswersButton {
   display: flex;
   justify-content: center;
@@ -152,13 +93,8 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   text-align: center;
   align-self: center;
 }
-.buttomButtons.containter {
-  display: flex;
-}
 
-.buttomButtons.container{
-  display: flex;
-}
+
 .moreAnsweredBtn, .addQuestionBtn {
   display: flex;
   width: 10em;
@@ -170,9 +106,6 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   box-shadow: 0 0 1rem rgba(0,0,0,0.2);
   text-align: center;
 }
-.moreAnsweredBtn {
-  width: 15.8em;
-}
 .loadMoreAnswersButton:hover{
   color:navy;
 }
@@ -181,84 +114,40 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   background: beige;
   box-shadow: 0 0 1rem rgba(0,0,0,0.6);
 }
-.loadMoreAnswersButton{
-  display: flex;
-}
-.addQuestionBtn {
-  display: flex;
-}
+
 .questionListButton.container {
   display: flex;
   justify-content: start;
-
 }
-
 
 .questionList.container {
   display: flex;
   width: 65vw;
-
-
-
-
-
-
-
   flex-direction: column;
 }
-.answerList.hide {
-  display: none;
-}
-div.test {
+
+div.list.container {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   height: 50vh;
-  /* height: 100vh;
-  overflow: hidden; */
-
-
 }
-
 
 div.helpfulQuestion.container {
   display: flex;
   height: 3vh;
-
-
 }
 .answererDetails {
   display: flex;
   flex-direction: row;
-
   margin: 0;
 }
 .answerList.scroll {
-
-
   width: 75vw;
-
-
-
-
-}
-.questionList.scroll.container {
-
-
-
-  /* overflow-y: auto;
-  overflow: hidden; */
-
-
-
-
 }
 
-.aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
+.aHelpful, .qhelpfulIndicator, .qhelpfulIndicator, .addAnswerText, .helpfulCount{
   margin: 0em;
-}
-.helpulQuestion.display{
-  display: flex;
 }
 .aHelpful, .helpfulCount {
   border-right: .15em solid black;
@@ -270,20 +159,17 @@ div.helpfulQuestion.container {
 }
 p.addAnswerText{
   width: 7vw;
+}
 
-}
-.helpulQuestion.display {
-  padding-right: 3em;
-}
 .bottomButtons {
   display: flex;
 }
 .moreAnsweredBtn {
   display: flex;
+  width: 15.8em;
   margin-right: 2.5em;
   justify-content: start;
 }
-
 /* questionAdd form CSS */
 .addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
   margin: 1vh;
@@ -379,7 +265,6 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
   background-color: white;
 
 }
-
 .userQSubmit.btn {
   height: 3rem;
   font-family: 'Roboto', sans-serif;
@@ -407,7 +292,6 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
 .userQSubmit.btn:hover {
   background-color: royalblue;
 }
-
 /*addAnswer component CSS*/
 .aFormData {
   position: fixed;
@@ -417,9 +301,7 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
   height: 95vh;
   width: 56vw;
 }
-.aFormHide {
-  display: none;
-}
+
 .aForm {
   display: flex;
   justify-content: center;
@@ -537,28 +419,20 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
   color: darkred;
   cursor: pointer;
 }
-.answerImage.container{
-  display: flex;
-}
+
 .answerText {
   margin-bottom: 0;
   margin-top: 2vh;
 }
 .questionText {
-
-
   padding: .25rem;
   margin: 0;
-
-
   width: 65vw;
 }
 
 p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
  margin: 0;
 }
-
-
 img.currentQuestionProductPhoto.img {
   display: flex;
   flex-direction: row;
@@ -567,13 +441,10 @@ img.currentQuestionProductPhoto.img {
   height: 15vw;
   padding: 1rem;
 }
-
 textarea.addAnswerFormText{
   display: flex;
   width: 35vw;
   height: 15vh;
-  margin-right: auto;
-  margin-left: auto;
   resize:none;
   overflow-y: scroll;
   overflow: hidden;
@@ -604,7 +475,6 @@ img.answerFormProduct.img {
   margin-bottom:0 ;
 }
 .selectedQuestionText{
-
   margin: 0;
   font-style: italic;
 }
@@ -649,13 +519,11 @@ input.photos {
   transform: translateY(-7px);
   background-color: royalblue;
 }
-
 .submitAnswer.container {
   margin-top: 2vh;
   margin-left: 2vh;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   width: 8vw;
   border-radius: 10rem;
   background-color: white;
@@ -721,16 +589,12 @@ input.photos {
   display: flex;
   flex-direction: column;
   margin-top: 5vh;
-
-
   width: 75vw;
   height: 20vh;
-  /* border-bottom: .15rem solid lightgray; */
   border-top: .1em solid grey;
 }
 .qa.row {
   display: flex;
   margin: .1em;
   width: 75vw;
-  /* border-top: .15rem solid steelblue; */
 }

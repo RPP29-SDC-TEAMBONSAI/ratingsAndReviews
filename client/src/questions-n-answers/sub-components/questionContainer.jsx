@@ -17,7 +17,7 @@ const QuestionsContainer = (props) => {
 
     <div className={showQuestion?  'showQuestion': 'hide'}>
         <div className='qa row'>
-        <h4 className={'questionText'}>Q: {props.question.question_body}</h4>
+        <h4 className='questionText'>Q: {props.question.question_body}</h4>
         <AddAnswer
             recordClick={props.recordClick}
             addAnswerOnClick={props.addAnswerOnClick}

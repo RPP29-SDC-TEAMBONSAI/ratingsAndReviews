@@ -15,7 +15,7 @@ class UserAnswer extends React.Component {
       hideButton: null,
       tempPhoto:null,
       data: '',
-      confirmationState: 'photoConfirmationHide',
+      confirmationState: 'hide',
       checked: false,
       fileName: 0
     }
@@ -77,7 +77,7 @@ class UserAnswer extends React.Component {
         hideButton: null,
         tempPhoto:null,
         data: '',
-        confirmationState: 'photoConfirmationHide',
+        confirmationState: 'hide',
         checked: false
       })
   }
@@ -179,7 +179,7 @@ class UserAnswer extends React.Component {
           <h1 className='answerFormProductImg text'>{this.props.currentItemName}</h1>
           <img className='answerFormProduct img'src={this.props.currentProductPhoto}/>
         </div>
-        <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'closeAnswerHide'} onClick={(e) => {this.props.closeAnswerForm(e), this.resetConfirmationFormState(e)}}>x</h1>
+        <h1 className={this.props.answerFormDisplayClass ? 'closeAnswer': 'hide'} onClick={(e) => {this.props.closeAnswerForm(e), this.resetConfirmationFormState(e)}}>x</h1>
         <form className='addAnswerForm form' onSubmit={this.onAnswerSubmit}>
           <div className='questionText container'>
             <h5 className='selectedQuestionText'>Selected Question:</h5>

@@ -15,9 +15,9 @@ const QuestionList = (props) => {
         {props.question.answers.map((answer, index) => {
 
           return (
-            <div className={!props.answerState && index <=1 || props.answerState ? 'answerList scroll': 'answerList hide'} key={index}>
+            <div className={!props.answerState && index <=1 || props.answerState ? 'answerList scroll': 'hide'} key={index}>
 
-              <h4 className={`answerText`}>A: {answer.body}</h4>
+              <h4 className='answerText'>A: {answer.body}</h4>
 
 
                 {answer.photos.map((photo, index) => {
