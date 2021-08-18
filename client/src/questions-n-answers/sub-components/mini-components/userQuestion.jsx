@@ -125,6 +125,7 @@ class UserQuestion extends React.Component {
 }
 
 UserQuestion.propTypes = {
+  currentProductPhoto:propTypes.string.isRequired,
   recordClick:propTypes.func.isRequired,
   currentItemName: propTypes.string.isRequired,
   addQuestion: propTypes.func.isRequired,

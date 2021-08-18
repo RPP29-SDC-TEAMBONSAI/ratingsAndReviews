@@ -226,6 +226,7 @@ class QuestionsNAnswers extends React.Component {
 
               <div className={this.props.allClicksProps.answerFormDisplayClass}>
                 <UserAnswer
+                  currentProductPhoto={this.props.currentProductPhoto}
                   recordClick={trackerProps.recordClick}
                   currentItemName={this.props.currentItemName}
                   updateAnswers={this.updateAnswers}
@@ -296,7 +297,7 @@ class QuestionsNAnswers extends React.Component {
 
 QuestionsNAnswers.propTypes = {
   currentItemName: propTypes.string.isRequired,
-  // QuestionSavedData: propTypes.array.isRequired,
+  currentProductPhoto: propTypes.string.isRequired,
   product_id: propTypes.number.isRequired,
   data: propTypes.array.isRequired,
   allClicksProps: propTypes.any
