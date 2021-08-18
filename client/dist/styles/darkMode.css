@@ -1,0 +1,10 @@
+.dark-app {
+  background: darkgray;
+  color: ivory;
+}
+
+#darkswitch {
+  display:flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}

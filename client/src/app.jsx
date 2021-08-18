@@ -25,10 +25,12 @@ class App extends React.Component {
       qNa: [],
       savedQnA: [],
       loaded: false,
-      ratings: {}
+      ratings: {},
+      isDarkMode: false
     }
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
+    this.toggleDarkMode = this.toggleDarkMode.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +45,13 @@ class App extends React.Component {
       this.getStateData(this.state.product_id)
 
     }
+  }
+
+  toggleDarkMode () {
+    this.setState({
+      isDarkMode: !this.state.isDarkMode
+    })
+    console.log(this.state.isDarkMode)
   }
 
   handleProductChange(newProductId) {
@@ -94,7 +103,14 @@ class App extends React.Component {
 
     if (this.state.loaded) {
       return (
-        <div className='app'>
+        <div className={this.state.isDarkMode ? 'app dark-app' : 'app'}>
+          <header className={this.state.isDarkMode ? 'app-header dark-header' : 'app-header'}>
+            <div className={this.state.isDarkMode ? "toggle-dark" : "toggle-light"}>
+              {this.state.isDarkMode ?
+              <h2 className='light-mode' id='darkswitch' onClick={() => {this.toggleDarkMode()}}>Light</h2>
+              : <h2 className='dark-mode' id='darkswitch' onClick={() => {this.toggleDarkMode()}}>Dark</h2>}
+            </div>
+          </header>
           <Overview
             state = {this.state}/>
           <RelatedProducts
