@@ -34,7 +34,7 @@ const YourOutfitCard = (props) => {
           <h3 className='productCategory'>{props.outfitProps.category}</h3>
           <h3 className='originalProductPrice'>{props.outfitProps.originalPrice}</h3>
           <h3 className='saleproductPrice'>{props.outfitProps.salePrice}</h3>
-          <img className='outfitCardImage'
+          <img id='outfitImage' className='outfitCardImage'
           src={props.outfitProps.photoUrl.thumbnail_url}
           alt='clothing product'
           >

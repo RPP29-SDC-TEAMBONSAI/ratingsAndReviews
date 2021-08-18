@@ -5,6 +5,7 @@ import RelatedProductsCard from './RelatedProductsCard.jsx';
 
 const RelatedProductsList = (props) => {
   let relatedItemsList = props.allProps.map((product, index) => {
+
     return <div key={index}>
       <RelatedProductsCard
         key={product.itemId}
