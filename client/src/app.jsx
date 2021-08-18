@@ -51,7 +51,7 @@ class App extends React.Component {
     this.setState({
       isDarkMode: !this.state.isDarkMode
     })
-    console.log(this.state.isDarkMode)
+
   }
 
   handleProductChange(newProductId) {
