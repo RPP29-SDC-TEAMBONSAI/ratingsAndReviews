@@ -90,9 +90,9 @@ module.exports = {
     currentQuestions.forEach((question) => {
       question.answers.forEach((answer) => {
         if (answerIds.includes(answer.id)) {
-          answer.report = 'reported'
+          answer.report = 'Reported'
         } else {
-          answer.report ='report'
+          answer.report ='Report'
         }
       })
     })

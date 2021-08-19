@@ -3,7 +3,6 @@ import AddAnswer from './mini-components/addAnswerTable.jsx';
 import propTypes from 'prop-types';
 import QuestionList from './mini-components/questionList.jsx';
 
-
 const QuestionsContainer = (props) => {
 
   let showQuestion= props.showQuestions(props.questionClickCount, props.currentI)
@@ -26,7 +25,8 @@ const QuestionsContainer = (props) => {
             question_id={props.question_id}
         />
       </div>
-      <div className={'questionList row'}>
+      <div className='answerListRow container'>
+        <h4 className='answerA' >A:</h4>
         <QuestionList
           answerState={props.answerState}
           recordClick={props.recordClick}
@@ -35,6 +35,9 @@ const QuestionsContainer = (props) => {
           question={props.question}
           answers={props.answers}
           showQuestion={props.showQuestion}
+          currentQuestionI={props.currentI}
+          showAns={props.showAns}
+          loadMoreAnsOrQ={props.loadMoreAnsOrQ}
         />
       </div>
     </div>
@@ -42,6 +45,8 @@ const QuestionsContainer = (props) => {
 }
 
 QuestionsContainer.propTypes = {
+  loadMoreAnsOrQ:propTypes.func.isRequired,
+  showAns: propTypes.array.isRequired,
   showQuestion:propTypes.any,
   answerState:propTypes.any.isRequired,
   recordClick:propTypes.func.isRequired,
