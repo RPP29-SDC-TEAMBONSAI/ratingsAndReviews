@@ -26,21 +26,21 @@ const RelatedProductsCard = (props) => {
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <div className='relatedProductsCardTop'>
-          <h2 className='productName'>{props.name}</h2>
+          <h3 className='productName'>{props.name}</h3>
           <button className='relatedProductsActionButton'onClick={(e) => {props.handleCompareItems(props, e)}}>★</button>
         </div>
         <div className='relatedProductsCardBottom'>
-        <h3 className='productCategory'>{props.category}</h3>
+        <h4 className='productCategory'>{props.category}</h4>
         {(function() {
           if (props.salePrice === null) {
             return (
-              <h3 className='originalProductPrice'>{props.originalPrice}</h3>
+              <h4 className='originalProductPrice'>{props.originalPrice}</h4>
             )
           } else {
             return (
               <div className='salePriceWrapper'>
-                <h3 className='originalProductPriceWithSale'>{props.originalPrice}</h3>
-                <h3 className='saleProductPrice'>{props.salePrice}</h3>
+                <h4 className='originalProductPriceWithSale'>{props.originalPrice}</h4>
+                <h4 className='saleProductPrice'>{props.salePrice}</h4>
               </div>
             )
           }

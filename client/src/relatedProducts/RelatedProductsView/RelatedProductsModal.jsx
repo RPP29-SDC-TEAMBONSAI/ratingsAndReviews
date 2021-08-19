@@ -9,7 +9,7 @@ const RelatedProductsModal = (props) => {
          style={{'display': props.modalShow ? 'flex' : 'none'}} >
       <div className='modalOpen'>
         <div className='modalTable'>
-          <h1>Comparing</h1>
+          <h1 className='modalTitle'>Comparing</h1>
           <table className='rpModalTable'>
             <tbody className='rpModalTbody'>
               <tr className='rpModalTrow'>
