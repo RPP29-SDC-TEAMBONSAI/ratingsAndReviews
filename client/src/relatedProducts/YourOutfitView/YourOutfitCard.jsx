@@ -36,7 +36,7 @@ const YourOutfitCard = (props) => {
           <h3 className='saleproductPrice'>{props.outfitProps.salePrice}</h3>
           <img id='outfitImage' className='outfitCardImage'
           src={props.outfitProps.photoUrl.thumbnail_url}
-          alt='clothing product'
+          alt='outfit item'
           >
           </img>
           <div className="reviewStars">{getStars(outfitItemRatings)}</div>

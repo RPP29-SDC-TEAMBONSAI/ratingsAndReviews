@@ -1,17 +1,17 @@
 
 
-import exampleData from '../../relatedProducts/newExampleData.js'
-import {get, newId} from './axios.js'
+// import exampleData from '../../relatedProducts/newExampleData.js'
+// import {get, newId} from './axios.js'
 
-let products= (id) => {
-  let currentProducts = exampleData.currentProducts
-  return currentProducts[id]
-}
+// let products= (id) => {
+//   let currentProducts = exampleData.currentProducts
+//   return currentProducts[id]
+// }
 
-module.exports = {
-  productsWithId: jest.fn((id) => Promise.resolve({data:products(id)})),
-  productsStyle: jest.fn((id) => Promise.resolve(get(`${id}`)))
-}
+// module.exports = {
+//   productsWithId: jest.fn((id) => Promise.resolve({data:products(id)})),
+//   productsStyle: jest.fn((id) => Promise.resolve(get(`${id}`)))
+// }
 
 
     // 28213:{
