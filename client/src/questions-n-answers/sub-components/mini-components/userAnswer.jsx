@@ -119,7 +119,7 @@ class UserAnswer extends React.Component {
           this.setState({
             fileName:this.state.fileName + 1,
             photos: newPhotos,
-            confirmationState:'photoConfirmationHide',
+            confirmationState:'hide',
             checked:false,
           })
         })
@@ -152,7 +152,7 @@ class UserAnswer extends React.Component {
       hideButton: null,
       tempPhoto:null,
       data: '',
-      confirmationState: 'photoConfirmationHide',
+      confirmationState: 'hide',
       checked: false
     })
   }
@@ -162,17 +162,12 @@ class UserAnswer extends React.Component {
       hideButton: null,
       tempPhoto:null,
       data: '',
-      confirmationState: 'photoConfirmationHide',
+      confirmationState: 'hide',
       checked: false
     })
   }
 
   render() {
-    let uploadClass;
-    if (this.state.photos.length === 5) {
-      uploadClass = 'uploadButtonHide'
-    }
-
     return (
       <div className='aFormData'>
         <div className='answerFormProductImg container'>
@@ -185,7 +180,6 @@ class UserAnswer extends React.Component {
             <h5 className='selectedQuestionText'>Selected Question:</h5>
             <h4 className='currentQuestion'>{this.props.currentQuestion}</h4>
           </div>
-
           <h3 className='answerFormAsterisk answer'>Your Answer</h3>
           <textarea className='addAnswerFormText'
                     value ={this.state.yourAnswer}
@@ -233,8 +227,8 @@ class UserAnswer extends React.Component {
                   accept='image/png, image/jpeg'
 
             />
-            <div className='uploadBtn container'>
-              <button className={uploadClass? uploadClass: 'uploadButton'}
+            <div className={this.state.photos.length >= 5? 'hide':'uploadBtn container'}>
+              <button className='uploadButton'
                       id='uploadBtn'
                       type='button'
                       onClick={(e)=> {this.props.recordClick(e), this.userPhotoUpload(e)}}
@@ -242,7 +236,6 @@ class UserAnswer extends React.Component {
               </button>
             </div>
           </div>
-
           <div className='submitAnswer container'>
             <input type='submit'
                   className='addAnswersubmit'
@@ -271,7 +264,6 @@ class UserAnswer extends React.Component {
                         >Confirm
                 </button>
               </div>
-
             </div>
           </div>
           <div className='answerFormPhotoThumbnail'>
@@ -284,7 +276,6 @@ class UserAnswer extends React.Component {
     )
   }
 }
-
 
 UserAnswer.propTypes = {
   recordClick:propTypes.func.isRequired,
