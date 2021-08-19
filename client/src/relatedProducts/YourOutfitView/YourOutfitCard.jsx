@@ -32,8 +32,20 @@ const YourOutfitCard = (props) => {
         </div>
         <div className='relatedProductsCardBottom'>
           <h3 className='productCategory'>{props.outfitProps.category}</h3>
-          <h3 className='originalProductPrice'>{props.outfitProps.originalPrice}</h3>
-          <h3 className='saleproductPrice'>{props.outfitProps.salePrice}</h3>
+          {(function() {
+          if (props.outfitProps.salePrice === null) {
+            return (
+              <h3 className='originalProductPrice'>{props.outfitProps.originalPrice}</h3>
+            )
+          } else {
+            return (
+              <div className='salePriceWrapper'>
+                <h3 className='originalProductPriceWithSale'>{props.outfitProps.originalPrice}</h3>
+                <h3 className='saleProductPrice'>{props.outfitProps.salePrice}</h3>
+              </div>
+            )
+          }
+        })()}
           <img id='outfitImage' className='outfitCardImage'
           src={props.outfitProps.photoUrl.thumbnail_url}
           alt='outfit item'
