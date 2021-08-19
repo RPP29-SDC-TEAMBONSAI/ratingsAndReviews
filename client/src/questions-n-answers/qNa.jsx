@@ -255,11 +255,12 @@ class QuestionsNAnswers extends React.Component {
                   )})}
               </div>
               <div className='questionListButton container'>
+                <div className='loadMoreAnswerButton container'>
 
                   <h3 className='loadMoreAnswersButton'
                       onClick={(e) => {trackerProps.recordClick(e), this.props.allClicksProps.loadMoreAnsOrQ(e)}}>{this.props.allClicksProps.loadAnswerState ? 'Collapse Answers':'Load More Answers'}
                   </h3>
-
+                </div>
                 <div className='bottomButtons'>
 
                   <h3 className={this.props.allClicksProps.showQuestionButton ? 'hide' : 'moreAnsweredBtn'}
