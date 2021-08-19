@@ -43,7 +43,7 @@ div.list.container {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 35vh;
+  height: 50vh;
   align-items: center;
   margin-left: 5vh;
 }
@@ -530,7 +530,7 @@ textarea.addAnswerFormText:hover {
 .answerList {
   display: flex;
   overflow-y: scroll;
-  height: 25vh;
+  height: 15em;
   flex-direction: column;
 }
 
