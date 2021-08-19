@@ -390,7 +390,7 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover, input.addAnswe
   outline: none;
   border: .15rem solid lightgray;
   align-items: center;
-  width: 14vw;
+
 
 }
 .loadMoreAnswersButton:hover{
