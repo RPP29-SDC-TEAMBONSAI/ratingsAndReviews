@@ -122,7 +122,7 @@ class RelatedProducts extends React.Component {
           resolve(outfitPropsObj);
         })
         .catch(err=> {
-           console.log(err)
+           //console.log(err)
         })
       })
     }

@@ -1,5 +1,5 @@
 
-import exampleData from '../../relatedProducts/newExampleData.js'
+//import exampleData from '../../relatedProducts/newExampleData.js'
 
 
 

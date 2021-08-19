@@ -23,7 +23,6 @@ const getStars = function (starsObject) {
 };
 
 const RelatedProductsCard = (props) => {
-
   return (
     <div className='relatedProductsCard' onClick={() => props.handleProductChange(props.id)} >
         <div className='relatedProductsCardTop'>
@@ -47,7 +46,7 @@ const RelatedProductsCard = (props) => {
           }
         })()}
         <img id='rpImage' src={props.photo || 'https://lightwidget.com/wp-content/uploads/local-file-not-found-480x488.png'}
-        alt='clothing product'
+        alt='related clothing product'
         className='relatedProductImage'></img>
 
         <span className="reviewStars">{getStars(props.starRating.ratings)}</span>

@@ -62,6 +62,13 @@ REALTED PRODUCTS STYLING
   border: none;
 }
 
+.nextButton {
+  margin-right: 2rem
+}
+
+.prevButton {
+  margin-left: 2 rem
+}
 
 /*-----------------
 YOUR OUTFIT STYLING
@@ -110,6 +117,7 @@ YOUR OUTFIT STYLING
   overflow-wrap: break-word;
   cursor: pointer;
   margin-right: auto;
+  margin-left: 2rem;
 }
 
 .addToOutfitCard {
