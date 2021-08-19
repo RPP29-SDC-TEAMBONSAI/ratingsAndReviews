@@ -6,6 +6,7 @@ REALTED PRODUCTS STYLING
   margin-top: 2rem;
   margin-left: 2rem;
   margin-bottom: 0.25rem;
+  border-bottom: .1em solid grey;
 }
 
 .relatedProductsList {
@@ -38,10 +39,6 @@ REALTED PRODUCTS STYLING
   display: flex;
   flex-direction: column;
 }
-/* .relatedProductsCardBottom, img {
-  display: flex;
-  align-self: center
-} */
 
 .relatedProductsActionButton {
   height: 4em;
@@ -78,6 +75,7 @@ YOUR OUTFIT STYLING
   margin-top: 2rem;
   margin-left: 2rem;
   margin-bottom: 0.25rem;
+  border-bottom: .1em solid grey;
 }
 
 .yourOutfitList {
@@ -112,12 +110,25 @@ YOUR OUTFIT STYLING
 .addToOutfitButton {
   display: flex;
   flex-direction: column;
-  width: 3em;
+  width: 4em;
   align-items: center;
-  overflow-wrap: break-word;
   cursor: pointer;
-  margin-right: auto;
   margin-left: 2rem;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 400;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  outline: none;
+  border: .2rem solid lightgray;
+}
+
+.addToOutfitButton span {
+  font-size: 3rem;
 }
 
 .addToOutfitCard {
@@ -189,6 +200,18 @@ HOVER STYLING
   transform: scale(1.2);
 }
 
+.addToOutfitButton:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  background-color: royalblue;
+  transform: translateY(-.438rem);
+}
+
+.relatedProductsCard:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  transform: translateY(-.438rem);
+}
+
 
 
 /*----------
@@ -212,4 +235,5 @@ IMAGE STLYING
 #outfitImage {
   width: 250px;
   height: 300px;
+  align-self: center;
 }
