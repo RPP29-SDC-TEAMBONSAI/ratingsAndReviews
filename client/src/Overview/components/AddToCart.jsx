@@ -3,7 +3,6 @@ import React from "react";
 const AddToCart = (props) => {
   if (props.state.styles.length > 0) {
     let val = 0;
-    console.log(2- (Object.keys(props.state.styles[props.OverviewState.styleIndex].skus)).length)
     return (
       <>
         <div className = "select-size-and-quantity">

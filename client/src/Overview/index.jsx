@@ -78,7 +78,6 @@ class Overview extends React.Component {
 
   changeStyle(e) {
     if (this.state.mainPhoto > this.props.state.styles[e.target.attributes.value.value].photos.length) {
-      console.log('yurrrp')
       this.setState({
         styleIndex: e.target.attributes.value.value,
         sizeSelected: "",
@@ -283,7 +282,6 @@ dropDown() {
 }
 
 dropDownFalse() {
-  console.log('yup')
   if (this.state.dropDown){
     this.setState({
       dropDown: false
