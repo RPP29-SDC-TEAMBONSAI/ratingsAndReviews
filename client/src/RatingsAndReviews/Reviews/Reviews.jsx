@@ -94,9 +94,6 @@ class Reviews extends React.Component {
                 product_id={this.props.product_id}/>
           </div>
           {/* MAIN MODAL WHEN NO REVIEWS */}
-          <div className="rating-title">
-            NO REVIEWS
-          </div>
           <button
             className="review-button"
             onClick={this.openAddReview}>

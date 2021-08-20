@@ -7,7 +7,7 @@ import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globa
 import renderer from 'react-test-renderer';
 
 // COMPONENTS & HELPERS
-import RatingBreakdown from '../../RatingsAndReviews/RatingsBreakdown/RatingBreakdown.jsx';
+import ReviewsClicker from '../../RatingsAndReviews/ReviewsClicker.jsx';
 import reviewRoutes from '../../clientRoutes/reviews.js';
 import helper from '../../helper-functions/rpHelpers.js';
 jest.mock('../../clientRoutes/reviews.js');
@@ -16,25 +16,26 @@ const mockEvent = (attr, value) => {
 }
 
 const props = {
-  percentages: [0, 10, 20, 30, 40],
-  counts: 100,
-  starFilters: [],
-  starFilterClick: () => {}
+  test: 'test'
+}
+
+class Test extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <div>test</div>
+  }
 }
 
 let wrapper;
 
-describe('RatingBreakdown component', () => {
-  describe('render', () => {
-    beforeEach(() => {
-      wrapper = RatingBreakdown(props);
-    });
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
+describe('ReviewsClicker component', () => {
+  describe('clicker', () => {
 
-    test('should render properly', () => {
-      expect(wrapper).not.toBe(null);
+    test('should return a wrapped react class component', () => {
+      const wrapped = ReviewsClicker(<Test {...props}/>);
     });
   });
 });

@@ -53,23 +53,26 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div
-        className="ratings-and-reviews"
-        id="link_to_reviews"
-        onClick={this.props.recordClick}>
-        <RatingsBreakdown
-          product_id={this.props.product_id}
-          starFilters={this.state.starFilters}
-          starFilterClick={this.setStarFilter}
-          hideIfNoReviews={this.hideIfNoReviews}
-          setCharacteristics={this.setCharacteristics}
-          hidden={this.state.hidden}/>
-        <Reviews
-          product_id={this.props.product_id}
-          characteristics={this.state.characteristics}
-          starFilters={this.state.starFilters}
-          productName={this.props.productName}
-          hidden={this.state.hidden}/>
+      <div className="rnr">
+        <h2 className="rnr-title">Ratings & Reviews</h2>
+        <div
+          className="ratings-and-reviews"
+          id="link_to_reviews"
+          onClick={this.props.recordClick}>
+          <RatingsBreakdown
+            product_id={this.props.product_id}
+            starFilters={this.state.starFilters}
+            starFilterClick={this.setStarFilter}
+            hideIfNoReviews={this.hideIfNoReviews}
+            setCharacteristics={this.setCharacteristics}
+            hidden={this.state.hidden}/>
+          <Reviews
+            product_id={this.props.product_id}
+            characteristics={this.state.characteristics}
+            starFilters={this.state.starFilters}
+            productName={this.props.productName}
+            hidden={this.state.hidden}/>
+        </div>
       </div>
     );
   }
@@ -82,3 +85,4 @@ RatingsAndReviews.propTypes = {
 }
 
 export default ReviewsClicker(RatingsAndReviews);
+export { RatingsAndReviews as PureRatingsAndReviews };

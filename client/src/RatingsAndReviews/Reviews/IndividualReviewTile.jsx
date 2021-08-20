@@ -19,11 +19,21 @@ class IndividualReviewTile extends React.Component {
     this.showMore = this.showMore.bind(this);
     this.handleReport = this.handleReport.bind(this);
     this.handleHelpful = this.handleHelpful.bind(this);
+    this.shortify = this.shortify.bind(this);
   }
 
   componentDidMount() {
+    this.shortify();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.review.body !== this.props.review.body) {
+      this.shortify();
+    }
+  }
+
+  shortify() {
     let len = this.props.review.body.length;
-    console.log(len);
     if (len > 250) {
       let short = this.props.review.body.substring(0, 250);
       this.setState({
@@ -78,8 +88,7 @@ class IndividualReviewTile extends React.Component {
             <div className="irt-username-and-date">✓ {this.props.review.reviewer_name}, {formatDate(this.props.review.date)}</div>
           </div>
           <div className="irt-review-summary">
-            <div className="irt-summary-trunc">{truncateSummary(this.props.review.summary)[0]}</div>
-            <div className="irt-summary-overage">{truncateSummary(this.props.review.summary)[1]}</div>
+            <div className="irt-summary-trunc">{this.props.review.summary}</div>
           </div>
           <div className="irt-review-body">
             <div className="irt-body-text">{this.state.short}</div>
