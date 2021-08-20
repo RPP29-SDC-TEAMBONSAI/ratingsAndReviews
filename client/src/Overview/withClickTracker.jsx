@@ -44,7 +44,7 @@ const withClickTracker= WrappedComponent => {
                    }
           })
           .then(response => {
-            console.log('responce', response)
+            //console.log('responce', response)
             result.push(response);
             if (result.length >= 20) {
               resolve(result)
@@ -53,7 +53,7 @@ const withClickTracker= WrappedComponent => {
         })
       })
       .then(data => {
-        console.log('interactions successful', data)
+        //console.log('interactions successful', data)
       })
       .then(() => {
         this.setState({interactions: [], count: 0})

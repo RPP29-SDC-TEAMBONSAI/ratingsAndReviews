@@ -77,13 +77,26 @@ class Overview extends React.Component {
   }
 
   changeStyle(e) {
-    this.setState({
-      styleIndex: e.target.attributes.value.value,
-      sizeSelected: "",
-      quantitySelected: 0,
-      mainPhoto: 0,
-      firstPhotoInPhotoSelectorIndex: 0
-    });
+    if (this.state.mainPhoto > this.props.state.styles[e.target.attributes.value.value].photos.length) {
+      console.log('yurrrp')
+      this.setState({
+        styleIndex: e.target.attributes.value.value,
+        sizeSelected: "",
+        quantitySelected: 0,
+        mainPhoto: this.props.state.styles[e.target.attributes.value.value].photos.length - 1,
+        firstPhotoInPhotoSelectorIndex: 0
+      });
+
+    } else {
+      this.setState({
+        styleIndex: e.target.attributes.value.value,
+        sizeSelected: "",
+        quantitySelected: 0
+      });
+
+    }
+    //props.state.styles[props.OverviewState.styleIndex].photos.length
+
 
     //document.getElementsByClassName('selectSize')[0].options[0].click()
     // let selectMenu = document.getElementsByClassName("selectSize")[0];
@@ -169,6 +182,10 @@ class Overview extends React.Component {
       mainPhoto: newMainPhoto
     })
 
+    if (newMainPhoto < this.state.firstPhotoInPhotoSelectorIndex) {
+      this.upArrow()
+    }
+
   }
 
   mainImageRightArrow() {
@@ -177,6 +194,10 @@ class Overview extends React.Component {
     this.setState({
       mainPhoto: newMainPhoto
     })
+    //if mainphoto is larger than firstPhotoIn + 7 then
+    if (newMainPhoto >= this.state.firstPhotoInPhotoSelectorIndex + 7) {
+      this.downArrow()
+    }
 
 }
 
@@ -262,8 +283,8 @@ dropDown() {
 }
 
 dropDownFalse() {
+  console.log('yup')
   if (this.state.dropDown){
-
     this.setState({
       dropDown: false
     })
@@ -279,7 +300,8 @@ expandedClassName() {
   render() {
 
     return (
-      <div onClick = {this.dropDownFalse} onClick = {this.props.recordCount}>
+      <div onClick = {this.props.recordCount}>
+      <div onClick = {this.dropDownFalse}>
         <div className = "overview-expanded" onMouseMove = {this.handleMouseMove} style={{display: this.state.expandedView ? "flex" : "none"}}>
       <ExpandedView
       state={this.props.state}
@@ -323,6 +345,7 @@ expandedClassName() {
             dropDown = {this.dropDown}
           />
         </div>
+      </div>
       </div>
       </div>
     );

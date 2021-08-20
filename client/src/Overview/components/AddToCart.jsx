@@ -3,17 +3,18 @@ import React from "react";
 const AddToCart = (props) => {
   if (props.state.styles.length > 0) {
     let val = 0;
+    console.log(2- (Object.keys(props.state.styles[props.OverviewState.styleIndex].skus)).length)
     return (
       <>
         <div className = "select-size-and-quantity">
-          <div className = "select-items">
+          <div className = "select-items" style = {{marginBottom: `${2- (Object.keys(props.state.styles[props.OverviewState.styleIndex].skus)).length}em`}}>
           {Object.entries(
             props.state.styles[props.OverviewState.styleIndex].skus
           ).map(([key, value]) => {
             if (value.quantity > 0) {
               val += 1;
               return (
-                <div key={key} className = {'drop-down ' + value.size} value={value.quantity + ' ' + value.size + ' ' + key} onClick={props.changeAvailableQuantity}>
+                <div key={val} className = {'drop-down ' + value.size} value={value.quantity + ' ' + value.size + ' ' + key} onClick={props.changeAvailableQuantity}>
                   {value.size}
                 </div>
               );
@@ -24,6 +25,8 @@ const AddToCart = (props) => {
           <div id = "select-size" onClick = {props.dropDown}>{function() {
             if (props.OverviewState.sizeSelected.length > 0) {
               return (props.OverviewState.sizeSelected)
+            } else if (val == 0) {
+              return ('OUT OF STOCK')
             } else {
               return ('SELECT SIZE')
             }
@@ -50,7 +53,7 @@ const AddToCart = (props) => {
         </select>
         </div>
         <div className = "bag-and-favorite">
-        <button className="addToBag" onClick = {props.addToBag}>ADD TO BAG +</button>
+        <button className="addToBag" onClick = {props.addToBag} style = {{display: val ? "flex" : "none"}}>ADD TO BAG +</button>
         <button className="favoriteStar">⭒</button>
         </div>
         </>
