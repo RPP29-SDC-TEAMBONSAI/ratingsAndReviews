@@ -1,6 +1,16 @@
 /*----------------------
 REALTED PRODUCTS STYLING
 -----------------------*/
+body {
+  background-color: #fce1e0;
+}
+.relatedProductsTitle {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 0.25rem;
+  border-bottom: .1em solid grey;
+}
 
 .relatedProductsList {
   display: flex;
@@ -16,7 +26,7 @@ REALTED PRODUCTS STYLING
 .relatedProductsCard {
   flex-grow: 1;
   flex-shrink: 0;
-  border: solid;
+  border: .1em solid grey;
   margin: 2rem;
   width: 20rem;
   cursor: pointer;
@@ -28,13 +38,35 @@ REALTED PRODUCTS STYLING
   justify-content: space-between;
 }
 
+.productName {
+  font-family: 'Montserrat', sans-serif;
+  margin-left: .5rem;
+  margin-bottom: .2rem;
+}
+
 .relatedProductsCardBottom {
   display: flex;
   flex-direction: column;
 }
-.relatedProductsCardBottom, img {
-  display: flex;
-  align-self: center
+
+.productCategory {
+  font-family: 'Lora', serif;
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-left: .5rem;
+  font-style: italic;
+}
+
+.originalProductPrice {
+  margin-bottom: 1rem;
+  margin-left: .5rem;
+  margin-top: .2rem;
+}
+
+.originalProductPriceWithSale,
+.saleproductPrice {
+  margin-bottom: 1rem;
+  margin-left: .5rem;
 }
 
 .relatedProductsActionButton {
@@ -56,10 +88,25 @@ REALTED PRODUCTS STYLING
   border: none;
 }
 
+.nextButton {
+  margin-right: 2rem
+}
+
+.prevButton {
+  margin-left: 2rem
+}
 
 /*-----------------
 YOUR OUTFIT STYLING
 -----------------*/
+
+.yourOutfitTitle {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 0.25rem;
+  border-bottom: .1em solid grey;
+}
 
 .yourOutfitList {
   display: flex;
@@ -76,7 +123,7 @@ YOUR OUTFIT STYLING
 .yourOutfitCard {
   flex-grow: 1;
   flex-shrink: 1;
-  border: solid;
+  border: .1em solid grey;
   margin: 2rem;
   width: 20rem;
   align-items: center;
@@ -93,11 +140,24 @@ YOUR OUTFIT STYLING
 .addToOutfitButton {
   display: flex;
   flex-direction: column;
-  width: 3em;
   align-items: center;
-  overflow-wrap: break-word;
   cursor: pointer;
-  margin-right: auto;
+  margin-left: 2rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 400;
+  color: #000;
+  background-color: snow;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  outline: none;
+  border: .2rem solid lightgray;
+}
+
+.addToOutfitButton span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
 }
 
 .addToOutfitCard {
@@ -113,7 +173,7 @@ RP MODAL STLYING
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: .3125rem;
   overflow: scroll;
   z-index: 50;
 }
@@ -129,39 +189,95 @@ RP MODAL STLYING
   z-index: 50;
 }
 
+.modalTitle {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rpModalTdheader,
+.rpModalTdata {
+  font-family: 'Lora', serif;
+}
+
 .modalTable {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: white;
+  background: #fce1e0;
   width: 60%;
   height: 75%;
   margin: auto;
-
 }
 
 .rpModalTable {
-  border: 1px solid rgb(190,190,190);
+  border: .1em solid grey;;
 }
 
 .relatedProductsModal td,
 th {
-    border: 1px solid rgb(190, 190, 190);
-    padding: 10px;
+    border: .1em solid grey;;
+    padding: .0625rem;
 }
 
 .relatedProductsModal td {
     text-align: center;
 }
 
+.closeModal {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 400;
+  color: #000;
+  background-color: snow;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  outline: none;
+  border: .2rem solid lightgray;
+}
+
 /*------------
 HOVER STYLING
 -------------*/
-.yourOutfitActionButton:hover,
+
 .nextButton:hover,
-.prevButton:hover,
+.prevButton:hover {
+  color: dimgray;
+  transform: scale(1.5);
+}
+
 .relatedProductsActionButton:hover {
-  transform: scale(1.2);
+  color: #544848;
+  transform: translateY(-.238rem) scale(1.5);
+}
+.yourOutfitActionButton:hover {
+  color: darkred;
+  transform: translateY(-.238rem) scale(1.2);
+}
+
+.addToOutfitButton:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  background-color: rosybrown;
+  transform: translateY(-.438rem);
+}
+
+.closeModal:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  background-color: rosybrown;
+  transform: translateY(-.438rem);
+}
+
+.relatedProductsCard:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  transform: translateY(-.438rem);
 }
 
 
@@ -178,15 +294,14 @@ TEXT STLYING
   color: red;
 }
 
-.productName, h2 {
-
-}
 
 /*----------
 IMAGE STLYING
 -----------*/
 
-img {
-  width: 250px;
-  height: 300px;
+#rpImage,
+#outfitImage {
+  width: 15.625rem;
+  height: 18.75rem;
+  align-self: center;
 }

@@ -1,17 +1,16 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import helper from '../helper-functions/rpHelpers';
 import exampleData from '../RelatedProducts/exampleData.js';
 import { expect, jest, test, describe, beforeEach, afterEach } from '@jest/globals';
 import RelatedProducts from '../relatedProducts/RelatedProductsView/RelatedProducts.jsx';
+import RelatedProductsCard from '../RelatedProducts/RelatedProductsView/RelatedProductsCard.jsx';
+import RelatedProductsList from '../RelatedProducts/RelatedProductsView/RelatedProductsList.jsx';
+import RelatedProductsModal from '../relatedProducts/RelatedProductsView/RelatedProductsModal.jsx';
+import 'jsdom-global/register';
 
 
-const addToOutfitProps = {
-  handleAddToOutfit: () => {},
-  outfitProps: {'obj': 'data'},
-  state: {'obj': 'data'}
 
-}
 jest.mock('axios')
 jest.mock('../clientRoutes/products.js')
 
@@ -25,7 +24,14 @@ describe('RelatedProducts methods', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
+  test('expect count to start at 0', () => {
+    const instance = wrapper.instance();
+    expect(instance.props.count).toEqual(0);
+  })
+  test('expect state property starting indices to be set as [0, 1, 2]', () => {
+    const instance = wrapper.instance();
+    expect(instance.state.displayedProductsIndices).toEqual([0,1,2]);
+  })
   test('product method should be called a function', () => {
     const instance = wrapper.instance();
     expect(typeof instance.product).toBe('function');
@@ -46,7 +52,33 @@ describe('RelatedProducts methods', () => {
     const instance = wrapper.instance();
     expect(typeof instance.handleAddToOutfit).toBe('function');
   })
+})
 
+let rpcwrapper;
+describe('RelatedProductsCard', () => {
+  rpcwrapper = mount(<RelatedProductsCard {...exampleData.relatedProductsCardProps} />);
+  test('Should be stateless component', () => {
+    const instance = rpcwrapper.instance();
+    expect(instance).toBe(null);
+  })
+})
+
+let rplwrapper;
+describe('RelatedProductsList', () => {
+  rplwrapper = mount(<RelatedProductsList {...exampleData.relatedProductsListProps} />);
+  test('Should be stateless component', () => {
+    const instance = rplwrapper.instance();
+    expect(instance).toBe(null);
+  })
+})
+
+let rpmwrapper;
+describe('RelatedProductsModal', () => {
+  rpmwrapper = mount(<RelatedProductsModal {...exampleData.relatedProductsModalProps} />);
+  test('Should be stateless component', () => {
+    const instance = rpmwrapper.instance();
+    expect(instance).toBe(null);
+  })
 })
 
 

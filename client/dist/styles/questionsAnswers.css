@@ -1,260 +1,18 @@
-
-.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .addAnswerText {
-  text-decoration: underline;
-}
-.userIdText, .userHelpIndicator{
-  display: flex;
-  white-space: nowrap;
-  border-top:none;
-  border-Left:none;
-  border-right: .15em solid black;
-  border-bottom: none;
-}
-p.userIdText, p.answerHelpfulText, p.userHelpIndicator{
-  padding-right:.15em
-}
-p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
-  padding-left:.15em
-}
-.answerHelpfulText {
-  border-top:none;
-  border-Left:none;
-  padding-right: .15em;
-  border-right: .15em solid black;
-  border-bottom: none;
-}
-.hide {
-  display: none;
-}
-.moreAnsweredBtn.Hide {
-  display: none;
-}
-
-
-
-
-
-.closeAnswerHide {
-  display: none;
-}
-
-.photos {
-  margin-bottom: 1vh;
-}
-.uploadButtonhide {
-  display:none;
-
-}
-.thumbnail {
-  border: .01rem solid white;
-  border-radius: 1em;
-  width: 10vh;
-  height: 10vh;
-  margin-top: .5rem;
-}
-.answerThumbnail {
-
-  border: .01rem solid #ddd;
-  border-radius: 1em;
-  width: 10vh;
-  height: 10vh;
-}
-.answerThumbnail.Hide{
-  display: none;
-}
-.list.container {
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
-}
-.row.list.container{
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-}
-.questionList.row {
-  display: flex;
-  flex-direction: column;
-  flex:.5;
-}
-.addAnswerList.row {
-  margin-top: 1.3em;
-  justify-content: flex-end;
-  flex-direction: column;
-}
+/* all qNa component css*/
 .mainQnA.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-right: 13vw;
+  padding: 1rem;
 }
-.questionTitle{
- display: flex;
- flex-direction: column;
-}
-
-.search {
- display: flex;
- flex-direction: row;
-}
-.searchInput{
-  display: flex;
-  width: 60.5vw;
-}
-.searchBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-}
-.title.container.row{
+.title.container {
   display: flex;
   flex-direction: column;
-}
-.search.container{
-  display: flex;
-  flex-direction: row;
 }
 .componentTitle{
   display: flex;
-  justify-content: start;
-}
-.questionListButton.container {
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
-}
-
-.loadMoreAnswersButton {
-  display: flex;
+  justify-content: flex-start;
+  width: 30vw;
   justify-content: center;
-  width: 10em;
-  height: 1.3em;
-  cursor: pointer;
-  text-align: center;
-  align-self: center;
-}
-.buttomButtons.containter {
-  display: flex;
-}
-
-.buttomButtons.container{
-  display: flex;
-}
-.moreAnsweredBtn, .addQuestionBtn {
-  display: flex;
-  width: 10em;
-  height: 1.3em;
-  cursor: pointer;
-  color:#444;
-  border:.1rem solid #CCC;
-  background:#DDD;
-  box-shadow: 0 0 1rem rgba(0,0,0,0.2);
-  text-align: center;
-}
-.moreAnsweredBtn {
-  width: 15.8em;
-}
-.loadMoreAnswersButton:hover{
-  color:navy;
-}
-.moreAnsweredBtn:hover, h3.addQuestionBtn:hover {
-  color:navy;
-  background: beige;
-  box-shadow: 0 0 1rem rgba(0,0,0,0.6);
-}
-.loadMoreAnswersButton{
-  display: flex;
-}
-.addQuestionBtn {
-  display: flex;
-}
-.questionListButton.container {
-  display: flex;
-  justify-content: start;
-  width: 65vw;
-}
-.list.container.hide {
-  display: none;
-}
-.questionList.scroll.container {
-  height: 50vh;
-  overflow-y:scroll;
-  overflow-x: hidden;
-}
-.questionList.container {
-  display: flex;
-  width: 65vw;
-  height: 50vh;
-  overflow-y:scroll;
-  flex-direction: column;
-}
-.answerList.hide {
-  display: none;
-}
-.answerListScroll {
-  height: 15vh;
-  overflow-y:scroll;
-}
-.answererDetails {
-  display: flex;
-  flex-direction: row;
-  margin: 0;
-
-}
-.answerList {
-  flex:1;
-  margin: 0;
-  flex-direction: row;
-}
-.aHelpful, .qhelpfulIndicator, .helpfulCount, .addAnswerText{
-  margin: 0em;
-}
-.helpulQuestion.display{
-  display: flex;
-}
-.aHelpful, .helpfulCount {
-  border-right: .15em solid black;
-  justify-content: space-evenly;
-  padding-right: .15em;
-}
-.qhelpfulIndicator, .addAnswerText{
-  padding-left: .15em;
-}
-.helpulQuestion.display {
-  padding-right: 3em;
-}
-.bottomButtons {
-  display: flex;
-}
-.moreAnsweredBtn {
-  display: flex;
-  margin-right: 2.5em;
-  justify-content: start;
-}
-
-/* questionAdd form CSS */
-.addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
-  margin: 1vh;
-}
-.addQuestionAsterisk.productTitle:after, .addQuestionAsterisk.userNickName:after, .addQuestionAsterisk.userEmail:after{
-  content: ' *';
-  color: #B22222;
-  height: 3vh;
-}
-.qFormData {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  background-color: lightsteelblue;
-  border-radius: 1em;
-  margin-bottom: 1vh;
-  padding:.7rem;
-  z-index: 2;
-  height: 75vh;
-  width: 35vw;
-}
-.qFormHide {
-  display:  none;
 }
 .qForm {
   display: flex;
@@ -268,11 +26,168 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.questionClose.container {
+.aForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+div.list.container {
   display: flex;
   flex-direction: column;
-  height: 5vh;
-  width: 15vw;
+  overflow-y: scroll;
+  height: 50vh;
+  align-items: center;
+  margin-left: 5vh;
+}
+.list.container::-webkit-scrollbar {
+  display: none;
+}
+.questionListButton.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.bottomButtons {
+  display: flex;
+  width: 50vw;
+  justify-content: flex-end;
+}
+.moreAnsweredBtn {
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  margin: .25rem;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+}
+.addQuestionBtn {
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  margin: .25rem;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+}
+.addQuestionBtn:hover, .moreAnsweredBtn:hover{
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: white;
+}
+.addQuestionBtn:hover, .moreAnsweredBtn:hover {
+  background-color: royalblue;
+}
+/* all css for Search component
+*/
+.search.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.searchInput{
+  display: flex;
+  height: 7vh;
+  width: 73vw;
+  border-right: none;
+  font-size: large;
+
+  border-top:.1rem  solid black;
+  border-bottom: .1rem  solid black;
+  border-left: .1rem solid black;;
+}
+.iconContainer {
+  display: flex;
+  padding-right: 1vw;
+  border-left: none;
+  border-right: .1rem solid black;
+  border-top: .1rem  solid black;
+  border-bottom: .1rem  solid black;
+  align-items: center;
+  justify-content: center;
+}
+.searchBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 4vh;
+  height: 4vh;
+}
+.searchBtn:hover{
+  cursor:text;
+}
+/* all css for QuestionContainer component
+*/
+.showQuestion {
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  border-top: .1em solid grey;
+}
+.qa.row {
+  display: flex;
+  width: 80vw;
+  margin-top:5vh;
+}
+.questionText {
+  padding: .25rem;
+  margin: 0;
+  width: 50vw;
+}
+.answerListRow.container {
+  display: flex;
+  flex-direction: row;
+}
+.answerA {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  padding: .25rem
+}
+/*all css for UserQuestion component
+*/
+.qFormData {
+  position: fixed;
+  display: flex;
+  background-color: white	;
+  margin-bottom: 1vh;
+  padding:.7rem;
+  z-index: 2;
+  height: 75vh;
+  width: 52vw;
 }
 .questionCloseMarker {
   display: flex;
@@ -287,6 +202,14 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   color: darkred;
   cursor: pointer;
 }
+img.currentQuestionProductPhoto.img {
+  display: flex;
+  flex-direction: row;
+  border-radius: 2em;
+  width: 15vw;
+  height: 15vw;
+  padding: 1rem;
+}
 .askQuestionForm {
   display: flex;
   flex-direction: column;
@@ -296,12 +219,25 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   justify-self: end;
   align-items: center;
 }
-.userQuestion {
+.addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
+  margin: 1vh;
+}
+.addQuestionAsterisk.productTitle:after, .addQuestionAsterisk.userNickName:after, .addQuestionAsterisk.userEmail:after{
+  content: ' *';
+  color: #B22222;
+  height: 3vh;
+}
+textarea.userQuestion {
   width: 30vw;
   height:15vh;
   resize: none;
   overflow-y: scroll;
   margin-bottom: 1vh;
+  border: .1rem solid lightgray;
+  overflow: hidden;
+}
+textarea.userQuestion:hover {
+  border-color: grey;
 }
 .userNickName, .userEmail {
   display: flex;
@@ -309,40 +245,68 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   overflow-x: auto;
   margin-bottom: 1vh;
 }
-.userQSubmit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20vw;
-}
+.userQSubmit.btn {
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .125rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
 
-/*addAnswer component CSS*/
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
+
+}
+.userQSubmit {
+  margin-top: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  background-color: white;
+}
+.userQSubmit:hover{
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: white;
+}
+.userQSubmit.btn:hover {
+  background-color: royalblue;
+}
+/*all css for User Answer component
+*/
+.answerFormProductImg.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .aFormData {
   position: fixed;
   display: flex;
-  flex-direction: column;
-  background-color: lightsteelblue;
-  border-radius: 1em;
-  margin-bottom: 1vh;
-  padding:2.0rem;
+  background-color: white;
   z-index: 2;
-  height: 75vh;
-  width: 35vw;
+  height: 95vh;
+  width: 56vw;
 }
-.aFormHide {
-  display: none;
+.answerFormProductImg.text {
+  margin-top: 6vh;
+  margin-bottom:0 ;
 }
-.aForm {
+img.answerFormProduct.img {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  border-radius: 2em;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.6);
+  width: 15vw;
+  height: 15vw;
+  padding: 1rem;
 }
 .closeAnswer{
   display: flex;
@@ -354,38 +318,106 @@ p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
   top: 0vh;
   left: 0vw;
   height: 5vh;
-  width: 5vh;
-  border-radius: 50em;
-  background-color: lightsteelblue;
+  width: 3vw;
   z-index: 1;
 }
 .closeAnswer:hover{
   color: darkred;
   cursor: pointer;
 }
-.answerFormPhotoThumbnail{
-  display: flex;
-  justify-content: center;
+.selectedQuestionText{
+  margin: 0;
+  font-style: italic;
 }
-.addAnswerForm{
+.answerFormAsterisk {
+  margin-bottom:.25vh;
+  width: 35vw;
+  overflow-x: auto;
+}
+.answerFormAsterisk.answer, .answerFormAsterisk.nickName, .answerFormAsterisk.email {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: small;
+}
+.answerFormAsterisk.answer {
+  margin-top: 1.5vh;
+}
+.answerFormAsterisk.answer:after, .answerFormAsterisk.nickName:after, .answerFormAsterisk.email:after{
+  content: ' *';
+  color: #B22222;
+}
+.addAnswerFormUploadPhotoTitle {
   display: flex;
   flex-direction: column;
-  margin: 0;
-  bottom: 25vh;
+  margin-bottom: .25vh;
 }
-.currentQuestion {
+.fileSelector.container {
+  display: flex;
+  margin: 0;
+}
+input.photos {
+  margin-top: 2vh;
+  width: 15vw;
+}
+.uploadBtn.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8vw;
+  /* border-radius: 10rem; */
+  background-color: white;
+}
+.addAnswersubmit {
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
+}
+.addAnswersubmit:hover{
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: royalblue;
+}
+.closeConfirmation{
+  display: flex;
+  justify-content: start;
+  margin: 0;
+  padding-left: .25em;
+}
+.closeConfirmation:hover{
+  color: darkred;
+  cursor: pointer;
+}
+.confirmPhoto.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 5vh;
-  margin: 0;
 }
-textarea.addAnswerFormText {
- display: flex;
- height: 15vh;
- resize:none;
- overflow-y: scroll;
- justify-content: start;
+textarea.addAnswerFormText{
+  display: flex;
+  width: 35vw;
+  height: 15vh;
+  resize:none;
+  overflow-y: scroll;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-bottom: 1vh;
+  border: .1rem solid lightgray;
+  overflow: hidden;
+}
+textarea.addAnswerFormText:hover {
+  border-color: grey;
 }
 .addAnswerFormNickNameInput{
   width: 20vw;
@@ -395,34 +427,24 @@ textarea.addAnswerFormText {
   width: 20vw;
   overflow-x: auto;
 }
-.addAnswerFormUploadPhotoTitle {
+.submitAnswer.container {
+  margin-top: 2vh;
+  margin-left: 2vh;
   display: flex;
-  flex-direction: column;
-  margin-bottom: .25vh;
-}
-.answerFormAsterisk{
-  margin-bottom:.25vh;
-  width: 20vw;
-  overflow-x: auto;
-}
-.answerFormAsterisk.answer:after, .answerFormAsterisk.nickName:after, .answerFormAsterisk.email:after{
-
-  content: ' *';
-  color: #B22222;
-
-}
-.photoConfirmationHide {
-  display: none;
+  align-items: center;
+  width: 8vw;
+  border-radius: 10rem;
+  background-color: white;
 }
 .photoConfirmation {
   display: flex;
   flex-direction: column;
   width: 35vw;
-  height: 75vh;
+  height: 66vh;
   position: fixed;
-  background-color: lightgray;
+  background-color:whitesmoke;
+  border: .25rem solid black;
   border-radius: 1em;
-  margin-bottom: 1vh;
   z-index: 3;
 }
 .answerConfirmPhoto {
@@ -430,39 +452,268 @@ textarea.addAnswerFormText {
   flex-direction: column;
   justify-content: start;
   align-content: center;
+  height: 25vh;
+  width: 25vh;
+}
+.addAnswerPhotoConfirmBtn.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8vw;
+  background-color: white;
+  margin-top: 5vh;
 }
 .addAnswerPhotoConfirmButton{
-  display: flex;
-
-  justify-content: center;
-  width: 5vw;
+  height: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
 }
-.closeConfirmation{
-  display: flex;
-  justify-content: start;
-  margin: 0;
-  padding-left: .25em;
+.addAnswerPhotoConfirmButton:hover {
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: royalblue;
 }
-.confirmPhoto.container {
+.answerFormPhotoThumbnail{
+  display: flex;
+}
+.addAnswerForm.form{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-top: 10vh;
+  margin-left: 1vw;
 }
-.closeConfirmation:hover{
-  color: darkred;
+.uploadButton {
+  height: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
+  outline: none;
+  border: .2rem solid lightgray;
 }
-.answerImage.container{
+.uploadButton:hover{
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: royalblue;
+}
+.currentQuestion {
   display: flex;
-}
-.answerText {
+  flex-direction: column;
+  width: 25vw;
   margin-bottom: 0;
-  margin-top: 2vh;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  font-family:'Helvetica', sans-serif;
 }
-.questionText {
-  margin-bottom: 0;
+/* all css for QuestionList component
+*/
+.answerList {
+  display: flex;
+  overflow-y: scroll;
+  height: 15em;
+  flex-direction: column;
 }
 
+.answerList::-webkit-scrollbar {
+  display: none;
+}
+.answer.container {
+  display: flex;
+  flex-direction: column;
+  padding: .25rem;
+}
+.answerText {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 50vw;
+  padding: .25rem;
+}
+.answererDetails {
+  display: flex;
+  flex-direction: row;
+  width: 45vw;
+  border-bottom: .025rem solid royalblue;
+  border-width: thin;
+}
+.userIdText, .userHelpIndicator{
+  display: flex;
+  white-space: nowrap;
+  border-top:none;
+  border-Left:none;
+  border-right: .15em solid black;
+  border-bottom: none;
+}
+p.userReportBtn:hover{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  text-decoration: none;
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  width: 3rem;
+  height: 1.35rem;
+  letter-spacing: .0156rem;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color:darkred;
+  margin-left: 1rem;
+}
+.loadMoreAnswerButton.container {
+  display: flex;
+  justify-content: flex-start;
+  width: 75vw;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+.loadMoreAnswersButton {
+  display: flex;
+  justify-content: center;
+  height: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .156rem;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  border: .15rem solid lightgray;
+  align-items: center;
+}
+.loadMoreAnswersButton:hover{
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color: white;
+}
+.loadMoreAnswersButton:hover {
+  background-color: royalblue;
+}
+
+/* all css for AnswerImages component*/
+.thumbnail {
+  border: .01rem solid white;
+  border-radius: 1em;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin-top: .5vh;
+}
+/*all css for AddAnswer component*/
+div.helpfulQuestion.container {
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+.aHelpful, .qhelpfulIndicator,  .addAnswerText, .helpfulCount{
+  margin-top: 0em;
+}
+.aHelpful {
+  padding-right: 1vw;
+}
+.qhelpfulIndicator{
+  padding-left: .15em;
+  margin-right: .15rem;
+}
+p.qhelpfulIndicator:hover, p.userHelpfulBtn:hover{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-size: .75rem;
+  width: 2rem;
+  height: 1rem;
+  letter-spacing: .0156rem;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color:royalblue
+}
+.helpfulCount {
+  border-right: .15em solid black;
+  justify-content: space-evenly;
+  padding-right: 1vw;
+}
+p.addAnswerText{
+  margin-left: 1vw;
+  font-size: 1rem;
+}
+p.addAnswerText:hover{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  text-decoration: none;
+  border-radius: 1.5rem;
+  font-size: .75rem;
+  width: 5rem;
+  height: 2rem;
+  letter-spacing: .0156rem;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transform: translateY(-.438rem);
+  background-color:royalblue
+}
+/* messy css - some of this can be refactored/combined - tech debt*/
+input.userNickName, input.userEmail, .addAnswerFormNickNameInput, .addAnswerFormEmail {
+  border: .1rem solid lightgray;
+  resize: none;
+}
+input.userNickName:hover, input.addAnswerFormNickNameInput:hover,input.userEmail:hover, input.addAnswerFormEmail:hover {
+  border: .12rem solid grey;
+  resize: none;
+}
+p.userIdText, p.answerHelpfulText, p.userHelpIndicator{
+  padding-right:.15em
+}
 p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
-margin-top: .25rem;
+  margin-top:0;
+  margin-bottom: 1rem;
+ }
+ p.userIdText, p.answerHelpfulText, p.userReportBtn {
+   padding-right: 1vw;
+   padding-left: 1vw;
+ }
+ .qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn, .addAnswerText {
+  text-decoration: underline;
+}
+p.userHelpfulBtn {
+  margin-right: .15rem;
+}
+p.userHelpIndicator {
+  padding-right: 1vw;
+}
+p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
+  padding-left:.15em
+}
+/*used for hinding all components*/
+.hide {
+  display: none;
 }

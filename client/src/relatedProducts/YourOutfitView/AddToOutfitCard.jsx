@@ -7,11 +7,12 @@ const AddToOutfitCard = (props) => {
   return (
     <div className='addToOutfitCard' >
         <button className='addToOutfitButton'
-        style={{'fontSize': '50px'}}
+
         onClick={(e) => {props.handleAddToOutfit(props.outfitProps, e)}}>
            <span>+</span>
-
-           <span>Add to Outfit</span>
+           <span>Add </span>
+           <span>to</span>
+           <span>Outfit</span>
         </button>
     </div>
   )

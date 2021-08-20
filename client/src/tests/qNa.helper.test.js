@@ -171,9 +171,9 @@ describe('helper', () => {
       answerIds = [1, 2, 3]
       let newQuestions = helper.createDynamicData(testData.helperTestData())
       newQuestions = helper.addReportedProp(newQuestions, answerIds)
-      expect(newQuestions[0].answers[2].report).toEqual('reported')
-      expect(newQuestions[0].answers[3].report).toEqual('reported')
-      expect(newQuestions[0].answers[4].report).toEqual('reported')
+      expect(newQuestions[0].answers[2].report).toEqual('Reported')
+      expect(newQuestions[0].answers[3].report).toEqual('Reported')
+      expect(newQuestions[0].answers[4].report).toEqual('Reported')
     })
   })
 })

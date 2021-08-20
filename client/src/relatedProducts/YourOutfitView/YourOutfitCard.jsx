@@ -27,16 +27,28 @@ const YourOutfitCard = (props) => {
   return (
     <div className='yourOutfitCard'>
         <div className='relatedProductsCardTop'>
-          <h2 className='productName' >{props.outfitProps.name}</h2>
+          <h3 className='productName' >{props.outfitProps.name}</h3>
           <button className='yourOutfitActionButton' onClick={(e) => {props.handleRemoveFromOutfit(props.outfitProps, e)}}>X</button>
         </div>
         <div className='relatedProductsCardBottom'>
-          <h3 className='productCategory'>{props.outfitProps.category}</h3>
-          <h3 className='originalProductPrice'>{props.outfitProps.originalPrice}</h3>
-          <h3 className='saleproductPrice'>{props.outfitProps.salePrice}</h3>
-          <img className='outfitCardImage'
+          <h4 className='productCategory'>{props.outfitProps.category}</h4>
+          {(function() {
+          if (props.outfitProps.salePrice === null) {
+            return (
+              <h4 className='originalProductPrice'>{props.outfitProps.originalPrice}</h4>
+            )
+          } else {
+            return (
+              <div className='salePriceWrapper'>
+                <h4 className='originalProductPriceWithSale'>{props.outfitProps.originalPrice}</h4>
+                <h4 className='saleProductPrice'>{props.outfitProps.salePrice}</h4>
+              </div>
+            )
+          }
+        })()}
+          <img id='outfitImage' className='outfitCardImage'
           src={props.outfitProps.photoUrl.thumbnail_url}
-          alt='clothing product'
+          alt='outfit item'
           >
           </img>
           <div className="reviewStars">{getStars(outfitItemRatings)}</div>

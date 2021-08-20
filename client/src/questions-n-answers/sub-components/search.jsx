@@ -12,8 +12,9 @@ const Search = (props) => {
         name='question'
         onChange={(e) => props.questionSearchChange(e)}>
       </input>
-
-      <input className='searchBtn' type="submit" value='Search'></input>
+      <div className='iconContainer'>
+      <img className='searchBtn' src='https://i.ibb.co/6NL5q3Q/6aad782c2d7e.png'></img>
+      </div>
     </div>
   )
 }

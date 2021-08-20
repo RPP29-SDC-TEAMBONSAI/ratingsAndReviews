@@ -50,7 +50,6 @@ class RelatedProducts extends React.Component {
       getStyle.then(styleData => {
         outFitData.then(fitData => {
           reviewData.then(reviewData => {
-
             let allPropsObj = helper.compileRelatedProductsDataToProps(data, styleData)
 
             let values = [];
@@ -123,7 +122,7 @@ class RelatedProducts extends React.Component {
           resolve(outfitPropsObj);
         })
         .catch(err=> {
-           console.log(err)
+           //console.log(err)
         })
       })
     }
