@@ -83,7 +83,7 @@ class Reviews extends React.Component {
   render() {
     if (this.props.hidden) {
       return (
-        <div style={{width: "100%"}}>
+        <div className="review-list-full">
           {/* FORM MODAL */}
           <div
             className="add-review-open"
@@ -103,7 +103,7 @@ class Reviews extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div className="review-list-full">
           {/* PHOTO MODAL */}
           <div
             className="review-photo-open"
