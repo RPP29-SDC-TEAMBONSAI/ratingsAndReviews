@@ -18,7 +18,7 @@ const withClickTracker= WrappedComponent => {
       e.stopPropagation();
       let interaction = {
         element: e.target.nodeName,
-        widget: 'Related Products',
+        widget: 'Overview',
         time: new Date(Date.now(e.target.timeStamp))
       }
       this.setState(prevState => {
@@ -44,6 +44,7 @@ const withClickTracker= WrappedComponent => {
                    }
           })
           .then(response => {
+            console.log('responce', response)
             result.push(response);
             if (result.length >= 20) {
               resolve(result)
@@ -52,7 +53,7 @@ const withClickTracker= WrappedComponent => {
         })
       })
       .then(data => {
-        //console.log('interactions successful', data)
+        console.log('interactions successful', data)
       })
       .then(() => {
         this.setState({interactions: [], count: 0})

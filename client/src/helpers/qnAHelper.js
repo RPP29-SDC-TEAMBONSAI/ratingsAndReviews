@@ -99,7 +99,8 @@ module.exports = {
     })
 
     return currentQuestions
-  }
+  },
+
 }
 
 

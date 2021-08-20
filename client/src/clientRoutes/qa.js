@@ -17,7 +17,7 @@ module.exports = {
   },
 
   updateAnswerHelpfulness(id) {
-    console.log(id)
+    //console.log(id)
     return axios.put(`/qa/answers/:answer_id=${id}`)
       .then(data => {
 

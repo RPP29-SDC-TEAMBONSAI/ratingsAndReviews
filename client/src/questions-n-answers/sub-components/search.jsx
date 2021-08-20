@@ -8,7 +8,7 @@ const Search = (props) => {
         onClick={(e) => props.recordClick(e)}
         className='searchInput'
         type='text'
-        value={props.currentInput}
+        placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...'
         name='question'
         onChange={(e) => props.questionSearchChange(e)}>
       </input>

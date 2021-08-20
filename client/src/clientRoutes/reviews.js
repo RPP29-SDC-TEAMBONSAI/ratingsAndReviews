@@ -41,7 +41,7 @@ module.exports = {
       characteristics: newChars
     }
 
-    console.log(review);
+    //console.log(review);
     return axios.post(`/reviews/add`, review)
   },
   reviewsInteraction: (event) => {

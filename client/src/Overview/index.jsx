@@ -7,6 +7,7 @@ import ImageGallery from "./components/ImageGallery.jsx";
 import ExpandedView from "./components/ExpandedView.jsx";
 import $ from 'jquery';
 import {addToCart} from "../clientRoutes/cart.js"
+import withClickTracker from "./withClickTracker.jsx"
 
 class Overview extends React.Component {
   constructor(props) {
@@ -278,7 +279,7 @@ expandedClassName() {
   render() {
 
     return (
-      <div onClick = {this.dropDownFalse} >
+      <div onClick = {this.dropDownFalse} onClick = {this.props.recordCount}>
         <div className = "overview-expanded" onMouseMove = {this.handleMouseMove} style={{display: this.state.expandedView ? "flex" : "none"}}>
       <ExpandedView
       state={this.props.state}
@@ -329,4 +330,4 @@ expandedClassName() {
 
 }
 
-export default Overview;
+export default withClickTracker(Overview);
