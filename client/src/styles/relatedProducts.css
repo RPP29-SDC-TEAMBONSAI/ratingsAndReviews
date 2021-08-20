@@ -208,6 +208,7 @@ RP MODAL STLYING
   width: 60%;
   height: 75%;
   margin: auto;
+  border-radius: 0.3125rem;
 }
 
 .rpModalTable {
