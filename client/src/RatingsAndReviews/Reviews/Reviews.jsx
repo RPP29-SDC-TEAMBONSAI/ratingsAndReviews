@@ -81,60 +81,86 @@ class Reviews extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {/* PHOTO MODAL */}
-        <div
-          className="review-photo-open"
-          style={{display: this.state.photoOpen ? "block" : "none"}}
-          onClick={this.viewPhoto}>
-            <img className="review-photo-url" src={this.state.photo}/>
+    if (this.props.hidden) {
+      return (
+        <div style={{width: "100%"}}>
+          {/* FORM MODAL */}
+          <div
+            className="add-review-open"
+            style={{display: this.state.addReviewOpen ? "block" : "none"}}>
+              <AddReview
+                close={this.openAddReview}
+                characteristics={this.props.characteristics}
+                product_id={this.props.product_id}/>
+          </div>
+          {/* MAIN MODAL WHEN NO REVIEWS */}
+          <div className="rating-title">
+            NO REVIEWS
+          </div>
+          <button
+            className="review-button"
+            onClick={this.openAddReview}>
+              ADD A REVIEW +
+          </button>
         </div>
-        {/* FORM MODAL */}
-        <div
-          className="add-review-open"
-          style={{display: this.state.addReviewOpen ? "block" : "none"}}>
-            <AddReview
-              close={this.openAddReview}
-              characteristics={this.props.characteristics}
-              product_id={this.props.product_id}/>
-        </div>
-        {/* MAIN REVIEWS COMPONENT */}
-        <div className="reviews">
-          <ReviewsHeader
-            starFilters={this.props.starFilters}
-            starFilterClick={this.props.starFilterClick}
-            numReviews={this.state.numReviews}
-            handleSortChange={this.handleSortChange}
-            sortBy={this.state.sortBy}/>
-          <ReviewsList
-            reviews={this.state.reviews}
-            loaded={this.state.loaded}
-            viewPhoto={this.viewPhoto}/>
-          <div className="review-buttons">
-            <button
-              className="review-button"
-              onClick={this.loadTwoMore}
-              style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
-                MORE REVIEWS
-            </button>
-            <button
-              className="review-button"
-              onClick={this.openAddReview}>
-                ADD A REVIEW +
-            </button>
+      );
+    } else {
+      return (
+        <div>
+          {/* PHOTO MODAL */}
+          <div
+            className="review-photo-open"
+            style={{display: this.state.photoOpen ? "block" : "none"}}
+            onClick={this.viewPhoto}>
+              <img className="review-photo-url" src={this.state.photo}/>
+          </div>
+          {/* FORM MODAL */}
+          <div
+            className="add-review-open"
+            style={{display: this.state.addReviewOpen ? "block" : "none"}}>
+              <AddReview
+                close={this.openAddReview}
+                characteristics={this.props.characteristics}
+                product_id={this.props.product_id}
+                productName={this.props.productName}/>
+          </div>
+          {/* MAIN REVIEWS COMPONENT */}
+          <div className="reviews">
+            <ReviewsHeader
+              starFilters={this.props.starFilters}
+              numReviews={this.state.numReviews}
+              handleSortChange={this.handleSortChange}
+              sortBy={this.state.sortBy}/>
+            <ReviewsList
+              reviews={this.state.reviews}
+              loaded={this.state.loaded}
+              viewPhoto={this.viewPhoto}/>
+            <div className="review-buttons">
+              <button
+                className="review-button"
+                onClick={this.loadTwoMore}
+                style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
+                  MORE REVIEWS
+              </button>
+              <button
+                className="review-button"
+                onClick={this.openAddReview}>
+                  ADD A REVIEW +
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 };
 
 Reviews.propTypes = {
   product_id: PropTypes.number,
+  productName: PropTypes.string,
   starFilters: PropTypes.array,
-  starFilterClick: PropTypes.func,
-  characteristics: PropTypes.object
+  characteristics: PropTypes.object,
+  hidden: PropTypes.bool
 }
 
 export default Reviews;

@@ -10,7 +10,7 @@
 .ratings-breakdown {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 20px 5px 5px 5px;
   width: 300px;
 }
 
@@ -176,7 +176,7 @@
 .reviews {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 10px 50px;
+  padding: 0 10px 0 50px;
   width: 650px;
   height: 100vh;
   z-index: -1;
@@ -219,19 +219,17 @@
   text-align: center;
 }
 
-.sort-option
-, .sort-option-title {
+.sort-option-title {
   display: flex;
-  flex-direction: row;
-  height: 16px;
-  margin: 0 2px 0 2px;
-  padding: 2px 4px 2px 4px;
-  border-radius: 3px;
-  background-color: lightgray;
+    flex-direction: row;
+    padding: 2px 6px 2px 6px;
+    width: max-content;
+    border-radius: 100px;
+    cursor: pointer;
 }
 
-.sort-option-text {
-  margin-left: 4px;
+.sort-option-title:hover {
+  background-color: lightgray;
 }
 
 .remove-star-filter {
@@ -253,7 +251,7 @@
 .reviews-list {
   display: flex;
   flex-direction: column;
-  height: minmax(auto, calc(100vh - 196px));
+  /* height: minmax(auto, calc(100vh - 196px)); */
   overflow: scroll;
 }
 
@@ -306,7 +304,17 @@
 }
 
 .irt-body-show {
-  display: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px 0 0 0;
+  padding: 0 5px 0 5px;
+  border-radius: 100px;
+  width: fit-content;
+  display: flex;
+}
+
+.irt-body-show:hover {
+  background-color: lightgray;
 }
 
 .irt-photos {
@@ -473,20 +481,16 @@
 }
 
 .x {
-  background: lightgray;
   width: 10px;
   padding: 5px;
   position: fixed;
-  border-radius: 100px;
   height: 10px;
   margin: 10px;
-  color: white;
-  display: flex;
-  align-items: center;
+  color: darkgray;
 }
 
 .x:hover {
-  background-color: darkgray;
+  color: black;
   cursor: pointer;
 }
 
@@ -583,6 +587,10 @@
   justify-content: center;
 }
 
+.radio-label:hover {
+  cursor: pointer;
+}
+
 .is-false {
   background-color: white;
 }
@@ -620,7 +628,7 @@
 .r-submit {
   flex-grow: 1;
   margin: 0px;
-  margin-top: 70px;
+  align-self: flex-end;
 }
 
 .r-input-small {
@@ -666,7 +674,8 @@
 }
 
 .r-photo-button:hover,
-.r-submit:hover {
+.r-submit:hover,
+.review-button:hover {
   background-color: rgb(235, 235, 235);
 }
 
@@ -688,4 +697,10 @@
   font-size: small;
   color: rgb(80, 80, 80);
   padding: 5px 3px 15px 3px;
+}
+
+.form-button-wrap {
+  display: flex;
+  justify-content: end;
+  align-content: flex-end;
 }

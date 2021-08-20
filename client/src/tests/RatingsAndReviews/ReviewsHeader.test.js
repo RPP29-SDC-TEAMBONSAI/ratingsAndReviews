@@ -31,7 +31,7 @@ let props = {
 
 let wrapper;
 
-describe('Review component', () => {
+describe('ReviewsHeader component', () => {
   describe('componentDidMount', () => {
     beforeEach(() => {
       wrapper = mount(<ReviewsHeader {...props}/>);

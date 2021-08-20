@@ -111,7 +111,8 @@ class App extends React.Component {
             )}
           </QnAClicks>
           <RatingsAndReviews
-            product_id={this.state.product_id}/>
+            product_id={this.state.product_id}
+            productName={this.state.productInformation.name}/>
         </div>
       )
     } else {

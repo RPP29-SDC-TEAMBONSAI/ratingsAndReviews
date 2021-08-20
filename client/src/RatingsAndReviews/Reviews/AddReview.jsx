@@ -232,11 +232,13 @@ class AddReview extends React.Component {
             </div>
           </div>
           {/* SUBMIT BUTTON */}
-          <button
-            className="r-submit"
-            onClick={this.submitReview}>
-              Sumbit Review
+          <div className="form-button-wrap">
+            <button
+              className="r-submit"
+              onClick={this.submitReview}>
+                Submit Review
             </button>
+          </div>
         </div>
       </div>
     );
