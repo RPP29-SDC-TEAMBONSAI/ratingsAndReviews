@@ -86,10 +86,6 @@ class QnAClicks extends React.Component {
       showQAns: copy
     })
 
-
-
-
-
   }
 
   loadNewQuestions(questionLength){

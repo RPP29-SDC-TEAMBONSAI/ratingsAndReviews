@@ -28,6 +28,7 @@ class UserQuestion extends React.Component {
 
     postQuestion(newObj)
       .then(data => {
+        console.log(data)
         this.props.updateQuestions()
 
       })
