@@ -106,3 +106,4 @@ client/dist/bundle.js
 #config file
 config.js
 MyKeyPair.pem
+.Ds_store

@@ -15,10 +15,11 @@ class QnAClicks extends React.Component {
       helpfulAnswerCount: 0,
       clickedHQuestions: [],
       clickedHAnswers:[],
-      answerFormDisplayClass: 'aFormHide',
+      answerFormDisplayClass: 'hide',
       currentQuestion: '',
       aFormQuestion_id: null,
-      QuestionFormDisplayClass: 'qFormHide',
+      QuestionFormDisplayClass: 'hide',
+      showQAns:[],
 
 
     }
@@ -32,9 +33,10 @@ class QnAClicks extends React.Component {
     this.closeAnswerForm = this.closeAnswerForm.bind(this)
     this.addQuestion = this.addQuestion.bind(this)
     this.closeQuestionForm = this.closeQuestionForm.bind(this)
+    this.resetState = this.resetState.bind(this)
   }
   componentDidMount() {
-    if (this.props.children().props.data.length - 1 === 0 || this.props.children().props.data.length - 1 === 1){
+    if (this.props.children().props.data.length - 1 === 0 || this.props.children().props.data.length - 1 === 1 || !this.props.children().props.data.length){
       this.setState({
         showQuestionButton: !this.state.showQuestionButton
       })
@@ -48,15 +50,46 @@ class QnAClicks extends React.Component {
         showQuestionButton: showMoreAnsweredQuestions
       })
     }
-  }
-
-  moreAnsweredQorLoadMoreAnswers(e) {
-    if (e.target.className === 'loadMoreAnswersButton') {
+    if(prevState.showQAns.length !== this.state.showQAns.length) {
+      console.log('hi')
       this.setState({
-        loadAnswerState: !this.state.loadAnswerState
-
+        showQAns: this.state.showQAns
       })
     }
+  }
+
+  moreAnsweredQorLoadMoreAnswers(currentIndex) {
+    // if (e.target.className === 'loadMoreAnswersButton') {
+    //   this.setState({
+    //     loadAnswerState: !this.state.loadAnswerState
+
+
+    //   })
+    // }
+
+    let copy = this.state.showQAns.slice()
+    if (copy.includes(currentIndex)) {
+
+      let index = copy.indexOf(currentIndex)
+
+      copy.splice(index, 1)
+
+      console.log(copy)
+
+    } else
+
+    if (!copy.includes(currentIndex)) {
+      copy.push(currentIndex)
+    }
+
+    this.setState({
+      showQAns: copy
+    })
+
+
+
+
+
   }
 
   loadNewQuestions(questionLength){
@@ -103,7 +136,7 @@ class QnAClicks extends React.Component {
 
   closeAnswerForm() {
     this.setState({
-      answerFormDisplayClass:'aFormHide'
+      answerFormDisplayClass:'hide'
     })
   }
 
@@ -116,13 +149,32 @@ class QnAClicks extends React.Component {
 
   closeQuestionForm() {
     this.setState({
-      QuestionFormDisplayClass: 'qFormHide'
+      QuestionFormDisplayClass: 'hide'
     })
   }
 
   resetQuestionCount() {
     this.setState({
       helpfulQuestionCount:0
+    })
+  }
+  resetState() {
+    this.setState({
+      loadAnswerState: false,
+      questionClickCount: 1,
+      lastIndex:null,
+      showQuestionButton: false,
+      helpfulQuestionCount: 0,
+      question_id: null,
+      answerId: null,
+      helpfulAnswerCount: 0,
+      clickedHQuestions: [],
+      clickedHAnswers:[],
+      answerFormDisplayClass: 'hide',
+      currentQuestion: '',
+      aFormQuestion_id: null,
+      QuestionFormDisplayClass: 'hide',
+      showQAns:[],
     })
   }
 
@@ -140,6 +192,7 @@ class QnAClicks extends React.Component {
       currentQuestion: this.state.currentQuestion,
       aFormQuestion_id: this.state.aFormQuestion_id,
       QuestionFormDisplayClass: this.state.QuestionFormDisplayClass,
+      showQAns: this.state.showQAns,
       closeAnswerForm: this.closeAnswerForm,
       loadMoreAnsOrQ: this.moreAnsweredQorLoadMoreAnswers,
       loadNewQuestions: this.loadNewQuestions,
@@ -148,7 +201,8 @@ class QnAClicks extends React.Component {
       resetQuestionCount: this.resetQuestionCount,
       addAnswerOnClick: this.addAnswerOnClick,
       addQuestion: this.addQuestion,
-      closeQuestionForm: this.closeQuestionForm
+      closeQuestionForm: this.closeQuestionForm,
+      resetState: this.resetState
     }
 
     return typeof this.props.children === 'function'

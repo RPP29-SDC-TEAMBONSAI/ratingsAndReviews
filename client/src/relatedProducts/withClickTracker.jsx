@@ -28,6 +28,7 @@ const withClickTracker= WrappedComponent => {
         }
       })
 
+
       if (this.state.count >= 20) {
         this.postInteractions();
       }
@@ -52,7 +53,7 @@ const withClickTracker= WrappedComponent => {
         })
       })
       .then(data => {
-        //console.log('interactions successful', data)
+        console.log('interactions successful', data)
       })
       .then(() => {
         this.setState({interactions: [], count: 0})

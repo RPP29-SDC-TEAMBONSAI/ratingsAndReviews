@@ -24,11 +24,14 @@ class App extends React.Component {
       relatedProducts: [],
       qNa: [],
       savedQnA: [],
+      currentProductPhoto:'',
       loaded: false,
-      ratings: {}
+      ratings: {},
+      isDarkMode: false
     }
     this.handleProductChange = this.handleProductChange.bind(this);
     this.getStateData = this.getStateData.bind(this);
+    this.toggleDarkMode = this.toggleDarkMode.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +46,13 @@ class App extends React.Component {
       this.getStateData(this.state.product_id)
 
     }
+  }
+
+  toggleDarkMode () {
+    this.setState({
+      isDarkMode: !this.state.isDarkMode
+    })
+
   }
 
   handleProductChange(newProductId) {
@@ -66,6 +76,7 @@ class App extends React.Component {
 
     ])
       .then((results) => {
+
         this.setState({
           productInformation: results[1].data,
           styles: results[2].data,
@@ -74,10 +85,12 @@ class App extends React.Component {
           qNa: results[4].data,
           currentItemName:results[1].data.name,
           product_id:results[1].data.id,
-          ratings: results[5].data.ratings
+          ratings: results[5].data.ratings,
+          currentProductPhoto: results[2].data[0].photos[0].thumbnail_url
           //do not remove
 
         })
+        console.log(this.state.currentProductPhoto)
       })
       .then(() => {
         this.setState({
@@ -94,7 +107,14 @@ class App extends React.Component {
 
     if (this.state.loaded) {
       return (
-        <div className='app'>
+        <div className={this.state.isDarkMode ? 'app dark-app' : 'app'}>
+          <header className={this.state.isDarkMode ? 'app-header dark-header' : 'app-header'}>
+            <div className={this.state.isDarkMode ? "toggle-dark" : "toggle-light"}>
+              {this.state.isDarkMode ?
+              <h2 className='light-mode' id='darkswitch' onClick={() => {this.toggleDarkMode()}}>Light</h2>
+              : <h2 className='dark-mode' id='darkswitch' onClick={() => {this.toggleDarkMode()}}>Dark</h2>}
+            </div>
+          </header>
           <Overview
             state = {this.state}/>
           <RelatedProducts
@@ -107,6 +127,7 @@ class App extends React.Component {
                 product_id={this.state.product_id}
                 data={this.state.qNa}
                 currentItemName={this.state.currentItemName}
+                currentProductPhoto={this.state.currentProductPhoto}
               />
             )}
           </QnAClicks>
