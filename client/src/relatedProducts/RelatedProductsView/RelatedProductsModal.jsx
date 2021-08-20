@@ -8,7 +8,7 @@ const RelatedProductsModal = (props) => {
     <div className='relatedProductsModal'
          style={{'display': props.modalShow ? 'flex' : 'none'}} >
       <div className='modalOpen' onClick={(e) => {props.closeModal(e)}}>
-        <div className='modalTable'>
+        <div className='modalTable' >
           <h1 className='modalTitle'>Comparing</h1>
           <table className='rpModalTable'>
             <tbody className='rpModalTbody'>
