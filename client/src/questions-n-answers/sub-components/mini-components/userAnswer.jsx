@@ -246,7 +246,7 @@ class UserAnswer extends React.Component {
           <div className={this.state.confirmationState}>
             <h2 className='closeConfirmation' onClick={this.resetPhotoConfirmationState}>x</h2>
             <div className='confirmPhoto container'>
-              <h4>Confirm Your Photo Selection</h4>
+              <h4 className='confirmPhoto text'>Confirm Your Photo Selection</h4>
               <input id='checkbox1'
                     type='checkbox'
                     checked={this.state.checked}
