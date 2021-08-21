@@ -12,7 +12,6 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      numReviews: 0,
       loaded: 1,
       sortBy: 'relevant',
       photo: null,
@@ -28,20 +27,23 @@ class Reviews extends React.Component {
   };
 
   componentDidMount() {
-    this.getStateData(this.state.loaded, this.state.sortBy);
+    this.getStateData(this.state.loaded, this.state.sortBy, 2);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.product_id !== prevProps.product_id || this.props.starFilters !== prevProps.starFilters) {
-      this.getStateData(this.state.loaded, this.state.sortBy);
+      this.getStateData(this.state.loaded, this.state.sortBy, this.props.numReviews);
+    }
+    if (prevState) {
+      if (this.state.loaded !== prevState.loaded && prevState.loaded === 1) {
+        this.getStateData(this.state.loaded, this.state.sortBy, this.props.numReviews);
+      }
     }
   }
 
-  getStateData(loaded, sortBy) {
-    reviews(1, 1000, sortBy, this.props.product_id)
+  getStateData(loaded, sortBy, numReviews) {
+    reviews(1, numReviews, sortBy, this.props.product_id)
       .then(({ data }) => {
-        // save the num of reviews in total
-        let numReviews = data.length;
         // if sort selected is relevance sort the data
         let reviews = sortBy === 'relevant'
           ? sortByRelevance(data)
@@ -51,7 +53,6 @@ class Reviews extends React.Component {
         // set the state
         this.setState({
           reviews: reviews,
-          numReviews: numReviews,
           loaded: loaded,
           sortBy: sortBy
         });
@@ -60,7 +61,7 @@ class Reviews extends React.Component {
   }
 
   handleSortChange(event) {
-    this.getStateData(this.state.loaded, event.target.value);
+    this.getStateData(this.state.loaded, event.target.value, this.props.numReviews);
   }
 
   viewPhoto(event) {
@@ -125,7 +126,7 @@ class Reviews extends React.Component {
           <div className="reviews">
             <ReviewsHeader
               starFilters={this.props.starFilters}
-              numReviews={this.state.numReviews}
+              numReviews={this.props.numReviews}
               handleSortChange={this.handleSortChange}
               sortBy={this.state.sortBy}/>
             <ReviewsList
@@ -136,7 +137,7 @@ class Reviews extends React.Component {
               <button
                 className="review-button"
                 onClick={this.loadTwoMore}
-                style={{display: this.state.reviews.length - 1 <= this.state.loaded ? "none" : "inline-block"}}>
+                style={{display: this.props.numReviews - 1 <= this.state.loaded ? "none" : "inline-block"}}>
                   MORE REVIEWS
               </button>
               <button
@@ -157,7 +158,8 @@ Reviews.propTypes = {
   productName: PropTypes.string,
   starFilters: PropTypes.array,
   characteristics: PropTypes.object,
-  hidden: PropTypes.bool
+  hidden: PropTypes.bool,
+  numReviews: PropTypes.number
 }
 
 export default Reviews;
