@@ -9,10 +9,13 @@
   flex-direction: column;
 }
 .componentTitle{
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: flex-start;
-  width: 30vw;
-  justify-content: center;
+  margin-left: 1.25rem;
+  border-bottom: .1em solid grey;
+  margin-bottom: 1rem;
+  font-size: 1.5em;
 }
 .qForm {
   display: flex;
@@ -45,7 +48,7 @@ div.list.container {
   overflow-y: scroll;
   height: 50vh;
   align-items: center;
-  margin-left: 5vh;
+  margin-left: 5rem;
 }
 .list.container::-webkit-scrollbar {
   display: none;
@@ -57,59 +60,51 @@ div.list.container {
 }
 .bottomButtons {
   display: flex;
-  width: 50vw;
-  justify-content: flex-end;
+  margin-left: 4rem;
+  margin-top: 1rem;
 }
 .moreAnsweredBtn {
-  height: 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  padding: .5rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
+  letter-spacing: .0156rem;
+  font-weight: lighter;
   color: #000;
-  background-color: #fff;
+  background-color: #fce1e0;
   border: none;
   margin: .25rem;
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20vw;
+  width: 17.5rem;
 }
 .addQuestionBtn {
-  height: 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  padding: .5rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
+  font-weight: lighter;
   color: #000;
-  background-color: #fff;
+  background-color: #fce1e0;;
   border: none;
   margin: .25rem;
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20vw;
+  width: 11rem;
 }
 .addQuestionBtn:hover, .moreAnsweredBtn:hover{
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  color: #9e9af5;
+  filter: saturate(5);
   transform: translateY(-.438rem);
-  background-color: white;
-}
-.addQuestionBtn:hover, .moreAnsweredBtn:hover {
-  background-color: royalblue;
+  font-weight: bolder;
+  background-color: darkgrey;
 }
 /* all css for Search component
 */
@@ -121,10 +116,9 @@ div.list.container {
 .searchInput{
   display: flex;
   height: 7vh;
-  width: 73vw;
+  width: 50rem;
   border-right: none;
   font-size: large;
-
   border-top:.1rem  solid black;
   border-bottom: .1rem  solid black;
   border-left: .1rem solid black;;
@@ -138,6 +132,7 @@ div.list.container {
   border-bottom: .1rem  solid black;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 .searchBtn {
   display: flex;
@@ -155,17 +150,18 @@ div.list.container {
   display: flex;
   flex-direction: column;
   width: 75vw;
-  border-top: .1em solid grey;
+  border-bottom: .2em solid darkgrey;
 }
 .qa.row {
   display: flex;
-  width: 80vw;
+  width: 90vw;
   margin-top:5vh;
 }
 .questionText {
   padding: .25rem;
-  margin: 0;
-  width: 50vw;
+  width: 40rem;
+  font-size: x-large;
+  font-family: 'Lora', serif;
 }
 .answerListRow.container {
   display: flex;
@@ -175,14 +171,17 @@ div.list.container {
   margin-top: 0;
   margin-bottom: 0;
   display: flex;
-  padding: .25rem
+  padding: .25rem;
+  font-size: x-large;
+  font-family: 'Lora', serif;
+  font-style: italic;
 }
 /*all css for UserQuestion component
 */
 .qFormData {
   position: fixed;
   display: flex;
-  background-color: white	;
+  background-color: #e1edfc;
   margin-bottom: 1vh;
   padding:.7rem;
   z-index: 2;
@@ -217,10 +216,16 @@ img.currentQuestionProductPhoto.img {
 .askQuestionForm.title {
   display: flex;
   justify-self: end;
+  font-family: 'Montserrat', serif;
+  font-size: x-large;
   align-items: center;
+  font-style: italic;
 }
 .addQuestionAsterisk.productTitle, .addQuestionAsterisk.userNickName, .addQuestionAsterisk.userEmail {
   margin: 1vh;
+  font-family: 'lora', serif;
+  font-size: small;
+
 }
 .addQuestionAsterisk.productTitle:after, .addQuestionAsterisk.userNickName:after, .addQuestionAsterisk.userEmail:after{
   content: ' *';
@@ -231,6 +236,8 @@ textarea.userQuestion {
   width: 30vw;
   height:15vh;
   resize: none;
+  font-size:large;
+  font-family: 'Montserrat', serif;
   overflow-y: scroll;
   margin-bottom: 1vh;
   border: .1rem solid lightgray;
@@ -244,24 +251,34 @@ textarea.userQuestion:hover {
   width: 20vw;
   overflow-x: auto;
   margin-bottom: 1vh;
+  font-family: 'Montserrat', serif;
+  font-size: medium;
 }
 .userQSubmit.btn {
-  height: 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  display: flex;
+  justify-content: center;
+  padding: .25rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .125rem;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bold;
+  color: #cd7912;
+  background-color:#e1edfc;
   border: none;
-
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
-
+  border: .15rem solid darkgrey;
+  align-items: center;
+}
+.userQSubmit.btn:hover{
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  border: .15rem solid darkgrey;
+  color: #9e9af5;
+  filter: saturate(10);
+  background-color: darkgrey;
+  transform: translateY(-.438rem);
 }
 .userQSubmit {
   margin-top: 1vh;
@@ -269,16 +286,7 @@ textarea.userQuestion:hover {
   align-items: center;
   justify-content: center;
   width: 25vw;
-  background-color: white;
-}
-.userQSubmit:hover{
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
-  transform: translateY(-.438rem);
-  background-color: white;
-}
-.userQSubmit.btn:hover {
-  background-color: royalblue;
+  background-color: #e1edfc;
 }
 /*all css for User Answer component
 */
@@ -290,7 +298,7 @@ textarea.userQuestion:hover {
 .aFormData {
   position: fixed;
   display: flex;
-  background-color: white;
+  background-color: #e1edfc;
   z-index: 2;
   height: 95vh;
   width: 56vw;
@@ -298,6 +306,8 @@ textarea.userQuestion:hover {
 .answerFormProductImg.text {
   margin-top: 6vh;
   margin-bottom:0 ;
+  font-family: 'Montserrat', sans-serif;
+  font-size: x-large;
 }
 img.answerFormProduct.img {
   display: flex;
@@ -328,14 +338,15 @@ img.answerFormProduct.img {
 .selectedQuestionText{
   margin: 0;
   font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+  font-size: large;
 }
 .answerFormAsterisk {
   margin-bottom:.25vh;
   width: 35vw;
   overflow-x: auto;
-}
-.answerFormAsterisk.answer, .answerFormAsterisk.nickName, .answerFormAsterisk.email {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  overflow:hidden;
+  font-family: 'lora', sans-serif;
   font-size: small;
 }
 .answerFormAsterisk.answer {
@@ -349,6 +360,9 @@ img.answerFormProduct.img {
   display: flex;
   flex-direction: column;
   margin-bottom: .25vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: large;
+  font-style: italic;
 }
 .fileSelector.container {
   display: flex;
@@ -363,31 +377,33 @@ input.photos {
   align-items: center;
   justify-content: center;
   width: 8vw;
-  /* border-radius: 10rem; */
-  background-color: white;
 }
 .addAnswersubmit {
-  height: 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  display: flex;
+  justify-content: center;
+  padding: .25rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bold;
+  color: #cd7912;
+  background-color:#e1edfc;
   border: none;
-
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
+  border: .15rem solid darkgrey;
+  align-items: center;
 }
+
 .addAnswersubmit:hover{
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  border: .15rem solid darkgrey;
+  color: #9e9af5;
+  filter: saturate(10);
+  background-color: darkgrey;
   transform: translateY(-.438rem);
-  background-color: royalblue;
 }
 .closeConfirmation{
   display: flex;
@@ -404,6 +420,10 @@ input.photos {
   flex-direction: column;
   align-items: center;
 }
+.confirmPhoto.text {
+  font-family: 'lora', serif;
+  font-size: large;
+}
 textarea.addAnswerFormText{
   display: flex;
   width: 35vw;
@@ -415,6 +435,8 @@ textarea.addAnswerFormText{
   margin-bottom: 1vh;
   border: .1rem solid lightgray;
   overflow: hidden;
+  font-family: 'Montserrat', serif;
+  font-size: larger;
 }
 textarea.addAnswerFormText:hover {
   border-color: grey;
@@ -422,10 +444,12 @@ textarea.addAnswerFormText:hover {
 .addAnswerFormNickNameInput{
   width: 20vw;
   overflow-x: auto;
+  font-family: 'Lora', serif;
 }
 .addAnswerFormEmail {
   width: 20vw;
   overflow-x: auto;
+  font-family: 'Lora', serif;
 }
 .submitAnswer.container {
   margin-top: 2vh;
@@ -442,7 +466,7 @@ textarea.addAnswerFormText:hover {
   width: 35vw;
   height: 66vh;
   position: fixed;
-  background-color:whitesmoke;
+  background-color: #e1edfc;
   border: .25rem solid black;
   border-radius: 1em;
   z-index: 3;
@@ -460,30 +484,33 @@ textarea.addAnswerFormText:hover {
   align-items: center;
   justify-content: center;
   width: 8vw;
-  background-color: white;
   margin-top: 5vh;
 }
 .addAnswerPhotoConfirmButton{
-  height: 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  display: flex;
+  justify-content: center;
+  padding: .25rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bold;
+  color: #cd7912;
+  background-color:#e1edfc;
   border: none;
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
+  border: .15rem solid darkgrey;
+  align-items: center;
 }
 .addAnswerPhotoConfirmButton:hover {
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  border: .15rem solid darkgrey;
+  color: #9e9af5;
+  filter: saturate(10);
+  background-color: darkgrey;
   transform: translateY(-.438rem);
-  background-color: royalblue;
 }
 .answerFormPhotoThumbnail{
   display: flex;
@@ -495,26 +522,30 @@ textarea.addAnswerFormText:hover {
   margin-left: 1vw;
 }
 .uploadButton {
-  height: 2rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  display: flex;
+  justify-content: center;
+  padding: .25rem;
+  font-family: 'lora', sans-serif;
+  font-size: small;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bold;
+  color: #cd7912;
+  background-color:#e1edfc;
   border: none;
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .2rem solid lightgray;
+  border: .15rem solid darkgrey;
+  align-items: center;
 }
 .uploadButton:hover{
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  border: .15rem solid darkgrey;
+  color: #9e9af5;
+  filter: saturate(10);
+  background-color: darkgrey;
   transform: translateY(-.438rem);
-  background-color: royalblue;
 }
 .currentQuestion {
   display: flex;
@@ -523,7 +554,8 @@ textarea.addAnswerFormText:hover {
   margin-bottom: 0;
   margin-top: 1vh;
   margin-left: 1vw;
-  font-family:'Helvetica', sans-serif;
+  font-family:'Lora', serif;
+  font-size: x-large;
 }
 /* all css for QuestionList component
 */
@@ -547,13 +579,21 @@ textarea.addAnswerFormText:hover {
   margin-bottom: 0;
   width: 50vw;
   padding: .25rem;
+  font-size: x-large;
+  font-family: 'Lora', serif;
+  font-weight:lighter;
 }
 .answererDetails {
   display: flex;
   flex-direction: row;
   width: 45vw;
-  border-bottom: .025rem solid royalblue;
+  border-bottom: .025rem solid #8883f3;;
   border-width: thin;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: small;
+  padding: .25rem;
+
 }
 .userIdText, .userHelpIndicator{
   display: flex;
@@ -564,21 +604,19 @@ textarea.addAnswerFormText:hover {
   border-bottom: none;
 }
 p.userReportBtn:hover{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'lora', sans-serif;
   display: flex;
-  box-shadow: 0rem .938rem 1.25rem lightgray;
+  box-shadow: 1rem 1rem 1.25rem lightgray;
   text-decoration: none;
-  border-radius: 1.5rem;
-  font-size: 1rem;
-  width: 3rem;
-  height: 1.35rem;
+  font-size: small;
+  padding: .5rem;
   letter-spacing: .0156rem;
   justify-content: center;
   align-items: center;
-  color: white;
-  transform: translateY(-.438rem);
-  background-color:darkred;
-  margin-left: 1rem;
+  font-style: normal;
+  font-weight: bold;
+  color: darkred;
+  transform: translateY(-.7rem);
 }
 .loadMoreAnswerButton.container {
   display: flex;
@@ -590,32 +628,31 @@ p.userReportBtn:hover{
 .loadMoreAnswersButton {
   display: flex;
   justify-content: center;
-  height: 1rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: .75rem;
+  padding: .25rem;
+  font-family: 'lora', sans-serif;
+  font-size: large;
   text-transform: uppercase;
-  letter-spacing: .156rem;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bold;
+  color: #8883f3;
+  background-color:#fce1e0;
   border: none;
   box-shadow: 0rem .5rem .938rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  border: .15rem solid lightgray;
+  border: .15rem solid darkgrey;
   align-items: center;
 }
 .loadMoreAnswersButton:hover{
-  box-shadow: 0rem .938rem 1.25rem lightgray;
-  color: white;
+  box-shadow: 0rem .938rem 1.25rem darkgrey;
+  border: .15rem solid darkgrey;
+  color: #9e9af5;
+  filter: saturate(10);
   transform: translateY(-.438rem);
-  background-color: white;
 }
 .loadMoreAnswersButton:hover {
-  background-color: royalblue;
+  background-color: #B1B1B1;;
 }
-
 /* all css for AnswerImages component*/
 .thumbnail {
   border: .01rem solid white;
@@ -627,59 +664,74 @@ p.userReportBtn:hover{
 /*all css for AddAnswer component*/
 div.helpfulQuestion.container {
   display: flex;
-  margin: 0;
   align-items: center;
-}
-.aHelpful, .qhelpfulIndicator,  .addAnswerText, .helpfulCount{
-  margin-top: 0em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: large;
+
 }
 .aHelpful {
-  padding-right: 1vw;
+  padding-right: 1rem;
 }
 .qhelpfulIndicator{
-  padding-left: .15em;
-  margin-right: .15rem;
+  padding-right: .15rem;
+
 }
-p.qhelpfulIndicator:hover, p.userHelpfulBtn:hover{
+p.qhelpfulIndicator:hover {
+  font-family: 'Lora', sans-serif;
+  display: flex;
+  box-shadow: 0rem .938rem 1.25rem lightgray;
+  text-decoration: none;
+  font-size: x-large;
+  padding: .25rem;
+  letter-spacing: .0156rem;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: bold;
+  filter: saturate(5);
+  color: #8883f3;
+  transform: translateY(-.438rem);
+}
+ p.userHelpfulBtn:hover{
   font-family: 'Roboto', sans-serif;
   display: flex;
   box-shadow: 0rem .938rem 1.25rem lightgray;
   text-decoration: none;
-  border-radius: 2rem;
-  font-size: .75rem;
-  width: 2rem;
-  height: 1rem;
+  font-size: small;
+  padding: .25rem;
   letter-spacing: .0156rem;
   justify-content: center;
   align-items: center;
-  color: white;
+  font-style: normal;
+  font-weight: bold;
+  filter: saturate(5);
+  color: #8883f3;
   transform: translateY(-.438rem);
-  background-color:royalblue
 }
 .helpfulCount {
   border-right: .15em solid black;
   justify-content: space-evenly;
-  padding-right: 1vw;
+  padding-right: 1rem;
 }
 p.addAnswerText{
   margin-left: 1vw;
-  font-size: 1rem;
+  font-size: large;
 }
 p.addAnswerText:hover{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'lora', sans-serif;
   display: flex;
   box-shadow: 0rem .938rem 1.25rem lightgray;
   text-decoration: none;
-  border-radius: 1.5rem;
-  font-size: .75rem;
-  width: 5rem;
-  height: 2rem;
+  font-size: x-large;;
+  padding: .5rem;
   letter-spacing: .0156rem;
   justify-content: center;
   align-items: center;
-  color: white;
+  font-style: normal;
+  font-weight: bold;
+  filter: saturate(5);
+  color: #8883f3;
   transform: translateY(-.438rem);
-  background-color:royalblue
 }
 /* messy css - some of this can be refactored/combined - tech debt*/
 input.userNickName, input.userEmail, .addAnswerFormNickNameInput, .addAnswerFormEmail {
@@ -690,29 +742,33 @@ input.userNickName:hover, input.addAnswerFormNickNameInput:hover,input.userEmail
   border: .12rem solid grey;
   resize: none;
 }
-p.userIdText, p.answerHelpfulText, p.userHelpIndicator{
+
+p.userIdText {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+p.answerHelpfulText{
+  padding-right:1rem;
+  padding-left: 1rem;
+}
+p.userHelpIndicator {
   padding-right:.15em
 }
-p.userIdText, p.answerHelpfulText, p.userHelpfulBtn,p.userHelpIndicator, p.userReportBtn {
-  margin-top:0;
-  margin-bottom: 1rem;
- }
- p.userIdText, p.answerHelpfulText, p.userReportBtn {
-   padding-right: 1vw;
-   padding-left: 1vw;
- }
- .qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn, .addAnswerText {
+
+.qhelpfulIndicator, .userReportBtn, .userHelpfulBtn, .userHelpfulBtn, .addAnswerText {
   text-decoration: underline;
 }
 p.userHelpfulBtn {
-  margin-right: .15rem;
+  margin-right: .25rem;
 }
 p.userHelpIndicator {
-  padding-right: 1vw;
+  padding-right: 1rem;
 }
-p.answerHelpfulText, p.userHelpfulBtn, p.userReportBtn{
-  padding-left:.15em
+p.userReportBtn{
+  padding-left: 1rem;
 }
+
 /*used for hinding all components*/
 .hide {
   display: none;

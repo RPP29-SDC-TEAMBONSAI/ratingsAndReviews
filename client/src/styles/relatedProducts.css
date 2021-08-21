@@ -112,7 +112,8 @@ YOUR OUTFIT STYLING
 .yourOutfitList {
   display: flex;
   justify-content: flex-start;
-  overflow-x: hidden;
+  overflow-x: scroll;
+  overflow: hidden;
 
 }
 .yourOutfitCardList {
