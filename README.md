@@ -1,6 +1,6 @@
 # RPP29 Front-End-Capstone
 
-*Team Cojita for life*
+*Team Cotijta for life*
 
 ### Overview
 ---
