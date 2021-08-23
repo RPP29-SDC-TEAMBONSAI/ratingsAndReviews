@@ -22,6 +22,8 @@
 
 **Questions & Answers**
 
+Questions and Answers is split into three main modules.   The search bar, question list, and answer list.  There are many sub components that make up the complete layout of the component, but these are the elements everything is centered around.  The component allows for a user to add a question with button located at the bottom of the page, related to the specific product shown on the page.  Each question has an add answer component.  This component allows the user to add an answer to a specific question.  Each question and answer, contain the ability for a user to mark the question or answer helpful.  Additionally, a user can only mark a question/answer helpful once.  Answers have the ability to be
+
 **Related Items & Outfit Creation**
 
   The core of the Related Items & Outfit Creation module rests in two lists for the end user. The first of these is a list of related products, determined internally, that change depending on the current product a user is viewing. This list is comprised of card elements in a horizontally scrolling carousel that have information such as name, price, star rating, and image of a related product. The scrolling of this list is done by buttons that conditionally render and dissapear depending on if there are items available in the desired direction of scroll. The cards feature a clickable action button that opens a comparison modal that displays the features of the current item being viewed and the related item that was clicked. If a related product card is clicked outside of this action button, the user is redirected to the landing page for the item that they clicked.
@@ -49,6 +51,8 @@ The web page includes the option a user to toggle light or dark mode. This allow
 - To reach these goals, we performed a number of optimizations
   * Text Compression: Using `uglifyjs-webpack-plugin`, we reduced our bundle.js size from 1.6 MiB to 352 KiB
   * Preload Images: Through preloading above the fold images on our landing page, our largest contentful paint dropped by 3.4s
+  * Adding a caching layer for requests made through the Related Products component.  This brought metrix from on lighthouse from 50s to mid 90s and twenties to mid     50s on google page speed.  Caching layer ensurings new requests are only fired upon adding an review/answer/question or  every 300 seconds with (instead of         firing every single product load) 
+  * adjusted images to have a prefdefined size - to improve loading time.
 
 ### Accessibility
 ---
