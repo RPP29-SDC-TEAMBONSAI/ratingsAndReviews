@@ -31,7 +31,7 @@ Their were three main challenges surrounding the creation QA module.
 2) The question list component needed to have a scroll bar and each answer needed a scroll bar.   When building this functionality correct spacing had to be ensured between each answer list view and question list view length.  Without proper spacing, it led to poor user scroll experience.  To fix the appearance of scroll bars - webkit was used to hide the display of both user/question scroll bars.  This allowed for the QA component to maintain a clean appearance, without being clusted with scroll bars.
 
 3) Upon product change (from related products) the App changed all data regarding the product.  Technically the product data/ related product data did not need to be updated on each new product load.  This caused for API timeout errors and poor user experience based on load times.  A caching layer was implemented to allow for the app to load off of cached data.  On product change, if it has been > 300 seconds the cached data gets updated with new information for that product (if any).  Upon an question/answer/review being added - the requests are fired, new product information is cached in server, and the new information is displayed.  Caching layer allowed for metrics to improve for desktop on lighthouse from mid 50s to 95 (for performance) .  On google page speed it went from the twenties to mid fifties.  Caching functionality as it sits, only handles related products requests.  Further implementation would include caching ALL data for the app.  This would bring google page speed report to 90+. 
-
+https://drive.google.com/file/d/1tYB0V_hLnxQW_iHp6X10ANrosbfK7FTJ/view?usp=sharing
 
 **Related Items & Outfit Creation**
 
@@ -40,6 +40,8 @@ Their were three main challenges surrounding the creation QA module.
   The Outfit Creation list initially appears as empty, except for a button reading 'Add to Outfit'. Clicking this button will add the current product being viewed to a user's outfit list, populating the list with a card similar to the related products cards above. Users can add as many items as they want to their outfit, but are prevented from adding the same item twice. The user's outfit persists through navigation to other pages and exiting browser windows by relying on local storage. These outfit cards contain an action button that remove an item from the outfit. 
 
   The primary challenge in creating this module came from needing data from numerous different endpoints that than needed to be altered and combined in order to reach the desired functionality. I had to be mindful of when and where to make API calls so I would have the necessary data for each subcomponent without overloading the server with requests. A change in the primary product being displayed means that a new list of 5-10 related product cards needs to be generated, of which each card would need data from multiple endpoints. This data then had to be run through numerous helper functions to be formatted in a useable way. The end result was accomplished by careful consideration and constant refactor to the base data structures I rely on the display each list and card.
+  
+  
      
 **Additional Features**
 
@@ -60,7 +62,7 @@ The web page includes the option a user to toggle light or dark mode. This allow
 - To reach these goals, we performed a number of optimizations
   * Text Compression: Using `uglifyjs-webpack-plugin`, we reduced our bundle.js size from 1.6 MiB to 352 KiB
   * Preload Images: Through preloading above the fold images on our landing page, our largest contentful paint dropped by 3.4s
-  * Adding a caching layer for requests made through the Related Products component.  This brought metrix from on lighthouse from 50s to mid 90s and twenties to mid     50s on google page speed.  Caching layer ensurings new requests are only fired upon adding an review/answer/question or  every 300 seconds with (instead of         firing every single product load) 
+  * Adding a caching layer for requests made through the Related Products component.  This brought metrix from on lighthouse from 50s to mid 90s and      twenties to mid 50s on google page speed.  Caching layer ensurings new requests are only fired upon adding an review/answer/question or  every 300    seconds with (instead of firing every single product load) https://drive.google.com/file/d/1tYB0V_hLnxQW_iHp6X10ANrosbfK7FTJ/view?usp=sharing
   * adjusted images to have a prefdefined size - to improve loading time.
 
 ### Accessibility
