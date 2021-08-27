@@ -12,7 +12,7 @@
 
 ### Demonstration
 ---
-[Imgur](https://imgur.com/ZYSfnmQ)
+![](https://i.imgur.com/ZYSfnmQ.gif)
 
 ### Description
 ---
