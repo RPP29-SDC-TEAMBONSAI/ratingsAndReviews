@@ -13,7 +13,7 @@
 ### Demonstration
 ---
 
-![](https://i.imgur.com/ZYSfnmQ.gif)
+![demo-gif](https://github.com/FEC-RPP29-cotija/Front-End-Capstone/blob/main/FECdemo1.0.gif)
 
 ### Description
 ---
