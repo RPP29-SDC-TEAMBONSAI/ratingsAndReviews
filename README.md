@@ -12,7 +12,7 @@
 
 ### Demonstration
 ---
-<iframe src="https://drive.google.com/file/d/1pGLSAgHtiRrwkTpztQKnn5Kl3LDkrNZH/preview" width="640" height="480"></iframe>
+[Imgur](https://imgur.com/ZYSfnmQ)
 
 ### Description
 ---
