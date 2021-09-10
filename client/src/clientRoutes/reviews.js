@@ -13,12 +13,16 @@ module.exports = {
   },
   reviewHelpful: (review_id) => {
     return axios.put(
-      `/reviews/${review_id}/helpful`
+      `/reviews/${review_id}/helpful`, {
+        id: review_id
+      }
     );
   },
   reviewReport: (review_id) => {
     return axios.put(
-      `/reviews/${review_id}/report`
+      `/reviews/${review_id}/report`, {
+        id: review_id
+      }
     );
   },
   reviewAdd: (reviewData, product_id) => {

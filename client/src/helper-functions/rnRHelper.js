@@ -125,7 +125,7 @@ const helper = {
     if (body.length > 999) warnings += 'Review body is longer than maximum characters allowed of 1000'
     if (name === '') warnings += 'Nickname not entered\n';
     if (!helper.validateEmail(email)) warnings += 'Email invalid\n';
-    if (Object.keys(characteristics).length !== Object.keys(chars).length) warnings += 'One or more factors is not selected\n';
+    // if (Object.keys(characteristics).length !== Object.keys(chars).length) warnings += 'One or more factors is not selected\n';
     return warnings;
   }
 }

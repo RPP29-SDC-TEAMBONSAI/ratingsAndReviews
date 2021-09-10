@@ -53,6 +53,7 @@
     "jsdom": "16.7.0",
     "jsdom-global": "3.0.2",
     "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
     "react-test-renderer": "^17.0.2",
     "webpack-cli": "^4.7.2"
   },

@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: 36300,
+      product_id: 47421,
       productInformation: {},
       styles: [],
       relatedProducts: [],
@@ -56,7 +56,6 @@ class App extends React.Component {
     this.setState({
       isDarkMode: !this.state.isDarkMode
     })
-
   }
 
   handleProductChange(newProductId) {

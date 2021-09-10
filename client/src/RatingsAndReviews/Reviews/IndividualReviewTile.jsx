@@ -118,7 +118,7 @@ class IndividualReviewTile extends React.Component {
               <div
                 className="irt-yes-clickable"
                 onClick={this.handleHelpful}>Yes</div>
-              <div className="irt-rating-helpfulness">({this.props.review.helpfulness + this.state.helpful})</div>
+              <div className="irt-rating-helpfulness">({Number(this.props.review.helpfulness) + this.state.helpful})</div>
               <div
                 className="irt-report-clickable"
                 onClick={this.handleReport}>Report</div>
