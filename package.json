@@ -9,7 +9,8 @@
     "start": "nodemon node server/index.js",
     "test": "jest --updateSnapshot",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --updateSnapshot --coverage"
+    "test:coverage": "jest --updateSnapshot --coverage",
+    "test:db": "nyc --reporter=text --all mocha database/spec.js"
   },
   "jest": {
     "setupFilesAfterEnv": [
@@ -61,16 +62,21 @@
     "16": "0.0.2",
     "axios": "^0.21.1",
     "babel-jest": "^27.0.6",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "core-js": "^3.15.2",
     "css-loader": "^6.2.0",
     "date-fns": "^2.23.0",
     "fs": "0.0.1-security",
     "imgbb-uploader": "^1.3.3",
     "jquery": "^3.6.0",
+    "mocha": "^9.1.1",
     "multer": "^1.4.2",
+    "nyc": "^15.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "style-loader": "^3.2.1",
+    "supertest": "^6.1.6",
     "webpack": "^5.51.1"
   }
 }

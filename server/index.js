@@ -46,6 +46,6 @@ app.get('/products', products)
   .post('/qa/interactions', interactions)
 
 
-app.listen(PORT, () => {
+module.exports = app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

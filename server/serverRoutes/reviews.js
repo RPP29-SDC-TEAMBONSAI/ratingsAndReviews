@@ -18,10 +18,12 @@ module.exports = {
   reviews: (req, res) => {
     db.getReviews(req.query.product_id)
     .then((data) => {
-      Promise.all(data)
-      .then((each) => {
-        res.status(200).send(each);
-      })
+      // console.log('SERVER DATA', data)
+      res.status(200).send(data);
+      // Promise.all(data)
+      // .then((each) => {
+      //   res.status(200).send(each);
+      // })
     })
     .catch((err) => {
       console.log('resultErr', err);
@@ -39,6 +41,9 @@ module.exports = {
     .then((data) => {
       res.status(200).send(data);
     })
+    .catch((err) => {
+      console.log('metaErr', err);
+    })
     // axios(requestConfig('get', api + req.originalUrl.substring(1)))
     //   .then((data)=> {
     //     console.log('META', data.data)
@@ -49,10 +54,11 @@ module.exports = {
   reviewsHelpful: (req, res) => {
     db.updateHelpful(req.body.id)
     .then((data) => {
-      console.log(data)
       res.status(200).send(data)
     })
-
+    .catch((err) => {
+      console.log('helpfulErr', err);
+    })
     // axios(requestConfig('put', api + req.originalUrl.substring(1)))
     //   .then((data)=> {
     //     res.status(200).send(data.data);
@@ -64,6 +70,9 @@ module.exports = {
     .then((data) => {
       res.status(200).send(data)
     })
+    .catch((err) => {
+      console.log('reportReviewErr', err);
+    })
     // axios(requestConfig('put', api + req.originalUrl.substring(1)))
     //   .then((data)=> {
     //     res.status(200).send(data.data);
@@ -73,12 +82,10 @@ module.exports = {
   reviewsAdd: (req, res) => {
     db.addReview(req.body)
     .then((data) => {
-      console.log('SERVER DATA', data)
-      Promise.all(data)
-      .then((prom) => {
-        console.log(prom)
-      })
-      // res.status(200).send(data);
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      console.log('addReview', err);
     })
     // axios(requestConfig('post', api + 'reviews', req.body))
     //   .then((data)=> {

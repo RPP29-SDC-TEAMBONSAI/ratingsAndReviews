@@ -100,13 +100,15 @@ class IndividualReviewTile extends React.Component {
             </div>
             <div className="irt-photos">
               {this.props.review.photos.map((photo, index) => {
-                return (
-                  <img
-                    className="irt-photo"
-                    key={index} src={photo.url}
-                    alt="image"
-                    onClick={this.props.viewPhoto}/>
-                )
+                if (photo.url) {
+                  return (
+                    <img
+                      className="irt-photo"
+                      key={index} src={photo.url}
+                      alt="image"
+                      onClick={this.props.viewPhoto}/>
+                  )
+                }
               })}
             </div>
           </div>
