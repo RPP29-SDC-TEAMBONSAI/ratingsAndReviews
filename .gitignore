@@ -107,3 +107,4 @@ client/dist/bundle.js
 config.js
 MyKeyPair.pem
 .Ds_store
+newrelic.js

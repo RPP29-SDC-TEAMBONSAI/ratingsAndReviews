@@ -24,10 +24,8 @@ const client = new Client({
 client.connect();
 //status message
 
-//sub query
-//or batch query
 const getReviews = (id) => {
-  return client.query(`SELECT DISTINCT reviews.id, reviews.productId, reviews.rating, reviews.datestamp, reviews.summary, reviews.body, reviews.recommended, reviews.reported, reviews.reviewerName, reviews.reviewerEmail, reviews.response, reviews.helpfulness, reviewsPhotos.reviewId, reviewsPhotos.url FROM reviews LEFT JOIN reviewsPhotos ON reviews.id = reviewsPhotos.reviewId WHERE reviews.productId = ${id};`)
+  return client.query(`SELECT reviews.id, reviews.productId, reviews.rating, reviews.datestamp, reviews.summary, reviews.body, reviews.recommended, reviews.reported, reviews.reviewerName, reviews.reviewerEmail, reviews.response, reviews.helpfulness, reviewsPhotos.reviewId, reviewsPhotos.url FROM reviews LEFT JOIN reviewsPhotos ON reviews.id = reviewsPhotos.reviewId WHERE reviews.productId = ${id};`)
     .then((res) => {
       return res.rows.map((row) => {
         let data = {
@@ -45,28 +43,6 @@ const getReviews = (id) => {
         return data;
       })
     })
-    // return client.query(`SELECT * FROM reviews WHERE productId = '${id}';`)
-    // .then((res) => {
-    //   return res.rows.map((row) => {
-    //       return client.query(`SELECT url FROM reviewsPhotos WHERE reviewId = ${row.id}`)
-    //       .then((photos) => {
-    //         let data = {
-    //           review_id: row.id,
-    //           rating: row.rating,
-    //           summary: row.summary,
-    //           recommend: row.recommended,
-    //           response: row.response,
-    //           body: row.body,
-    //           date: row.date,
-    //           reviewer_name: row.reviewername,
-    //           helpfulness: row.helpfulness,
-    //           photos: photos.rows
-    //         }
-    //         console.log('DATA==', data)
-    //         return data;
-    //       })
-    //     })
-    // })
     .catch((err) => {
       console.log('ERR', err)
     })
@@ -168,18 +144,6 @@ const getCharacteristics = (id) => {
     }
     return characteristics;
   })
-
-
-  // return client.query(`SELECT * FROM characteristics WHERE productId = '${id}';`)
-  //   .then((res) => {
-  //     return res.rows.map((row) => {
-  //       return client.query(`SELECT AVG(value) FROM characteristicReviews WHERE characteristicsId = '${row.id}';`)
-  //         .then((data) => {
-  //           characteristics[row.name] = { id: row.id, value: data.rows[0].avg }
-  //           return characteristics;
-  //         })
-  //     })
-  //   })
     .catch((err) => {
       console.log('DB GetCharacteristics Error', err)
     })
@@ -218,8 +182,19 @@ const addReview = (bodyObj) => {
     })
 }
 
+const relatedRatings = (id) => {
+  return client.query(`SELECT productId, rating FROM reviews WHERE productId IN (${id});`)
+    .then((res) => {
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB GetRating Error', err)
+    })
+}
+
+
 // getReviews(47212);
-getMeta(1)
+// getMeta(1)
 // getRating(1)
 // getRecommended(4)
 // getCharacteristics(1)
@@ -241,3 +216,4 @@ module.exports.getMeta = getMeta;
 module.exports.updateHelpful = updateHelpful;
 module.exports.updateReported = updateReported;
 module.exports.addReview = addReview;
+module.exports.relatedRatings = relatedRatings;

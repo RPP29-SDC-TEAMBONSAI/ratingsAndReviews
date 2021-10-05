@@ -1,9 +1,11 @@
+const newrelic = require('newrelic');
 const express = require("express");
 const app = express();
 const PORT = 3000;
+const path = require('path');
 
 // SERVER ROUTES
-const { reviews, reviewsMeta, reviewsHelpful, reviewsReport, reviewsAdd, reviewsInteraction } = require("./serverRoutes/reviews.js");
+const { reviews, reviewsMeta, reviewsHelpful, reviewsReport, reviewsAdd, reviewsInteraction, relatedRating } = require("./serverRoutes/reviews.js");
 const { products, productsWithId, productsStyle, productsRelated } = require("./serverRoutes/products.js");
 const { questions, answers, updateHelpfulness, updateAnswerHelpfulness, postQuestion, postAnswer, getUrl, addToReported, getReported, interactions} = require("./serverRoutes/qa.js");
 const { cart, addToCart } = require("./serverRoutes/cart.js");
@@ -16,25 +18,28 @@ const multer = require('multer')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('client/dist'));
+// app.use('/reviews', reviews);
+app.use('/loaderio-0f420f57b7d74f73d66ea53366e40b7c.txt', express.static(path.join(__dirname, '../loaderio-0f420f57b7d74f73d66ea53366e40b7c.txt')));
 
-//get requests for page load (chain)
+
 app.get('/products', products)
   .get('/products/:product_id', productsWithId)
   .get('/products/:product_id/styles', productsStyle)
   .get('/products/:product_id/related', productsRelated)
   .get('/reviews', reviews)
   .get('/reviews/meta', reviewsMeta)
+  .get('/reviews/relatedRatings', relatedRating)
   .get('/qa/questions/:product_id?', questions)
   .get('/qa/questions/:question_id/answers', answers)
   .get('/cart', cart)
   .post('/cart', addToCart)
-  //put request for helpfulness Question
+
   .put('/qa/questions/:question_id?', updateHelpfulness)
-  //put request for helpfulness Answer
+
   .put('/qa/answers/:answer_id?', updateAnswerHelpfulness)
-  //post request for new question
+
   .post('/qa/questions', postQuestion)
-  //post request for new answer
+
   .post('/qa/questions/:question_id?/answers', postAnswer)
   .post('/qa/questions/get/photo-url', getUrl)
   .post('/qa/questions/store-reported-answer', addToReported)
