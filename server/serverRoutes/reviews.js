@@ -26,6 +26,7 @@ const requestConfig = (method, url, data) => {
 module.exports = {
   reviews: (req, res) => {
     try {
+      console.log('QUERY', req.query.product_id)
       client.get(req.query.product_id, (err, reply) => {
         if (err) {
           throw err;
@@ -34,6 +35,9 @@ module.exports = {
           console.log('REPLY', reply)
           res.status(200).send(JSON.parse(reply));
         } else {
+          if (!req.query.product_id) {
+            res.status(200).send('Product id is not valid');
+          }
           db.getReviews(req.query.product_id)
             .then((data) => {
               console.log('DATA', data)
@@ -55,12 +59,13 @@ module.exports = {
           throw err;
         }
         if (reply) {
-          console.log('META REPLY', reply);
           res.status(200).send(JSON.parse(reply));
         } else {
+          if (!req.query.product_id) {
+            res.status(200).send('Product id is not valid');
+          }
           db.getMeta(req.query.product_id)
           .then((data) => {
-            console.log('META DATA', data);
             client.set('meta' + req.query.product_id, JSON.stringify(data))
             res.status(200).send(data);
           })
@@ -73,8 +78,22 @@ module.exports = {
     }
   },
   reviewsHelpful: (req, res) => {
+    console.log('ID', req.body.id)
+    //update database
+    //get row from database
+    //update cache
+    // db.updateHelpful(req.body.id)
+    // .then((data) => {
+    //   db.getReviews(req.body.id)
+    //   .then((res) => {
+
+    //   })
+    // })
+
+
     db.updateHelpful(req.body.id)
       .then((data) => {
+        console.log('HERE', data)
         res.status(200).send(data)
       })
       .catch((err) => {
